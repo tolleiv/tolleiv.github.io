@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/service/index.xml</link>
+    <link>//blog.tolleiv.de/tags/service/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/service/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/service/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Specification [DDD]</title>
-      <link>https://blog.tolleiv.de/2008/05/specification-ddd/</link>
+      <link>//blog.tolleiv.de/2008/05/specification-ddd/</link>
       <pubDate>Thu, 15 May 2008 14:00:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/specification-ddd/</guid>
+      <guid>//blog.tolleiv.de/2008/05/specification-ddd/</guid>
       <description>&lt;p&gt;Maybe sometimes the cookie tin is filled with all sorts of cookies and only some of them are what you&amp;rsquo;d like in this special moment. Often it&amp;rsquo;s very easy to specify which cookie you like, but sometimes your wishes are very complex, for example if you look for grannies special cookie with chocolate, coconut and vanilla crumbles. This could lead into a real crumby problem if you try to sort all the cookies and then select eat the right one.&lt;/p&gt;
 
 &lt;p&gt;In the world of OOP it&amp;rsquo;s often much harder to collect a few objects out of a large number of different objects, also combining different requirements isn&amp;rsquo;t easy and that&amp;rsquo;s where the specification pattern can help you out. It implements some basic operations to combine requirements (AND, OR, NOT) and the only thing a concrete specification for a concrete class has to do is to implement a method (isSatisfied()) which is able to determine whether a object meats a requirement or not.&lt;/p&gt;

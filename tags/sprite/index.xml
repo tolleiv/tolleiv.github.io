@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/sprite/index.xml</link>
+    <link>//blog.tolleiv.de/tags/sprite/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/sprite/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/sprite/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>TYPO3 4.4 sprites in your extension...</title>
-      <link>https://blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</link>
+      <link>//blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</link>
       <pubDate>Sun, 25 Jul 2010 08:00:29 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</guid>
+      <guid>//blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</guid>
       <description>
 
 &lt;p&gt;TYPO3 4.4 ships with a long list of improvements. One of them is the sprite API which was developed during T3UXW09. It extends the iconWorks API and enables to retrieve any backend-icon from a central sprite.&lt;/p&gt;
@@ -101,10 +101,10 @@ $icon = t3lib_iconWorks::getSpriteIcon(&#39;actions-view-go-back&#39;);
     
     <item>
       <title>CSS Sprites ... a nice way to save bandwidth</title>
-      <link>https://blog.tolleiv.de/2009/04/css-sprites-...-a-nice-way-to-save-bandwidth/</link>
+      <link>//blog.tolleiv.de/2009/04/css-sprites-...-a-nice-way-to-save-bandwidth/</link>
       <pubDate>Wed, 29 Apr 2009 20:06:23 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/04/css-sprites-...-a-nice-way-to-save-bandwidth/</guid>
+      <guid>//blog.tolleiv.de/2009/04/css-sprites-...-a-nice-way-to-save-bandwidth/</guid>
       <description>&lt;p&gt;I saw some of these sprites long time ago on some spiegel.de subpage and from time to time I see smaller sprites within stuff I get from our HTML-team - but this article and it&amp;rsquo;s insights into realworld design, is really great &amp;hellip; continue on &lt;a href=&#34;http://www.smashingmagazine.com/2009/04/27/the-mystery-of-css-sprites-techniques-tools-and-tutorials/&#34;&gt; Smashing Mag - The Mystery Of CSS Sprites&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;And that&amp;rsquo;s where you should start with it - as always AListApart is the best source for Web-Designers &amp;hellip; &lt;a href=&#34;http://www.alistapart.com/articles/sprites&#34;&gt;AListApart about Sprites&lt;/a&gt;&lt;/p&gt;

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/extension/index.xml</link>
+    <link>//blog.tolleiv.de/tags/extension/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/extension/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/extension/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>TYPO3 4.4 sprites in your extension...</title>
-      <link>https://blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</link>
+      <link>//blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</link>
       <pubDate>Sun, 25 Jul 2010 08:00:29 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</guid>
+      <guid>//blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</guid>
       <description>
 
 &lt;p&gt;TYPO3 4.4 ships with a long list of improvements. One of them is the sprite API which was developed during T3UXW09. It extends the iconWorks API and enables to retrieve any backend-icon from a central sprite.&lt;/p&gt;
@@ -101,10 +101,10 @@ $icon = t3lib_iconWorks::getSpriteIcon(&#39;actions-view-go-back&#39;);
     
     <item>
       <title>Crawler 3.1 release &#43; podcast</title>
-      <link>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</link>
+      <link>//blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</link>
       <pubDate>Wed, 31 Mar 2010 22:35:20 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</guid>
+      <guid>//blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</guid>
       <description>&lt;p&gt;Nearly a month after version 3.0.5, we published 3.1.0 of the well known crawler extension today. The main work for that step was related to several bugfixes, a better scheduler integration, some CLI-API enhancements, better testcases and (finally) some documentation updates. Most kudos go to Michael Klapper who took over the responsibility for this release and who also fixed a decent amount of bugs.
 You can download the extension in the &lt;a href=&#34;http://typo3.org/extensions/repository/view/crawler/current/&#34;&gt;TER &lt;/a&gt; and hopefully this time OpenOffice didn&amp;rsquo;t trick us again and you&amp;rsquo;ll be able to see a shiny new extension manual on typo3.org as well.&lt;/p&gt;
 
@@ -114,10 +114,10 @@ You can download the extension in the &lt;a href=&#34;http://typo3.org/extension
     
     <item>
       <title>Handling data in TYPO3 with tcemain</title>
-      <link>https://blog.tolleiv.de/2010/03/handling-data-in-typo3-with-tcemain/</link>
+      <link>//blog.tolleiv.de/2010/03/handling-data-in-typo3-with-tcemain/</link>
       <pubDate>Tue, 02 Mar 2010 07:05:16 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/03/handling-data-in-typo3-with-tcemain/</guid>
+      <guid>//blog.tolleiv.de/2010/03/handling-data-in-typo3-with-tcemain/</guid>
       <description>&lt;p&gt;TYPO3 is (by definition) a powerful tool when it comes to data. Besides creating, updating and deleting data there are also localizing and versioning, logging and even rollbacks. All this is provided through the GUI of TYPO3 and all the technical stuff in working under the hood of TYPO3 for nearly every piece of data. But what if you&amp;rsquo;re asked to write a script which imports or updates data, how can you make sure that all this is done in a TYPO3 compatible way?&lt;/p&gt;
 
 &lt;p&gt;The lazy programmers approach is to write up SQL, but that&amp;rsquo;s not what&amp;rsquo;s recommended if you still want the full TYPO3 featureset to be available for you (without reinventing the wheel). In this case the TYPO3 core class tslib_tcemain (short tcemain) is what you&amp;rsquo;re looking for. For the mentioned tasks there are two main functions relevant - &lt;strong&gt;process_cmdmap()&lt;/strong&gt; and &lt;strong&gt;process_datamap()&lt;/strong&gt;. The &lt;strong&gt;process_cmdmap()&lt;/strong&gt; performs actions like &amp;ldquo;move&amp;rdquo;, &amp;ldquo;copy&amp;rdquo;, &amp;ldquo;localize&amp;rdquo;, &amp;ldquo;version&amp;rdquo; (create, stage, swap, flush), &amp;ldquo;delete&amp;rdquo; and &amp;ldquo;undelete&amp;rdquo;. The &lt;strong&gt;process_datamap()&lt;/strong&gt; does the rest - creating records, updating datafields. Controlling both of them is done with configuration arrays and that&amp;rsquo;s how it looks like**:&lt;/p&gt;
@@ -225,10 +225,10 @@ $tce-&amp;gt;process_cmdmap ();
     
     <item>
       <title>imagemap_wizard 0.5.3</title>
-      <link>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</link>
+      <link>//blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</link>
       <pubDate>Thu, 22 Oct 2009 19:18:39 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</guid>
+      <guid>//blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</guid>
       <description>&lt;p&gt;Last Sunday I&amp;rsquo;ve released the first official stable version of my &lt;a href=&#34;http://blog.tolleiv.de/2009/07/typo3-extensions/&#34;&gt;imagemap_wizard&lt;/a&gt; extension &lt;a href=&#34;http://typo3.org/extensions/repository/view/imagemap_wizard/current/&#34;&gt;(TER&lt;/a&gt;).
 I though that&amp;rsquo;s a good moment to review the introduction text on the project-homepage and that&amp;rsquo;s how it looks like - &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;forge.typo3.org/projects/show/extension-imagemap_wizard&lt;/a&gt;&lt;/p&gt;
 
@@ -240,20 +240,20 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
     
     <item>
       <title>TYPO3 crawler extension</title>
-      <link>https://blog.tolleiv.de/2009/09/typo3-crawler-extension/</link>
+      <link>//blog.tolleiv.de/2009/09/typo3-crawler-extension/</link>
       <pubDate>Fri, 11 Sep 2009 07:36:08 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/09/typo3-crawler-extension/</guid>
+      <guid>//blog.tolleiv.de/2009/09/typo3-crawler-extension/</guid>
       <description>&lt;p&gt;Cool thing just happend after a couple of months we finally released the new version of the famous crawler extension. Read more on &lt;a href=&#34;http://forge.typo3.org/news/show/181&#34;&gt;forge,typo3.org&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>TYPO3 extensions ....</title>
-      <link>https://blog.tolleiv.de/2009/07/typo3-extensions-..../</link>
+      <link>//blog.tolleiv.de/2009/07/typo3-extensions-..../</link>
       <pubDate>Sun, 26 Jul 2009 19:20:18 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/07/typo3-extensions-..../</guid>
+      <guid>//blog.tolleiv.de/2009/07/typo3-extensions-..../</guid>
       <description>&lt;p&gt;I&amp;rsquo;m currently within the preparation for some exams therefore my day&amp;rsquo;s aren&amp;rsquo;t very fancy at all - and that&amp;rsquo;s why I just decided to introduce some TYPO3 extensions - especially TYPO3 extensions where I&amp;rsquo;m somehow involved ;)&lt;/p&gt;
 
 &lt;p&gt;The mentioned extensions are all created by AOEmedia or in cooperation with &lt;a href=&#34;http://www.aoemedia.com&#34;&gt;AOEmedia&lt;/a&gt;, they&amp;rsquo;re actively maintained and they work within regular TYPO3 environments with all TYPO3 features -lot&amp;rsquo;s of other extensions don&amp;rsquo;t support l10n and workspaces - ours do ;) Please use the mentioned pages on forge.typo3.org to get feedback on your bugs within the mentioned extensions.&lt;/p&gt;

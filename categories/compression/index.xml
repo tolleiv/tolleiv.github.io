@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/categories/compression/index.xml</link>
+    <link>//blog.tolleiv.de/categories/compression/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/categories/compression/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/categories/compression/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Self-extracting PHP archive</title>
-      <link>https://blog.tolleiv.de/2008/06/self-extracting-php-archive/</link>
+      <link>//blog.tolleiv.de/2008/06/self-extracting-php-archive/</link>
       <pubDate>Sat, 07 Jun 2008 21:30:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/self-extracting-php-archive/</guid>
+      <guid>//blog.tolleiv.de/2008/06/self-extracting-php-archive/</guid>
       <description>&lt;p&gt;The __halt_compiler(); function in php enables to store some additional data in a php-file without blowing up the memory. A very nice possibility is to use this for a self-extracting php file as installation-packages of your php application.
 A wile ago I created a script which automatically creates such a archive and I think you might like it&amp;hellip;.for the impatient ones: &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.php&#34;&gt;Download&lt;/a&gt; / &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.zip&#34;&gt;Download as Zip&lt;/a&gt;.&lt;/p&gt;
 

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/pattern/index.xml</link>
+    <link>//blog.tolleiv.de/tags/pattern/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/pattern/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/pattern/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Signal / Slots in Extbase</title>
-      <link>https://blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</link>
+      <link>//blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</link>
       <pubDate>Wed, 30 Nov 2011 17:17:02 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</guid>
+      <guid>//blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</guid>
       <description>&lt;p&gt;A nice thing to have at hand is definately &lt;a href=&#34;http://en.wikipedia.org/wiki/Signals_and_slots&#34;&gt;Signal and Slots&lt;/a&gt;. I heard &lt;a href=&#34;http://f.oer.tel&#34;&gt;Felix&lt;/a&gt; talking about them quite often and I finally found a nice usecase and came to play with them a little bit this afternoon. And just to avoid that others have to look around too much to find how they can get them to work here&amp;rsquo;s how it&amp;rsquo;s working for me.&lt;/p&gt;
 
 &lt;p&gt;First of all you should understand the concept. This nice little &amp;ldquo;definition&amp;rdquo; (from &lt;a href=&#34;http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html&#34;&gt;flow3.typo3.org&lt;/a&gt;) sums it up pretty well:&lt;/p&gt;
@@ -75,10 +75,10 @@ $this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
     
     <item>
       <title>Iterator [GoF]</title>
-      <link>https://blog.tolleiv.de/2008/07/iterator-gof/</link>
+      <link>//blog.tolleiv.de/2008/07/iterator-gof/</link>
       <pubDate>Mon, 07 Jul 2008 17:30:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/07/iterator-gof/</guid>
+      <guid>//blog.tolleiv.de/2008/07/iterator-gof/</guid>
       <description>&lt;p&gt;Lot&amp;rsquo;s of people like to write down things into lists, so that they can go through that list later and check whether everything was fine. Normally every recipe has a list ~ there&amp;rsquo;s always a list of ingredients at the beginning of the recipe.
 This short example shows how such a list can be processed in PHP. So why would you want to have something else than a array to hold your objects? - My example still uses a array to hold the objects (uni- or bidirectional lists would also be possible) but it adds a kind of a facade to the array so that the common managements-tasks are handled within the List-Object. Everything you need for this example is present in PHP since version 5.0. The basic steps you need to do is to provide a &amp;ldquo;Object&amp;rdquo; and an &amp;ldquo;ObjectList&amp;rdquo; which implements the native &lt;a href=&#34;http://www.php.net/manual/en/language.oop5.iterations.php&#34;&gt;&amp;ldquo;Iterator&amp;rdquo;&lt;/a&gt; interface and then you&amp;rsquo;re able to have very handy lists :)&lt;/p&gt;
 
@@ -152,10 +152,10 @@ echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&
     
     <item>
       <title>Null-Object Pattern</title>
-      <link>https://blog.tolleiv.de/2008/07/null-object-pattern/</link>
+      <link>//blog.tolleiv.de/2008/07/null-object-pattern/</link>
       <pubDate>Tue, 01 Jul 2008 17:58:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/07/null-object-pattern/</guid>
+      <guid>//blog.tolleiv.de/2008/07/null-object-pattern/</guid>
       <description>&lt;p&gt;Very often you create a object with a factory and before you really start using it, you check if your factory really created a object or returned NULL. Or maybe you have a method where a object is passed in and in this situation you&amp;rsquo;ll have to do this check also.&lt;/p&gt;
 
 &lt;p&gt;Instead of typing the &amp;ldquo;if(object == null)&amp;rdquo; phrase again and again, you could use the Null-Object pattern, you&amp;rsquo;ll see that this can make some situations much clearer.&lt;/p&gt;
@@ -198,10 +198,10 @@ return 0;
     
     <item>
       <title>Query Object [PoEEA]</title>
-      <link>https://blog.tolleiv.de/2008/06/query-object-poeea/</link>
+      <link>//blog.tolleiv.de/2008/06/query-object-poeea/</link>
       <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/query-object-poeea/</guid>
+      <guid>//blog.tolleiv.de/2008/06/query-object-poeea/</guid>
       <description>&lt;p&gt;Maybe you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification Pattern&lt;/a&gt; I explained some weeks ago. It enabled a easy and intuitive  searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification.
 Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory. The idea of the Query Object pattern is that it enables a usage, comparable to the specification pattern, for objects which are persisted in a database. The benefit is that it creates a query to exclude objects which won&amp;rsquo;t satisfy your needs and therefore you wont mess up the memory anymore.
 Once you have a query-object in place you should not get in touch with SQL anymore because it can encapsulate SQL completely, at least if you also have some kind of data mapping (coming soon), which is a great benefit for everyone who is not so familiar with SQL. (But don&amp;rsquo;t forget, regarding performance, SQL-optimization is a very important thing).&lt;/p&gt;
@@ -287,10 +287,10 @@ But no matter which flavor you prefer, Query Objects bring some real benefits wh
     
     <item>
       <title>Plugin [PoEAA]</title>
-      <link>https://blog.tolleiv.de/2008/06/plugin-poeaa/</link>
+      <link>//blog.tolleiv.de/2008/06/plugin-poeaa/</link>
       <pubDate>Thu, 05 Jun 2008 01:11:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/plugin-poeaa/</guid>
+      <guid>//blog.tolleiv.de/2008/06/plugin-poeaa/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m sure you&amp;rsquo;re pretty often in the situation that you have to switch something depending on the context you&amp;rsquo;re currently in. For example most people change their eating habits before summer - I also do :P&lt;/p&gt;
 
 &lt;p&gt;Sometimes this is what you also want to have in your software. To achieve different behaviour you normally just implement two different classes or aggregates and since they have the same &amp;ldquo;meaning&amp;rdquo; they normally share a interface (a.k.a Separated Interface). But who decides which implementation fits into the current environment/context?&lt;/p&gt;
@@ -377,10 +377,10 @@ There&amp;rsquo;s something else in the example beside the Plugin Pattern - I al
     
     <item>
       <title>Value Object [DDD]</title>
-      <link>https://blog.tolleiv.de/2008/05/value-object-ddd/</link>
+      <link>//blog.tolleiv.de/2008/05/value-object-ddd/</link>
       <pubDate>Fri, 30 May 2008 04:39:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/value-object-ddd/</guid>
+      <guid>//blog.tolleiv.de/2008/05/value-object-ddd/</guid>
       <description>&lt;p&gt;This metaphor does not fit completely, and the &amp;ldquo;Money-Example&amp;rdquo; is omnipresent, but I really like the pattern and so that&amp;rsquo;s the story:&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s say you have your grannies recipe for a chocolate cookie and you want to keep this in mind, but also you like to somehow experiment with some new or different ingredients. Normally you just keep in mind what you changed and later you write down the new recipe. But from time to time you might want to compare the two recipes or maybe you want to make cookies with the new and the changed recipes. In this situation it&amp;rsquo;s really good to have both written down on paper. ;)&lt;/p&gt;
@@ -437,10 +437,10 @@ $coconutRecipe-&amp;gt;printIncredients();
     
     <item>
       <title>Prototype [GoF]</title>
-      <link>https://blog.tolleiv.de/2008/05/prototype-gof/</link>
+      <link>//blog.tolleiv.de/2008/05/prototype-gof/</link>
       <pubDate>Tue, 27 May 2008 23:17:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/prototype-gof/</guid>
+      <guid>//blog.tolleiv.de/2008/05/prototype-gof/</guid>
       <description>&lt;p&gt;Imagine a cookie-oven which produces tasty cookies with chocolate crumbles. How do you ensure that the 1000th cookie still has the same taste as the first?
 You might think that this is an easy task - just write down the recipe and follow the described steps&amp;hellip;you know the result in real life - the 1000th cookie normally tasts like the 1st but you always had the &amp;ldquo;overhead&amp;rdquo; to read the recipe and go through the steps again and again.
 In OOP it&amp;rsquo;s much easier to follow the recipe just instantiate a new Object and  there you go&amp;hellip; no matter if it&amp;rsquo;s the 1st or the 1000th - it&amp;rsquo;ll always taste look similar.
@@ -495,10 +495,10 @@ $chocolateCookieMachine-&amp;gt;makeCookie()-&amp;gt;printFlavor();
     
     <item>
       <title>Specification [DDD]</title>
-      <link>https://blog.tolleiv.de/2008/05/specification-ddd/</link>
+      <link>//blog.tolleiv.de/2008/05/specification-ddd/</link>
       <pubDate>Thu, 15 May 2008 14:00:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/specification-ddd/</guid>
+      <guid>//blog.tolleiv.de/2008/05/specification-ddd/</guid>
       <description>&lt;p&gt;Maybe sometimes the cookie tin is filled with all sorts of cookies and only some of them are what you&amp;rsquo;d like in this special moment. Often it&amp;rsquo;s very easy to specify which cookie you like, but sometimes your wishes are very complex, for example if you look for grannies special cookie with chocolate, coconut and vanilla crumbles. This could lead into a real crumby problem if you try to sort all the cookies and then select eat the right one.&lt;/p&gt;
 
 &lt;p&gt;In the world of OOP it&amp;rsquo;s often much harder to collect a few objects out of a large number of different objects, also combining different requirements isn&amp;rsquo;t easy and that&amp;rsquo;s where the specification pattern can help you out. It implements some basic operations to combine requirements (AND, OR, NOT) and the only thing a concrete specification for a concrete class has to do is to implement a method (isSatisfied()) which is able to determine whether a object meats a requirement or not.&lt;/p&gt;
@@ -663,10 +663,10 @@ echo ‘
     
     <item>
       <title>Memento [GoF]</title>
-      <link>https://blog.tolleiv.de/2008/05/memento-gof/</link>
+      <link>//blog.tolleiv.de/2008/05/memento-gof/</link>
       <pubDate>Tue, 13 May 2008 07:59:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/memento-gof/</guid>
+      <guid>//blog.tolleiv.de/2008/05/memento-gof/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s say you got a cookie from a repository your granny and you&amp;rsquo;re not sure if you like the new taste. Wouldn&amp;rsquo;t it be cool if you could just try it and revoke the operation first bite if you don&amp;rsquo;t like it?&lt;/p&gt;
 
 &lt;p&gt;In the world of OOP thats a easy job which can be handled by the so called memento pattern - you just save the inner state of the object  within a memento object and revoke you actions whenever you like&amp;hellip;&lt;/p&gt;
@@ -725,10 +725,10 @@ $cookieMonster-&amp;gt;run();
     
     <item>
       <title>Decorator [GoF]</title>
-      <link>https://blog.tolleiv.de/2008/05/decorator-gof/</link>
+      <link>//blog.tolleiv.de/2008/05/decorator-gof/</link>
       <pubDate>Mon, 12 May 2008 22:59:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/decorator-gof/</guid>
+      <guid>//blog.tolleiv.de/2008/05/decorator-gof/</guid>
       <description>&lt;p&gt;As the first pattern I&amp;rsquo;d like to introduce the decorator pattern - it&amp;rsquo;s one of the [GoF]- structural patterns. It enables to extend the functionality of a existing method by wrapping a so called decorator-object.&lt;/p&gt;
 
 &lt;p&gt;So maybe you already know the situation ;) , your granny  is going to bake cookies and you think of how they gonna taste - so cookie is our main-object and the different additional spices and other options which refine the taste of the cookies are the decoration for it. The cookies, pardon main-objects, are fine without the decoration but they&amp;rsquo;re much better with and the best thing is that you&amp;rsquo;re able to combine the decorations&amp;hellip; yummy&lt;/p&gt;

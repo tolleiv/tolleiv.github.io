@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/categories/null/index.xml</link>
+    <link>//blog.tolleiv.de/categories/null/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/categories/null/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/categories/null/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Null-Object Pattern</title>
-      <link>https://blog.tolleiv.de/2008/07/null-object-pattern/</link>
+      <link>//blog.tolleiv.de/2008/07/null-object-pattern/</link>
       <pubDate>Tue, 01 Jul 2008 17:58:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/07/null-object-pattern/</guid>
+      <guid>//blog.tolleiv.de/2008/07/null-object-pattern/</guid>
       <description>&lt;p&gt;Very often you create a object with a factory and before you really start using it, you check if your factory really created a object or returned NULL. Or maybe you have a method where a object is passed in and in this situation you&amp;rsquo;ll have to do this check also.&lt;/p&gt;
 
 &lt;p&gt;Instead of typing the &amp;ldquo;if(object == null)&amp;rdquo; phrase again and again, you could use the Null-Object pattern, you&amp;rsquo;ll see that this can make some situations much clearer.&lt;/p&gt;

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/categories/behavioral/index.xml</link>
+    <link>//blog.tolleiv.de/categories/behavioral/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/categories/behavioral/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/categories/behavioral/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Iterator [GoF]</title>
-      <link>https://blog.tolleiv.de/2008/07/iterator-gof/</link>
+      <link>//blog.tolleiv.de/2008/07/iterator-gof/</link>
       <pubDate>Mon, 07 Jul 2008 17:30:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/07/iterator-gof/</guid>
+      <guid>//blog.tolleiv.de/2008/07/iterator-gof/</guid>
       <description>&lt;p&gt;Lot&amp;rsquo;s of people like to write down things into lists, so that they can go through that list later and check whether everything was fine. Normally every recipe has a list ~ there&amp;rsquo;s always a list of ingredients at the beginning of the recipe.
 This short example shows how such a list can be processed in PHP. So why would you want to have something else than a array to hold your objects? - My example still uses a array to hold the objects (uni- or bidirectional lists would also be possible) but it adds a kind of a facade to the array so that the common managements-tasks are handled within the List-Object. Everything you need for this example is present in PHP since version 5.0. The basic steps you need to do is to provide a &amp;ldquo;Object&amp;rdquo; and an &amp;ldquo;ObjectList&amp;rdquo; which implements the native &lt;a href=&#34;http://www.php.net/manual/en/language.oop5.iterations.php&#34;&gt;&amp;ldquo;Iterator&amp;rdquo;&lt;/a&gt; interface and then you&amp;rsquo;re able to have very handy lists :)&lt;/p&gt;
 
@@ -88,10 +88,10 @@ echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&
     
     <item>
       <title>Null-Object Pattern</title>
-      <link>https://blog.tolleiv.de/2008/07/null-object-pattern/</link>
+      <link>//blog.tolleiv.de/2008/07/null-object-pattern/</link>
       <pubDate>Tue, 01 Jul 2008 17:58:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/07/null-object-pattern/</guid>
+      <guid>//blog.tolleiv.de/2008/07/null-object-pattern/</guid>
       <description>&lt;p&gt;Very often you create a object with a factory and before you really start using it, you check if your factory really created a object or returned NULL. Or maybe you have a method where a object is passed in and in this situation you&amp;rsquo;ll have to do this check also.&lt;/p&gt;
 
 &lt;p&gt;Instead of typing the &amp;ldquo;if(object == null)&amp;rdquo; phrase again and again, you could use the Null-Object pattern, you&amp;rsquo;ll see that this can make some situations much clearer.&lt;/p&gt;
@@ -134,10 +134,10 @@ return 0;
     
     <item>
       <title>Value Object [DDD]</title>
-      <link>https://blog.tolleiv.de/2008/05/value-object-ddd/</link>
+      <link>//blog.tolleiv.de/2008/05/value-object-ddd/</link>
       <pubDate>Fri, 30 May 2008 04:39:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/value-object-ddd/</guid>
+      <guid>//blog.tolleiv.de/2008/05/value-object-ddd/</guid>
       <description>&lt;p&gt;This metaphor does not fit completely, and the &amp;ldquo;Money-Example&amp;rdquo; is omnipresent, but I really like the pattern and so that&amp;rsquo;s the story:&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s say you have your grannies recipe for a chocolate cookie and you want to keep this in mind, but also you like to somehow experiment with some new or different ingredients. Normally you just keep in mind what you changed and later you write down the new recipe. But from time to time you might want to compare the two recipes or maybe you want to make cookies with the new and the changed recipes. In this situation it&amp;rsquo;s really good to have both written down on paper. ;)&lt;/p&gt;
@@ -194,10 +194,10 @@ $coconutRecipe-&amp;gt;printIncredients();
     
     <item>
       <title>Memento [GoF]</title>
-      <link>https://blog.tolleiv.de/2008/05/memento-gof/</link>
+      <link>//blog.tolleiv.de/2008/05/memento-gof/</link>
       <pubDate>Tue, 13 May 2008 07:59:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/memento-gof/</guid>
+      <guid>//blog.tolleiv.de/2008/05/memento-gof/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s say you got a cookie from a repository your granny and you&amp;rsquo;re not sure if you like the new taste. Wouldn&amp;rsquo;t it be cool if you could just try it and revoke the operation first bite if you don&amp;rsquo;t like it?&lt;/p&gt;
 
 &lt;p&gt;In the world of OOP thats a easy job which can be handled by the so called memento pattern - you just save the inner state of the object  within a memento object and revoke you actions whenever you like&amp;hellip;&lt;/p&gt;

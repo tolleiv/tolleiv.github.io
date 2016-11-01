@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/categories/tdd/index.xml</link>
+    <link>//blog.tolleiv.de/categories/tdd/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/categories/tdd/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/categories/tdd/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Using Mocks within Tests</title>
-      <link>https://blog.tolleiv.de/2008/05/using-mocks-within-tests/</link>
+      <link>//blog.tolleiv.de/2008/05/using-mocks-within-tests/</link>
       <pubDate>Sat, 17 May 2008 20:02:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/using-mocks-within-tests/</guid>
+      <guid>//blog.tolleiv.de/2008/05/using-mocks-within-tests/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s say you have some kind of process which creates cookies and which requires the cookies to bake before you deliver them to the customers. This process somehow touches two kinds of objects the cookie itself and a object which performs the process - the cookie oven.
 When you start to develop the oven how do you check whether the cookies are really baked or not? Since you can&amp;rsquo;t get rid of the dependency between the oven and the cookie, you have to simulate a real object and do the checks by hand - but wait there&amp;rsquo;s already a way to resolve it:
 PHPUnit ships with a very nice and comfortable function to create and check mock-objects and that&amp;rsquo;s exactly what we need in this situation where we somehow need to find out if our cookie really gets baked.

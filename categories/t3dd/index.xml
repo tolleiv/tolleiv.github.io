@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/categories/t3dd/index.xml</link>
+    <link>//blog.tolleiv.de/categories/t3dd/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/categories/t3dd/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/categories/t3dd/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>T3DD08</title>
-      <link>https://blog.tolleiv.de/2008/05/t3dd08/</link>
+      <link>//blog.tolleiv.de/2008/05/t3dd08/</link>
       <pubDate>Tue, 13 May 2008 22:15:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/t3dd08/</guid>
+      <guid>//blog.tolleiv.de/2008/05/t3dd08/</guid>
       <description>&lt;p&gt;The last weekend was great, I joined the T3DD in Elmshorn, Germany and meet a lot of interesting people, the beer was cheap and the weather was amazing. So I&amp;rsquo;m looking forward to the T3CON in autumn&amp;hellip;  :)&lt;/p&gt;
 
 &lt;p&gt;It also seems that some of the guys got some new spirit - today 4 official and some inofficial bugs in some extensions had been fixed in a very short sequence &amp;hellip; great!&lt;/p&gt;

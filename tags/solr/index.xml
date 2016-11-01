@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/solr/index.xml</link>
+    <link>//blog.tolleiv.de/tags/solr/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/solr/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/solr/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Using genetic algorithms to optimize Apache Solr boost factors.</title>
-      <link>https://blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</link>
+      <link>//blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</link>
       <pubDate>Thu, 06 Jun 2013 18:47:56 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</guid>
+      <guid>//blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</guid>
       <description>
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18-150x150.png&#34; alt=&#34;Configuration interface.&#34; /&gt;&lt;/a&gt; Configuration interface.One thing I took along from last year&amp;rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&amp;rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&amp;rsquo;d like to share. If you want to have a look right away - the code can be found on &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18-150x150.png&#34; alt=&#34;Configuration interface.&#34; /&gt;&lt;/a&gt; Configuration interface.One thing I took along from last year&amp;rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&amp;rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&amp;rsquo;d like to share. If you want to have a look right away - the code can be found on &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;the-problem-to-solve&#34;&gt;The problem to solve:&lt;/h2&gt;
 
@@ -61,7 +61,7 @@ Comparing the &amp;ldquo;error&amp;rdquo; and &amp;ldquo;squared error&amp;rdquo
 
 &lt;h2 id=&#34;implementation&#34;&gt;Implementation:&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43-150x150.png&#34; alt=&#34;10 generation optimization&#34; /&gt;&lt;/a&gt; 10 generation optimizationThere&amp;rsquo;s really not too much to say other than that the code can be found in &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;. I used NodeJS with ExpressJs, SocketIO and an Twitter Bootstrap interface to have a relatively good looking and somewhat performing proof-of-concept. I used that setup, because NodeJS seems to me as the most easiest way to talk to Solr and it &amp;ldquo;promises&amp;rdquo; to be performant even with larger examples. SocketIO helped a lot to ease the pain when it comes to Server &amp;lt;&amp;gt; Client communication. The only drawback of that setup is the that everything had to be turned into something which is able to deal with asynchronous processing. This makes the algorithmic parts look a bit odd and bloated - but for me the benefits outweigh the odds.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43-150x150.png&#34; alt=&#34;10 generation optimization&#34; /&gt;&lt;/a&gt; 10 generation optimizationThere&amp;rsquo;s really not too much to say other than that the code can be found in &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;. I used NodeJS with ExpressJs, SocketIO and an Twitter Bootstrap interface to have a relatively good looking and somewhat performing proof-of-concept. I used that setup, because NodeJS seems to me as the most easiest way to talk to Solr and it &amp;ldquo;promises&amp;rdquo; to be performant even with larger examples. SocketIO helped a lot to ease the pain when it comes to Server &amp;lt;&amp;gt; Client communication. The only drawback of that setup is the that everything had to be turned into something which is able to deal with asynchronous processing. This makes the algorithmic parts look a bit odd and bloated - but for me the benefits outweigh the odds.&lt;/p&gt;
 
 &lt;h2 id=&#34;final-thoughts&#34;&gt;Final thoughts:&lt;/h2&gt;
 

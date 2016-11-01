@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/apache/index.xml</link>
+    <link>//blog.tolleiv.de/tags/apache/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/apache/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/apache/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Debugging mod_rewrite... my favorite way</title>
-      <link>https://blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</link>
+      <link>//blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</link>
       <pubDate>Sat, 23 Jan 2010 17:19:42 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</guid>
+      <guid>//blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</guid>
       <description>&lt;p&gt;Once a month someone is asking because he has issues to get his mod_rewrite rules to do what he want&amp;rsquo;s. Writing the rules and the required RegEx for these rules is quite easy, but Apache still behaves strange every now and then and that&amp;rsquo;s where one of my favorite ways to &amp;ldquo;debug&amp;rdquo; mod_rewrite comes in very handy. And I felt that writing something is better than having a silent blog ;)&lt;/p&gt;
 
 &lt;p&gt;The following block is what it&amp;rsquo;s all about. It seems to have it&amp;rsquo;s origin on &lt;a href=&#34;http://www.webmasterworld.com/forum92/5360.htm&#34;&gt;WebmasterWorld&lt;/a&gt; and &lt;a href=&#34;http://www.latenightpc.com/blog/archives/2007/09/05/a-couple-ways-to-debug-mod_rewrite&#34;&gt;Rob Russel&amp;rsquo;s Blog&lt;/a&gt; and looks basically like this:&lt;/p&gt;

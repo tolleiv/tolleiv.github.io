@@ -2,602 +2,602 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.tolleiv.de/</loc>
+    <loc>//blog.tolleiv.de/</loc>
     <lastmod>2015-11-17T08:43:33+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2015/11/enrich-zabbix-monitoring-with-additional-data-from-pingdom/</loc>
+    <loc>//blog.tolleiv.de/2015/11/enrich-zabbix-monitoring-with-additional-data-from-pingdom/</loc>
     <lastmod>2015-11-17T08:43:33+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2015/01/post-mortem-documentations-or-how-to-build-knowledge-during-failures/</loc>
+    <loc>//blog.tolleiv.de/2015/01/post-mortem-documentations-or-how-to-build-knowledge-during-failures/</loc>
     <lastmod>2015-01-05T22:18:26+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2014/07/chef-cookbook-dependecy-visualization/</loc>
+    <loc>//blog.tolleiv.de/2014/07/chef-cookbook-dependecy-visualization/</loc>
     <lastmod>2014-07-06T15:32:04+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2014/05/chef-qa-toolchain/</loc>
+    <loc>//blog.tolleiv.de/2014/05/chef-qa-toolchain/</loc>
     <lastmod>2014-05-24T00:35:09+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2014/05/socket.io-within-concurrent-processes/</loc>
+    <loc>//blog.tolleiv.de/2014/05/socket.io-within-concurrent-processes/</loc>
     <lastmod>2014-05-11T15:43:53+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2014/05/octopress-migration/</loc>
+    <loc>//blog.tolleiv.de/2014/05/octopress-migration/</loc>
     <lastmod>2014-05-04T09:57:25+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2013/06/templavoila---followup/</loc>
+    <loc>//blog.tolleiv.de/2013/06/templavoila---followup/</loc>
     <lastmod>2013-06-14T09:45:54+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2013/06/templavoila-future/</loc>
+    <loc>//blog.tolleiv.de/2013/06/templavoila-future/</loc>
     <lastmod>2013-06-08T07:20:34+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</loc>
+    <loc>//blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</loc>
     <lastmod>2013-06-06T18:47:56+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2012/12/re-how-to-move-on-</loc>
+    <loc>//blog.tolleiv.de/2012/12/re-how-to-move-on-</loc>
     <lastmod>2012-12-22T09:11:02+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</loc>
+    <loc>//blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</loc>
     <lastmod>2012-12-10T15:56:46+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2012/02/finding-typoscript-errors./</loc>
+    <loc>//blog.tolleiv.de/2012/02/finding-typoscript-errors./</loc>
     <lastmod>2012-02-16T16:02:31+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2012/01/visualizing-typo3-core-activity/</loc>
+    <loc>//blog.tolleiv.de/2012/01/visualizing-typo3-core-activity/</loc>
     <lastmod>2012-01-20T08:00:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2012/01/templavoila-1.6.x/</loc>
+    <loc>//blog.tolleiv.de/2012/01/templavoila-1.6.x/</loc>
     <lastmod>2012-01-16T07:10:33+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2011/12/further-reading-2011/</loc>
+    <loc>//blog.tolleiv.de/2011/12/further-reading-2011/</loc>
     <lastmod>2011-12-30T10:00:01+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2011/12/tagging-page-caches/</loc>
+    <loc>//blog.tolleiv.de/2011/12/tagging-page-caches/</loc>
     <lastmod>2011-12-22T17:23:16+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</loc>
+    <loc>//blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</loc>
     <lastmod>2011-11-30T17:17:02+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2011/02/release-reviews-templavoila-imagemap_wizard-workspaces/</loc>
+    <loc>//blog.tolleiv.de/2011/02/release-reviews-templavoila-imagemap_wizard-workspaces/</loc>
     <lastmod>2011-02-24T21:17:14+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/11/typo3-4.5-beta1/</loc>
+    <loc>//blog.tolleiv.de/2010/11/typo3-4.5-beta1/</loc>
     <lastmod>2010-11-18T21:48:31+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/10/templavoila-1.5-released/</loc>
+    <loc>//blog.tolleiv.de/2010/10/templavoila-1.5-released/</loc>
     <lastmod>2010-10-03T20:31:33+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/09/templavoila-on-github.com/</loc>
+    <loc>//blog.tolleiv.de/2010/09/templavoila-on-github.com/</loc>
     <lastmod>2010-09-03T15:52:14+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/08/peter-sunde-talking-about-flattr/</loc>
+    <loc>//blog.tolleiv.de/2010/08/peter-sunde-talking-about-flattr/</loc>
     <lastmod>2010-08-02T15:11:59+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</loc>
+    <loc>//blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</loc>
     <lastmod>2010-07-25T08:00:29+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/07/t3dd10-git-workshop/</loc>
+    <loc>//blog.tolleiv.de/2010/07/t3dd10-git-workshop/</loc>
     <lastmod>2010-07-08T22:11:29+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</loc>
+    <loc>//blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</loc>
     <lastmod>2010-06-30T06:00:30+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/06/typo3-workspaces/</loc>
+    <loc>//blog.tolleiv.de/2010/06/typo3-workspaces/</loc>
     <lastmod>2010-06-15T17:54:47+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/05/tiny-update.../</loc>
+    <loc>//blog.tolleiv.de/2010/05/tiny-update.../</loc>
     <lastmod>2010-05-08T16:20:34+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</loc>
+    <loc>//blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</loc>
     <lastmod>2010-03-31T22:35:20+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</loc>
+    <loc>//blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</loc>
     <lastmod>2010-03-15T23:39:53+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/about/</loc>
+    <loc>//blog.tolleiv.de/about/</loc>
     <lastmod>2010-03-12T00:16:53+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/03/re-farewell-templavoila/</loc>
+    <loc>//blog.tolleiv.de/2010/03/re-farewell-templavoila/</loc>
     <lastmod>2010-03-03T23:04:08+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/03/handling-data-in-typo3-with-tcemain/</loc>
+    <loc>//blog.tolleiv.de/2010/03/handling-data-in-typo3-with-tcemain/</loc>
     <lastmod>2010-03-02T07:05:16+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/02/crawler-extension-version-3.0.5-released/</loc>
+    <loc>//blog.tolleiv.de/2010/02/crawler-extension-version-3.0.5-released/</loc>
     <lastmod>2010-02-28T15:36:56+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</loc>
+    <loc>//blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</loc>
     <lastmod>2010-01-23T17:19:42+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/11/typo3-4.3-release/</loc>
+    <loc>//blog.tolleiv.de/2009/11/typo3-4.3-release/</loc>
     <lastmod>2009-11-30T18:05:18+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/11/templavoila-1.4-released.../</loc>
+    <loc>//blog.tolleiv.de/2009/11/templavoila-1.4-released.../</loc>
     <lastmod>2009-11-26T20:00:19+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/10/typo3-core-changelog-feeded/</loc>
+    <loc>//blog.tolleiv.de/2009/10/typo3-core-changelog-feeded/</loc>
     <lastmod>2009-10-31T20:47:39+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</loc>
+    <loc>//blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</loc>
     <lastmod>2009-10-22T19:18:39+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/10/visiting-uk/</loc>
+    <loc>//blog.tolleiv.de/2009/10/visiting-uk/</loc>
     <lastmod>2009-10-13T20:24:19+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/09/typo3-crawler-extension/</loc>
+    <loc>//blog.tolleiv.de/2009/09/typo3-crawler-extension/</loc>
     <lastmod>2009-09-11T07:36:08+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</loc>
+    <loc>//blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</loc>
     <lastmod>2009-08-17T21:38:45+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/08/www.encodechain.com/</loc>
+    <loc>//blog.tolleiv.de/2009/08/www.encodechain.com/</loc>
     <lastmod>2009-08-08T12:54:13+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/07/browser...-hmmm/</loc>
+    <loc>//blog.tolleiv.de/2009/07/browser...-hmmm/</loc>
     <lastmod>2009-07-26T21:49:55+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/07/typo3-extensions-..../</loc>
+    <loc>//blog.tolleiv.de/2009/07/typo3-extensions-..../</loc>
     <lastmod>2009-07-26T19:20:18+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/07/firefox-3.7-sneak..../</loc>
+    <loc>//blog.tolleiv.de/2009/07/firefox-3.7-sneak..../</loc>
     <lastmod>2009-07-22T21:59:31+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/07/fancy-wolfram-alpha-queries-..../</loc>
+    <loc>//blog.tolleiv.de/2009/07/fancy-wolfram-alpha-queries-..../</loc>
     <lastmod>2009-07-17T21:30:14+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/07/project-code-rush/</loc>
+    <loc>//blog.tolleiv.de/2009/07/project-code-rush/</loc>
     <lastmod>2009-07-11T17:08:53+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/imprint/</loc>
+    <loc>//blog.tolleiv.de/imprint/</loc>
     <lastmod>2009-06-29T22:18:34+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/06/disable-templavoila-new-page-wizard/</loc>
+    <loc>//blog.tolleiv.de/2009/06/disable-templavoila-new-page-wizard/</loc>
     <lastmod>2009-06-27T16:59:05+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/06/typo3-nerds-community--share-your-location/</loc>
+    <loc>//blog.tolleiv.de/2009/06/typo3-nerds-community--share-your-location/</loc>
     <lastmod>2009-06-27T14:34:31+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/06/optimize-css-and-js-on-the-fly/</loc>
+    <loc>//blog.tolleiv.de/2009/06/optimize-css-and-js-on-the-fly/</loc>
     <lastmod>2009-06-24T23:00:33+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</loc>
+    <loc>//blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</loc>
     <lastmod>2009-06-18T21:54:34+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/06/jquery-performance/</loc>
+    <loc>//blog.tolleiv.de/2009/06/jquery-performance/</loc>
     <lastmod>2009-06-15T06:53:58+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/06/my-jquery-1.3.2-update-experience/</loc>
+    <loc>//blog.tolleiv.de/2009/06/my-jquery-1.3.2-update-experience/</loc>
     <lastmod>2009-06-11T07:27:34+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/06/last-week..../</loc>
+    <loc>//blog.tolleiv.de/2009/06/last-week..../</loc>
     <lastmod>2009-06-06T17:42:18+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/06/wolfram-alpha-...-knows-the-answer-p/</loc>
+    <loc>//blog.tolleiv.de/2009/06/wolfram-alpha-...-knows-the-answer-p/</loc>
     <lastmod>2009-06-02T20:36:49+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/06/typo3-extensions-from-subversion/</loc>
+    <loc>//blog.tolleiv.de/2009/06/typo3-extensions-from-subversion/</loc>
     <lastmod>2009-06-01T11:08:47+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/05/php-best-practice-comparison/</loc>
+    <loc>//blog.tolleiv.de/2009/05/php-best-practice-comparison/</loc>
     <lastmod>2009-05-28T10:13:09+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/05/some-free-music/</loc>
+    <loc>//blog.tolleiv.de/2009/05/some-free-music/</loc>
     <lastmod>2009-05-24T13:47:05+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/05/desktop-timetracking/</loc>
+    <loc>//blog.tolleiv.de/2009/05/desktop-timetracking/</loc>
     <lastmod>2009-05-24T09:28:48+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/05/morrissey/</loc>
+    <loc>//blog.tolleiv.de/2009/05/morrissey/</loc>
     <lastmod>2009-05-23T19:05:48+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/05/typo3-templavoila-rtfm/</loc>
+    <loc>//blog.tolleiv.de/2009/05/typo3-templavoila-rtfm/</loc>
     <lastmod>2009-05-21T21:39:53+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/05/streetart-.../</loc>
+    <loc>//blog.tolleiv.de/2009/05/streetart-.../</loc>
     <lastmod>2009-05-06T20:46:55+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/05/eintracht-frankfurt-last-saturday/</loc>
+    <loc>//blog.tolleiv.de/2009/05/eintracht-frankfurt-last-saturday/</loc>
     <lastmod>2009-05-04T20:44:46+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/05/hilarious-commercial/</loc>
+    <loc>//blog.tolleiv.de/2009/05/hilarious-commercial/</loc>
     <lastmod>2009-05-04T20:32:05+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/el%C3%A4kel%C3%A4iset-in-wiesbaden/</loc>
+    <loc>//blog.tolleiv.de/2009/04/el%C3%A4kel%C3%A4iset-in-wiesbaden/</loc>
     <lastmod>2009-04-30T17:11:33+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/css-sprites-...-a-nice-way-to-save-bandwidth/</loc>
+    <loc>//blog.tolleiv.de/2009/04/css-sprites-...-a-nice-way-to-save-bandwidth/</loc>
     <lastmod>2009-04-29T20:06:23+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/shell-command-translate/</loc>
+    <loc>//blog.tolleiv.de/2009/04/shell-command-translate/</loc>
     <lastmod>2009-04-28T16:22:55+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/around-the-world/</loc>
+    <loc>//blog.tolleiv.de/2009/04/around-the-world/</loc>
     <lastmod>2009-04-26T08:00:43+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/death-star-over-san-francisco/</loc>
+    <loc>//blog.tolleiv.de/2009/04/death-star-over-san-francisco/</loc>
     <lastmod>2009-04-25T23:51:43+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/history-and-cookbooks-are-written-by-the-victors.../</loc>
+    <loc>//blog.tolleiv.de/2009/04/history-and-cookbooks-are-written-by-the-victors.../</loc>
     <lastmod>2009-04-25T09:38:31+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/the-subshell-is-your-friend/</loc>
+    <loc>//blog.tolleiv.de/2009/04/the-subshell-is-your-friend/</loc>
     <lastmod>2009-04-24T21:10:29+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/visualization..../</loc>
+    <loc>//blog.tolleiv.de/2009/04/visualization..../</loc>
     <lastmod>2009-04-24T19:46:25+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/webdesign-and-stuff-that-came-along-my-way-today/</loc>
+    <loc>//blog.tolleiv.de/2009/04/webdesign-and-stuff-that-came-along-my-way-today/</loc>
     <lastmod>2009-04-23T21:15:13+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/moments/</loc>
+    <loc>//blog.tolleiv.de/2009/04/moments/</loc>
     <lastmod>2009-04-18T18:39:06+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/visualized-sorting-algorithms/</loc>
+    <loc>//blog.tolleiv.de/2009/04/visualized-sorting-algorithms/</loc>
     <lastmod>2009-04-16T20:10:35+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/...-much-better-way-to-use-your-shell/</loc>
+    <loc>//blog.tolleiv.de/2009/04/...-much-better-way-to-use-your-shell/</loc>
     <lastmod>2009-04-15T19:22:38+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2009/04/find-the-newest-file-within-a-folder..../</loc>
+    <loc>//blog.tolleiv.de/2009/04/find-the-newest-file-within-a-folder..../</loc>
     <lastmod>2009-04-14T20:14:42+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/08/bye-bye-version-4.../</loc>
+    <loc>//blog.tolleiv.de/2008/08/bye-bye-version-4.../</loc>
     <lastmod>2008-08-08T17:30:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/07/b-tree-simulation.../</loc>
+    <loc>//blog.tolleiv.de/2008/07/b-tree-simulation.../</loc>
     <lastmod>2008-07-29T19:25:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/07/working-from-home./</loc>
+    <loc>//blog.tolleiv.de/2008/07/working-from-home./</loc>
     <lastmod>2008-07-15T17:26:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/07/musique-...-britisch-musique-p/</loc>
+    <loc>//blog.tolleiv.de/2008/07/musique-...-britisch-musique-p/</loc>
     <lastmod>2008-07-10T22:43:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/07/track-time-for-a-subroutine-within-a-shell-script/</loc>
+    <loc>//blog.tolleiv.de/2008/07/track-time-for-a-subroutine-within-a-shell-script/</loc>
     <lastmod>2008-07-10T21:55:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/07/iterator-gof/</loc>
+    <loc>//blog.tolleiv.de/2008/07/iterator-gof/</loc>
     <lastmod>2008-07-07T17:30:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/07/how-breakfast-could-look-like.../</loc>
+    <loc>//blog.tolleiv.de/2008/07/how-breakfast-could-look-like.../</loc>
     <lastmod>2008-07-03T21:37:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/07/our-wonderful-nature/</loc>
+    <loc>//blog.tolleiv.de/2008/07/our-wonderful-nature/</loc>
     <lastmod>2008-07-02T19:30:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/07/null-object-pattern/</loc>
+    <loc>//blog.tolleiv.de/2008/07/null-object-pattern/</loc>
     <lastmod>2008-07-01T17:58:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/07/chronotopic-anamorphosis/</loc>
+    <loc>//blog.tolleiv.de/2008/07/chronotopic-anamorphosis/</loc>
     <lastmod>2008-07-01T09:12:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/yslow---powerful-ff-extension/</loc>
+    <loc>//blog.tolleiv.de/2008/06/yslow---powerful-ff-extension/</loc>
     <lastmod>2008-06-30T17:30:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/musique/</loc>
+    <loc>//blog.tolleiv.de/2008/06/musique/</loc>
     <lastmod>2008-06-29T19:36:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/factory-gof/</loc>
+    <loc>//blog.tolleiv.de/2008/06/factory-gof/</loc>
     <lastmod>2008-06-23T18:20:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/query-object-poeea/</loc>
+    <loc>//blog.tolleiv.de/2008/06/query-object-poeea/</loc>
     <lastmod>2008-06-20T17:29:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/...-i-laughed/</loc>
+    <loc>//blog.tolleiv.de/2008/06/...-i-laughed/</loc>
     <lastmod>2008-06-19T15:40:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/fa%C3%A7ade-gof/</loc>
+    <loc>//blog.tolleiv.de/2008/06/fa%C3%A7ade-gof/</loc>
     <lastmod>2008-06-16T23:33:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/todays-rofl/</loc>
+    <loc>//blog.tolleiv.de/2008/06/todays-rofl/</loc>
     <lastmod>2008-06-15T22:28:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/inherit-abstract-functions..../</loc>
+    <loc>//blog.tolleiv.de/2008/06/inherit-abstract-functions..../</loc>
     <lastmod>2008-06-11T20:28:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/new-typo-releases/</loc>
+    <loc>//blog.tolleiv.de/2008/06/new-typo-releases/</loc>
     <lastmod>2008-06-11T14:18:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/self-extracting-php-archive/</loc>
+    <loc>//blog.tolleiv.de/2008/06/self-extracting-php-archive/</loc>
     <lastmod>2008-06-07T21:30:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/dunno-why-but-i-love-this-song.../</loc>
+    <loc>//blog.tolleiv.de/2008/06/dunno-why-but-i-love-this-song.../</loc>
     <lastmod>2008-06-07T15:45:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/plugin-poeaa/</loc>
+    <loc>//blog.tolleiv.de/2008/06/plugin-poeaa/</loc>
     <lastmod>2008-06-05T01:11:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/06/comparing-php-best-practises/</loc>
+    <loc>//blog.tolleiv.de/2008/06/comparing-php-best-practises/</loc>
     <lastmod>2008-06-02T15:37:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/value-object-ddd/</loc>
+    <loc>//blog.tolleiv.de/2008/05/value-object-ddd/</loc>
     <lastmod>2008-05-30T04:39:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/todays-rofl/</loc>
+    <loc>//blog.tolleiv.de/2008/05/todays-rofl/</loc>
     <lastmod>2008-05-29T21:11:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/prototype-gof/</loc>
+    <loc>//blog.tolleiv.de/2008/05/prototype-gof/</loc>
     <lastmod>2008-05-27T23:17:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/wii-head-tracking/</loc>
+    <loc>//blog.tolleiv.de/2008/05/wii-head-tracking/</loc>
     <lastmod>2008-05-26T15:33:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</loc>
+    <loc>//blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</loc>
     <lastmod>2008-05-24T17:40:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/singelton-gof/</loc>
+    <loc>//blog.tolleiv.de/2008/05/singelton-gof/</loc>
     <lastmod>2008-05-23T21:40:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/php-sucks-not-really/</loc>
+    <loc>//blog.tolleiv.de/2008/05/php-sucks-not-really/</loc>
     <lastmod>2008-05-22T06:35:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../</loc>
+    <loc>//blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../</loc>
     <lastmod>2008-05-20T21:40:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/preview-to-php-5.3/</loc>
+    <loc>//blog.tolleiv.de/2008/05/preview-to-php-5.3/</loc>
     <lastmod>2008-05-19T05:15:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/firefox-3-rc1/</loc>
+    <loc>//blog.tolleiv.de/2008/05/firefox-3-rc1/</loc>
     <lastmod>2008-05-18T16:11:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/using-mocks-within-tests/</loc>
+    <loc>//blog.tolleiv.de/2008/05/using-mocks-within-tests/</loc>
     <lastmod>2008-05-17T20:02:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/typo3-api.../</loc>
+    <loc>//blog.tolleiv.de/2008/05/typo3-api.../</loc>
     <lastmod>2008-05-15T14:40:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/specification-ddd/</loc>
+    <loc>//blog.tolleiv.de/2008/05/specification-ddd/</loc>
     <lastmod>2008-05-15T14:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/homer-simpson-as-ascii-art/</loc>
+    <loc>//blog.tolleiv.de/2008/05/homer-simpson-as-ascii-art/</loc>
     <lastmod>2008-05-14T22:02:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/t3dd08/</loc>
+    <loc>//blog.tolleiv.de/2008/05/t3dd08/</loc>
     <lastmod>2008-05-13T22:15:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/memento-gof/</loc>
+    <loc>//blog.tolleiv.de/2008/05/memento-gof/</loc>
     <lastmod>2008-05-13T07:59:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2008/05/decorator-gof/</loc>
+    <loc>//blog.tolleiv.de/2008/05/decorator-gof/</loc>
     <lastmod>2008-05-12T22:59:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.tolleiv.de/2007/09/t3con07/</loc>
+    <loc>//blog.tolleiv.de/2007/09/t3con07/</loc>
     <lastmod>2007-09-22T23:27:54+00:00</lastmod>
   </url>
   

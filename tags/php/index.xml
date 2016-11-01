@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/php/index.xml</link>
+    <link>//blog.tolleiv.de/tags/php/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/php/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>multiple arguments for mocked functions....</title>
-      <link>https://blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</link>
+      <link>//blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</link>
       <pubDate>Mon, 17 Aug 2009 21:38:45 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</guid>
+      <guid>//blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</guid>
       <description>&lt;p&gt;If you look into the PHPUnit documentation (&lt;a href=&#34;http://www.phpunit.de/manual/3.3/en/test-doubles.html#test-doubles.mock-objects&#34;&gt; http://www.phpunit.de/manual/3.3/en/test-doubles.html#test-doubles.mock-objects&lt;/a&gt; ) you&amp;rsquo;ll see some nice examples but non of them shows how to translate a function with multiple arguments into a mock-assumption.&lt;/p&gt;
 
 &lt;p&gt;Within the examples you&amp;rsquo;ll find:
@@ -33,11 +33,11 @@
     
     <item>
       <title>www.encodechain.com</title>
-      <link>https://blog.tolleiv.de/2009/08/www.encodechain.com/</link>
+      <link>//blog.tolleiv.de/2009/08/www.encodechain.com/</link>
       <pubDate>Sat, 08 Aug 2009 12:54:13 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/08/www.encodechain.com/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2009/08/encodingchain-0.1.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2009/08/encodingchain-0.1-300x221.png&#34; alt=&#34;encodingchain-0.1&#34; /&gt;&lt;/a&gt;I just &amp;ldquo;released&amp;rdquo; &lt;a href=&#34;http://www.encodechain.com&#34;&gt;encodechain.com&lt;/a&gt;. A little tool which enables to combine various popular PHP conversion methods and to check how they affect your input&amp;hellip; feel free to give me some feedback :)&lt;/p&gt;
+      <guid>//blog.tolleiv.de/2009/08/www.encodechain.com/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2009/08/encodingchain-0.1.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2009/08/encodingchain-0.1-300x221.png&#34; alt=&#34;encodingchain-0.1&#34; /&gt;&lt;/a&gt;I just &amp;ldquo;released&amp;rdquo; &lt;a href=&#34;http://www.encodechain.com&#34;&gt;encodechain.com&lt;/a&gt;. A little tool which enables to combine various popular PHP conversion methods and to check how they affect your input&amp;hellip; feel free to give me some feedback :)&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m also not sure whether I choose the right name for it &amp;hellip; O_o&lt;/p&gt;
 </description>
@@ -45,20 +45,20 @@
     
     <item>
       <title>PHP Best practice comparison</title>
-      <link>https://blog.tolleiv.de/2009/05/php-best-practice-comparison/</link>
+      <link>//blog.tolleiv.de/2009/05/php-best-practice-comparison/</link>
       <pubDate>Thu, 28 May 2009 10:13:09 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/05/php-best-practice-comparison/</guid>
+      <guid>//blog.tolleiv.de/2009/05/php-best-practice-comparison/</guid>
       <description>&lt;p&gt;If you&amp;rsquo;re still wondering whether the single- or double quotes are processed faster in PHP you might want to look at &lt;a href=&#34;http://www.phpbench.com/&#34;&gt;phpbench.com&lt;/a&gt;. They don&amp;rsquo;t provide any ground breaking new insights, but they show in a very nice way what&amp;rsquo;s best pratice when it comes to arrays, strings and loops&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Iterator [GoF]</title>
-      <link>https://blog.tolleiv.de/2008/07/iterator-gof/</link>
+      <link>//blog.tolleiv.de/2008/07/iterator-gof/</link>
       <pubDate>Mon, 07 Jul 2008 17:30:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/07/iterator-gof/</guid>
+      <guid>//blog.tolleiv.de/2008/07/iterator-gof/</guid>
       <description>&lt;p&gt;Lot&amp;rsquo;s of people like to write down things into lists, so that they can go through that list later and check whether everything was fine. Normally every recipe has a list ~ there&amp;rsquo;s always a list of ingredients at the beginning of the recipe.
 This short example shows how such a list can be processed in PHP. So why would you want to have something else than a array to hold your objects? - My example still uses a array to hold the objects (uni- or bidirectional lists would also be possible) but it adds a kind of a facade to the array so that the common managements-tasks are handled within the List-Object. Everything you need for this example is present in PHP since version 5.0. The basic steps you need to do is to provide a &amp;ldquo;Object&amp;rdquo; and an &amp;ldquo;ObjectList&amp;rdquo; which implements the native &lt;a href=&#34;http://www.php.net/manual/en/language.oop5.iterations.php&#34;&gt;&amp;ldquo;Iterator&amp;rdquo;&lt;/a&gt; interface and then you&amp;rsquo;re able to have very handy lists :)&lt;/p&gt;
 
@@ -132,10 +132,10 @@ echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&
     
     <item>
       <title>Null-Object Pattern</title>
-      <link>https://blog.tolleiv.de/2008/07/null-object-pattern/</link>
+      <link>//blog.tolleiv.de/2008/07/null-object-pattern/</link>
       <pubDate>Tue, 01 Jul 2008 17:58:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/07/null-object-pattern/</guid>
+      <guid>//blog.tolleiv.de/2008/07/null-object-pattern/</guid>
       <description>&lt;p&gt;Very often you create a object with a factory and before you really start using it, you check if your factory really created a object or returned NULL. Or maybe you have a method where a object is passed in and in this situation you&amp;rsquo;ll have to do this check also.&lt;/p&gt;
 
 &lt;p&gt;Instead of typing the &amp;ldquo;if(object == null)&amp;rdquo; phrase again and again, you could use the Null-Object pattern, you&amp;rsquo;ll see that this can make some situations much clearer.&lt;/p&gt;
@@ -178,10 +178,10 @@ return 0;
     
     <item>
       <title>Self-extracting PHP archive</title>
-      <link>https://blog.tolleiv.de/2008/06/self-extracting-php-archive/</link>
+      <link>//blog.tolleiv.de/2008/06/self-extracting-php-archive/</link>
       <pubDate>Sat, 07 Jun 2008 21:30:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/self-extracting-php-archive/</guid>
+      <guid>//blog.tolleiv.de/2008/06/self-extracting-php-archive/</guid>
       <description>&lt;p&gt;The __halt_compiler(); function in php enables to store some additional data in a php-file without blowing up the memory. A very nice possibility is to use this for a self-extracting php file as installation-packages of your php application.
 A wile ago I created a script which automatically creates such a archive and I think you might like it&amp;hellip;.for the impatient ones: &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.php&#34;&gt;Download&lt;/a&gt; / &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.zip&#34;&gt;Download as Zip&lt;/a&gt;.&lt;/p&gt;
 
@@ -288,20 +288,20 @@ I think that it could be useful to have a version with a better error-handling a
     
     <item>
       <title>Comparing PHP Best Practises</title>
-      <link>https://blog.tolleiv.de/2008/06/comparing-php-best-practises/</link>
+      <link>//blog.tolleiv.de/2008/06/comparing-php-best-practises/</link>
       <pubDate>Mon, 02 Jun 2008 15:37:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/comparing-php-best-practises/</guid>
+      <guid>//blog.tolleiv.de/2008/06/comparing-php-best-practises/</guid>
       <description>&lt;p&gt;If you&amp;rsquo;re still wondering whether the single- or double quotes are processed faster in PHP you might want to look at &lt;a href=&#34;http://www.phpbench.com/&#34;&gt;phpbench.com&lt;/a&gt;. They don&amp;rsquo;t provide any ground breaking new insights, but they show in a very nice way what&amp;rsquo;s best pratice when it comes to arrays, strings and loops&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Value Object [DDD]</title>
-      <link>https://blog.tolleiv.de/2008/05/value-object-ddd/</link>
+      <link>//blog.tolleiv.de/2008/05/value-object-ddd/</link>
       <pubDate>Fri, 30 May 2008 04:39:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/value-object-ddd/</guid>
+      <guid>//blog.tolleiv.de/2008/05/value-object-ddd/</guid>
       <description>&lt;p&gt;This metaphor does not fit completely, and the &amp;ldquo;Money-Example&amp;rdquo; is omnipresent, but I really like the pattern and so that&amp;rsquo;s the story:&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s say you have your grannies recipe for a chocolate cookie and you want to keep this in mind, but also you like to somehow experiment with some new or different ingredients. Normally you just keep in mind what you changed and later you write down the new recipe. But from time to time you might want to compare the two recipes or maybe you want to make cookies with the new and the changed recipes. In this situation it&amp;rsquo;s really good to have both written down on paper. ;)&lt;/p&gt;
@@ -358,10 +358,10 @@ $coconutRecipe-&amp;gt;printIncredients();
     
     <item>
       <title>PHP FastCGI vs. PHP as a module</title>
-      <link>https://blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</link>
+      <link>//blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</link>
       <pubDate>Sat, 24 May 2008 17:40:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</guid>
+      <guid>//blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</guid>
       <description>&lt;p&gt;The apachelounge.org guy published a very interesting stat which compares the &lt;a href=&#34;http://www.apachelounge.com/forum/viewtopic.php?p=10991&#34;&gt;memory-usage of PHP/FastCGI and PHP/as module&lt;/a&gt; and that&amp;rsquo;s really interesting:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDfQbt7tygI/AAAAAAAAABY/D72W5ZIj22c/s1600-h/httpd-ram-week.png&#34;&gt;&lt;img src=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDfQbt7tygI/AAAAAAAAABY/D72W5ZIj22c/s400/httpd-ram-week.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
@@ -372,10 +372,10 @@ $coconutRecipe-&amp;gt;printIncredients();
     
     <item>
       <title>PHP sucks? not really!</title>
-      <link>https://blog.tolleiv.de/2008/05/php-sucks-not-really/</link>
+      <link>//blog.tolleiv.de/2008/05/php-sucks-not-really/</link>
       <pubDate>Thu, 22 May 2008 06:35:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/php-sucks-not-really/</guid>
+      <guid>//blog.tolleiv.de/2008/05/php-sucks-not-really/</guid>
       <description>&lt;p&gt;There are so many people from outside of the PHP World and lots of them are complaining about PHP and their reasons are mostly so ridiculous. In most cases they just say that PHP code sucks.&lt;br /&gt;
 The PHP 10.0 Blog brought up some good arguments about that and I fully agree - it&amp;rsquo;s not the language that produces sucking code, it&amp;rsquo;s the guy who wrote it down. &lt;a href=&#34;http://php100.wordpress.com/2008/05/21/secret-of-php/&#34;&gt;Click&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -383,10 +383,10 @@ The PHP 10.0 Blog brought up some good arguments about that and I fully agree - 
     
     <item>
       <title>Preview to PHP 5.3</title>
-      <link>https://blog.tolleiv.de/2008/05/preview-to-php-5.3/</link>
+      <link>//blog.tolleiv.de/2008/05/preview-to-php-5.3/</link>
       <pubDate>Mon, 19 May 2008 05:15:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/preview-to-php-5.3/</guid>
+      <guid>//blog.tolleiv.de/2008/05/preview-to-php-5.3/</guid>
       <description>&lt;p&gt;One of the mayor updates since PHP 5.0 is upcoming with the 5.3 version, this is also a major step forward to PHP 6 - I love to have namespaces and appreciate the split of E_NOTICE and E_DEPRECATED. Also other features like the native MySQL support ( I hope this really raises the performance), the array_replace/array_replace_recursive functions and also dynamic calls to static functions &amp;ldquo;$classname::$functionname($parameter);&amp;rdquo; sound very cool. So I really look forward to have it on the server (or at least on my laptop) :P&lt;/p&gt;
 
 &lt;p&gt;Regarding the namespaces I&amp;rsquo;ve one idea: maybe someday someone will invent a common namespace &amp;ldquo;php::clean&amp;rdquo; which fixes all the small inconsistencies within function-names and parameter-styles &amp;hellip; that would be really great ;)&lt;/p&gt;
@@ -397,10 +397,10 @@ The PHP 10.0 Blog brought up some good arguments about that and I fully agree - 
     
     <item>
       <title>Using Mocks within Tests</title>
-      <link>https://blog.tolleiv.de/2008/05/using-mocks-within-tests/</link>
+      <link>//blog.tolleiv.de/2008/05/using-mocks-within-tests/</link>
       <pubDate>Sat, 17 May 2008 20:02:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/using-mocks-within-tests/</guid>
+      <guid>//blog.tolleiv.de/2008/05/using-mocks-within-tests/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s say you have some kind of process which creates cookies and which requires the cookies to bake before you deliver them to the customers. This process somehow touches two kinds of objects the cookie itself and a object which performs the process - the cookie oven.
 When you start to develop the oven how do you check whether the cookies are really baked or not? Since you can&amp;rsquo;t get rid of the dependency between the oven and the cookie, you have to simulate a real object and do the checks by hand - but wait there&amp;rsquo;s already a way to resolve it:
 PHPUnit ships with a very nice and comfortable function to create and check mock-objects and that&amp;rsquo;s exactly what we need in this situation where we somehow need to find out if our cookie really gets baked.

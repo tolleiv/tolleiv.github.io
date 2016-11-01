@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/varnish/index.xml</link>
+    <link>//blog.tolleiv.de/tags/varnish/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/varnish/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/varnish/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>TYPO3 login state and Varnish cache</title>
-      <link>https://blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</link>
+      <link>//blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</link>
       <pubDate>Mon, 10 Dec 2012 15:56:46 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</guid>
+      <guid>//blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</guid>
       <description>
 
 &lt;p&gt;Caching is hard in complex page setups with user specific content, especially when public pages change their content once a user is logged in. TYPO3 is smart enough to deal with the login state properly and cache appropriately. Once Varnish is involved, it&amp;rsquo;s quite tricky to cache as much as possible without loosing the dynamic content. But it&amp;rsquo;s not impossible and here&amp;rsquo;s my summary how we resolved it for &lt;a href=&#34;http://typo3.org&#34;&gt;typo3.org&lt;/a&gt;.&lt;/p&gt;

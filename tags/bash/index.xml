@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/bash/index.xml</link>
+    <link>//blog.tolleiv.de/tags/bash/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/bash/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>bash: small improvement for the &#34;cd&#34; builtin</title>
-      <link>https://blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</link>
+      <link>//blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</link>
       <pubDate>Thu, 18 Jun 2009 21:54:34 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</guid>
+      <guid>//blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</guid>
       <description>&lt;p&gt;If you use the shell and walk around in directories wouldn&amp;rsquo;t it be cool to have &amp;ldquo;cd &amp;hellip;&amp;rdquo; to move 2 levels up, &amp;ldquo;cd &amp;hellip;.&amp;rdquo; to move 3 levels up &amp;hellip;? I&amp;rsquo;m not sure if there&amp;rsquo;s an easier way to resolve it but the following lines work pretty nice so far and they just made it into my default .bashrc :P&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;cd() {
@@ -36,10 +36,10 @@
     
     <item>
       <title>shell command: translate </title>
-      <link>https://blog.tolleiv.de/2009/04/shell-command-translate/</link>
+      <link>//blog.tolleiv.de/2009/04/shell-command-translate/</link>
       <pubDate>Tue, 28 Apr 2009 16:22:55 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/04/shell-command-translate/</guid>
+      <guid>//blog.tolleiv.de/2009/04/shell-command-translate/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;Translate, squeeze, and/or delete characters from standard input,
 writing to standard output.&amp;rdquo;&lt;/p&gt;
@@ -56,10 +56,10 @@ writing to standard output.&amp;rdquo;&lt;/p&gt;
     
     <item>
       <title>find the newest file within a folder....</title>
-      <link>https://blog.tolleiv.de/2009/04/find-the-newest-file-within-a-folder..../</link>
+      <link>//blog.tolleiv.de/2009/04/find-the-newest-file-within-a-folder..../</link>
       <pubDate>Tue, 14 Apr 2009 20:14:42 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/04/find-the-newest-file-within-a-folder..../</guid>
+      <guid>//blog.tolleiv.de/2009/04/find-the-newest-file-within-a-folder..../</guid>
       <description>&lt;p&gt;These are two neat little commands to find the newest and oldest file within a folder and it&amp;rsquo;s subfolder:
 &lt;code&gt;find . -type f -printf &amp;quot;%T@ %p \n&amp;quot; | sort -n -k 1,1 | awk &#39;{print $2}&#39; | tail -n 1
 find . -type f -printf &amp;quot;%T@ %p \n&amp;quot; | sort -n -k 1,1 | awk &#39;{print $2}&#39; | head -n 1&lt;/code&gt;
@@ -73,10 +73,10 @@ find . -type f -printf &amp;quot;%T@ %C+ %p \n&amp;quot; | sort -n -k 1,1 | head
     
     <item>
       <title>track time for a subroutine within a shell-script</title>
-      <link>https://blog.tolleiv.de/2008/07/track-time-for-a-subroutine-within-a-shell-script/</link>
+      <link>//blog.tolleiv.de/2008/07/track-time-for-a-subroutine-within-a-shell-script/</link>
       <pubDate>Thu, 10 Jul 2008 21:55:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/07/track-time-for-a-subroutine-within-a-shell-script/</guid>
+      <guid>//blog.tolleiv.de/2008/07/track-time-for-a-subroutine-within-a-shell-script/</guid>
       <description>&lt;p&gt;The following code-snippet is a shell-script which does the following:&lt;/p&gt;
 
 &lt;ol&gt;

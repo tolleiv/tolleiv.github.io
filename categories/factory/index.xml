@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/categories/factory/index.xml</link>
+    <link>//blog.tolleiv.de/categories/factory/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/categories/factory/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/categories/factory/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Factory [GoF]</title>
-      <link>https://blog.tolleiv.de/2008/06/factory-gof/</link>
+      <link>//blog.tolleiv.de/2008/06/factory-gof/</link>
       <pubDate>Mon, 23 Jun 2008 18:20:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/factory-gof/</guid>
+      <guid>//blog.tolleiv.de/2008/06/factory-gof/</guid>
       <description>&lt;p&gt;Do you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;Fa&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ç&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ade pattern&lt;/a&gt; post? Sure you do :) - I described a child which asked his granny whether she could bake some cookies. So how this happens in a formal way was describe within the&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt; Fa&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ç&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ade pattern&lt;/a&gt; post ;) but the basic action &amp;ldquo;to ask for sth.&amp;rdquo; is described here&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;As you might remember we had a child, probably a lazy one, which was in the mood to eat some cookies but since the cookie tin was empty it asked his granny to bake some new. In OOP thats nearly the same - when you&amp;rsquo;d to have a (complex) object and if you don&amp;rsquo;t already have one you need someone who creates it or you do it yourself but since you need remember all the steps to create it, that&amp;rsquo;s something for programmers who likes to type :P&lt;/p&gt;
@@ -96,10 +96,10 @@ $lowQualityCookiePackage = $wrapper-&amp;gt;run(new MassProduction());&lt;/p&gt;
     
     <item>
       <title>Query Object [PoEEA]</title>
-      <link>https://blog.tolleiv.de/2008/06/query-object-poeea/</link>
+      <link>//blog.tolleiv.de/2008/06/query-object-poeea/</link>
       <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/query-object-poeea/</guid>
+      <guid>//blog.tolleiv.de/2008/06/query-object-poeea/</guid>
       <description>&lt;p&gt;Maybe you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification Pattern&lt;/a&gt; I explained some weeks ago. It enabled a easy and intuitive  searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification.
 Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory. The idea of the Query Object pattern is that it enables a usage, comparable to the specification pattern, for objects which are persisted in a database. The benefit is that it creates a query to exclude objects which won&amp;rsquo;t satisfy your needs and therefore you wont mess up the memory anymore.
 Once you have a query-object in place you should not get in touch with SQL anymore because it can encapsulate SQL completely, at least if you also have some kind of data mapping (coming soon), which is a great benefit for everyone who is not so familiar with SQL. (But don&amp;rsquo;t forget, regarding performance, SQL-optimization is a very important thing).&lt;/p&gt;
@@ -185,10 +185,10 @@ But no matter which flavor you prefer, Query Objects bring some real benefits wh
     
     <item>
       <title>Plugin [PoEAA]</title>
-      <link>https://blog.tolleiv.de/2008/06/plugin-poeaa/</link>
+      <link>//blog.tolleiv.de/2008/06/plugin-poeaa/</link>
       <pubDate>Thu, 05 Jun 2008 01:11:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/plugin-poeaa/</guid>
+      <guid>//blog.tolleiv.de/2008/06/plugin-poeaa/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m sure you&amp;rsquo;re pretty often in the situation that you have to switch something depending on the context you&amp;rsquo;re currently in. For example most people change their eating habits before summer - I also do :P&lt;/p&gt;
 
 &lt;p&gt;Sometimes this is what you also want to have in your software. To achieve different behaviour you normally just implement two different classes or aggregates and since they have the same &amp;ldquo;meaning&amp;rdquo; they normally share a interface (a.k.a Separated Interface). But who decides which implementation fits into the current environment/context?&lt;/p&gt;

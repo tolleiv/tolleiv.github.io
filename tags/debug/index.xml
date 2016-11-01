@@ -2,36 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/debug/index.xml</link>
+    <link>//blog.tolleiv.de/tags/debug/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/debug/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/debug/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Finding TypoScript errors.</title>
-      <link>https://blog.tolleiv.de/2012/02/finding-typoscript-errors./</link>
+      <link>//blog.tolleiv.de/2012/02/finding-typoscript-errors./</link>
       <pubDate>Thu, 16 Feb 2012 16:02:31 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2012/02/finding-typoscript-errors./</guid>
+      <guid>//blog.tolleiv.de/2012/02/finding-typoscript-errors./</guid>
       <description>&lt;p&gt;When you work on TypoScript templates in TYPO3, errors might show up in the TypoScript Object Browser. Within the error messages you&amp;rsquo;ll see a more or less detailed error description with the related line number. Within most setups these line numbers won&amp;rsquo;t relate to any of your sys_template records or TypoScript files directly. But they still provide value if you know how they help to find the right spot. As it&amp;rsquo;s not too obvious how to find the right spot I&amp;rsquo;ve created a little screenshot series to guide you to the broken spots in your templates.&lt;/p&gt;
 
 &lt;p&gt;So that&amp;rsquo;s what you might see in your TypoScript Object Browser:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34; alt=&#34;The error message from your TypoScript Object Browser might look like this.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34; alt=&#34;The error message from your TypoScript Object Browser might look like this.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt; Switching from there to the Template Analyzer:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34; alt=&#34;Switching to the TypoScript analyzer&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34; alt=&#34;Switching to the TypoScript analyzer&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;At the bottom of the Template Analyzer, you&amp;rsquo;ll find a &amp;ldquo;Complete TS&amp;rdquo; section and a link ~which looks like normal text.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34; alt=&#34;And you&#39;ll find a link to the fully concatenated TypoScript of your current page.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34; alt=&#34;And you&#39;ll find a link to the fully concatenated TypoScript of your current page.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Clicking on that link will give you the entire concatenated TypoScript and here you&amp;rsquo;ll also find that the line numbers finally match to the error message.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34; alt=&#34;And you&#39;ll find that the line numbers are now what you saw in the error message before (might need some scrolling).&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34; alt=&#34;And you&#39;ll find that the line numbers are now what you saw in the error message before (might need some scrolling).&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;A well hidden gem which works most likely in all TYPO3 4.x versions ;)&lt;/p&gt;
 
@@ -43,10 +43,10 @@
     
     <item>
       <title>Debugging mod_rewrite... my favorite way</title>
-      <link>https://blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</link>
+      <link>//blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</link>
       <pubDate>Sat, 23 Jan 2010 17:19:42 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</guid>
+      <guid>//blog.tolleiv.de/2010/01/debugging-mod_rewrite...-my-favorite-way/</guid>
       <description>&lt;p&gt;Once a month someone is asking because he has issues to get his mod_rewrite rules to do what he want&amp;rsquo;s. Writing the rules and the required RegEx for these rules is quite easy, but Apache still behaves strange every now and then and that&amp;rsquo;s where one of my favorite ways to &amp;ldquo;debug&amp;rdquo; mod_rewrite comes in very handy. And I felt that writing something is better than having a silent blog ;)&lt;/p&gt;
 
 &lt;p&gt;The following block is what it&amp;rsquo;s all about. It seems to have it&amp;rsquo;s origin on &lt;a href=&#34;http://www.webmasterworld.com/forum92/5360.htm&#34;&gt;WebmasterWorld&lt;/a&gt; and &lt;a href=&#34;http://www.latenightpc.com/blog/archives/2007/09/05/a-couple-ways-to-debug-mod_rewrite&#34;&gt;Rob Russel&amp;rsquo;s Blog&lt;/a&gt; and looks basically like this:&lt;/p&gt;

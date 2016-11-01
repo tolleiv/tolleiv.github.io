@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/git/index.xml</link>
+    <link>//blog.tolleiv.de/tags/git/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>TemplaVoila on github.com</title>
-      <link>https://blog.tolleiv.de/2010/09/templavoila-on-github.com/</link>
+      <link>//blog.tolleiv.de/2010/09/templavoila-on-github.com/</link>
       <pubDate>Fri, 03 Sep 2010 15:52:14 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/09/templavoila-on-github.com/</guid>
+      <guid>//blog.tolleiv.de/2010/09/templavoila-on-github.com/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;Update: Finally TemplaVoila moved to git.typo3.org  - please read the &lt;a href=&#34;http://blog.tolleiv.de/2012/01/templavoila-1-6-x/&#34;&gt;update here&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -32,10 +32,10 @@
     
     <item>
       <title>T3DD10 Git workshop</title>
-      <link>https://blog.tolleiv.de/2010/07/t3dd10-git-workshop/</link>
+      <link>//blog.tolleiv.de/2010/07/t3dd10-git-workshop/</link>
       <pubDate>Thu, 08 Jul 2010 22:11:29 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/07/t3dd10-git-workshop/</guid>
+      <guid>//blog.tolleiv.de/2010/07/t3dd10-git-workshop/</guid>
       <description>&lt;p&gt;I just found that &lt;a href=&#34;http://www.xing.com/profile/Peter_Niederlag&#34;&gt;Peter&lt;/a&gt; shares the slides of the Git workshop from the T3DD10 on &lt;a href=&#34;http://www.slideshare.net/jugglefish/t3dd10-git&#34;&gt;slideshare&lt;/a&gt;. Since this 4 hour workshop was - for many reasons - one of my favorites during the T3DD10, I felt that it&amp;rsquo;s worth to mention it. And due to the fact that TYPO3 is moving very fast towards Git it&amp;rsquo;s worth to look at them ;) &amp;mdash; &lt;a href=&#34;http://www.slideshare.net/jugglefish/t3dd10-git&#34;&gt;Open workshop slides&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Btw. at the beginning I didn&amp;rsquo;t belief that a Git workshop could fill 4 hours - now I don&amp;rsquo;t think that shorter workshops make any sense :P&lt;/p&gt;
@@ -44,10 +44,10 @@
     
     <item>
       <title>Using git svn for TYPO3 extension development</title>
-      <link>https://blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</link>
+      <link>//blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</link>
       <pubDate>Wed, 30 Jun 2010 06:00:30 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</guid>
+      <guid>//blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</guid>
       <description>
 
 &lt;p&gt;When I first saw a presentation about Git 2 years ago I liked it, but I was convinced that Subversion covers all I need. Things have changed and especially the bad performance of Subversion for larger repositories and the need to commit things without messing up the official trunk motivated me to look up how to get started with Git. If you need more reasons why you should look into Git, you&amp;rsquo;ll find them in [7] - anyways it&amp;rsquo;s worth to have a look how I managed to work with it ;)&lt;/p&gt;

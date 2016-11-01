@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/categories/plugin/index.xml</link>
+    <link>//blog.tolleiv.de/categories/plugin/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/categories/plugin/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/categories/plugin/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Plugin [PoEAA]</title>
-      <link>https://blog.tolleiv.de/2008/06/plugin-poeaa/</link>
+      <link>//blog.tolleiv.de/2008/06/plugin-poeaa/</link>
       <pubDate>Thu, 05 Jun 2008 01:11:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/plugin-poeaa/</guid>
+      <guid>//blog.tolleiv.de/2008/06/plugin-poeaa/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m sure you&amp;rsquo;re pretty often in the situation that you have to switch something depending on the context you&amp;rsquo;re currently in. For example most people change their eating habits before summer - I also do :P&lt;/p&gt;
 
 &lt;p&gt;Sometimes this is what you also want to have in your software. To achieve different behaviour you normally just implement two different classes or aggregates and since they have the same &amp;ldquo;meaning&amp;rdquo; they normally share a interface (a.k.a Separated Interface). But who decides which implementation fits into the current environment/context?&lt;/p&gt;

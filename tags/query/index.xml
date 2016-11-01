@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/query/index.xml</link>
+    <link>//blog.tolleiv.de/tags/query/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/query/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/query/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Query Object [PoEEA]</title>
-      <link>https://blog.tolleiv.de/2008/06/query-object-poeea/</link>
+      <link>//blog.tolleiv.de/2008/06/query-object-poeea/</link>
       <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/query-object-poeea/</guid>
+      <guid>//blog.tolleiv.de/2008/06/query-object-poeea/</guid>
       <description>&lt;p&gt;Maybe you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification Pattern&lt;/a&gt; I explained some weeks ago. It enabled a easy and intuitive  searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification.
 Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory. The idea of the Query Object pattern is that it enables a usage, comparable to the specification pattern, for objects which are persisted in a database. The benefit is that it creates a query to exclude objects which won&amp;rsquo;t satisfy your needs and therefore you wont mess up the memory anymore.
 Once you have a query-object in place you should not get in touch with SQL anymore because it can encapsulate SQL completely, at least if you also have some kind of data mapping (coming soon), which is a great benefit for everyone who is not so familiar with SQL. (But don&amp;rsquo;t forget, regarding performance, SQL-optimization is a very important thing).&lt;/p&gt;

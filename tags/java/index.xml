@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/java/index.xml</link>
+    <link>//blog.tolleiv.de/tags/java/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Desktop-Timetracking</title>
-      <link>https://blog.tolleiv.de/2009/05/desktop-timetracking/</link>
+      <link>//blog.tolleiv.de/2009/05/desktop-timetracking/</link>
       <pubDate>Sun, 24 May 2009 09:28:48 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/05/desktop-timetracking/</guid>
+      <guid>//blog.tolleiv.de/2009/05/desktop-timetracking/</guid>
       <description>&lt;p&gt;I just saw that Heiner already published a new (stable) version of his Desktop-Timetracking software.  Within this version he did a lot of refactoring - actually I helped out with some work and with lot&amp;rsquo;s of smart³ comments ;) - and I&amp;rsquo;m really proud that I got him into &lt;a href=&#34;en.wikipedia.org/wiki/Test-driven_development&#34;&gt;TDD&lt;/a&gt;. Check out &lt;a href=&#34;http://dpdesktop.sourceforge.net/wordpress/&#34;&gt;DPDesktop at sourceforge.net&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>

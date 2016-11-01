@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/release/index.xml</link>
+    <link>//blog.tolleiv.de/tags/release/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/release/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/release/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Crawler 3.1 release &#43; podcast</title>
-      <link>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</link>
+      <link>//blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</link>
       <pubDate>Wed, 31 Mar 2010 22:35:20 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</guid>
+      <guid>//blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</guid>
       <description>&lt;p&gt;Nearly a month after version 3.0.5, we published 3.1.0 of the well known crawler extension today. The main work for that step was related to several bugfixes, a better scheduler integration, some CLI-API enhancements, better testcases and (finally) some documentation updates. Most kudos go to Michael Klapper who took over the responsibility for this release and who also fixed a decent amount of bugs.
 You can download the extension in the &lt;a href=&#34;http://typo3.org/extensions/repository/view/crawler/current/&#34;&gt;TER &lt;/a&gt; and hopefully this time OpenOffice didn&amp;rsquo;t trick us again and you&amp;rsquo;ll be able to see a shiny new extension manual on typo3.org as well.&lt;/p&gt;
 
@@ -24,10 +24,10 @@ You can download the extension in the &lt;a href=&#34;http://typo3.org/extension
     
     <item>
       <title>TemplaVoila 1.4.2 released</title>
-      <link>https://blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</link>
+      <link>//blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</link>
       <pubDate>Mon, 15 Mar 2010 23:39:53 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</guid>
+      <guid>//blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</guid>
       <description>&lt;p&gt;Yesterday the 2nd team release of TemplaVoila was uploaded into the &lt;a href=&#34;http://typo3.org/extensions/repository/view/templavoila/current/&#34;&gt;TER&lt;/a&gt;. It&amp;rsquo;s basically a maintenance release which fixes more than 100 bugs. But since we haven&amp;rsquo;t been that straight distinguishing between bug and usability feature, you&amp;rsquo;ll see a couple of new things within this release.&lt;/p&gt;
 
 &lt;p&gt;The high level release notes are:&lt;/p&gt;
@@ -78,10 +78,10 @@ mod.web_txtemplavoilaM1.javascript {
     
     <item>
       <title>crawler extension version 3.0.5 released</title>
-      <link>https://blog.tolleiv.de/2010/02/crawler-extension-version-3.0.5-released/</link>
+      <link>//blog.tolleiv.de/2010/02/crawler-extension-version-3.0.5-released/</link>
       <pubDate>Sun, 28 Feb 2010 15:36:56 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/02/crawler-extension-version-3.0.5-released/</guid>
+      <guid>//blog.tolleiv.de/2010/02/crawler-extension-version-3.0.5-released/</guid>
       <description>&lt;p&gt;Quite some time after the 4.3 release of TYPO3, we published the necessary compatibility version of the crawler extension. Besides the compatibility fixes for TYPO3 and also for PHP 5.3 we also included some handy features:&lt;/p&gt;
 
 &lt;p&gt;First of all there&amp;rsquo;s now, besides the CLI interface, also a full integration with the scheduler extension, which is available in TYPO3 4.3. This enables to setup crawler runs and manage all crawler releated tasks through the TYPO3 backend.&lt;/p&gt;
@@ -98,10 +98,10 @@ mod.web_txtemplavoilaM1.javascript {
     
     <item>
       <title>TemplaVoila 1.4 released...</title>
-      <link>https://blog.tolleiv.de/2009/11/templavoila-1.4-released.../</link>
+      <link>//blog.tolleiv.de/2009/11/templavoila-1.4-released.../</link>
       <pubDate>Thu, 26 Nov 2009 20:00:19 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/11/templavoila-1.4-released.../</guid>
+      <guid>//blog.tolleiv.de/2009/11/templavoila-1.4-released.../</guid>
       <description>&lt;p&gt;A new version of  TemplaVoila (&lt;a href=&#34;http://typo3.org/extensions/repository/view/templavoila/current/&#34;&gt;ter&lt;/a&gt;) (&lt;a href=&#34;http://forge.typo3.org/projects/show/extension-templavoila&#34;&gt;forge&lt;/a&gt;) has just been released. Besides the great fact that this is the first &lt;strong&gt;team-release&lt;/strong&gt; of TemplaVoila, the high-level improvements within the pagemodule (drag&amp;rsquo;n&amp;rsquo;drop),  the mapping module and the FCE editing forms and besides lot&amp;rsquo;s of bug fixes, there are a few very nice features which make the day-to-day work with TemplaVoila much easier.&lt;/p&gt;
 
 &lt;p&gt;The list of things which happend in 1.4 can be seen on bugs.typo3.org (&lt;a href=&#34;http://tinyurl.com/yb9wsnk&#34;&gt;preselected filter&lt;/a&gt;). The following list contain my favorite fixes which happened unter the hood:&lt;/p&gt;
@@ -162,10 +162,10 @@ tx_templavoila_pi1.sectionPos holds the position of the curren titem -starting w
     
     <item>
       <title>imagemap_wizard 0.5.3</title>
-      <link>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</link>
+      <link>//blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</link>
       <pubDate>Thu, 22 Oct 2009 19:18:39 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</guid>
+      <guid>//blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</guid>
       <description>&lt;p&gt;Last Sunday I&amp;rsquo;ve released the first official stable version of my &lt;a href=&#34;http://blog.tolleiv.de/2009/07/typo3-extensions/&#34;&gt;imagemap_wizard&lt;/a&gt; extension &lt;a href=&#34;http://typo3.org/extensions/repository/view/imagemap_wizard/current/&#34;&gt;(TER&lt;/a&gt;).
 I though that&amp;rsquo;s a good moment to review the introduction text on the project-homepage and that&amp;rsquo;s how it looks like - &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;forge.typo3.org/projects/show/extension-imagemap_wizard&lt;/a&gt;&lt;/p&gt;
 

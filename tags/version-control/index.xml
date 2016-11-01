@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/version-control/index.xml</link>
+    <link>//blog.tolleiv.de/tags/version-control/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/version-control/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/version-control/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Using git svn for TYPO3 extension development</title>
-      <link>https://blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</link>
+      <link>//blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</link>
       <pubDate>Wed, 30 Jun 2010 06:00:30 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</guid>
+      <guid>//blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</guid>
       <description>
 
 &lt;p&gt;When I first saw a presentation about Git 2 years ago I liked it, but I was convinced that Subversion covers all I need. Things have changed and especially the bad performance of Subversion for larger repositories and the need to commit things without messing up the official trunk motivated me to look up how to get started with Git. If you need more reasons why you should look into Git, you&amp;rsquo;ll find them in [7] - anyways it&amp;rsquo;s worth to have a look how I managed to work with it ;)&lt;/p&gt;

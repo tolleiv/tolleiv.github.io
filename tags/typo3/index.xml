@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/typo3/index.xml</link>
+    <link>//blog.tolleiv.de/tags/typo3/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/typo3/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/typo3/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>TYPO3 login state and Varnish cache</title>
-      <link>https://blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</link>
+      <link>//blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</link>
       <pubDate>Mon, 10 Dec 2012 15:56:46 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</guid>
+      <guid>//blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</guid>
       <description>
 
 &lt;p&gt;Caching is hard in complex page setups with user specific content, especially when public pages change their content once a user is logged in. TYPO3 is smart enough to deal with the login state properly and cache appropriately. Once Varnish is involved, it&amp;rsquo;s quite tricky to cache as much as possible without loosing the dynamic content. But it&amp;rsquo;s not impossible and here&amp;rsquo;s my summary how we resolved it for &lt;a href=&#34;http://typo3.org&#34;&gt;typo3.org&lt;/a&gt;.&lt;/p&gt;
@@ -64,27 +64,27 @@
     
     <item>
       <title>Finding TypoScript errors.</title>
-      <link>https://blog.tolleiv.de/2012/02/finding-typoscript-errors./</link>
+      <link>//blog.tolleiv.de/2012/02/finding-typoscript-errors./</link>
       <pubDate>Thu, 16 Feb 2012 16:02:31 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2012/02/finding-typoscript-errors./</guid>
+      <guid>//blog.tolleiv.de/2012/02/finding-typoscript-errors./</guid>
       <description>&lt;p&gt;When you work on TypoScript templates in TYPO3, errors might show up in the TypoScript Object Browser. Within the error messages you&amp;rsquo;ll see a more or less detailed error description with the related line number. Within most setups these line numbers won&amp;rsquo;t relate to any of your sys_template records or TypoScript files directly. But they still provide value if you know how they help to find the right spot. As it&amp;rsquo;s not too obvious how to find the right spot I&amp;rsquo;ve created a little screenshot series to guide you to the broken spots in your templates.&lt;/p&gt;
 
 &lt;p&gt;So that&amp;rsquo;s what you might see in your TypoScript Object Browser:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34; alt=&#34;The error message from your TypoScript Object Browser might look like this.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34; alt=&#34;The error message from your TypoScript Object Browser might look like this.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt; Switching from there to the Template Analyzer:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34; alt=&#34;Switching to the TypoScript analyzer&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34; alt=&#34;Switching to the TypoScript analyzer&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;At the bottom of the Template Analyzer, you&amp;rsquo;ll find a &amp;ldquo;Complete TS&amp;rdquo; section and a link ~which looks like normal text.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34; alt=&#34;And you&#39;ll find a link to the fully concatenated TypoScript of your current page.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34; alt=&#34;And you&#39;ll find a link to the fully concatenated TypoScript of your current page.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Clicking on that link will give you the entire concatenated TypoScript and here you&amp;rsquo;ll also find that the line numbers finally match to the error message.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34; alt=&#34;And you&#39;ll find that the line numbers are now what you saw in the error message before (might need some scrolling).&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34; alt=&#34;And you&#39;ll find that the line numbers are now what you saw in the error message before (might need some scrolling).&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;A well hidden gem which works most likely in all TYPO3 4.x versions ;)&lt;/p&gt;
 
@@ -96,23 +96,23 @@
     
     <item>
       <title>Visualizing TYPO3 Core activity</title>
-      <link>https://blog.tolleiv.de/2012/01/visualizing-typo3-core-activity/</link>
+      <link>//blog.tolleiv.de/2012/01/visualizing-typo3-core-activity/</link>
       <pubDate>Fri, 20 Jan 2012 08:00:12 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2012/01/visualizing-typo3-core-activity/</guid>
+      <guid>//blog.tolleiv.de/2012/01/visualizing-typo3-core-activity/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;DISCLAIMER: Don&amp;rsquo;t take the following too serious - when reading this post please keep in mind that the TYPO3 community itself consists of much more than just the Core team activity - many things take place outside of code repositories and can&amp;rsquo;t be measured anyhow. &lt;strong&gt;Every&lt;/strong&gt; contribution is important and &lt;strong&gt;every&lt;/strong&gt; single action has value.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Using Gerrit sometimes feels quite lonesome - you don&amp;rsquo;t really see who&amp;rsquo;s active and you don&amp;rsquo;t really get a feeling on how much is done in the TYPO3 Core at a certain point. To visualize on how active the contributors are and to show the most active members I applied a little scoring and summed up the results for the time since 2006.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://blog.tolleiv.de/impact-chart&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/01/TYPO3-Core-impact.png&#34; alt=&#34;Snippet of the impact chart.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.tolleiv.de/impact-chart&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/01/TYPO3-Core-impact.png&#34; alt=&#34;Snippet of the impact chart.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;The scoring is quite easy - every author of a patch gets 10 points, testers get 3 and reviewers 1 point*. Looking at the stats it seems that even the statistics pulled from the old Subversion days seem to meet up with today&amp;rsquo;s numbers - of course we&amp;rsquo;ve to keep in mind that everything which was pulled from Subversion doesn&amp;rsquo;t really point to the author but to the actual committer (except if there was a &amp;ldquo;Thanks to XXXXX&amp;rdquo; reference in the commit).&lt;/p&gt;
 
 &lt;p&gt;To visualize the numbers I choose a &lt;a href=&#34;https://github.com/blog/219-impact-graph-speedups&#34;&gt;Github&lt;/a&gt; like &lt;a href=&#34;http://blog.tolleiv.de/impact-chart&#34;&gt;impact chart&lt;/a&gt;**. Each contributor has it&amp;rsquo;s own color and line in it and whenever he got active the width of the line scales up. To maintain the overview the scale of the width isn&amp;rsquo;t linear and every contributor who&amp;rsquo;s not within the &amp;ldquo;Top 20&amp;rdquo; had to be scaled down to &amp;ldquo;1&amp;rdquo;. The line stops if the contributor didn&amp;rsquo;t get active anymore. The scores are grouped and compared by month.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://blog.tolleiv.de/impact-chart/stat.html&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/01/Core-Stats-January20121.png&#34; alt=&#34;Snapshot of the &amp;quot;Top 20&amp;quot; stats taken Jan. 14th 2012&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.tolleiv.de/impact-chart/stat.html&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/01/Core-Stats-January20121.png&#34; alt=&#34;Snapshot of the &amp;quot;Top 20&amp;quot; stats taken Jan. 14th 2012&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;In addition to the chart I also created a &lt;a href=&#34;http://blog.tolleiv.de/impact-chart/stat.html&#34;&gt;table based overview for the &amp;ldquo;Top 20&amp;rdquo;&lt;/a&gt; contributors with their score***.&lt;/p&gt;
 
@@ -134,10 +134,10 @@
     
     <item>
       <title>TemplaVoila 1.6.x</title>
-      <link>https://blog.tolleiv.de/2012/01/templavoila-1.6.x/</link>
+      <link>//blog.tolleiv.de/2012/01/templavoila-1.6.x/</link>
       <pubDate>Mon, 16 Jan 2012 07:10:33 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2012/01/templavoila-1.6.x/</guid>
+      <guid>//blog.tolleiv.de/2012/01/templavoila-1.6.x/</guid>
       <description>&lt;p&gt;Quite some things changed in the past months and I never found the time to clear up my mind and write up a summary.&lt;/p&gt;
 
 &lt;p&gt;First of all &lt;a href=&#34;http://typo3.org/extensions/repository/view/templavoila/current/&#34;&gt;TemplaVoila 1.6&lt;/a&gt; was released parallel to &lt;a href=&#34;http://typo3.org/download/release-notes/typo3-46/&#34;&gt;TYPO3 4.6&lt;/a&gt;. It shipped with 22 bug and compatibility fixes. In general the 1.6.x branch is supposed to be compatible with TYPO3 4.4+ which also made it possible to clean up the extension quite a bit. In addition to that TemplaVoila 1.6.1 will show up in the TER in the next few hours. It fixes 10 additional issues.&lt;/p&gt;
@@ -170,10 +170,10 @@ But I&amp;rsquo;m not planning to integrate new major features such as the field
     
     <item>
       <title>Tagging page caches</title>
-      <link>https://blog.tolleiv.de/2011/12/tagging-page-caches/</link>
+      <link>//blog.tolleiv.de/2011/12/tagging-page-caches/</link>
       <pubDate>Thu, 22 Dec 2011 17:23:16 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2011/12/tagging-page-caches/</guid>
+      <guid>//blog.tolleiv.de/2011/12/tagging-page-caches/</guid>
       <description>&lt;p&gt;In our small TYPO3 world it&amp;rsquo;s quite common to have list and single views for extensions on specific pages. That&amp;rsquo;s quite nice because once a record is changed it allowes users to flush the caches for these pages automatically, using:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;TCEMAIN.clearCacheCmd=all|&amp;lt;pid&amp;gt;
@@ -218,10 +218,10 @@ But I&amp;rsquo;m not planning to integrate new major features such as the field
     
     <item>
       <title>Signal / Slots in Extbase</title>
-      <link>https://blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</link>
+      <link>//blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</link>
       <pubDate>Wed, 30 Nov 2011 17:17:02 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</guid>
+      <guid>//blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</guid>
       <description>&lt;p&gt;A nice thing to have at hand is definately &lt;a href=&#34;http://en.wikipedia.org/wiki/Signals_and_slots&#34;&gt;Signal and Slots&lt;/a&gt;. I heard &lt;a href=&#34;http://f.oer.tel&#34;&gt;Felix&lt;/a&gt; talking about them quite often and I finally found a nice usecase and came to play with them a little bit this afternoon. And just to avoid that others have to look around too much to find how they can get them to work here&amp;rsquo;s how it&amp;rsquo;s working for me.&lt;/p&gt;
 
 &lt;p&gt;First of all you should understand the concept. This nice little &amp;ldquo;definition&amp;rdquo; (from &lt;a href=&#34;http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html&#34;&gt;flow3.typo3.org&lt;/a&gt;) sums it up pretty well:&lt;/p&gt;
@@ -282,10 +282,10 @@ $this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
     
     <item>
       <title>Release reviews (templavoila, imagemap_wizard, workspaces)</title>
-      <link>https://blog.tolleiv.de/2011/02/release-reviews-templavoila-imagemap_wizard-workspaces/</link>
+      <link>//blog.tolleiv.de/2011/02/release-reviews-templavoila-imagemap_wizard-workspaces/</link>
       <pubDate>Thu, 24 Feb 2011 21:17:14 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2011/02/release-reviews-templavoila-imagemap_wizard-workspaces/</guid>
+      <guid>//blog.tolleiv.de/2011/02/release-reviews-templavoila-imagemap_wizard-workspaces/</guid>
       <description>&lt;p&gt;I just push the TER upload button two times and in addition to that TYPO3 4.5.2 will be released tomorrow containing some nice workspaces updates. So here&amp;rsquo;s a short summary what happened in the extension releases.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;TemplaVoila 1.5.4&lt;/strong&gt;
@@ -306,10 +306,10 @@ Btw. if you didn&amp;rsquo;t check out the new workspaces features and improveme
     
     <item>
       <title>TemplaVoila 1.5 released</title>
-      <link>https://blog.tolleiv.de/2010/10/templavoila-1.5-released/</link>
+      <link>//blog.tolleiv.de/2010/10/templavoila-1.5-released/</link>
       <pubDate>Sun, 03 Oct 2010 20:31:33 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/10/templavoila-1.5-released/</guid>
+      <guid>//blog.tolleiv.de/2010/10/templavoila-1.5-released/</guid>
       <description>
 
 &lt;p&gt;The new version comes with many bugfixes,new features and a closer TYPO3 integration. Overall 95 issues have been resolved in the last 4 months to finalize this versions, some of the highlights are:&lt;/p&gt;
@@ -318,7 +318,7 @@ Btw. if you didn&amp;rsquo;t check out the new workspaces features and improveme
 
 &lt;p&gt;The full list of HTML5 tags is now supported in TemplaVoila. The restrictions to specific tags was removed and the TYPO3 integrator is now able to use the full bandwidth of modern HTML. With this change also the tag-icons themself were replaced and the coloring schema was changed. The inspiration for the current color schema came from &lt;a href=&#34;http://joshduck.com/periodic-table.html&#34;&gt;Josh Duck&amp;rsquo;s &amp;ldquo;Periodic Table of the Elements&amp;rdquo;&lt;/a&gt;. In additon same mapping bugs have been resolved too - for details see &lt;a href=&#34;http://bugs.typo3.org/view.php?id=13974&#34;&gt;#13974&lt;/a&gt; and &lt;a href=&#34;http://bugs.typo3.org/view.php?id=14881&#34;&gt;#14881&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2010/09/tv15-page-module.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2010/09/tv15-page-module-300x190.png&#34; alt=&#34;TemplaVoila 1.5 page module&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2010/09/tv15-page-module.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2010/09/tv15-page-module-300x190.png&#34; alt=&#34;TemplaVoila 1.5 page module&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;typo3-4-4-look-feel-and-docheader-integration&#34;&gt;TYPO3 4.4 Look&amp;amp;Feel and docHeader integration&lt;/h4&gt;
 
@@ -350,10 +350,10 @@ Many many thanks to all contributors and reviewers - it&amp;rsquo;s great that m
     
     <item>
       <title>TYPO3 4.4 sprites in your extension...</title>
-      <link>https://blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</link>
+      <link>//blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</link>
       <pubDate>Sun, 25 Jul 2010 08:00:29 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</guid>
+      <guid>//blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</guid>
       <description>
 
 &lt;p&gt;TYPO3 4.4 ships with a long list of improvements. One of them is the sprite API which was developed during T3UXW09. It extends the iconWorks API and enables to retrieve any backend-icon from a central sprite.&lt;/p&gt;
@@ -440,10 +440,10 @@ $icon = t3lib_iconWorks::getSpriteIcon(&#39;actions-view-go-back&#39;);
     
     <item>
       <title>T3DD10 Git workshop</title>
-      <link>https://blog.tolleiv.de/2010/07/t3dd10-git-workshop/</link>
+      <link>//blog.tolleiv.de/2010/07/t3dd10-git-workshop/</link>
       <pubDate>Thu, 08 Jul 2010 22:11:29 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/07/t3dd10-git-workshop/</guid>
+      <guid>//blog.tolleiv.de/2010/07/t3dd10-git-workshop/</guid>
       <description>&lt;p&gt;I just found that &lt;a href=&#34;http://www.xing.com/profile/Peter_Niederlag&#34;&gt;Peter&lt;/a&gt; shares the slides of the Git workshop from the T3DD10 on &lt;a href=&#34;http://www.slideshare.net/jugglefish/t3dd10-git&#34;&gt;slideshare&lt;/a&gt;. Since this 4 hour workshop was - for many reasons - one of my favorites during the T3DD10, I felt that it&amp;rsquo;s worth to mention it. And due to the fact that TYPO3 is moving very fast towards Git it&amp;rsquo;s worth to look at them ;) &amp;mdash; &lt;a href=&#34;http://www.slideshare.net/jugglefish/t3dd10-git&#34;&gt;Open workshop slides&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Btw. at the beginning I didn&amp;rsquo;t belief that a Git workshop could fill 4 hours - now I don&amp;rsquo;t think that shorter workshops make any sense :P&lt;/p&gt;
@@ -452,10 +452,10 @@ $icon = t3lib_iconWorks::getSpriteIcon(&#39;actions-view-go-back&#39;);
     
     <item>
       <title>Using git svn for TYPO3 extension development</title>
-      <link>https://blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</link>
+      <link>//blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</link>
       <pubDate>Wed, 30 Jun 2010 06:00:30 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</guid>
+      <guid>//blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</guid>
       <description>
 
 &lt;p&gt;When I first saw a presentation about Git 2 years ago I liked it, but I was convinced that Subversion covers all I need. Things have changed and especially the bad performance of Subversion for larger repositories and the need to commit things without messing up the official trunk motivated me to look up how to get started with Git. If you need more reasons why you should look into Git, you&amp;rsquo;ll find them in [7] - anyways it&amp;rsquo;s worth to have a look how I managed to work with it ;)&lt;/p&gt;
@@ -589,10 +589,10 @@ feature branches and merge&lt;/a&gt;
     
     <item>
       <title>TYPO3 workspaces</title>
-      <link>https://blog.tolleiv.de/2010/06/typo3-workspaces/</link>
+      <link>//blog.tolleiv.de/2010/06/typo3-workspaces/</link>
       <pubDate>Tue, 15 Jun 2010 17:54:47 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/06/typo3-workspaces/</guid>
+      <guid>//blog.tolleiv.de/2010/06/typo3-workspaces/</guid>
       <description>&lt;p&gt;One of the enterprise features TYPO3 has to offer is versioning and workspace handling. &lt;a href=&#34;http://typo3.org/community/people/kaspers-korner/&#34;&gt;Kasper&lt;/a&gt; did a great job when he initially brough these featues into TYPO3. Unfortunately during the last years they became orphans and nobody really took care of them. There are multiple reasons for that, one was that Kasper didn&amp;rsquo;t allow big changes, another one was that everyone was somehow able to live with the existing odds they had but probable the most important one was that it was just to complicated to improve them alone without knowing the big picture.&lt;/p&gt;
 
 &lt;p&gt;The good news is that these times are over and that some important changes to improve workspace handling are planned for
@@ -608,10 +608,10 @@ feature branches and merge&lt;/a&gt;
     
     <item>
       <title>tiny update...</title>
-      <link>https://blog.tolleiv.de/2010/05/tiny-update.../</link>
+      <link>//blog.tolleiv.de/2010/05/tiny-update.../</link>
       <pubDate>Sat, 08 May 2010 16:20:34 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/05/tiny-update.../</guid>
+      <guid>//blog.tolleiv.de/2010/05/tiny-update.../</guid>
       <description>&lt;p&gt;I&amp;rsquo;m pretty busy in these days and unfortunately there&amp;rsquo;s not much time to write blogposts. In detail there&amp;rsquo;s currently a long list of feature wishes and bugs for TemplaVoila which need my attention and in addition I also already started to prepare a workshop for the &lt;a href=&#34;http://t3dd10.typo3.org/&#34;&gt;T3DD10&lt;/a&gt; about Git*.&lt;/p&gt;
 
 &lt;p&gt;Just to keep this blog alive this is what I found interesting during the last weeks:&lt;/p&gt;
@@ -637,10 +637,10 @@ It also seems that the TYPO3 v5 project &amp;ndash; called &amp;ldquo;Phoenix&am
     
     <item>
       <title>Crawler 3.1 release &#43; podcast</title>
-      <link>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</link>
+      <link>//blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</link>
       <pubDate>Wed, 31 Mar 2010 22:35:20 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</guid>
+      <guid>//blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</guid>
       <description>&lt;p&gt;Nearly a month after version 3.0.5, we published 3.1.0 of the well known crawler extension today. The main work for that step was related to several bugfixes, a better scheduler integration, some CLI-API enhancements, better testcases and (finally) some documentation updates. Most kudos go to Michael Klapper who took over the responsibility for this release and who also fixed a decent amount of bugs.
 You can download the extension in the &lt;a href=&#34;http://typo3.org/extensions/repository/view/crawler/current/&#34;&gt;TER &lt;/a&gt; and hopefully this time OpenOffice didn&amp;rsquo;t trick us again and you&amp;rsquo;ll be able to see a shiny new extension manual on typo3.org as well.&lt;/p&gt;
 
@@ -650,10 +650,10 @@ You can download the extension in the &lt;a href=&#34;http://typo3.org/extension
     
     <item>
       <title>TemplaVoila 1.4.2 released</title>
-      <link>https://blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</link>
+      <link>//blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</link>
       <pubDate>Mon, 15 Mar 2010 23:39:53 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</guid>
+      <guid>//blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</guid>
       <description>&lt;p&gt;Yesterday the 2nd team release of TemplaVoila was uploaded into the &lt;a href=&#34;http://typo3.org/extensions/repository/view/templavoila/current/&#34;&gt;TER&lt;/a&gt;. It&amp;rsquo;s basically a maintenance release which fixes more than 100 bugs. But since we haven&amp;rsquo;t been that straight distinguishing between bug and usability feature, you&amp;rsquo;ll see a couple of new things within this release.&lt;/p&gt;
 
 &lt;p&gt;The high level release notes are:&lt;/p&gt;

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/memento/index.xml</link>
+    <link>//blog.tolleiv.de/tags/memento/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/memento/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/memento/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Memento [GoF]</title>
-      <link>https://blog.tolleiv.de/2008/05/memento-gof/</link>
+      <link>//blog.tolleiv.de/2008/05/memento-gof/</link>
       <pubDate>Tue, 13 May 2008 07:59:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/memento-gof/</guid>
+      <guid>//blog.tolleiv.de/2008/05/memento-gof/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s say you got a cookie from a repository your granny and you&amp;rsquo;re not sure if you like the new taste. Wouldn&amp;rsquo;t it be cool if you could just try it and revoke the operation first bite if you don&amp;rsquo;t like it?&lt;/p&gt;
 
 &lt;p&gt;In the world of OOP thats a easy job which can be handled by the so called memento pattern - you just save the inner state of the object  within a memento object and revoke you actions whenever you like&amp;hellip;&lt;/p&gt;

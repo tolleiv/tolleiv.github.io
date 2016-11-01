@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/categories/coding/index.xml</link>
+    <link>//blog.tolleiv.de/categories/coding/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/categories/coding/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/categories/coding/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Using genetic algorithms to optimize Apache Solr boost factors.</title>
-      <link>https://blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</link>
+      <link>//blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</link>
       <pubDate>Thu, 06 Jun 2013 18:47:56 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</guid>
+      <guid>//blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</guid>
       <description>
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18-150x150.png&#34; alt=&#34;Configuration interface.&#34; /&gt;&lt;/a&gt; Configuration interface.One thing I took along from last year&amp;rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&amp;rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&amp;rsquo;d like to share. If you want to have a look right away - the code can be found on &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18-150x150.png&#34; alt=&#34;Configuration interface.&#34; /&gt;&lt;/a&gt; Configuration interface.One thing I took along from last year&amp;rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&amp;rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&amp;rsquo;d like to share. If you want to have a look right away - the code can be found on &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;the-problem-to-solve&#34;&gt;The problem to solve:&lt;/h2&gt;
 
@@ -61,7 +61,7 @@ Comparing the &amp;ldquo;error&amp;rdquo; and &amp;ldquo;squared error&amp;rdquo
 
 &lt;h2 id=&#34;implementation&#34;&gt;Implementation:&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43-150x150.png&#34; alt=&#34;10 generation optimization&#34; /&gt;&lt;/a&gt; 10 generation optimizationThere&amp;rsquo;s really not too much to say other than that the code can be found in &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;. I used NodeJS with ExpressJs, SocketIO and an Twitter Bootstrap interface to have a relatively good looking and somewhat performing proof-of-concept. I used that setup, because NodeJS seems to me as the most easiest way to talk to Solr and it &amp;ldquo;promises&amp;rdquo; to be performant even with larger examples. SocketIO helped a lot to ease the pain when it comes to Server &amp;lt;&amp;gt; Client communication. The only drawback of that setup is the that everything had to be turned into something which is able to deal with asynchronous processing. This makes the algorithmic parts look a bit odd and bloated - but for me the benefits outweigh the odds.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43-150x150.png&#34; alt=&#34;10 generation optimization&#34; /&gt;&lt;/a&gt; 10 generation optimizationThere&amp;rsquo;s really not too much to say other than that the code can be found in &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;. I used NodeJS with ExpressJs, SocketIO and an Twitter Bootstrap interface to have a relatively good looking and somewhat performing proof-of-concept. I used that setup, because NodeJS seems to me as the most easiest way to talk to Solr and it &amp;ldquo;promises&amp;rdquo; to be performant even with larger examples. SocketIO helped a lot to ease the pain when it comes to Server &amp;lt;&amp;gt; Client communication. The only drawback of that setup is the that everything had to be turned into something which is able to deal with asynchronous processing. This makes the algorithmic parts look a bit odd and bloated - but for me the benefits outweigh the odds.&lt;/p&gt;
 
 &lt;h2 id=&#34;final-thoughts&#34;&gt;Final thoughts:&lt;/h2&gt;
 
@@ -83,10 +83,10 @@ Comparing the &amp;ldquo;error&amp;rdquo; and &amp;ldquo;squared error&amp;rdquo
     
     <item>
       <title>Signal / Slots in Extbase</title>
-      <link>https://blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</link>
+      <link>//blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</link>
       <pubDate>Wed, 30 Nov 2011 17:17:02 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</guid>
+      <guid>//blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</guid>
       <description>&lt;p&gt;A nice thing to have at hand is definately &lt;a href=&#34;http://en.wikipedia.org/wiki/Signals_and_slots&#34;&gt;Signal and Slots&lt;/a&gt;. I heard &lt;a href=&#34;http://f.oer.tel&#34;&gt;Felix&lt;/a&gt; talking about them quite often and I finally found a nice usecase and came to play with them a little bit this afternoon. And just to avoid that others have to look around too much to find how they can get them to work here&amp;rsquo;s how it&amp;rsquo;s working for me.&lt;/p&gt;
 
 &lt;p&gt;First of all you should understand the concept. This nice little &amp;ldquo;definition&amp;rdquo; (from &lt;a href=&#34;http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html&#34;&gt;flow3.typo3.org&lt;/a&gt;) sums it up pretty well:&lt;/p&gt;
@@ -147,10 +147,10 @@ $this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
     
     <item>
       <title>imagemap_wizard 0.5.3</title>
-      <link>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</link>
+      <link>//blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</link>
       <pubDate>Thu, 22 Oct 2009 19:18:39 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</guid>
+      <guid>//blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</guid>
       <description>&lt;p&gt;Last Sunday I&amp;rsquo;ve released the first official stable version of my &lt;a href=&#34;http://blog.tolleiv.de/2009/07/typo3-extensions/&#34;&gt;imagemap_wizard&lt;/a&gt; extension &lt;a href=&#34;http://typo3.org/extensions/repository/view/imagemap_wizard/current/&#34;&gt;(TER&lt;/a&gt;).
 I though that&amp;rsquo;s a good moment to review the introduction text on the project-homepage and that&amp;rsquo;s how it looks like - &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;forge.typo3.org/projects/show/extension-imagemap_wizard&lt;/a&gt;&lt;/p&gt;
 
@@ -162,10 +162,10 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
     
     <item>
       <title>multiple arguments for mocked functions....</title>
-      <link>https://blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</link>
+      <link>//blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</link>
       <pubDate>Mon, 17 Aug 2009 21:38:45 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</guid>
+      <guid>//blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</guid>
       <description>&lt;p&gt;If you look into the PHPUnit documentation (&lt;a href=&#34;http://www.phpunit.de/manual/3.3/en/test-doubles.html#test-doubles.mock-objects&#34;&gt; http://www.phpunit.de/manual/3.3/en/test-doubles.html#test-doubles.mock-objects&lt;/a&gt; ) you&amp;rsquo;ll see some nice examples but non of them shows how to translate a function with multiple arguments into a mock-assumption.&lt;/p&gt;
 
 &lt;p&gt;Within the examples you&amp;rsquo;ll find:
@@ -184,11 +184,11 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
     
     <item>
       <title>www.encodechain.com</title>
-      <link>https://blog.tolleiv.de/2009/08/www.encodechain.com/</link>
+      <link>//blog.tolleiv.de/2009/08/www.encodechain.com/</link>
       <pubDate>Sat, 08 Aug 2009 12:54:13 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/08/www.encodechain.com/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2009/08/encodingchain-0.1.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2009/08/encodingchain-0.1-300x221.png&#34; alt=&#34;encodingchain-0.1&#34; /&gt;&lt;/a&gt;I just &amp;ldquo;released&amp;rdquo; &lt;a href=&#34;http://www.encodechain.com&#34;&gt;encodechain.com&lt;/a&gt;. A little tool which enables to combine various popular PHP conversion methods and to check how they affect your input&amp;hellip; feel free to give me some feedback :)&lt;/p&gt;
+      <guid>//blog.tolleiv.de/2009/08/www.encodechain.com/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2009/08/encodingchain-0.1.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2009/08/encodingchain-0.1-300x221.png&#34; alt=&#34;encodingchain-0.1&#34; /&gt;&lt;/a&gt;I just &amp;ldquo;released&amp;rdquo; &lt;a href=&#34;http://www.encodechain.com&#34;&gt;encodechain.com&lt;/a&gt;. A little tool which enables to combine various popular PHP conversion methods and to check how they affect your input&amp;hellip; feel free to give me some feedback :)&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;m also not sure whether I choose the right name for it &amp;hellip; O_o&lt;/p&gt;
 </description>
@@ -196,10 +196,10 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
     
     <item>
       <title>bash: small improvement for the &#34;cd&#34; builtin</title>
-      <link>https://blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</link>
+      <link>//blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</link>
       <pubDate>Thu, 18 Jun 2009 21:54:34 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</guid>
+      <guid>//blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</guid>
       <description>&lt;p&gt;If you use the shell and walk around in directories wouldn&amp;rsquo;t it be cool to have &amp;ldquo;cd &amp;hellip;&amp;rdquo; to move 2 levels up, &amp;ldquo;cd &amp;hellip;.&amp;rdquo; to move 3 levels up &amp;hellip;? I&amp;rsquo;m not sure if there&amp;rsquo;s an easier way to resolve it but the following lines work pretty nice so far and they just made it into my default .bashrc :P&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;cd() {
@@ -221,10 +221,10 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
     
     <item>
       <title>jQuery performance</title>
-      <link>https://blog.tolleiv.de/2009/06/jquery-performance/</link>
+      <link>//blog.tolleiv.de/2009/06/jquery-performance/</link>
       <pubDate>Mon, 15 Jun 2009 06:53:58 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/06/jquery-performance/</guid>
+      <guid>//blog.tolleiv.de/2009/06/jquery-performance/</guid>
       <description>&lt;p&gt;jQuery 1.3 made a huge step especially towards better performance. But it&amp;rsquo;s not only the framework, from time to time it&amp;rsquo;s the developer who should care about performance too. Artzstudio.com made up a really good summary of &lt;a href=&#34;http://www.artzstudio.com/2009/04/jquery-performance-rules/&#34;&gt;how you should change your coding-style to achieve a higher performance with jQuery&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;In my opinion the most important things are:&lt;/p&gt;
@@ -250,10 +250,10 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
     
     <item>
       <title>my jQuery 1.3.2 update experience</title>
-      <link>https://blog.tolleiv.de/2009/06/my-jquery-1.3.2-update-experience/</link>
+      <link>//blog.tolleiv.de/2009/06/my-jquery-1.3.2-update-experience/</link>
       <pubDate>Thu, 11 Jun 2009 07:27:34 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/06/my-jquery-1.3.2-update-experience/</guid>
+      <guid>//blog.tolleiv.de/2009/06/my-jquery-1.3.2-update-experience/</guid>
       <description>&lt;p&gt;Over the last days I did some small steps to clean up the code of my &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;TYPO3 imagemap extension&lt;/a&gt;. During that process I wanted to update jQuery from 1.2.6 to 1.3.2. Initially this went fine but after some testing I found this strange error:&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;[Exception... &amp;quot;&#39;Syntax error, unrecognized expression: #&#39; when calling method: [nsIDOMEventListener::handleEvent]&amp;quot;  nsresult: &amp;quot;0x8057001e (NS_ERROR_XPC_JS_THREW_STRING)&amp;quot;  location: &amp;quot;&amp;lt;unknown&amp;gt;&amp;quot;&lt;/code&gt;&lt;/p&gt;
@@ -264,20 +264,20 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
     
     <item>
       <title>Desktop-Timetracking</title>
-      <link>https://blog.tolleiv.de/2009/05/desktop-timetracking/</link>
+      <link>//blog.tolleiv.de/2009/05/desktop-timetracking/</link>
       <pubDate>Sun, 24 May 2009 09:28:48 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/05/desktop-timetracking/</guid>
+      <guid>//blog.tolleiv.de/2009/05/desktop-timetracking/</guid>
       <description>&lt;p&gt;I just saw that Heiner already published a new (stable) version of his Desktop-Timetracking software.  Within this version he did a lot of refactoring - actually I helped out with some work and with lot&amp;rsquo;s of smart³ comments ;) - and I&amp;rsquo;m really proud that I got him into &lt;a href=&#34;en.wikipedia.org/wiki/Test-driven_development&#34;&gt;TDD&lt;/a&gt;. Check out &lt;a href=&#34;http://dpdesktop.sourceforge.net/wordpress/&#34;&gt;DPDesktop at sourceforge.net&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>visualized sorting algorithms</title>
-      <link>https://blog.tolleiv.de/2009/04/visualized-sorting-algorithms/</link>
+      <link>//blog.tolleiv.de/2009/04/visualized-sorting-algorithms/</link>
       <pubDate>Thu, 16 Apr 2009 20:10:35 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/04/visualized-sorting-algorithms/</guid>
+      <guid>//blog.tolleiv.de/2009/04/visualized-sorting-algorithms/</guid>
       <description>&lt;p&gt;There are lot&amp;rsquo;s of visualizations for soting algorithms - this pages provides all relevant informations including runtime complexity and extra space requirements etc - and a easy to memorize domain name ;) ~ &lt;a href=&#34;http://www.sorting-algorithms.com/&#34;&gt;http://www.sorting-algorithms.com&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>

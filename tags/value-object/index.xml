@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/value-object/index.xml</link>
+    <link>//blog.tolleiv.de/tags/value-object/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/value-object/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/value-object/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Value Object [DDD]</title>
-      <link>https://blog.tolleiv.de/2008/05/value-object-ddd/</link>
+      <link>//blog.tolleiv.de/2008/05/value-object-ddd/</link>
       <pubDate>Fri, 30 May 2008 04:39:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/value-object-ddd/</guid>
+      <guid>//blog.tolleiv.de/2008/05/value-object-ddd/</guid>
       <description>&lt;p&gt;This metaphor does not fit completely, and the &amp;ldquo;Money-Example&amp;rdquo; is omnipresent, but I really like the pattern and so that&amp;rsquo;s the story:&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s say you have your grannies recipe for a chocolate cookie and you want to keep this in mind, but also you like to somehow experiment with some new or different ingredients. Normally you just keep in mind what you changed and later you write down the new recipe. But from time to time you might want to compare the two recipes or maybe you want to make cookies with the new and the changed recipes. In this situation it&amp;rsquo;s really good to have both written down on paper. ;)&lt;/p&gt;

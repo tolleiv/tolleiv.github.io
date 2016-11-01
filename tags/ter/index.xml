@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/tags/ter/index.xml</link>
+    <link>//blog.tolleiv.de/tags/ter/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/tags/ter/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/tags/ter/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>webdesign and stuff that came along my way today</title>
-      <link>https://blog.tolleiv.de/2009/04/webdesign-and-stuff-that-came-along-my-way-today/</link>
+      <link>//blog.tolleiv.de/2009/04/webdesign-and-stuff-that-came-along-my-way-today/</link>
       <pubDate>Thu, 23 Apr 2009 21:15:13 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2009/04/webdesign-and-stuff-that-came-along-my-way-today/</guid>
+      <guid>//blog.tolleiv.de/2009/04/webdesign-and-stuff-that-came-along-my-way-today/</guid>
       <description>&lt;p&gt;A friend of mine recommended this URL in regards to one topic which I&amp;rsquo;m currently working on: &lt;a href=&#34;http://www.smashingmagazine.com/2009/03/24/designing-drop-down-menus-examples-and-best-practices/&#34;&gt;Designing Drop-Down Menus: Examples and Best Practices &lt;/a&gt;. This article about how to use Drop-Down menus within the navigation, including some DOs and some DONTs,  is a very nice summary for anyone who creates designs with these elements.&lt;/p&gt;
 
 &lt;p&gt;After I scanned that article, I found another one which will be my default answer in the future whenever clients or coworkers ask strange questions about features and designs: &lt;a href=&#34;http://www.smashingmagazine.com/2009/02/18/9-common-usability-blunders/&#34;&gt;9 Common Usability Mistakes In Web Design | How-To | Smashing Magazine&lt;/a&gt;. There are lot&amp;rsquo;s of lists around in the Web but there aren&amp;rsquo;t so many sources with this quality and with such an amount of good quality comments in it.&lt;/p&gt;

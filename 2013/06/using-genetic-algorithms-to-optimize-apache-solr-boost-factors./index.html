@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Using genetic algorithms to optimize Apache Solr boost factors. | blog.tolleiv.de ...  </title>
-<link rel="stylesheet" href="https://blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
@@ -13,18 +13,18 @@
   <div class="container">
     <nav class="nav">
       <div class="nav-left">
-        <a class="nav-item" href="https://blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
       </div>
       <div class="nav-right">
         <nav class="nav-item level is-mobile">
           
-          <a class="level-item" href="https://blog.tolleiv.de/imprint">
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
             <span class="icon">
               <i class="fa fa-hand-o-right"></i>
             </span>
           </a>
           
-          <a class="level-item" href="https://blog.tolleiv.de/about">
+          <a class="level-item" href="//blog.tolleiv.de/about">
             <span class="icon">
               <i class="fa fa-user"></i>
             </span>
@@ -42,7 +42,7 @@
             </span>
           </a>
           
-          <a class="level-item" href="https://blog.tolleiv.de/index.xml">
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
             <span class="icon">
               <i class="fa fa-rss"></i>
             </span>
@@ -61,7 +61,7 @@
     <div class="content">
       
 
-<p><a href="https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18.png"><img src="https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18-150x150.png" alt="Configuration interface." /></a> Configuration interface.One thing I took along from last year&rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&rsquo;d like to share. If you want to have a look right away - the code can be found on <a href="http://github.com/tolleiv/boostgenetics">Github</a>.</p>
+<p><a href="//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18.png"><img src="//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18-150x150.png" alt="Configuration interface." /></a> Configuration interface.One thing I took along from last year&rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&rsquo;d like to share. If you want to have a look right away - the code can be found on <a href="http://github.com/tolleiv/boostgenetics">Github</a>.</p>
 
 <h2 id="the-problem-to-solve">The problem to solve:</h2>
 
@@ -105,7 +105,7 @@ Comparing the &ldquo;error&rdquo; and &ldquo;squared error&rdquo; produced by (a
 
 <h2 id="implementation">Implementation:</h2>
 
-<p><a href="https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43.png"><img src="https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43-150x150.png" alt="10 generation optimization" /></a> 10 generation optimizationThere&rsquo;s really not too much to say other than that the code can be found in <a href="http://github.com/tolleiv/boostgenetics">Github</a>. I used NodeJS with ExpressJs, SocketIO and an Twitter Bootstrap interface to have a relatively good looking and somewhat performing proof-of-concept. I used that setup, because NodeJS seems to me as the most easiest way to talk to Solr and it &ldquo;promises&rdquo; to be performant even with larger examples. SocketIO helped a lot to ease the pain when it comes to Server &lt;&gt; Client communication. The only drawback of that setup is the that everything had to be turned into something which is able to deal with asynchronous processing. This makes the algorithmic parts look a bit odd and bloated - but for me the benefits outweigh the odds.</p>
+<p><a href="//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43.png"><img src="//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43-150x150.png" alt="10 generation optimization" /></a> 10 generation optimizationThere&rsquo;s really not too much to say other than that the code can be found in <a href="http://github.com/tolleiv/boostgenetics">Github</a>. I used NodeJS with ExpressJs, SocketIO and an Twitter Bootstrap interface to have a relatively good looking and somewhat performing proof-of-concept. I used that setup, because NodeJS seems to me as the most easiest way to talk to Solr and it &ldquo;promises&rdquo; to be performant even with larger examples. SocketIO helped a lot to ease the pain when it comes to Server &lt;&gt; Client communication. The only drawback of that setup is the that everything had to be turned into something which is able to deal with asynchronous processing. This makes the algorithmic parts look a bit odd and bloated - but for me the benefits outweigh the odds.</p>
 
 <h2 id="final-thoughts">Final thoughts:</h2>
 

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog.tolleiv.de ...  </title>
-    <link>https://blog.tolleiv.de/categories/errors/index.xml</link>
+    <link>//blog.tolleiv.de/categories/errors/index.xml</link>
     <description>Recent content on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="https://blog.tolleiv.de/categories/errors/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//blog.tolleiv.de/categories/errors/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Inherit abstract functions....</title>
-      <link>https://blog.tolleiv.de/2008/06/inherit-abstract-functions..../</link>
+      <link>//blog.tolleiv.de/2008/06/inherit-abstract-functions..../</link>
       <pubDate>Wed, 11 Jun 2008 20:28:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/06/inherit-abstract-functions..../</guid>
+      <guid>//blog.tolleiv.de/2008/06/inherit-abstract-functions..../</guid>
       <description>&lt;p&gt;A error I find from time to time when I work with inheritance is this one:&lt;/p&gt;
 
 &lt;p&gt;Fatal error: Can&amp;rsquo;t inherit abstract function Cookie::setFlavor() (previously declared abstract in ChocolateCookie) in &amp;hellip;&lt;/p&gt;
@@ -37,10 +37,10 @@ abstract public function setFlavor($flavor);&lt;br /&gt;
     
     <item>
       <title>error_reposting and exceptions....</title>
-      <link>https://blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../</link>
+      <link>//blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../</link>
       <pubDate>Tue, 20 May 2008 21:40:00 +0000</pubDate>
       
-      <guid>https://blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../</guid>
+      <guid>//blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../</guid>
       <description>&lt;p&gt;I just found this line:&lt;/p&gt;
 
 &lt;p&gt;set_error_handler(create_function(&amp;lsquo;$x, $y&amp;rsquo;, &amp;lsquo;throw new Exception($y, $x);&amp;rsquo;), E_ALL~E_NOTICE);&lt;/p&gt;
