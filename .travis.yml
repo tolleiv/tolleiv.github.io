@@ -1,9 +1,13 @@
----
 language: go
 go: 1.5.1
 
-global_env: SSH_KEY="travis_key" GIT_NAME="Tolleiv Nietsch" GIT_EMAIL="info@tolleiv.de"
-  SOURCE_DIR="public" DEPLOY_BRANCH="source"
+env:
+  global:
+  - SSH_KEY="travis_key"
+  - GIT_NAME="Tolleiv Nietsch"
+  - GIT_EMAIL="info@tolleiv.de"
+  - SOURCE_DIR="public"
+  - DEPLOY_BRANCH="source"
 script:
 - openssl aes-256-cbc -K $encrypted_8b60d5b91e9d_key -iv $encrypted_8b60d5b91e9d_iv -in travis_key.enc -out travis_key -d
 - go get -u -v github.com/spf13/hugo
