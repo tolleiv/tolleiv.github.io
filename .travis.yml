@@ -1,18 +1,26 @@
 language: go
-go: 1.5.1
+
+go:
+  - 1.5.1
 
 env:
   global:
-  - SSH_KEY="travis_key"
-  - GIT_NAME="Tolleiv Nietsch"
-  - GIT_EMAIL="info@tolleiv.de"
-  - SOURCE_DIR="public"
-  - DEPLOY_BRANCH="source"
+    - SSH_KEY="travis_key"
+    - GIT_NAME="Tolleiv Nietsch"
+    - GIT_EMAIL="info@tolleiv.de"
+    - SOURCE_DIR="public"
+    - DEPLOY_BRANCH="source"
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_8b60d5b91e9d_key -iv $encrypted_8b60d5b91e9d_iv -in travis_key.enc -out travis_key -d
+
+before_script:
+  - go get -u -v github.com/spf13/hugo
+
 script:
-- openssl aes-256-cbc -K $encrypted_8b60d5b91e9d_key -iv $encrypted_8b60d5b91e9d_iv -in travis_key.enc -out travis_key -d
-- go get -u -v github.com/spf13/hugo
-- git clone https://github.com/tanksuzuki/hemingway.git ./themes/hemingway.git
-- hugo --theme=hemingway
+  - git clone https://github.com/tanksuzuki/hemingway.git ./themes/hemingway.git
+  - hugo --theme=hemingway
+
 after_success:
-- echo "blog.tolleiv.de" > ./public/CNAME
-- ./scripts/deploy.sh
+  - echo "blog.tolleiv.de" > ./public/CNAME
+  - ./scripts/deploy.sh
