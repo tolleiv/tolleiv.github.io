@@ -1,17 +1,17 @@
 language: go
 
 go:
-  - 1.5.1
+ - 1.5.1
 
 env:
   global:
-    - SSH_KEY="travis_key"
-    - GIT_NAME="Tolleiv Nietsch"
-    - GIT_EMAIL="info@tolleiv.de"
-    - SOURCE_DIR="public"
-    - DEPLOY_BRANCH="source"
+   - SSH_KEY="travis_key"
+   - GIT_NAME="Tolleiv Nietsch"
+   - GIT_EMAIL="info@tolleiv.de"
+   - SOURCE_DIR="public"
+   - DEPLOY_BRANCH="source"
 
 script:
-  - go get -u -v github.com/spf13/hugo
-  - git clone https://github.com/tanksuzuki/hemingway.git ./themes/hemingway.git
-  - hugo --theme=hemingway
+ - go get -u -v github.com/spf13/hugo
+ - git clone https://github.com/tanksuzuki/hemingway.git ./themes/hemingway.git
+ - hugo --theme=hemingway
