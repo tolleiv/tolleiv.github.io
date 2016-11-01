@@ -1,7 +1,8 @@
 language: go
 
 go:
-  - 1.3
+  - 1.5.1
+
 env:
   global:
     - SSH_KEY="travis_key"
@@ -10,13 +11,9 @@ env:
     - SOURCE_DIR="public"
     - DEPLOY_BRANCH="source"
 
-before_install:
-  - openssl aes-256-cbc -K $encrypted_8b60d5b91e9d_key -iv $encrypted_8b60d5b91e9d_iv -in travis_key.enc -out travis_key -d
-
-before_script:
-  - go get -u -v github.com/spf13/hugo
-
 script:
+  - openssl aes-256-cbc -K $encrypted_8b60d5b91e9d_key -iv $encrypted_8b60d5b91e9d_iv -in travis_key.enc -out travis_key -d
+  - go get -u -v github.com/spf13/hugo
   - git clone https://github.com/tanksuzuki/hemingway.git ./themes/hemingway.git
   - hugo --theme=hemingway
 
