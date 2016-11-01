@@ -18,7 +18,7 @@ before_script:
   - go get -u -v github.com/spf13/hugo
 
 script:
-  - hugo --theme=hemingway
+  - hugo -v --theme=hemingway
 
 after_success:
   - echo "blog.tolleiv.de" > ./public/CNAME

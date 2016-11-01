@@ -62,5 +62,3 @@ git add -A .
 git commit --allow-empty -m "Built from commit $REV"
 git push $REPO $TARGET_BRANCH
 
-git config --global user.name "$GIT_NAME"
-git config --global user.email "$GIT_EMAIL"
