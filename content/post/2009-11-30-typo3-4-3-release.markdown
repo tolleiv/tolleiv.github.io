@@ -1,0 +1,18 @@
+---
+author: tolleiv
+comments: true
+date: 2009-11-30T18:05:18Z
+slug: typo3-4-3-release
+tags:
+- typo3
+title: TYPO3 4.3 release
+wordpress_id: 292
+---
+
+Today the TYPO3 Core Team released version 4.3 ([release-notes on typo3.org](https://typo3.org/download/release-notes/typo3-43/)).
+
+Finally the list of improvements is long and the amount of cool new features is outstanding compared to other releases. Imho especially the security and performance-improvements are remarkable as well as the improved usability in the backend. But I guess my favorite improvement is obvious ([hint hint](https://typo3.org/download/release-notes/typo3-43/#c5642)) :P
+
+In addition to TYPO3 4.3 a new major version of the tt_news ([ter](http://typo3.org/extensions/repository/view/tt_news/current/)) extension was released over the weekend ([Rupert Germans announcement on lists.typo3.org](http://lists.typo3.org/pipermail/typo3-dev/2009-November/037916.html)) and the already mentioned [release of TemplaVoilà](http://blog.tolleiv.de/2009/11/templavoila-1-4-released/) ([ter](http://typo3.org/extensions/repository/view/templavoila/current/)) was somehow releated as well.
+
+The next TYPO3 release is planned for May 2010... we'll see if that happens in time ;)

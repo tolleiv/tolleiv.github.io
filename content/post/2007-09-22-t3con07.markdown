@@ -1,0 +1,10 @@
+---
+author: tolleiv
+comments: true
+date: 2007-09-22T23:27:54Z
+slug: t3con07
+title: T3CON07
+wordpress_id: 732
+---
+
+Visiting the T3CON07 was one of the best choices I made in the last weeks. After years of being in touch with some people on newslists and working with this great CMS its so great to finally meat some of them. I found lots of new inspiration and motivation for the upcoming tasks and found some new perspectives as well. New topics like the content repository, TYPO3 version 5 and large scale localization also found my attention. After all it's been a great experience... see you next year :)

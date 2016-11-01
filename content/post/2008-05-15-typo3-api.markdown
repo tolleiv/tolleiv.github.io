@@ -1,0 +1,15 @@
+---
+author: tolleiv
+categories:
+- typo3
+comments: true
+date: 2008-05-15T14:40:00Z
+slug: typo3-api
+tags:
+- typo3
+title: TYPO3 API...
+wordpress_id: 597
+---
+
+The API documentation on [typo3.org](http://typo3.org/fileadmin/typo3api-4.0.0/) is not very up-to-date, but the typo3-unleashed.net guys just provided some links to the API documentation of the current TYPO3 versions - [http://www.typo3-unleashed.net/api_online.html](http://www.typo3-unleashed.net/api_online.html) - thanks a lot :)  
+

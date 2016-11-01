@@ -1,0 +1,14 @@
+---
+author: tolleiv
+comments: true
+date: 2009-04-18T18:39:06Z
+slug: moments
+tags:
+- vimeo
+title: moments
+wordpress_id: 21
+---
+
+I just stumpled over this video while the piano in the room next to me played some strange ronan keating song...  what a moment :D
+
+[vimeo]http://vimeo.com/2585249?pg=embed&sec=2585249[/vimeo]

@@ -1,0 +1,15 @@
+---
+author: tolleiv
+comments: true
+date: 2010-11-18T21:48:31Z
+slug: typo3-4-5-beta1
+title: TYPO3 4.5 beta1
+wordpress_id: 708
+---
+
+As announced on [news.typo3.org](http://news.typo3.org/news/article/typo3-45beta1-released/) yesterday the TYPO3 Core team published TYPO3 4.5 beta. With this beta the features for the next version are fixed and the remaining time until the release will be used for polishing and bug fixing.
+A complete list of the included features and changes can be found on [forge.typo3.org](http://forge.typo3.org/projects/typo3v45-projects/wiki/TYPO3_450beta1).
+
+As member of the [TYPO3 workspace team](http://blog.tolleiv.de/2010/06/typo3-workspaces/) I'd like to encourage everyone to send as much feedback as possible for all the workspace related changes and since [maintaining TemplaVoila](http://blog.tolleiv.de/2010/10/templavoila-1-5-released/) is also still on my list, it would be great if you let me know if you find any TemplaVoila related issues with the new TYPO3 version.
+
+If you'd like to stay up-to-date with the latest changes in the TYPO3 Core, without reading all the newsgroup messages, you might be interested to use the [TYPO3 trunk Changelog RSS feed](http://feeds.feedburner.com/TYPO3-CoreTrunkChangelog). Besides the feed there's a great service from the Core team, they started to publish the protocol of their weekly meeting as ["Minutes from the meeting of the release 4.5 team"](http://lists.typo3.org/pipermail/typo3-project-v4/2010-November/000996.html) to the typo3.project.v4 newsgroup. I hope this will be kept up in the future.

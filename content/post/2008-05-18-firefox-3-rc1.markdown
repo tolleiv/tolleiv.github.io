@@ -1,0 +1,15 @@
+---
+author: tolleiv
+categories:
+- firefox
+- offtopic
+comments: true
+date: 2008-05-18T16:11:00Z
+slug: firefox-3-rc1
+title: Firefox 3 RC1
+wordpress_id: 562
+---
+
+I just saw that the first Release Candidate of Firefox 3 is available for [download](http://www.mozilla.com/en-US/firefox/all-rc.html) . As with the most of the Beta-versions I also checked this update because I'm really excited to get the [new features](http://www.mozilla.com/en-US/firefox/3.0rc1/releasenotes/#whatsnew), but after 5 minutes (again) I removed it from my PC. Non of my extensions is working in FF3 (except the dictionary), it still destroys the Frames in TYPO3 ([there's a bugfix-extension for that](http://typo3.org/extensions/repository/view/mn_ff3_be_bugfix/0.0.2/)) and the memory-usage is still very high,10% lower than in FF2 but still high.  
+So I postponed the update and  kept on running [Firefox 2](http://www.mozilla.com/en-US/firefox/all.html), at least until the next Release Candidate ;)  
+

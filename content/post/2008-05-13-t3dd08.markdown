@@ -1,0 +1,15 @@
+---
+author: tolleiv
+categories:
+- t3dd
+- typo3
+comments: true
+date: 2008-05-13T22:15:00Z
+slug: t3dd08
+title: T3DD08
+wordpress_id: 594
+---
+
+The last weekend was great, I joined the T3DD in Elmshorn, Germany and meet a lot of interesting people, the beer was cheap and the weather was amazing. So I'm looking forward to the T3CON in autumn...  :)  
+  
+It also seems that some of the guys got some new spirit - today 4 official and some inofficial bugs in some extensions had been fixed in a very short sequence ... great!

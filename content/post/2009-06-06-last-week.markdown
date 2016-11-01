@@ -1,0 +1,14 @@
+---
+author: tolleiv
+comments: true
+date: 2009-06-06T17:42:18Z
+slug: last-week
+title: last week....
+wordpress_id: 110
+---
+
+This week has gone by so very fast - the most interesting thing was that [Tetris ](http://en.wikipedia.org/wiki/Tetris)is now 25 years old. Happy birthday :)
+
+After 2.5 years of work the [TYPO3 ](http://typo3.org/)guys published the first Alpha version of [FLOW3 ](http://flow3.typo3.org/news/0/1/)- that's the amazing framework for TYPO3 Version 5 and I can't wait to test it. Since they decided to have a "release" every month the next alpha will be ready at the beginning of July.
+
+And finally Microsoft also launched their new attempt to get some customers into their online services - [bing.com](http://news.cnet.com/8301-19518_3-10255043-238.html) - which seems to have a couple of [problems](http://news.cnet.com/8301-19518_3-10255043-238.html) :/ and still can't beat [Wolfram Alpha](www.wolframalpha.com) :D

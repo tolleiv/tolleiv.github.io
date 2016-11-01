@@ -1,0 +1,61 @@
+baseurl = "//blog.tolleiv.de/" 
+builddrafts = false
+canonifyurls = true
+contentdir = "content"
+languageCode = "en-US"
+layoutdir = "layouts"
+publishdir = "public"
+author = "Tolleiv Nietsch // @tolleiv"
+title = "blog.tolleiv.de ...  "
+pygmentsuseclasses = true
+disqusShortname = "tolleiv" # Comment out to disable Disqus.
+pluralizelisttitles = false
+enableEmoji = true
+copyright = "&copy; <a href=\"https://github.com/tolleiv\">tolleiv</a> 2016 - <a href=\"http://creativecommons.org/licenses/by-sa/3.0/\">CC BY-SA 3.0</a> - Powered by Hugo"
+
+[permalinks]
+  post = ":year/:month/:title/"
+
+[params]
+	Author = "blog.tolleiv.de"
+	CacheBuster = true
+	DateForm = "Jan 2, 2006"
+	DateFormFull = "Mon Jan 2 2006 15:04:05 MST"
+	Description = "Don't panic"
+	FooterMsg = "@tolleiv CC BY-SA 3.0 - Powered by Hugo."
+	Email = "blog+feedback@tolleiv.de"
+	FaviconFile = "img/leaf.ico"
+	GitHub = "//github.com/tolleiv"
+	GithubID = "tolleiv"
+	TwitterID = "tolleiv"
+	AnalyticsID = ""
+	DisqusShortname = "blog.tolleiv.de"
+	HighlightJS = true
+	Lang = "en"
+	LinkedIn = "//linkedin.com/in/tolleiv-nietsch-857a0a25"
+	Twitter = "//twitter.com/tolleiv"
+	ExtraCssFiles = [ "/css/override.css" ] # In your `static/css`, add/remove files as necessary.
+
+[params.highlight]
+	style = "github"
+	languages = ["go", "dockerfile", "php", "javascript", "ruby"]
+
+[[params.social]]
+    url = "/imprint"
+    fa_icon = "fa-hand-o-right"
+
+[[params.social]]
+    url = "/about"
+    fa_icon = "fa-user"
+
+[[params.social]]
+	url = "https://github.com/tolleiv"
+	fa_icon = "fa-github"
+
+[[params.social]]
+	url = "https://twitter.com/tolleiv"
+	fa_icon = "fa-twitter"
+
+[[params.social]]
+	url = "/index.xml"
+	fa_icon = "fa-rss"
