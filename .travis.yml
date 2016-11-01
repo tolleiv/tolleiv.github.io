@@ -18,7 +18,6 @@ before_script:
   - go get -u -v github.com/spf13/hugo
 
 script:
-  - git clone https://github.com/tanksuzuki/hemingway.git ./themes/hemingway.git
   - hugo --theme=hemingway
 
 after_success:
