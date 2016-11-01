@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Socket.IO within concurrent processes | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">May 11, 2014</h2>
+    <h1 class="title">Socket.IO within concurrent processes</h1>
+    <div class="content">
+      
+
+<p>The following is going to show some pitfalls and their solution when working with NodeJs, Socket.IO and concurrent processes.</p>
+
+<h3 id="basic-setup">Basic setup</h3>
+
+<h4 id="socket-connections">Socket connections</h4>
+
+<p>In order to use socket communication with NodeJS a basic server side code block might look this <a href="http://socket.io/">see online docs</a>:</p>
+
+<pre><code>var io = require('socket.io').listen(80);
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+});
+</code></pre>
+
+<p>This enables you to send some data through the socket connection to the client and with just a little more code it could even retrieve some data from the client. I left that part out to keep it simple.</p>
+
+<h4 id="event-emitters">Event emitters</h4>
+
+<p>The second component which I&rsquo;ve to add in the mix is a simple <a href="http://nodejs.org/api/events.html">EventEmitter</a>. It&rsquo;s build like this:</p>
+
+<pre><code>var emitter = new (require('events').EventEmitter);
+ // listening to a given event:
+emitter.on(&quot;news&quot;, function (data) { console.log(data); });
+ // actually trigger the event:
+emitter.emit(&quot;news&quot;, {my: data})
+</code></pre>
+
+<p>The emitter would be used to gather data from within the program and the listeners would trigger <code>socket.emit(...)</code> in case the event is relevant for the connected client. This way the program could be decoupled from the socket implementation and other listeners could use the same event data without additional event (a nice way to introduce logging).</p>
+
+<h4 id="concurrent-processes">Concurrent processes</h4>
+
+<p>Besides all the event logic, the application should run in a robust way and that&rsquo;s typically done with the <a href="http://nodejs.org/api/cluster.html">cluster module</a> like this:</p>
+
+<pre><code>var cluster = require('cluster');
+if (cluster.isMaster) {
+    var cpuCount = require('os').cpus().length;
+    for (var i = 0; i &lt; cpuCount; i += 1) {
+        cluster.fork();
+    }
+    cluster.on('exit', function(worker) {
+        cluster.fork();
+    });
+} else {
+    // Your actual code come here
+}
+</code></pre>
+
+<p>That&rsquo;s now the application entry point, it creates worker processes for the actual processing. In case a worker dies our application would keep running and a new worker process would come up.</p>
+
+<h3 id="mixing-the-incredients">Mixing the incredients</h3>
+
+<p>Throwing all this into the mix creates some problems. First of all, the worker processes use their own memory, so everything which is sent to the EventEmitter in one process can&rsquo;t reach the others.</p>
+
+<p>The second problem occurs when Socket.IO is included in the concurrent setup. Due to the fact that the worker processes are assign randomly to the clients, your actual work (e.g. triggered by HTTP requests) might been done in one process, while your socket connection might be established to another process. If you&rsquo;d use the basic setup from above, your events would then never reach the right clients and therefore you&rsquo;d loose information.</p>
+
+<h3 id="redis-store-helping-out">Redis store helping out</h3>
+
+<p>The solution is to replace the in-memory store of Socket.IO with a Redis based store (see <a href="http://adamnengland.wordpress.com/2013/01/30/node-js-cluster-with-socket-io-and-express-3/">Adam N England</a> for further details). This would look like this:</p>
+
+<pre><code>var RedisStore = require('socket.io/lib/stores/redis')
+    , redis = require('socket.io/node_modules/redis')
+    , pub = redis.createClient()
+    , sub = redis.createClient()
+    , client = redis.createClient();
+
+var io = require('socket.io').listen(80);
+io.set('store', new RedisStore({
+    redis: redis, redisPub: pub, redisSub: sub, redisClient: client
+}));
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+});
+
+</code></pre>
+
+<p>With that, the native <a href="http://redis.io/topics/pubsub">Redis Publisher/Subscriber</a> functionality is used to implement the required interprocess communication and it makes sure all processes can react on the passed information.</p>
+
+<h4 id="eventemitter-replacement">EventEmitter replacement</h4>
+
+<p>In order to participate in that setup, all event based processes should then also start using the Redis functionality. Especially the events which are meant to &ldquo;reach&rdquo; out to the socket connection should be replaced with <a href="https://github.com/mranney/node_redis#publish--subscribe">Redis calls</a> then:</p>
+
+<pre><code>var redis = require('redis');
+
+  // subscription replace the event listener
+var sub = redisClient.createClient()
+sub.subscribe(&quot;channelname&quot;);
+sub.on(&quot;message&quot;, function (channel, msg) {
+   console.log(msg)
+})
+
+  // publishing replaces the event emitter
+var pub = redis.createClient();
+pub.publish(&quot;channelname&quot;, JSON.stringify({ my: data}));
+
+</code></pre>
+
+<p>This introduces some latency into the system which <a href="http://blog.lightstreamer.com/2013/05/benchmarking-socketio-vs-lightstreamer.html">might cause scaling problems</a> with higher numbers of clients - but first of all it enables higher numbers of clients at all.</p>
+
+<h3 id="final-setup">Final setup</h3>
+
+<p>The overall setup can be seen in the small demonstration app on <a href="https://github.com/tolleiv/concurrent-sockets">Github</a>. Within that application a simple HTTP frontend call would trigger the events, which then report back through Redis and the Socket.IO connection. That&rsquo;s quite trivial but complex enough to play with it and to run some tests against it.</p>
+
+<p>Btw. reviewing the demo app works best starting from the related test within <a href="https://github.com/tolleiv/concurrent-sockets/blob/master/spec/socket-spec.js">spec/socket-spec.js</a>.</p>
+
+<h3 id="benchmarks">Benchmarks</h3>
+
+<p>The NodeJS Redis client comes with some nice <a href="https://github.com/mranney/node_redis#performance">benchmarks</a> already. They reach up to 40000 ops/sec for simple calls with 50 concurrent connections.</p>
+
+<p>For NodeJS there are tons of benchmarks around already - especially the <a href="https://www.paypal-engineering.com/2013/11/22/node-js-at-paypal/">PayPal benchmark</a> and the <a href="https://vividcortex.com/blog/2013/12/09/analysis-of-paypals-node-vs-java-benchmarks/">related debate</a>, which show that Node can outperform Java significantly, should be mentioned. Along with that the <a href="http://drewww.github.io/socket.io-benchmarking/">Practical socket.io Benchmarking</a> by Drew Harry is worth a lookup.</p>
+
+<p>What&rsquo;s left for me is the question how many concurrent socket connections this could withstand and how all this scales depending on the amount of messages. The assumption from <a href="http://mrjoes.github.io/2011/12/15/sockjs-bench.html">existing benchmarks</a> would be that every worker process should be able to bind ~2k socket connections with approx. 10k messages per second. But those are not closely related to the described setup and they leave room for further investigations.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

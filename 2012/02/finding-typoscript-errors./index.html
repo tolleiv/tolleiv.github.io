@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding TypoScript errors. | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">February 16, 2012</h2>
+    <h1 class="title">Finding TypoScript errors.</h1>
+    <div class="content">
+      <p>When you work on TypoScript templates in TYPO3, errors might show up in the TypoScript Object Browser. Within the error messages you&rsquo;ll see a more or less detailed error description with the related line number. Within most setups these line numbers won&rsquo;t relate to any of your sys_template records or TypoScript files directly. But they still provide value if you know how they help to find the right spot. As it&rsquo;s not too obvious how to find the right spot I&rsquo;ve created a little screenshot series to guide you to the broken spots in your templates.</p>
+
+<p>So that&rsquo;s what you might see in your TypoScript Object Browser:</p>
+
+<p><a href="//blog.tolleiv.de/uploads/2012/02/typoscript-error.png"><img src="//blog.tolleiv.de/uploads/2012/02/typoscript-error.png" alt="The error message from your TypoScript Object Browser might look like this." /></a></p>
+
+<p> Switching from there to the Template Analyzer:</p>
+
+<p><a href="//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png"><img src="//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png" alt="Switching to the TypoScript analyzer" /></a></p>
+
+<p>At the bottom of the Template Analyzer, you&rsquo;ll find a &ldquo;Complete TS&rdquo; section and a link ~which looks like normal text.</p>
+
+<p><a href="//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png"><img src="//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png" alt="And you'll find a link to the fully concatenated TypoScript of your current page." /></a></p>
+
+<p>Clicking on that link will give you the entire concatenated TypoScript and here you&rsquo;ll also find that the line numbers finally match to the error message.</p>
+
+<p><a href="//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png"><img src="//blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png" alt="And you'll find that the line numbers are now what you saw in the error message before (might need some scrolling)." /></a></p>
+
+<p>A well hidden gem which works most likely in all TYPO3 4.x versions ;)</p>
+
+<hr />
+
+<p>Edit: In the meantime, Ingo&rsquo;s patch made it through the review process. So users of TYPO3 4.7 and above will find a nice and handy &ldquo;Show details&rdquo; link next to the error message. Makes it much much faster to find the broken spot. Thanks Ingo :) / (<a href="http://twitter.com/irnnr">@irnnr</a>)</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

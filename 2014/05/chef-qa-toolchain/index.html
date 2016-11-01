@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chef QA toolchain | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">May 24, 2014</h2>
+    <h1 class="title">Chef QA toolchain</h1>
+    <div class="content">
+      
+
+<p>In the past years I&rsquo;ve jumped into the role of the DevOps evangelist at AOE. As it seems this was quite successful and people joined in quickly. But due to the fact that DevOps for us also means that less trained colleges should participate in most parts of the codified infrastructure, it requires some quality assurance efforts in the background. An overview of the tools which help us to keep things clean, is what I wanted to share in this post.</p>
+
+<h3 id="tl-dr">Tl;dr</h3>
+
+<ul>
+<li><a href="http://www.getchef.com/chef/">Chef</a> - Great provisioning tool</li>
+<li><a href="http://berkshelf.com/">Berkshelf</a> - Easy dependency management</li>
+<li><a href="http://acrmp.github.io/foodcritic/">Foodcritic</a> - Chef specific lint</li>
+<li><a href="http://batsov.com/rubocop/">Rubocop</a> - Generic Ruby lint with autocorrect</li>
+<li><a href="https://github.com/test-kitchen">Test-Kitchen</a> - Real world test automation</li>
+<li><a href="http://serverspec.org/">Serverspec</a> - Intuitive good documented functional test library</li>
+</ul>
+
+<h3 id="provisioning-tools">Provisioning tools</h3>
+
+<p>The first part in the toolchain is <a href="http://www.getchef.com/chef/">Chef</a> itself. We choose it over <a href="http://puppetlabs.com/">Puppet</a> because it seemed to have a lower entry barrier and involved developers much better than the strict DSL of Puppet. We had some knowledge in our team for both tools, but in the end people sticked to Chef even on their private servers and that made the choice easy.</p>
+
+<h3 id="dependency-management">Dependency management</h3>
+
+<p>Nowadays we&rsquo;re using <a href="http://berkshelf.com/">Berkshelf</a> to maintain dependencies within our cookbooks and for our cookbook packages. The main reason to choose it over <a href="https://github.com/applicationsonline/librarian-chef">Librarian</a>, which we used before, was that it is failing with more meaningful errors. Besides that it turned out to be more robust when it comes to circular dependencies between cookbooks. Both features are essential when working with beginners.</p>
+
+<h3 id="lint-tools">Lint tools</h3>
+
+<p>Once our team started to write cookbooks on their own, it turned out quickly that the understanding of Chef, the awareness of best practices and a unique coding style is hard to achieve without tools. And that&rsquo;s where the following Ruby tools can help out a lot.</p>
+
+<p>The first tool which should be used by everyone who typed more than two lines of Chef code is <a href="http://acrmp.github.io/foodcritic/">Foodcritic</a>. It is analizing the cookbooks and responds with very cool and well documented error messages and code improvement suggestions. Along with them it guides every user to stick to Chef best practices.</p>
+
+<p>The second tool is <a href="http://batsov.com/rubocop/">Rubocop</a>, a well known Ruby static code analizer which enforces the <a href="https://github.com/bbatsov/ruby-style-guide">Ruby Style Guide</a>. One of the most powerful features is the autocorrect option which helps to get rid of trivial problems. That&rsquo;s especially important for developers who don&rsquo;t use Ruby all day and who hate to think about <em>single vs. double quotes</em> problems. Rubocop handles such problems automatically and keeps the code base in a consistent state.</p>
+
+<p>An alternative to Rubocop would be <a href="https://github.com/square/cane">Cane</a> - but that comes without the autocorrect feature. Further Ruby QA tools like <a href="https://github.com/seattlerb/flay">flay</a>, <a href="https://github.com/troessner/reek">reek</a> or <a href="https://github.com/seattlerb/flay">flog</a> didn&rsquo;t really apply to our Chef recipes or brought up too much false positives. This just created too much confusion and brought in too little value.</p>
+
+<h3 id="testing">Testing</h3>
+
+<p>There&rsquo;s a large amount of tools which you could use to test recipes. <a href="https://github.com/sethvargo/chefspec">ChefSpec</a> is the way to go when it comes to plain unit tests. It runs everything in Chef solo without actually converging anything on the system. Its speed is the biggest benefit and it is also the only way to properly test exception handling and broken paths in your recipes. Nowadays there&rsquo;s no way around ChefSpec when you look into the official OpsCode cookbooks. It is covered in lot&rsquo;s of blog posts as the entry point to cookbook testing (<a href="https://sethvargo.com/unit-testing-chef-cookbooks/">Unit testing Chef cookbooks</a>, <a href="http://jtimberman.housepub.org/blog/2013/05/09/starting-chefspec-example/">Starting ChefSpec Example</a>).</p>
+
+<p>If you&rsquo;re interested to run functional or integration tests, you could use <a href="https://github.com/sstephenson/bats">Bats</a>, <a href="http://serverspec.org/">Serverspec</a>, <a href="http://docs.seattlerb.org/minitest/">Minitest</a>, <a href="https://github.com/calavera/rspec-chef">Rspec</a>, <a href="https://github.com/Atalanta/cucumber-chef">Cucumber</a>, <a href="https://code.google.com/p/shunit2/">shUnit2</a> and even plain <a href="https://github.com/test-kitchen/busser-bash">Bash</a> scripts. All of the tools depend on a preceding converge step before the actual tests could check the results. That&rsquo;s why you usually want to run the tests in a fixed virtualized environment. That&rsquo;s provided with <a href="https://github.com/test-kitchen">Test-Kitchen</a>. Every Test-Kitchen suite is pulled up as seperate environment with it&rsquo;s own runlist and can then be tested fully isolated.</p>
+
+<p>For our recipe QA my favorite functional testing tool is Serverspec. It provides an intuitive test structure (opposed to MiniTest) and comes with a long list of well documented <a href="http://serverspec.org/resource_types.html">predefined resources</a>. But to encourage everyone to test as much as possible, I wouldn&rsquo;t really limit the toolchain to a single tool, instead I brought up example implementations for most of them into our internal cookbooks. This way everyone could pick the tool they liked.</p>
+
+<p>Good public examples for these testing libraries can be found on Github in various public cookbooks:</p>
+
+<ul>
+<li>ChefSpec: <a href="https://github.com/tas50/nagios/tree/master/spec">1</a>, <a href="https://github.com/opscode-cookbooks/nginx/tree/master/spec">2</a>, <a href="https://github.com/opscode-cookbooks/chef-splunk">3</a>, <a href="https://github.com/opscode-cookbooks/yum/tree/master/spec/unit">4</a>, <a href="https://github.com/opscode-cookbooks/rsyslog/tree/master/spec">5</a></li>
+<li>Serverspec: <a href="https://github.com/opscode-cookbooks/mysql/tree/master/test/integration">1</a>, <a href="https://github.com/serverspec/specinfra/tree/master/spec">2</a>, <a href="https://github.com/phlipper/chef-postgresql/tree/master/test/integration/server/serverspec">3</a>, <a href="https://github.com/phlipper/chef-monit/tree/master/test/integration">4</a></li>
+<li>Minitest: <a href="https://github.com/opscode-cookbooks/ark/tree/master/files/default/tests/minitest">1</a>, <a href="https://github.com/opscode-cookbooks/varnish/tree/master/files/default/test">2</a>, <a href="https://github.com/elasticsearch/cookbook-elasticsearch/tree/master/tests">3</a>, <a href="https://github.com/bflad/chef-docker/tree/master/test/cookbooks/docker_test/files/default/tests/minitest">4</a>, <a href="https://github.com/ganglia/chef-ganglia/tree/master/test/cookbooks/ganglia_test/files/default/tests/minitest">5</a></li>
+<li>Bats: <a href="https://github.com/opscode-cookbooks/lvm/tree/master/test/integration/create/bats">1</a>, <a href="https://github.com/opscode-cookbooks/rsync/tree/master/test/integration">2</a>, <a href="https://github.com/fnichol/chef-rbenv/tree/master/test/integration/system_ruby/bats">3</a></li>
+<li>Cucumber <a href="http://www.jedi.be/blog/2011/03/29/vagrant-testing-testing-one-two/">1</a></li>
+</ul>
+
+<h3 id="documentation">Documentation</h3>
+
+<p>Last but not least, every cookbook should have a nice README and that could be rendered with <a href="https://rubygems.org/gems/redcarpet">redcarpet</a> or if you&rsquo;re supporting more than just Markdown you could just throw <a href="https://github.com/github/markup">github/markup</a> at it.</p>
+
+<p>Alternatively you could of course just host your cookbooks on Github, Bitbucket or on a self-hosted Gitlab. Then these would take over rendering.</p>
+
+<h3 id="fin">Fin</h3>
+
+<p>The above <code>Tl,dr</code> section lined out my favorite tools. To sum up this post, I&rsquo;d say that automation was essential for our setup. Each tool which I brought up in the post can be used for our internal recipes and all off them will be triggered by our CI server. With that toolchain at hand we were able to have fully open cookbooks were everyone can contribute easily. Besides that the tools lower the barrier for people who are new to Chef and they help the more integrated people to support others efficiently.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

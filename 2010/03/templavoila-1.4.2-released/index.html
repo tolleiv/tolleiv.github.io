@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TemplaVoila 1.4.2 released | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">March 15, 2010</h2>
+    <h1 class="title">TemplaVoila 1.4.2 released</h1>
+    <div class="content">
+      <p>Yesterday the 2nd team release of TemplaVoila was uploaded into the <a href="http://typo3.org/extensions/repository/view/templavoila/current/">TER</a>. It&rsquo;s basically a maintenance release which fixes more than 100 bugs. But since we haven&rsquo;t been that straight distinguishing between bug and usability feature, you&rsquo;ll see a couple of new things within this release.</p>
+
+<p>The high level release notes are:</p>
+
+<ul>
+<li><p>page module is now customizable with CSS and JavaScript</p></li>
+
+<li><p>handling of static data structures are improved and fully working now</p></li>
+
+<li><p>wizards are improved, new page wizard is more explaining</p></li>
+
+<li><p>visual cleanups</p></li>
+
+<li><p>new hooks for eTypes (elements added by mapping interface)</p></li>
+
+<li><p>new classes for preview in page module, easy to override by extensions</p></li>
+
+<li><p>added missing localisations</p></li>
+
+<li><p>enhanced drag-and-drop in page module</p></li>
+
+<li><p>over 100 Bugs are fixed</p></li>
+
+<li><p>updated manual</p></li>
+</ul>
+
+<p>During the installation your TYPO3 Extension Manager will ask to perform a couple of database upgrades. These upgrades aren&rsquo;t really critical because they just enlarge some database fields, which will make sure that your data really fit&rsquo;s in.</p>
+
+<p>Just to point one thing out - especially the page module has been improved to be more flexible in certain parts.</p>
+
+<p>These lines of TSConfig can be used to add CSS or JavaScript into the page module and enable easy customizations:</p>
+
+<pre><code>mod.web_txtemplavoilaM1.stylesheet = ../fileadmin/css/tvpagemodule.css
+
+mod.web_txtemplavoilaM1.javascript {
+  file1 = ../fileadmin/templates/js/jquery.js
+  file2 = ../fileadmin/templates/css/backend.js
+}
+</code></pre>
+
+<p>Further customizations is provided using the &ldquo;<strong>mod.web_txtemplavoilaM1.blindIcons</strong>&rdquo; configuration or with individual content preview classes (configured though &ldquo;<strong>$GLOBALS[&lsquo;TYPO3_CONF_VARS&rsquo;][&lsquo;EXTCONF&rsquo;][&lsquo;templavoila&rsquo;][&lsquo;mod1&rsquo;][&lsquo;renderPreviewContent&rsquo;]</strong>&rdquo; - see ext_localconf.php).</p>
+
+<p>We haven&rsquo;t discussed what the direction for the next versions really looks like. From my perspective better TYPO3 integration, some kind of code cleanup and also the integration of some features which arise with TYPO3 4.4 will be somehow on our schedule. But since <a href="http://blog.tolleiv.de/2010/03/re-farewell-templavoila/">TemplaVoila isn&rsquo;t a one man show anymore</a>, this isn&rsquo;t just my decision and in addition I&rsquo;d like to encourage everyone to send feedback, bugfixes or new features just to give us an impression what you like or dislike in the current version.</p>
+
+<p>Last but not least, I&rsquo;d like to thank everyone who was somehow involved in the release, especially Steffen Kamper who shared lot of inspiration and who has spent many hours to debug and fix some really tricky issues.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

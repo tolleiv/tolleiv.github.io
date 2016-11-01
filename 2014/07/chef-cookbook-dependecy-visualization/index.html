@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chef cookbook dependecy visualization | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">July 6, 2014</h2>
+    <h1 class="title">Chef cookbook dependecy visualization</h1>
+    <div class="content">
+      
+
+<div>
+<img src="//blog.tolleiv.de/uploads/2014/07/smallgraph.png" align="right" markdown="1" />
+</div>
+
+<p>In my <a href="http://blog.tolleiv.de/2014/05/chef-qa-toolchain/">previous post</a> I&rsquo;ve pointed out some tools which make your live with <a href="http://www.getchef.com/chef/">Chef</a> much easier. Among these, <a href="http://berkshelf.com/">Berkshelf</a> helps with managing cookbooks and their dependencies. Depending on your workflows these  can be very straight forward or grow very complex.</p>
+
+<p>I had some free time and thought that visualizing these dependencies as graphs could be a fun weekend project. You can test out the results on <a href="http://berksgraph.tolleiv.de/">berksgraph.tolleiv.de</a> yourself. Just upload your Berksfile.lock and you&rsquo;ll see the result.</p>
+
+<h3 id="building-blocks">Building blocks</h3>
+
+<p>Esentially I&rsquo;ve used <a href="http://nodejs.org/api/stream.html">Node.Js transform streams</a> <a href="http://nicolashery.com/parse-data-files-using-nodejs-streams/">[1]</a> <a href="http://strongloop.com/strongblog/practical-examples-of-the-new-node-js-streams-api/">[2]</a> to parse the Berksfile.lock and generate <a href="http://d3js.org/">D3</a> graph data. The graph data is transformed into a nice graph with <a href="http://marvl.infotech.monash.edu/webcola/">cola.js</a>. In order to provide a nice interface for the application, everything was wrapped into an <a href="http://expressjs.com/">Express</a> application which uploads the graph data to <a href="https://github.com/tolleiv/berksfile-graphs/blob/master/lib/S3UploadStream.js">Amazon S3</a>. The actual hosting is done on one <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Heroku</a> dyno.</p>
+
+<h3 id="examples">Examples</h3>
+
+<ul>
+<li><a href="http://berksgraph.tolleiv.de/grph?1404657586462#2014-07-06-fe9d7192c4c36da5279226d5d82ef3f93128a48e.js">Very simple graph</a></li>
+<li><a href="http://berksgraph.tolleiv.de/grph?1404656042676#2014-07-06-04981e1185370fecf939ada2ef87ffda374c5e17.js">Graph with moderate complexity</a></li>
+<li><a href="http://berksgraph.tolleiv.de/grph?1404656118013#2014-07-06-51192e0f4bb8bfd2aab15551d4b31241eb295d18.js">Complex graph</a></li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

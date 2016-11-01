@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Query Object [PoEEA] | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">June 20, 2008</h2>
+    <h1 class="title">Query Object [PoEEA]</h1>
+    <div class="content">
+      <p>Maybe you remember the <a href="http://www.cookiepattern.com/2008/05/specification-ddd.html">Specification Pattern</a> I explained some weeks ago. It enabled a easy and intuitive  searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification.
+Normally you want to limit the number of objects and you also don&rsquo;t store large datasets in memory. The idea of the Query Object pattern is that it enables a usage, comparable to the specification pattern, for objects which are persisted in a database. The benefit is that it creates a query to exclude objects which won&rsquo;t satisfy your needs and therefore you wont mess up the memory anymore.
+Once you have a query-object in place you should not get in touch with SQL anymore because it can encapsulate SQL completely, at least if you also have some kind of data mapping (coming soon), which is a great benefit for everyone who is not so familiar with SQL. (But don&rsquo;t forget, regarding performance, SQL-optimization is a very important thing).</p>
+
+<p>So what we need for the Query Object in first place is a object, I&rsquo;ll use the Cookie out of the <a href="http://www.cookiepattern.com/2008/05/specification-ddd.html">specification pattern post</a> again. Then we need criteria-objects which hold the information for a single criteria, (determined by &ldquo;database-field&rdquo;, &ldquo;operator&rdquo; and &ldquo;value&rdquo;) and we also need the Query Objects itself to wrap up the SQL-querying and the object creation somehow.</p>
+
+<p>A very simple example could look like this:</p>
+
+<p>interface Critera {
+public function getWhereClause();
+}</p>
+
+<p>class CookieCriteria implements Critera {</p>
+
+<p>private $operator,$field,$value;</p>
+
+<p>protected function __construct($operator,$field,$value) {
+$this-&gt;operator=$operator;
+$this-&gt;field=$field;
+$this-&gt;value=$value;
+}</p>
+
+<p>public function getWhereClause() {
+return implode(&rdquo; &ldquo;,array($this-&gt;field,$this-&gt;operator,$this-&gt;value));
+}</p>
+
+<p>public static function matches($field,$value) {
+return new CookieCriteria(&ldquo;LIKE&rdquo;,$field,&lsquo;&ldquo;&rsquo;.$value.&lsquo;&rdquo;&rsquo;);
+}</p>
+
+<p>public static function greaterThan($field,$value) {
+return new CookieCriteria(&ldquo;&gt;&rdquo;,$field,$value);
+}
+}</p>
+
+<p>class CookieFinder {
+protected $criterias;</p>
+
+<p>public function addCriteria(Critera $criteria) {
+$this-&gt;criterias[] = $criteria;
+}</p>
+
+<p>public function generateSQL() {
+$sql = &ldquo;SELECT * FROM cookies&rdquo;;</p>
+
+<p>if(sizeof($this-&gt;criterias)) {
+$where=array();
+reset($this-&gt;criterias);
+while(list(,$criteria)=each($this-&gt;criterias)) {
+$where[] = $criteria-&gt;getWhereClause();
+}
+$sql.= sizeof($where)?&rdquo; WHERE &ldquo;.implode(&rdquo; AND &ldquo;,$where):&ldquo;&rdquo;;
+}
+return $sql;
+}</p>
+
+<p>public function find() {
+$collection = array();
+if(!$result = mysql_query($this-&gt;generateSQL())) {
+throw new Exception(mysql_errno());
+}
+while($row = mysql_fetch_assoc($result)) {
+$collection[] = new Cookie($row[&lsquo;name&rsquo;],$row[&lsquo;flavor&rsquo;],$name[&lsquo;size&rsquo;]);
+}
+return $collection;
+}
+}</p>
+
+<p>Possible client code could look like this:
+$finder = new CookieFinder();
+$finder-&gt;addCriteria(CookieCriteria::matches(&ldquo;name&rdquo;,&ldquo;Granny%&rdquo;));
+$finder-&gt;addCriteria(CookieCriteria::greaterThan(&ldquo;size&rdquo;,100));
+$cookies = $finder-&gt;find();</p>
+
+<p>We just pick up the Query Object, add one or more criteria and ask it to create the objects which fit them.</p>
+
+<p>So this example is not as powerful as the one I used for the <a href="http://www.cookiepattern.com/2008/05/specification-ddd.html">Specification pattern</a>, but it should be a easy task to create some kind of &ldquo;nested criteria objects&rdquo;.
+Query objects normally make use of data-mapping so that you can handle various classes, stored in different tables/databases, with a single and generic Query Object. This also enables to avoid SQL-Injection, since you&rsquo;re able to validate the fields and values before you sent them to your database, also some kind of database abstraction would be possible.
+With the &ldquo;Query Object by example&rdquo;, which requires to build up a single object which is used as blueprint for the required objects, exists another flavor of this pattern which is very handy to use and more descriptive.
+But no matter which flavor you prefer, Query Objects bring some real benefits when you&rsquo;ve to handle complex datasets - for smaller projects the effort might be to much so be careful where you use it.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

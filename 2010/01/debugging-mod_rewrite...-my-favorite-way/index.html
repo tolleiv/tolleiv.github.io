@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Debugging mod_rewrite... my favorite way | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">January 23, 2010</h2>
+    <h1 class="title">Debugging mod_rewrite... my favorite way</h1>
+    <div class="content">
+      <p>Once a month someone is asking because he has issues to get his mod_rewrite rules to do what he want&rsquo;s. Writing the rules and the required RegEx for these rules is quite easy, but Apache still behaves strange every now and then and that&rsquo;s where one of my favorite ways to &ldquo;debug&rdquo; mod_rewrite comes in very handy. And I felt that writing something is better than having a silent blog ;)</p>
+
+<p>The following block is what it&rsquo;s all about. It seems to have it&rsquo;s origin on <a href="http://www.webmasterworld.com/forum92/5360.htm">WebmasterWorld</a> and <a href="http://www.latenightpc.com/blog/archives/2007/09/05/a-couple-ways-to-debug-mod_rewrite">Rob Russel&rsquo;s Blog</a> and looks basically like this:</p>
+
+<pre><code>RewriteCond %{QUERY_STRING} !vardump
+RewriteRule (.*) http://www.example.com/$1?vardump&amp;reqhost=%{HTTP_HOST} [R=301,L,QSA]
+</code></pre>
+
+<p>Pretty easy and quite nice. The first line just prevents recursion, so that you&rsquo;ll be able to see the first redirect and nothing else. The second line is where you can place in every information you&rsquo;d like to check. The [R=301,L,QSA] makes sure that you can debug without interruption. The &ldquo;R=301&rdquo; makes sure the browser doesn&rsquo;t start a second request, but tells him that the location was changed, the &ldquo;QSA&rdquo; makes sure that the querystring isn&rsquo;t lost and the &ldquo;L&rdquo; prevents that your server performs other redirection rules.</p>
+
+<p>As shown the first block already unveils some information and places it into the redirection URL, so you could use it to check what the value of HTTP_HOST is and you also know whether mod_rewrite works or not. This way you can debug every variable mod_rewrite offers and you can check environmental variables and results of the regular expressions.</p>
+
+<p>If you&rsquo;d like to know whether a specific RewriteCond is working or not just place it in that block and you&rsquo;ll see if it&rsquo;s still redirecting or not, like this (<a href="http://twitcode.org/Bb">via</a>):</p>
+
+<pre><code>RewriteCond %{QUERY_STRING} !vardump
+RewriteCond %{HTTP:Accept-Language} ^de.*$
+RewriteRule (.*) http://www.example.com/$1?vardump&amp;languageMatchedDE [R=301,L,QSA]
+</code></pre>
+
+<p>Checking a regular expression from an RewriteCond looks like this (used on a server with a pretty strange setup for %{DOCUMENT_ROOT}):</p>
+
+<pre><code>RewriteCond %{QUERY_STRING} !vardump
+RewriteCond %{REQUEST_FILENAME} ^(.*\/htdocs\/).*$
+RewriteRule (.*) http://www.example.com/$1?vardump&amp;reqfilename=%1 [R=301,L,QSA]
+</code></pre>
+
+<p>As you see that&rsquo;s a pretty handy way to debug lot&rsquo;s of mod_rewrite stuff, it helped me quite often and I hope it does the same for you :)</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

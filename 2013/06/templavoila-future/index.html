@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TemplaVoila future | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">June 8, 2013</h2>
+    <h1 class="title">TemplaVoila future</h1>
+    <div class="content">
+      
+
+<p>If you followed some of my comments in the TYPO3 newsgroups recently, you&rsquo;ve heard that I&rsquo;m not very satisfied with the TYPO3 project in general and that&rsquo;s also reflected in my activity for TemplaVoila. After a certain time of inactivity I even had to ask myself whether it&rsquo;s wort to keep it in the TYPO3 universe or not. Due to the fact that this isn&rsquo;t an easy decision, I created a pro and con list which I&rsquo;d like to share, before I make conclusions.</p>
+
+<h3 id="why-templavoila-maintenance-should-continue">Why TemplaVoila maintenance should continue:</h3>
+
+<ul>
+<li><p>it made TYPO3 attractive for many less technical people (people who don&rsquo;t even understand conditions or loops)</p></li>
+
+<li><p>it contains and combines concepts (language, workspaces, content structuring) which aren&rsquo;t represented anyhow in other solutions</p></li>
+
+<li><p>it is still used within the community and various indicators proof that it is still very popular</p></li>
+</ul>
+
+<h3 id="why-templavoila-should-not-be-maintained-anymore">Why TemplaVoila should not be maintained anymore:</h3>
+
+<ul>
+<li><p>it is not supported by the <a href="http://lists.typo3.org/pipermail/typo3-team-core/2013-April/053866.html">active contributors</a> at all</p></li>
+
+<li><p>it is constantly under some kind of PR-attack from the other solutions (which is very demotivating)</p></li>
+
+<li><p>it lacks a developer &ldquo;community&rdquo; or at least a team</p></li>
+
+<li><p>it has a horribly outdated documentation which has to be overworked</p></li>
+
+<li><p>code refactoring is not really possible, the code is horrible to maintain</p></li>
+
+<li><p>it&rsquo;s concepts can&rsquo;t be ported anyhow to FLOW/extbase (extbase itself is broken when it comes to workspaces or languages - no way to port over alternative concepts for these)</p></li>
+
+<li><p>UI wise, Prototype and ExtJS have been used for it and need to be replaced with whatever the TYPO3 Core could offer</p></li>
+
+<li><p>some of it&rsquo;s concepts need to be reworked (language) to be much more useable</p></li>
+
+<li><p>the TYPO3 Core changes in a way that extension maintenance is no fun at all</p></li>
+</ul>
+
+<h3 id="conclusions">Conclusions:</h3>
+
+<p>I could add further points to both lists, but in general you&rsquo;ll get my point. All these have been on my mind for quite some time and I discussed them with various members of the TYPO3 community and I came to the conclusion that TemplaVoila should at least disappear from the TER to avoid that any new users start using it.</p>
+
+<p>Along with that, I also came to the conclusion that handing over TemplaVoila back to Dmitry, Robert or Kasper wouldn&rsquo;t make sense either - the remaining workload is enormous and a single developer alone would never be able to deliver anything with reasonable quality (incl. documentation).</p>
+
+<p>This basically means that TemplaVoila won&rsquo;t be actively distributed and supported by me and that there won&rsquo;t be any new public releases. In order to keep up the ability to fix bugs, I&rsquo;d offer to keep <a href="http://forge.typo3.org/projects/extension-templavoila">Forge+Git+Gerrit</a> open and I&rsquo;m still willing to review and merge patches (through Gerrit). Even though I didn&rsquo;t see too much activity from others for TemplaVoila within Gerrit, I assume that this should be enough to support running projects.</p>
+
+<p>To avoid that the discussion which might be needed for that announcement ends up in my blog, I&rsquo;ll close the comments here and I&rsquo;d love to invite you to comment within the related newsgroup entry in <a href="http://lists.typo3.org/cgi-bin/mailman/listinfo/typo3-project-templavoila">typo3.project.templavoila</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

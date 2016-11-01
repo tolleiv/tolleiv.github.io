@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal / Slots in Extbase | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">November 30, 2011</h2>
+    <h1 class="title">Signal / Slots in Extbase</h1>
+    <div class="content">
+      <p>A nice thing to have at hand is definately <a href="http://en.wikipedia.org/wiki/Signals_and_slots">Signal and Slots</a>. I heard <a href="http://f.oer.tel">Felix</a> talking about them quite often and I finally found a nice usecase and came to play with them a little bit this afternoon. And just to avoid that others have to look around too much to find how they can get them to work here&rsquo;s how it&rsquo;s working for me.</p>
+
+<p>First of all you should understand the concept. This nice little &ldquo;definition&rdquo; (from <a href="http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html">flow3.typo3.org</a>) sums it up pretty well:</p>
+
+<blockquote>
+<p>A signal, which contains event information as it makes sense in the case at hand, can be emitted (sent) by any part of the code and is received by one or more slots, which can be any function<del> in FLOW3</del> in extbase.</p>
+</blockquote>
+
+<p>To get this running in extbase, you&rsquo;ve to get hold of the _Tx_Extbase_SignalSlot<em>Dispatcher</em>, which is the central instance to manage all of it. Within Extbase that&rsquo;s done easily with this snippet within your classes:</p>
+
+<pre><code>   ...
+    /**
+     * @var Tx_Extbase_SignalSlot_Dispatcher
+     */
+    protected $signalSlotDispatcher;
+
+    /**
+     * @param Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher
+     */
+    public function injectSignalSlotDispatcher(Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher) {
+        $this-&gt;signalSlotDispatcher = $signalSlotDispatcher;
+    }
+   ...
+</code></pre>
+
+<p>Next thing is to make use of it. The Slot (listener) part could look like one of following blocks. In all cases you define the Signal by it&rsquo;s class (not necessarily a PHP Class) and it&rsquo;s name. Next to that the Slot can either be defined by a Closure, an object with a method name or a PHP-Class and a method name.</p>
+
+<pre><code>   ...
+// Using a closure
+$this-&gt;signalSlotDispatcher-&gt;connect(
+      'Crunching', 'emitDataReady', function($data) { crunch($data) }, NULL, FALSE
+);
+   ...
+// Using a method of the current object
+$this-&gt;signalSlotDispatcher-&gt;connect(
+     'Crunching', 'emitDataReady', $this, 'crunch', FALSE
+);
+   ...
+// Using a method of the specified class
+$this-&gt;signalSlotDispatcher-&gt;connect(
+     'Crunching', 'emitDataReady', 'Cruncher', 'crunch', FALSE
+);
+   ...
+</code></pre>
+
+<p>To trigger the Signal which invokes the Slots registered above, you&rsquo;ve to run the following code.</p>
+
+<pre><code>$this-&gt;signalSlotDispatcher-&gt;dispatch('Crunching', 'emitDataReady', array($data));
+</code></pre>
+
+<p>One thing I found was that by default the _Tx_Extbase_SignalSlot<em>Dispatcher</em> it not a Singleton in older extbase versions. Bastian fixed that already in the <a href="https://review.typo3.org/#change,6785">master</a> and <a href="https://review.typo3.org/#change,6786">1-4</a> branches and lucky enough this change was part within the TYPO3 4.6.1 release. But I think it&rsquo;s still important to mention that this wasn&rsquo;t the default from the beginning on.</p>
+
+<p>Even if <a href="http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html">AOP is a nicer way to implement this feature</a>, the extbase backport still works pretty straigh forward.</p>
+
+<p>Edit: One thing I&rsquo;ve to add - Felix is not &ldquo;just&rdquo; talking about Signal/Slots - he&rsquo;s the one to thank for the <a href="https://review.typo3.org/1563">backport</a>. And now that his <a href="http://blog.foertel.com/2011/10/using-signalslots-in-extbase/">blog</a> is running again - this post seems like a summary ;)</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

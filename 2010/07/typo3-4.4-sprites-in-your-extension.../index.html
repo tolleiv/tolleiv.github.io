@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TYPO3 4.4 sprites in your extension... | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">July 25, 2010</h2>
+    <h1 class="title">TYPO3 4.4 sprites in your extension...</h1>
+    <div class="content">
+      
+
+<p>TYPO3 4.4 ships with a long list of improvements. One of them is the sprite API which was developed during T3UXW09. It extends the iconWorks API and enables to retrieve any backend-icon from a central sprite.</p>
+
+<p>As extension maintainer there are several ways to use these new parts of the API you can either just use it to display core icons, you can include your own icons and retrieve it with the new API or you can include your own sprite and retrieve the separate icons.</p>
+
+<h4 id="use-sprite-icons">Use sprite icons</h4>
+
+<p>Using sprite icons is pretty easy, to get a checkmark icon you could use this:</p>
+
+<pre><code>t3lib_iconWorks::getSpriteIcon('status-dialog-ok');
+</code></pre>
+
+<p>The list of all available icons can be retrieved using the &lsquo;<strong><a href="http://typo3.org/extensions/repository/view/spriteiconoverview/current/">spriteiconoverview</a></strong>&rsquo; extension which I just recently pushed into the TER ;)</p>
+
+<h4 id="add-your-own-icons">Add your own icons</h4>
+
+<p>The API also provides the possibility to include your extension&rsquo;s icons using either single icons or your own icon sprite.
+Using single icons can be done with the following code in your ext_tables.php or ext_localconf.php:</p>
+
+<pre><code>$icons = array(
+     'myicon' =&gt; t3lib_extMgm::extRelPath('myextension') . 'myicon.gif'
+);
+t3lib_SpriteManager::addSingleIcons($icons, 'myextension');
+</code></pre>
+
+<p>Using this icon is easy again:</p>
+
+<pre><code>t3lib_iconWorks::getSpriteIcon('extensions-myextension-myicon');
+</code></pre>
+
+<p>If your extension comes with a larger amount of icons you might want to use your own sprite. This includes your sprite as a image file and a CSS file. The css file should look like this:</p>
+
+<pre><code>.t3-icon-extensions-myextension {
+     background-image:url(../../typo3conf/ext/myextension/myextension_sprite.gif);
+}
+.t3-icon-extensions-myextension-icon1 { background-position: 0px 0px; }
+.t3-icon-extensions-myextension-icon2 { background-position: 0px -16px; }
+</code></pre>
+
+<p>The path to your sprite needs to be relative to the typo3temp/sprites/ folder, from where the (temporary) merged CSS file will be included.
+This sprite can be included using:</p>
+
+<pre><code>$icons = array(
+     'extensions-myextension-icon1',
+     'extensions-myextension-icon2'
+);
+t3lib_SpriteManager::addIconSprite(
+     $icons,
+     t3lib_extMgm::siteRelPath('myextension') . 'myextension_sprite.css'
+);              
+</code></pre>
+
+<p>As you see it&rsquo;s quite easy to include the new API, the API provides some further options for overlays and further modifications which I didn&rsquo;t mention here. And as a final motivation this is a comparison between old and new API to get a &ldquo;back&rdquo; button:</p>
+
+<pre><code>// old API
+$icon = '&lt;img' . t3lib_iconWorks::skinImg($this-&gt;doc-&gt;backPath,'gfx/goback.gif','width=&quot;14&quot; height=&quot;14&quot;') . 'alt=&quot;&quot; /&gt;';
+
+// new API
+$icon = t3lib_iconWorks::getSpriteIcon('actions-view-go-back');
+</code></pre>
+
+<hr />
+
+<p>The sprite API is quite new and my knowledge about how to use it is also relatively fresh - so please let me know if you&rsquo;ve any remarks or questions.</p>
+
+<h2 id="btw-special-kudos-for-his-involvement-during-the-implementation-of-this-nice-feature-and-many-many-thanks-for-helping-me-to-understand-it-to-steffen-ritter-http-www-rs-websystems-de">Btw. special kudos for his involvement during the implementation of this nice feature and many many thanks for helping me to understand it, to <a href="http://www.rs-websystems.de/">Steffen Ritter</a>  :)</h2>
+
+<p>Further reading:</p>
+
+<ul>
+<li><p>If you&rsquo;ve never heard of sprites you might want to read this article an <a href="http://www.alistapart.com/articles/sprites">alistapart.com</a></p></li>
+
+<li><p><a href="http://typo3.org/download/release-notes/typo3-44/">TYPO3 4.4 release notes</a></p></li>
+
+<li><p><a href="http://news.typo3.org/news/article/t3dd10-its-all-about-sprites/">news.typo3.org - T3DD10: It&rsquo;s all about sprites</a></p></li>
+
+<li><p><a href="http://typo3.org/extensions/repository/view/spriteiconoverview/current/">spriteiconoverview</a> extension</p></li>
+</ul>
+
+<hr />
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

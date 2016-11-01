@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Specification [DDD] | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">May 15, 2008</h2>
+    <h1 class="title">Specification [DDD]</h1>
+    <div class="content">
+      <p>Maybe sometimes the cookie tin is filled with all sorts of cookies and only some of them are what you&rsquo;d like in this special moment. Often it&rsquo;s very easy to specify which cookie you like, but sometimes your wishes are very complex, for example if you look for grannies special cookie with chocolate, coconut and vanilla crumbles. This could lead into a real crumby problem if you try to sort all the cookies and then select eat the right one.</p>
+
+<p>In the world of OOP it&rsquo;s often much harder to collect a few objects out of a large number of different objects, also combining different requirements isn&rsquo;t easy and that&rsquo;s where the specification pattern can help you out. It implements some basic operations to combine requirements (AND, OR, NOT) and the only thing a concrete specification for a concrete class has to do is to implement a method (isSatisfied()) which is able to determine whether a object meats a requirement or not.</p>
+
+<p>I splitted the generic part of the script and the cookie-example. The first part just implements the methods which are needed for the combination and provides a abstract class which is extended by the specifications in the second part. As you see the specification is combined which normally encapsulates the retrieval of the objects ,for example from a database. &hellip;.just have a look it&rsquo;s really easy to select the right cookie &hellip; yummy</p>
+
+<p><a href="http://bp2.blogger.com/_l5fIZzJyYfc/SC115dPibfI/AAAAAAAAABQ/ZZfCsWJAwDA/s1600-h/specification_sequenze.png"><img src="http://bp2.blogger.com/_l5fIZzJyYfc/SC115dPibfI/AAAAAAAAABQ/ZZfCsWJAwDA/s400/specification_sequenze.png" alt="" /></a></p>
+
+<pre><code>interface Specification {
+    public function isSatisfiedBy($obj);
+    public function _and(Specification $spec);
+    public function _or(Specification $spec);
+    public function _not();
+}
+
+abstract class AbstractSpecification implements Specification {
+    public function isSatisfiedBy($obj) { }
+    public function _and(Specification $spec) {
+        return new AndSpecification($this, $spec);
+    }
+    public function _or(Specification $spec) {
+        return new OrSpecification($this, $spec);
+    }
+    public function _not() {
+        return new NotSpecification($this);
+    }
+}
+
+class AndSpecification extends AbstractSpecification {
+    private $spec1, $spec2;
+    public function __construct(Specification $spec1, Specification $spec2) {
+        $this-&gt;spec1 = $spec1;
+        $this-&gt;spec2 = $spec2;
+    }
+    public function isSatisfiedBy($obj) {
+        return $this-&gt;spec1-&gt;isSatisfiedBy($obj) &amp;&amp; $this-&gt;spec2-&gt;isSatisfiedBy($obj);
+    }
+}
+
+class OrSpecification extends AbstractSpecification {
+    private $spec1, $spec2;
+    public function __construct(Specification $spec1, Specification $spec2) {
+        $this-&gt;spec1 = $spec1;
+        $this-&gt;spec2 = $spec2;
+    }
+    public function isSatisfiedBy($obj) {
+        return $this-&gt;spec1-&gt;isSatisfiedBy($obj) || $this-&gt;spec2-&gt;isSatisfiedBy($obj);
+    }
+}
+
+class NotSpecification extends AbstractSpecification {
+    private $spec;
+    public function __construct(Specification $spec) {
+        $this-&gt;spec = $spec;
+    }
+    public function isSatisfiedBy($obj) {
+        return !$this-&gt;spec-&gt;isSatisfiedBy($obj);
+    }
+}
+
+
+
+
+
+
+/**
+* Cookie object just a container for the relevant data.
+*
+*/
+class Cookie {
+    protected $name,$flavor,$size;
+    public function __construct($name=”,$flavor=‘chocolate’,$size=100) {
+    $this-&gt;name=$name;
+    $this-&gt;flavor = $flavor;
+    $this-&gt;size = abs($size); // avoid negative size
+    }
+    public function getName() { return $this-&gt;name; }
+    public function getFlavor() { return $this-&gt;flavor; }
+    public function getSize() { return $this-&gt;size; }
+}
+/**
+* Cookie service delivers cookies, offers some ways to select specific types of cookies
+*
+*/
+class CookieService {
+    protected $cookies = array();
+    /**
+    * Add a cookie to the collection
+    * name is used as identifier, thats not the best choice
+    * but it’s ok for the example
+    *
+    * @param Cookie $cookie
+    */
+    public function add(Cookie $cookie) {
+        $this-&gt;cookies[$cookie-&gt;getName()]=$cookie;
+    }
+    /**
+    * Generic method to check which objects fit the spec
+    *
+    * @param Specification $spec
+    */
+    private function filter(Specification $spec) {
+        $result=array();
+        reset($this-&gt;cookies);
+        foreach($this-&gt;cookies as $name=&gt;$cookie) {
+            if($spec-&gt;isSatisfiedBy($cookie)) {
+                $result[]=$cookie;
+            }
+        }
+        return $result;
+    }
+
+    public function getLargeCookies() {
+        $spec = new SmallCookieSpecification();
+        $spec = $spec-&gt;_not();
+        return $this-&gt;filter($spec);
+    }
+    public function getSmallChocolateCookies() {
+        $spec = new SmallCookieSpecification();
+        $spec = $spec-&gt;_and(new ChocolateCookieSpecification());
+        return $this-&gt;filter($spec);
+    }
+    public function loadDummyData() {
+        $this-&gt;add(new Cookie(‘Granny\’s classic’,‘chocolate’,60));
+        $this-&gt;add(new Cookie(‘Modern Jumbo’,‘moca,chocolate’,180));
+        $this-&gt;add(new Cookie(‘Kitchen Sink’,‘macadamia,cranberrie’,90));
+        $this-&gt;add(new Cookie(‘Vanilla Cloud’,‘vanilla’,120));
+        $this-&gt;add(new Cookie(‘Chocolate chip’,‘coconut,chocolate’,160));
+    }
+}
+
+class SmallCookieSpecification extends AbstractSpecification {
+    public function isSatisfiedBy($obj) {
+        return $obj-&gt;getSize() &lt; 100;
+    }
+}
+
+class ChocolateCookieSpecification extends AbstractSpecification {
+    public function isSatisfiedBy($obj) {
+        return stristr(strtolower($obj-&gt;getFlavor()),‘chocolate’) !== FALSE;
+    }
+}
+
+/**
+* Client code
+*/
+$service = new CookieService();
+$service-&gt;loadDummyData();
+echo ‘
+
+’;
+var_dump($service-&gt;getLargeCookies());
+var_dump($service-&gt;getSmallChocolateCookies());
+echo ‘
+</code></pre>
+
+<p>’;</p>
+
+<p><a href="http://martinfowler.com/apsupp/spec.pdf">more information by E.Evans and M.Fowler</a></p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

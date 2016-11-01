@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TYPO3 extensions .... | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">July 26, 2009</h2>
+    <h1 class="title">TYPO3 extensions ....</h1>
+    <div class="content">
+      <p>I&rsquo;m currently within the preparation for some exams therefore my day&rsquo;s aren&rsquo;t very fancy at all - and that&rsquo;s why I just decided to introduce some TYPO3 extensions - especially TYPO3 extensions where I&rsquo;m somehow involved ;)</p>
+
+<p>The mentioned extensions are all created by AOEmedia or in cooperation with <a href="http://www.aoemedia.com">AOEmedia</a>, they&rsquo;re actively maintained and they work within regular TYPO3 environments with all TYPO3 features -lot&rsquo;s of other extensions don&rsquo;t support l10n and workspaces - ours do ;) Please use the mentioned pages on forge.typo3.org to get feedback on your bugs within the mentioned extensions.</p>
+
+<p>Ok let&rsquo;s start:</p>
+
+<p><img src="../wp-content/uploads/2009/07/39b125d4f5-197x300.png" alt="Imagemap Wizard preview" /><strong>imagemap_wizard (<a href="http://forge.typo3.org/projects/show/extension-imagemap_wizard">forge</a>)</strong></p>
+
+<p>My favorite extension - I started it on the T3DD08 and it took 6 months to finish the first alpha. After 1 year it&rsquo;s now a very flexible and fully integrated way to create imagemaps within TYPO3. I&rsquo;m very proud that it comes without any XCLASSes and that it can just be used like regular content elements. Localization and workspaces are also supported and the imagemaps are created on frontend-like images. E.g. the uploaded image can be transformed with some installed filters and you&rsquo;ll see the applied filters also in the preview while creating your imagemap - that&rsquo;s pretty cool since there&rsquo;s no other imagemap-tool which offers such an integration. And the editing of the imagemap itself is done with a (hopefully) intuitive point&amp;click interface :) &hellip; more details on <a href="http://forge.typo3.org/projects/show/extension-imagemap_wizard">forge.typo3.org</a>.</p>
+
+<p><strong>crawler (<a href="http://forge.typo3.org/projects/show/extension-crawler">forge</a>)</strong></p>
+
+<p>The crawler is a widely know extension within the TYPO3 community - initially Kasper himself implemented the crawler and he handed over the maintenance for the crawler and it&rsquo;s associated extension staticpub to AOEmedia - during the last year we made a lot of small improvements and currently we&rsquo;re making really big changes to get multiprocess-support and  a better &ldquo;configuration-interface&rdquo; into the extension. The biggest task was that we had to stay compatible with the old API because it&rsquo;s also widely know within the community ;) &hellip; a release of the new crawler version will follow very soon :) - more details about the crawler and <a href="http://forge.typo3.org/projects/show/extension-crawler">forge.typo3.org</a>.</p>
+
+<p><strong>aoe_realurlpath (<a href="http://forge.typo3.org/projects/show/extension-aoe_realurl">forge</a>)</strong></p>
+
+<p>RealURL is a powerful extension to generate readable and SEO friendly extensions within TYPO3, unfortunately RealURLs pathgenerations wasn&rsquo;t very flexible in the past and especially localization wasn&rsquo;t represented the way as you might expect it therefore <a href="http://www.typo3-media.com">Daniel</a> implemented an extension which did the path-generations in a more predictable and flexible way. During the last months we added lot&rsquo;s of Unit tests and added lot&rsquo;s of additional feature for some other special cases (mostly connected to l10n) - the extension itself has a stable state and the testcases make development for this extension very easy - it&rsquo;s still a tricky job to implement new features though.</p>
+
+<p>That&rsquo;s it for today - I think there&rsquo;ll be some additional posts on other extensions.</p>
+
+<p>Followups: <a href="http://www.typo3-media.com/blog/article/talking-about-10-extensions-part-i.html">Daniel about 10 extensions</a> , <a href="http://typo3.org/extensions/repository/popular/">popular exntensions on TYPO3.org</a></p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

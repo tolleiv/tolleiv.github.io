@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Release reviews (templavoila, imagemap_wizard, workspaces) | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="//blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="//blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="//blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">February 24, 2011</h2>
+    <h1 class="title">Release reviews (templavoila, imagemap_wizard, workspaces)</h1>
+    <div class="content">
+      <p>I just push the TER upload button two times and in addition to that TYPO3 4.5.2 will be released tomorrow containing some nice workspaces updates. So here&rsquo;s a short summary what happened in the extension releases.</p>
+
+<p><strong>TemplaVoila 1.5.4</strong>
+The current release focussed on 4.5 compatibility. It uses the new sys_language flag &ldquo;format&rdquo; to support sprites, it hooks into the new backend-form <em>(TCA)</em> &ldquo;layout&rdquo; and add&rsquo;s it&rsquo;s fields to the right tabs within the backend forms and adjusts everything to work fine with the new CSRF mechanism.</p>
+
+<p>Besides that bug fixes for the section index, performance improvements and a couple more are included.</p>
+
+<p><em>One thing in conjunction with 4.5 you should be aware of is that copied elements are hidden by default. In older versions hidden elements won&rsquo;t show up in the page module by default and therefore it might seem that nothing was copied, but that&rsquo;s not right. With 1.5.4 the default setting was changed so hidden elements will show up in the page module. Unfortunately the old setting (to skip hidden elements) might still be present in your session settings - so please either clear your session settings or use the &ldquo;Advanced function&rdquo; tab in the page module to change to setting and avoid confusion.</em></p>
+
+<p><strong>Imagemap_wizard 0.6.0</strong>
+The last versions proved to be very stable and with some additional sponsoring I was able to improve the DAM and TYPO3 workspaces support. Besides that a couple of issues which showed up in 4.4 and 4.5 were fixed. One of the next features will hopefully be a useful point of interest implementation - keep your fingers crossed that someone&rsquo;s clients want&rsquo;s to sponsor some time for that ;)</p>
+
+<p><strong>Workspaces 4.5.1 / 4.5.2</strong>
+Even if it&rsquo;s shipped with the Core and included in the <a href="http://news.typo3.org/news/article/typo3-451-released/">official release notes</a>, here&rsquo;s my summary of the improvements. The workspace module itself brought us lot&rsquo;s of good feedback and also the new workspace preview raised some attention. Even though 4.5.0 was quite stable we weren&rsquo;t able to get it working perfectly. The fixes made for 4.5.1 made sure that especially the preview window works much more stable, it introduced state persistence (so switching preview modes or module settings are memorized properly) and it brought some performance improvements.
+Btw. if you didn&rsquo;t check out the new workspaces features and improvements the<a href="http://forge.typo3.org/projects/typo3v4-workspaces/repository/entry/workspaces/trunk/Documentation/manual.pdf"> new workspaces documentation from Susanne Moog</a> is a good point to start.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'blog.tolleiv.de';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
