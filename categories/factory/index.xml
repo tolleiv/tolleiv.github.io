@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/categories/factory/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/categories/factory/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Factory [GoF]</title>
+      <link>https://blog.tolleiv.de/2008/06/factory-gof/</link>
+      <pubDate>Mon, 23 Jun 2008 18:20:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/factory-gof/</guid>
+      <description>&lt;p&gt;Do you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;Fa&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ç&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ade pattern&lt;/a&gt; post? Sure you do :) - I described a child which asked his granny whether she could bake some cookies. So how this happens in a formal way was describe within the&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt; Fa&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ç&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ade pattern&lt;/a&gt; post ;) but the basic action &amp;ldquo;to ask for sth.&amp;rdquo; is described here&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;As you might remember we had a child, probably a lazy one, which was in the mood to eat some cookies but since the cookie tin was empty it asked his granny to bake some new. In OOP thats nearly the same - when you&amp;rsquo;d to have a (complex) object and if you don&amp;rsquo;t already have one you need someone who creates it or you do it yourself but since you need remember all the steps to create it, that&amp;rsquo;s something for programmers who likes to type :P&lt;/p&gt;
+
+&lt;p&gt;So normally you create a method which wraps up all the code to create the complex object. Or maybe you have  a Aggregate and you don&amp;rsquo;t want that everyone needs to know how it is build up then this method should be the only way to access the Aggregate.&lt;/p&gt;
+
+&lt;p&gt;You see now how you can benefit when you have a Factory available - but there are also some drawbacks. Factories tend to be hard to extend - this happens because the factory has a very deep (mostly hard-coded) knowledge of the objects it creates and normally all the wiring happens statically. If you&amp;rsquo;re looking for a dynamic way to wire up your objects you might end making heavy use of reflection. In normal projects this might be a bit too much ;)&lt;/p&gt;
+
+&lt;p&gt;A normal factory method, for a cookie which requires to have 3 flavors, a predefined size and that it&amp;rsquo;s baked before anyone consumes it, could look like this:&lt;/p&gt;
+
+&lt;p&gt;class Cookie {&lt;/p&gt;
+
+&lt;p&gt;// &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;/*&lt;br /&gt;
+  * Create a Cookie object which consists&lt;br /&gt;
+  * of 3 flavors and has a defined size.&lt;br /&gt;
+  */&lt;br /&gt;
+ public function getInstance() {&lt;br /&gt;
+     $c = new Cookie();&lt;br /&gt;
+     $c-&amp;gt;setFlavor(Cookie::randomFlavor());&lt;br /&gt;
+     $c-&amp;gt;setFlavor(Cookie::randomFlavor());&lt;br /&gt;
+     $c-&amp;gt;setFlavor(Cookie::randomFlavor());&lt;br /&gt;
+     $c-&amp;gt;setSize(Cookie::randomSize());&lt;br /&gt;
+     $c-&amp;gt;bakeIt();&lt;br /&gt;
+     return $c;&lt;br /&gt;
+ }&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;If your software contains some complexity where you want to switch the used objects (created by a factory) without modifying the clients, which make use of the factory, you&amp;rsquo;ll end up with the so called Abtract factory.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say you have two types of Cookies - the first one is a high-quality cookie with a bunch of different flavors and the second one is a normal chocolate-cookie. The high-quality cookie is created by your granny (slow but mind-blowing taste), the cookies with the lower quality are the result of mass-production. Your &amp;ldquo;client&amp;rdquo; is a wrapping machine which does everything to deliver the cookies to some customers.&lt;br /&gt;
+So the wrapping machine won&amp;rsquo;t care what kind of cookies are prepared for delivering and so it doesn&amp;rsquo;t matter who the creator is - the only thing it has to know is how it can access the cookies&amp;hellip; some kind of interface.&lt;br /&gt;
+So the entire szenario could look like this:&lt;/p&gt;
+
+&lt;p&gt;class Cookie {&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;interface CookieFactory {&lt;br /&gt;
+ abstract function createCookie();&lt;br /&gt;
+}&lt;/p&gt;
+
+&lt;p&gt;class Granny implements CookieFactory {&lt;br /&gt;
+ public function createCookie() {&lt;br /&gt;
+     $cookie = new Cookie();&lt;br /&gt;
+     // do some wierd cookie-creation stuff //&lt;br /&gt;
+     return $cookie;&lt;br /&gt;
+ }&lt;br /&gt;
+}&lt;/p&gt;
+
+&lt;p&gt;class MassProduction implements CookieFactory {&lt;br /&gt;
+ public function createCookie() {&lt;br /&gt;
+     return new Cookie();&lt;br /&gt;
+ }&lt;br /&gt;
+}&lt;/p&gt;
+
+&lt;p&gt;class wrappingMachine {&lt;br /&gt;
+ public function run(CookieFactory $factory) {&lt;br /&gt;
+     $i = 6;&lt;br /&gt;
+     $package=array();&lt;br /&gt;
+     while($i&amp;ndash;) {&lt;br /&gt;
+         $package[] = $factory-&amp;gt;createCookie();&lt;br /&gt;
+     }&lt;br /&gt;
+     return $package;&lt;br /&gt;
+ }&lt;br /&gt;
+}&lt;/p&gt;
+
+&lt;p&gt;Client-code could look like this;&lt;/p&gt;
+
+&lt;p&gt;$wrapper = new wrappingMachine();&lt;br /&gt;
+$highQualityCookiePackage = $wrapper-&amp;gt;run(new Granny());&lt;br /&gt;
+$lowQualityCookiePackage = $wrapper-&amp;gt;run(new MassProduction());&lt;/p&gt;
+
+&lt;p&gt;Thats mostly what you can achieve with some normal Factories in the GoF-meaning. Some other interesting ways of object creation are the &lt;a href=&#34;http://www.cookiepattern.com/2008/06/plugin-poeaa.html&#34;&gt;Plugin pattern&lt;/a&gt; and the  &lt;a href=&#34;http://www.cookiepattern.com/2008/05/prototype-gof.html&#34;&gt;Prototype pattern&lt;/a&gt;. :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Query Object [PoEEA]</title>
+      <link>https://blog.tolleiv.de/2008/06/query-object-poeea/</link>
+      <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/query-object-poeea/</guid>
+      <description>&lt;p&gt;Maybe you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification Pattern&lt;/a&gt; I explained some weeks ago. It enabled a easy and intuitive  searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification.
+Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory. The idea of the Query Object pattern is that it enables a usage, comparable to the specification pattern, for objects which are persisted in a database. The benefit is that it creates a query to exclude objects which won&amp;rsquo;t satisfy your needs and therefore you wont mess up the memory anymore.
+Once you have a query-object in place you should not get in touch with SQL anymore because it can encapsulate SQL completely, at least if you also have some kind of data mapping (coming soon), which is a great benefit for everyone who is not so familiar with SQL. (But don&amp;rsquo;t forget, regarding performance, SQL-optimization is a very important thing).&lt;/p&gt;
+
+&lt;p&gt;So what we need for the Query Object in first place is a object, I&amp;rsquo;ll use the Cookie out of the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;specification pattern post&lt;/a&gt; again. Then we need criteria-objects which hold the information for a single criteria, (determined by &amp;ldquo;database-field&amp;rdquo;, &amp;ldquo;operator&amp;rdquo; and &amp;ldquo;value&amp;rdquo;) and we also need the Query Objects itself to wrap up the SQL-querying and the object creation somehow.&lt;/p&gt;
+
+&lt;p&gt;A very simple example could look like this:&lt;/p&gt;
+
+&lt;p&gt;interface Critera {
+public function getWhereClause();
+}&lt;/p&gt;
+
+&lt;p&gt;class CookieCriteria implements Critera {&lt;/p&gt;
+
+&lt;p&gt;private $operator,$field,$value;&lt;/p&gt;
+
+&lt;p&gt;protected function __construct($operator,$field,$value) {
+$this-&amp;gt;operator=$operator;
+$this-&amp;gt;field=$field;
+$this-&amp;gt;value=$value;
+}&lt;/p&gt;
+
+&lt;p&gt;public function getWhereClause() {
+return implode(&amp;rdquo; &amp;ldquo;,array($this-&amp;gt;field,$this-&amp;gt;operator,$this-&amp;gt;value));
+}&lt;/p&gt;
+
+&lt;p&gt;public static function matches($field,$value) {
+return new CookieCriteria(&amp;ldquo;LIKE&amp;rdquo;,$field,&amp;lsquo;&amp;ldquo;&amp;rsquo;.$value.&amp;lsquo;&amp;rdquo;&amp;rsquo;);
+}&lt;/p&gt;
+
+&lt;p&gt;public static function greaterThan($field,$value) {
+return new CookieCriteria(&amp;ldquo;&amp;gt;&amp;rdquo;,$field,$value);
+}
+}&lt;/p&gt;
+
+&lt;p&gt;class CookieFinder {
+protected $criterias;&lt;/p&gt;
+
+&lt;p&gt;public function addCriteria(Critera $criteria) {
+$this-&amp;gt;criterias[] = $criteria;
+}&lt;/p&gt;
+
+&lt;p&gt;public function generateSQL() {
+$sql = &amp;ldquo;SELECT * FROM cookies&amp;rdquo;;&lt;/p&gt;
+
+&lt;p&gt;if(sizeof($this-&amp;gt;criterias)) {
+$where=array();
+reset($this-&amp;gt;criterias);
+while(list(,$criteria)=each($this-&amp;gt;criterias)) {
+$where[] = $criteria-&amp;gt;getWhereClause();
+}
+$sql.= sizeof($where)?&amp;rdquo; WHERE &amp;ldquo;.implode(&amp;rdquo; AND &amp;ldquo;,$where):&amp;ldquo;&amp;rdquo;;
+}
+return $sql;
+}&lt;/p&gt;
+
+&lt;p&gt;public function find() {
+$collection = array();
+if(!$result = mysql_query($this-&amp;gt;generateSQL())) {
+throw new Exception(mysql_errno());
+}
+while($row = mysql_fetch_assoc($result)) {
+$collection[] = new Cookie($row[&amp;lsquo;name&amp;rsquo;],$row[&amp;lsquo;flavor&amp;rsquo;],$name[&amp;lsquo;size&amp;rsquo;]);
+}
+return $collection;
+}
+}&lt;/p&gt;
+
+&lt;p&gt;Possible client code could look like this:
+$finder = new CookieFinder();
+$finder-&amp;gt;addCriteria(CookieCriteria::matches(&amp;ldquo;name&amp;rdquo;,&amp;ldquo;Granny%&amp;rdquo;));
+$finder-&amp;gt;addCriteria(CookieCriteria::greaterThan(&amp;ldquo;size&amp;rdquo;,100));
+$cookies = $finder-&amp;gt;find();&lt;/p&gt;
+
+&lt;p&gt;We just pick up the Query Object, add one or more criteria and ask it to create the objects which fit them.&lt;/p&gt;
+
+&lt;p&gt;So this example is not as powerful as the one I used for the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification pattern&lt;/a&gt;, but it should be a easy task to create some kind of &amp;ldquo;nested criteria objects&amp;rdquo;.
+Query objects normally make use of data-mapping so that you can handle various classes, stored in different tables/databases, with a single and generic Query Object. This also enables to avoid SQL-Injection, since you&amp;rsquo;re able to validate the fields and values before you sent them to your database, also some kind of database abstraction would be possible.
+With the &amp;ldquo;Query Object by example&amp;rdquo;, which requires to build up a single object which is used as blueprint for the required objects, exists another flavor of this pattern which is very handy to use and more descriptive.
+But no matter which flavor you prefer, Query Objects bring some real benefits when you&amp;rsquo;ve to handle complex datasets - for smaller projects the effort might be to much so be careful where you use it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Plugin [PoEAA]</title>
+      <link>https://blog.tolleiv.de/2008/06/plugin-poeaa/</link>
+      <pubDate>Thu, 05 Jun 2008 01:11:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/plugin-poeaa/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m sure you&amp;rsquo;re pretty often in the situation that you have to switch something depending on the context you&amp;rsquo;re currently in. For example most people change their eating habits before summer - I also do :P&lt;/p&gt;
+
+&lt;p&gt;Sometimes this is what you also want to have in your software. To achieve different behaviour you normally just implement two different classes or aggregates and since they have the same &amp;ldquo;meaning&amp;rdquo; they normally share a interface (a.k.a Separated Interface). But who decides which implementation fits into the current environment/context?&lt;/p&gt;
+
+&lt;p&gt;The easiest way is to have a Factory Method with a small condition to decide this, but this method might grow very fast if you have various options. In this situation its also a matter of form to move this decision into some kind of configuration(-file) so that there&amp;rsquo;s only on file which differs in various environments.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://martinfowler.com/eaaCatalog/plugin.html&#34;&gt;Martin Fowler&lt;/a&gt; suggests to place some kind of mapping into the configuration-file, so that your Factory knows which implementation to instantiate in the current context. The key for the mapping in this case is the name of the Separated Interface.&lt;/p&gt;
+
+&lt;p&gt;As you see in the example code below, there are Cookie Tins which create contain Cookies and depending on the current month you want to use a more or less restrictive Cookie Tin. In May, June and July you restrict your application to create max. 5 cookies, the rest of the year you don&amp;rsquo;t care :P&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    // The Separated Interface
+interface CookieTin {
+    public function getCookieInstance();
+}
+
+class NormalTin implements CookieTin {
+    public function getCookieInstance() {
+        return new Cookie();
+    }
+}
+
+class DietTin implements CookieTin {
+    protected $i=0;
+    public function getCookieInstance() {
+        return ($this-&amp;gt;i++ &amp;lt; 5)?new Cookie():new NullCookie();
+    }
+}
+
+// The Factory which supports Plugin-Creation
+class CookieTinFactory {
+    public static function getPlugin( $class ) {
+        try {
+            return new $GLOBALS[&#39;Plugins&#39;][$class]();
+        } catch( Exception $e) {
+            // maybe call some default implementation if the mapping is wrong
+        }
+    }
+}
+
+
+
+
+
+
+
+class Cookie {
+    public function printCalories() {
+        echo ’200 ‘;
+    }
+}
+
+class NullCookie extends Cookie{
+    public function printCalories() { }
+}
+
+
+
+
+
+
+
+// This is usually in a configuration-file, normally this should
+// also sit in a XML structure….
+
+// That’s what it would be in 300 days/year
+$GLOBALS[&#39;Plugins&#39;][&#39;CookieTin&#39;] = “NormalTin”;
+// That’s what we have to turn it to before summer
+if(in_array(date(‘n’),array(5,6,7))) {
+    $GLOBALS[&#39;Plugins&#39;][&#39;CookieTin&#39;] = “DietTin”;
+}
+
+$tin = CookieTinFactory::getPlugin(‘CookieTin’);
+$i=10;
+while($i–) {
+    $cookie = $tin-&amp;gt;getCookieInstance();
+    $cookie-&amp;gt;printCalories();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A very common use-case for this is the changed behaviour in a testing-environment compared to the production-environment.
+There&amp;rsquo;s something else in the example beside the Plugin Pattern - I also made use of the Special Case (the NullCookie) pattern  which I&amp;rsquo;m going to show in a future post&amp;hellip;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

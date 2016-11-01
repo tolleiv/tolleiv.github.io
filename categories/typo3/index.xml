@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/categories/typo3/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/categories/typo3/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Signal / Slots in Extbase</title>
+      <link>https://blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</link>
+      <pubDate>Wed, 30 Nov 2011 17:17:02 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</guid>
+      <description>&lt;p&gt;A nice thing to have at hand is definately &lt;a href=&#34;http://en.wikipedia.org/wiki/Signals_and_slots&#34;&gt;Signal and Slots&lt;/a&gt;. I heard &lt;a href=&#34;http://f.oer.tel&#34;&gt;Felix&lt;/a&gt; talking about them quite often and I finally found a nice usecase and came to play with them a little bit this afternoon. And just to avoid that others have to look around too much to find how they can get them to work here&amp;rsquo;s how it&amp;rsquo;s working for me.&lt;/p&gt;
+
+&lt;p&gt;First of all you should understand the concept. This nice little &amp;ldquo;definition&amp;rdquo; (from &lt;a href=&#34;http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html&#34;&gt;flow3.typo3.org&lt;/a&gt;) sums it up pretty well:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A signal, which contains event information as it makes sense in the case at hand, can be emitted (sent) by any part of the code and is received by one or more slots, which can be any function&lt;del&gt; in FLOW3&lt;/del&gt; in extbase.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To get this running in extbase, you&amp;rsquo;ve to get hold of the _Tx_Extbase_SignalSlot&lt;em&gt;Dispatcher&lt;/em&gt;, which is the central instance to manage all of it. Within Extbase that&amp;rsquo;s done easily with this snippet within your classes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   ...
+    /**
+     * @var Tx_Extbase_SignalSlot_Dispatcher
+     */
+    protected $signalSlotDispatcher;
+
+    /**
+     * @param Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher
+     */
+    public function injectSignalSlotDispatcher(Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher) {
+        $this-&amp;gt;signalSlotDispatcher = $signalSlotDispatcher;
+    }
+   ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next thing is to make use of it. The Slot (listener) part could look like one of following blocks. In all cases you define the Signal by it&amp;rsquo;s class (not necessarily a PHP Class) and it&amp;rsquo;s name. Next to that the Slot can either be defined by a Closure, an object with a method name or a PHP-Class and a method name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   ...
+// Using a closure
+$this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
+      &#39;Crunching&#39;, &#39;emitDataReady&#39;, function($data) { crunch($data) }, NULL, FALSE
+);
+   ...
+// Using a method of the current object
+$this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
+     &#39;Crunching&#39;, &#39;emitDataReady&#39;, $this, &#39;crunch&#39;, FALSE
+);
+   ...
+// Using a method of the specified class
+$this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
+     &#39;Crunching&#39;, &#39;emitDataReady&#39;, &#39;Cruncher&#39;, &#39;crunch&#39;, FALSE
+);
+   ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To trigger the Signal which invokes the Slots registered above, you&amp;rsquo;ve to run the following code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$this-&amp;gt;signalSlotDispatcher-&amp;gt;dispatch(&#39;Crunching&#39;, &#39;emitDataReady&#39;, array($data));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One thing I found was that by default the _Tx_Extbase_SignalSlot&lt;em&gt;Dispatcher&lt;/em&gt; it not a Singleton in older extbase versions. Bastian fixed that already in the &lt;a href=&#34;https://review.typo3.org/#change,6785&#34;&gt;master&lt;/a&gt; and &lt;a href=&#34;https://review.typo3.org/#change,6786&#34;&gt;1-4&lt;/a&gt; branches and lucky enough this change was part within the TYPO3 4.6.1 release. But I think it&amp;rsquo;s still important to mention that this wasn&amp;rsquo;t the default from the beginning on.&lt;/p&gt;
+
+&lt;p&gt;Even if &lt;a href=&#34;http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html&#34;&gt;AOP is a nicer way to implement this feature&lt;/a&gt;, the extbase backport still works pretty straigh forward.&lt;/p&gt;
+
+&lt;p&gt;Edit: One thing I&amp;rsquo;ve to add - Felix is not &amp;ldquo;just&amp;rdquo; talking about Signal/Slots - he&amp;rsquo;s the one to thank for the &lt;a href=&#34;https://review.typo3.org/1563&#34;&gt;backport&lt;/a&gt;. And now that his &lt;a href=&#34;http://blog.foertel.com/2011/10/using-signalslots-in-extbase/&#34;&gt;blog&lt;/a&gt; is running again - this post seems like a summary ;)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>new TYPO releases</title>
+      <link>https://blog.tolleiv.de/2008/06/new-typo-releases/</link>
+      <pubDate>Wed, 11 Jun 2008 14:18:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/new-typo-releases/</guid>
+      <description>&lt;p&gt;I just saw that the TYPO3 guys released a new version of the popular Enterprise CMS (&lt;a href=&#34;http://www.typo3.org&#34;&gt;www.typo3.org&lt;/a&gt;). The changelog shows that they mainly changed some security issues and that a lot of  smaller changes in the backend happend - one change relates to the problems in the new Firefox 3 where all the frames in the backend are mixed up for some compatibility reason&amp;hellip; this was also the reason why the also updates the 4.0.x branch and the 4.1.x branch &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://typo3.org/download/packages/&#34;&gt;TYPO3 source package downloads&lt;/a&gt; / &lt;a href=&#34;http://wiki.typo3.org/index.php/Upgrade&#34;&gt;TYPO3 upgrading guide&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TYPO3 API...</title>
+      <link>https://blog.tolleiv.de/2008/05/typo3-api.../</link>
+      <pubDate>Thu, 15 May 2008 14:40:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/typo3-api.../</guid>
+      <description>&lt;p&gt;The API documentation on &lt;a href=&#34;http://typo3.org/fileadmin/typo3api-4.0.0/&#34;&gt;typo3.org&lt;/a&gt; is not very up-to-date, but the typo3-unleashed.net guys just provided some links to the API documentation of the current TYPO3 versions - &lt;a href=&#34;http://www.typo3-unleashed.net/api_online.html&#34;&gt;http://www.typo3-unleashed.net/api_online.html&lt;/a&gt; - thanks a lot :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>T3DD08</title>
+      <link>https://blog.tolleiv.de/2008/05/t3dd08/</link>
+      <pubDate>Tue, 13 May 2008 22:15:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/t3dd08/</guid>
+      <description>&lt;p&gt;The last weekend was great, I joined the T3DD in Elmshorn, Germany and meet a lot of interesting people, the beer was cheap and the weather was amazing. So I&amp;rsquo;m looking forward to the T3CON in autumn&amp;hellip;  :)&lt;/p&gt;
+
+&lt;p&gt;It also seems that some of the guys got some new spirit - today 4 official and some inofficial bugs in some extensions had been fixed in a very short sequence &amp;hellip; great!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

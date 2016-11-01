@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/categories/offtopic/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/categories/offtopic/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Working from home.</title>
+      <link>https://blog.tolleiv.de/2008/07/working-from-home./</link>
+      <pubDate>Tue, 15 Jul 2008 17:26:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/07/working-from-home./</guid>
+      <description>&lt;p&gt;There&amp;rsquo;s so much work in this week that I can&amp;rsquo;t publish a article in the next days.&lt;br /&gt;
+But Natalie Jost from &lt;a href=&#34;http://www.alistapart.com/&#34;&gt;A List Apart&lt;/a&gt; just published a very nice article which you really should read if you&amp;rsquo;re (like me) working from home &lt;a href=&#34;http://www.alistapart.com/articles/walkingthelinewhenyouworkfromhome&#34;&gt;read on..&lt;/a&gt; &amp;hellip; you&amp;rsquo;ll like it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>track time for a subroutine within a shell-script</title>
+      <link>https://blog.tolleiv.de/2008/07/track-time-for-a-subroutine-within-a-shell-script/</link>
+      <pubDate>Thu, 10 Jul 2008 21:55:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/07/track-time-for-a-subroutine-within-a-shell-script/</guid>
+      <description>&lt;p&gt;The following code-snippet is a shell-script which does the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Track the time for a block of shell commands&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check if the time was less than x seconds (the example uses 10 seconds)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If the block run through too fast the script waits/sleeps a few seconds&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run all this within a loop so that the block of shell-commands is executed periodically&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I used the script combined with a PHP script which processes a queue. The PHP script processes 1000 elements from the queue and takes about 30 seconds for that. Since just having a cronjob per minute would be not efficient enought I used this script.
+The waiting-block is necessary because now and then the queue is empty &amp;hellip; but I think there are lot&amp;rsquo;s of situations where a script like this can be usefull:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+while [ 1 -ge 0 ]; do
+time_begin=`date +%s`
+
+
+###BLOCK 2 TRACK - BEGIN
+number=$RANDOM
+let &amp;quot;number %= 20&amp;quot;
+sleep $number
+###BLOCK 2 TRACK - END
+
+time_end=`date +%s`
+total=$((time_end-time_begin))
+
+if [[ $total -ge 10 ]]; then
+echo &amp;quot;time taken was: $number : $total&amp;quot;
+else
+echo &amp;quot;time take was too less  $number : $total&amp;quot;
+sleep 10
+fi
+done
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>YSlow - powerful FF extension</title>
+      <link>https://blog.tolleiv.de/2008/06/yslow---powerful-ff-extension/</link>
+      <pubDate>Mon, 30 Jun 2008 17:30:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/yslow---powerful-ff-extension/</guid>
+      <description>&lt;p&gt;I use &lt;a href=&#34;http://www.getfirebug.com/&#34;&gt;firebug&lt;/a&gt; for a while and I love it especially for CSS and JS debugging. Today I stumbled over &lt;a href=&#34;http://developer.yahoo.com/yslow/&#34;&gt;Yslow&lt;/a&gt; and did some tests with it one some of my clients pages and I love the results.&lt;br /&gt;
+YSlow can help you to analyze all the referenced elements on a webpage. It shows their sizes, how they behave when a page is taken from the browser-cache, shows optimization hints and enables a easy way to optimize the output of your dynamically created webpage :) &amp;hellip; you&amp;rsquo;ll love it.&lt;br /&gt;
+&lt;a href=&#34;http://developer.yahoo.com/yslow/&#34;&gt;Get YSlow here :)&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PHP FastCGI vs. PHP as a module</title>
+      <link>https://blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</link>
+      <pubDate>Sat, 24 May 2008 17:40:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</guid>
+      <description>&lt;p&gt;The apachelounge.org guy published a very interesting stat which compares the &lt;a href=&#34;http://www.apachelounge.com/forum/viewtopic.php?p=10991&#34;&gt;memory-usage of PHP/FastCGI and PHP/as module&lt;/a&gt; and that&amp;rsquo;s really interesting:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDfQbt7tygI/AAAAAAAAABY/D72W5ZIj22c/s1600-h/httpd-ram-week.png&#34;&gt;&lt;img src=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDfQbt7tygI/AAAAAAAAABY/D72W5ZIj22c/s400/httpd-ram-week.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s no comment about performance and in early versions FastCGI/PHP was a bottleneck but maybe these days are gone :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Firefox 3 RC1</title>
+      <link>https://blog.tolleiv.de/2008/05/firefox-3-rc1/</link>
+      <pubDate>Sun, 18 May 2008 16:11:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/firefox-3-rc1/</guid>
+      <description>&lt;p&gt;I just saw that the first Release Candidate of Firefox 3 is available for &lt;a href=&#34;http://www.mozilla.com/en-US/firefox/all-rc.html&#34;&gt;download&lt;/a&gt; . As with the most of the Beta-versions I also checked this update because I&amp;rsquo;m really excited to get the &lt;a href=&#34;http://www.mozilla.com/en-US/firefox/3.0rc1/releasenotes/#whatsnew&#34;&gt;new features&lt;/a&gt;, but after 5 minutes (again) I removed it from my PC. Non of my extensions is working in FF3 (except the dictionary), it still destroys the Frames in TYPO3 (&lt;a href=&#34;http://typo3.org/extensions/repository/view/mn_ff3_be_bugfix/0.0.2/&#34;&gt;there&amp;rsquo;s a bugfix-extension for that&lt;/a&gt;) and the memory-usage is still very high,10% lower than in FF2 but still high.&lt;br /&gt;
+So I postponed the update and  kept on running &lt;a href=&#34;http://www.mozilla.com/en-US/firefox/all.html&#34;&gt;Firefox 2&lt;/a&gt;, at least until the next Release Candidate ;)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

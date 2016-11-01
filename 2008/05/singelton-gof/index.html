@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Singelton [GoF] | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="https://blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">May 23, 2008</h2>
+    <h1 class="title">Singelton [GoF]</h1>
+    <div class="content">
+      <p>Tis pattern is a very well know and a often discussed one.</p>
+
+<p>Explaining it the tasty way: let&rsquo;s say you have exactly one well know place where you store all your cookies and whenever you need one you can easy point to that place. Normally that&rsquo;s really comfortable because whatever you do with it, you don&rsquo;t have to search some place where you can find a cookie, you just go to that single &ldquo;cookie tin&rdquo; (or wherever you store cookies) and put a new cookie into it ;)</p>
+
+<p>In modern OOP the singleton is not very popular, Eric Evans simple calls it anti-pattern. It makes it much harder to test your software and normally the user of the class, not the class itself, should know how many instances are needed.</p>
+
+<p>But nevertheless for small applications it&rsquo;s very comfortable to use it in some situations and as long as you&rsquo;re also familiar with the drawbacks I think it&rsquo;s ok to consider using it&hellip;.</p>
+
+<p>So the example shows a cookie tin and how to use it and by the way it also implements some kind of lowlevel registry by using the <a href="http://www.php.net/manual/en/language.oop5.magic.php">PHP5 magic methods</a>, but that&rsquo;s another story ;)</p>
+
+<pre><code>/**
+* CookieTin a.k.a Singleton object
+* we want to force our application
+* to hold exactly one CookieTin object
+*/
+class CookieTin {
+    private $_cookies=array();
+
+    /* generic singleton part start*/
+
+    private static $_instance=NULL;
+    // prevent instatiation from the outside
+    private function __construct() { }
+
+    // prevent cloning
+    private function __clone() {}
+
+    public static function getInstance() {
+        if(!self::$_instance) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
+    }
+    /* generic singleton part end */
+
+    /* registry part start */
+    public static function __set($key,Cookie $value) {
+        echo “call setter\n”;
+        self::$_instance-&gt;_cookies[$key] = $value;
+    }
+
+    public static function __get($key) {
+        echo “call getter\n”;
+        return self::$_instance-&gt;_cookies[$key];
+    }
+
+    public static function __isset($key) {
+        echo “call isset\n”;
+        return isset(self::$_instance-&gt;_cookies[$key]);
+    }
+
+    public static function __unset($key) {
+        echo “call unset\n”;
+        unset(self::$_instance-&gt;_cookies[$key]);
+    }
+/* registry part end */
+}
+/**
+* Dummy Cookie
+*/
+class Cookie {
+    public $name,$flavor;
+}
+
+
+
+
+
+
+
+$tin = CookieTin::getInstance();
+if(!isset($tin-&gt;granniescookie)) {
+    $tin-&gt;granniescookie = new Cookie();
+    $tin-&gt;granniescookie-&gt;name=“Grannies chocolate wonder”;
+    $tin-&gt;granniescookie-&gt;flavor=“chocolate”;
+}
+
+CookieTin::getInstance()-&gt;granniescookie-&gt;flavor = “chocolte chips”;
+
+var_dump($tin);
+unset(CookieTin::getInstance()-&gt;granniescookie);
+var_dump($tin);
+</code></pre>
+
+<p>The really important things happen in the last lines where the CookieTin is accessed statically and this change also (as you will see yourself) is reflected in the local instance if the $tin.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'tolleiv';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

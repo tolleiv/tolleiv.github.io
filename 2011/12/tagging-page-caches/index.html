@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tagging page caches | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="https://blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">December 22, 2011</h2>
+    <h1 class="title">Tagging page caches</h1>
+    <div class="content">
+      <p>In our small TYPO3 world it&rsquo;s quite common to have list and single views for extensions on specific pages. That&rsquo;s quite nice because once a record is changed it allowes users to flush the caches for these pages automatically, using:</p>
+
+<pre><code>TCEMAIN.clearCacheCmd=all|&lt;pid&gt;
+</code></pre>
+
+<p>But of course it isn&rsquo;t very smart to clear all caches once you have filled them up for hundred or even thousand records. To work around these limits it&rsquo;s quite handy to use an API which lives in <a href="http://git.typo3.org/TYPO3v4/Core.git?a=commit;h=03af46">TYPO3 since 2008</a>. It allows to add tags to the page cache and removes the caches by tag.</p>
+
+<p>Adding tags to the current page can be done with this block:</p>
+
+<pre><code>$GLOBALS['TSFE']-&gt;addCacheTags(array('tx_example_model:' . $id));
+</code></pre>
+
+<p>Removing the caches for that specific page could look like this:</p>
+
+<pre><code>$GLOBALS['typo3CacheManager']-&gt;getCache('cache_pages')-&gt;flushByTag('tx_example_model:' . $id);
+</code></pre>
+
+<p>Correctly integrating this with your extension is quite easy. To set the tags, add the first block into your controller and make sure you provide the proper uid for the rendered domain objects. To remove the caches once a record is saved in the backend just register a t3lib_tcemain hook and flush the tagged caches.</p>
+
+<p>Credits: <a href="http://twitter.com/fbrnc">Fabrizio Branca @fbrnc</a> - thx for pointing me to it ;)</p>
+
+<hr />
+
+<p>The <a href="http://blog.tolleiv.de/2010/03/handling-data-in-typo3-with-tcemain/">Tcemain-Hook</a> could be integrated with these two snippets:
+<em>EXT:example/Classes/Hooks/Tcemain.php</em></p>
+
+<pre><code>class Tx_Example_Hooks_Tcemain {
+    public function processDatamap_afterDatabaseOperations($status, $table, $id, $fieldArray, &amp;$reference) {
+        if ($table == 'tx_example_model') {
+            $GLOBALS['typo3CacheManager']-&gt;getCache('cache_pages')-&gt;flushByTag('tx_example_model:' . $id);
+        }
+    }
+}
+</code></pre>
+
+<p>_EXT:example/ext<em>localconf.php</em></p>
+
+<pre><code>$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['example'] = 'EXT:example/Classes/Hooks/Tcemain.php:Tx_Example_Hooks_Tcemain';
+</code></pre>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'tolleiv';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

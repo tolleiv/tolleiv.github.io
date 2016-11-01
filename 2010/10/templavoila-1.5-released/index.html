@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TemplaVoila 1.5 released | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="https://blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">October 3, 2010</h2>
+    <h1 class="title">TemplaVoila 1.5 released</h1>
+    <div class="content">
+      
+
+<p>The new version comes with many bugfixes,new features and a closer TYPO3 integration. Overall 95 issues have been resolved in the last 4 months to finalize this versions, some of the highlights are:</p>
+
+<h4 id="html5-support">HTML5 support</h4>
+
+<p>The full list of HTML5 tags is now supported in TemplaVoila. The restrictions to specific tags was removed and the TYPO3 integrator is now able to use the full bandwidth of modern HTML. With this change also the tag-icons themself were replaced and the coloring schema was changed. The inspiration for the current color schema came from <a href="http://joshduck.com/periodic-table.html">Josh Duck&rsquo;s &ldquo;Periodic Table of the Elements&rdquo;</a>. In additon same mapping bugs have been resolved too - for details see <a href="http://bugs.typo3.org/view.php?id=13974">#13974</a> and <a href="http://bugs.typo3.org/view.php?id=14881">#14881</a>.</p>
+
+<p><a href="https://blog.tolleiv.de/uploads/2010/09/tv15-page-module.png"><img src="https://blog.tolleiv.de/uploads/2010/09/tv15-page-module-300x190.png" alt="TemplaVoila 1.5 page module" /></a></p>
+
+<h4 id="typo3-4-4-look-feel-and-docheader-integration">TYPO3 4.4 Look&amp;Feel and docHeader integration</h4>
+
+<p>TYPO3 4.4 introduced a new skin and changed the look&amp;feel in the backend radically. Once installed in 4.4 TemplaVoila 1.5 adjusts it&rsquo;s look and provides the same usability improvements as the official page module. The page-module was optimized to use as much &ldquo;official&rdquo; CSS as possible to support designes with their own backend-skins. In addition to the CSS&amp;Markup changes, TemplaVoila also uses the <a href="http://blog.tolleiv.de/2010/07/typo3-4-4-sprites-in-your-extension/">TYPO3 4.4 SpriteIcon API</a> to provide and retrieve backend icons and uses the FlashMessage API to style all backend notifications.</p>
+
+<p>Another important step was the integration of the so called docHeader. This is the area at the very top of each backend module page which provides useful tools and action-icons. With this version TemplaVoila finally provides docHeaders within every backend-part.</p>
+
+<h4 id="improved-typo3-integration">Improved TYPO3 integration</h4>
+
+<p>Besides the visual changes the general TYPO3 integration has been improved with various modifications.</p>
+
+<p>With the current version there&rsquo;s no need to give &ldquo;Edit page&rdquo; rights to you editors if they want to add or remove content elements. Just the &ldquo;Edit content&rdquo; right and access to the &ldquo;Page&gt;Content&rdquo; field is enough for them. For details see: <a href="http://bugs.typo3.org/view.php?id=3903">#3903</a></p>
+
+<p>The &ldquo;advached header link inclusion&rdquo; is one of the integration steps in the frontend. All resources which are related to an FCE are passed through an TYPO3 API (pageRenderer). This avoids duplicate inclusion of one resource (e.g. CSS files) and enables further post-processing (e.g. compression or merging). It can be enabled using the &ldquo;advancedHeaderInclusion&rdquo; within your TypoScript setup which could then look like this:</p>
+
+<pre><code>page = PAGE
+page.typeNum = 0
+page.10 = USER
+page.10.userFunc = tx_templavoila_pi1-&gt;main_page
+page.10.advancedHeaderInclusion= 1
+</code></pre>
+
+<hr />
+
+<p>The full list of changes within this version can be found on <a href="http://bugs.typo3.org/search.php?project_id=2&amp;sticky_issues=on&amp;target_version=1.5.0&amp;sortby=last_updated&amp;dir=DESC&amp;hide_status_id=90">bugs.typo3.org</a>.
+Many many thanks to all contributors and reviewers - it&rsquo;s great that more people try to help out and it keeps me motivated to continue improving this great TYPO3 extension.</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'tolleiv';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/categories/php/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/categories/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>bye bye version 4...</title>
+      <link>https://blog.tolleiv.de/2008/08/bye-bye-version-4.../</link>
+      <pubDate>Fri, 08 Aug 2008 17:30:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/08/bye-bye-version-4.../</guid>
+      <description>&lt;p&gt;Ten years ago Andi Gutmans and Zeev Suraski started to renew the old PHP3 core and in 1999 PHP4 was published and became really famous among Web-Developers.&lt;br /&gt;
+Bute 5 years late the successor was published and since then everyone is wondering why the era of PHP4 will end.&lt;br /&gt;
+Today is the magical 8-8-8 where PHP4 is no longer supported so for everyone who still runs PHP4 for some reason&lt;br /&gt;
+YOU SHOW NOW REALLY HAVE A LOOK AT THIS PAGE: &lt;a href=&#34;http://www.php.net/manual/en/migration5.php&#34;&gt;www.php.net/manual/en/migration5.php&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Detailed history of PHP can be found on &lt;a href=&#34;http://www.php.net/history&#34;&gt;www.php.net/history&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Iterator [GoF]</title>
+      <link>https://blog.tolleiv.de/2008/07/iterator-gof/</link>
+      <pubDate>Mon, 07 Jul 2008 17:30:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/07/iterator-gof/</guid>
+      <description>&lt;p&gt;Lot&amp;rsquo;s of people like to write down things into lists, so that they can go through that list later and check whether everything was fine. Normally every recipe has a list ~ there&amp;rsquo;s always a list of ingredients at the beginning of the recipe.
+This short example shows how such a list can be processed in PHP. So why would you want to have something else than a array to hold your objects? - My example still uses a array to hold the objects (uni- or bidirectional lists would also be possible) but it adds a kind of a facade to the array so that the common managements-tasks are handled within the List-Object. Everything you need for this example is present in PHP since version 5.0. The basic steps you need to do is to provide a &amp;ldquo;Object&amp;rdquo; and an &amp;ldquo;ObjectList&amp;rdquo; which implements the native &lt;a href=&#34;http://www.php.net/manual/en/language.oop5.iterations.php&#34;&gt;&amp;ldquo;Iterator&amp;rdquo;&lt;/a&gt; interface and then you&amp;rsquo;re able to have very handy lists :)&lt;/p&gt;
+
+&lt;p&gt;class Incredient {&lt;/p&gt;
+
+&lt;p&gt;public $name,$amount;
+public function __construct($name,$amount) {
+$this-&amp;gt;name = $name;
+$this-&amp;gt;amount = $amount;
+}
+}&lt;/p&gt;
+
+&lt;p&gt;class Recipe implements Iterator {
+public $title;
+private $ingredients;&lt;/p&gt;
+
+&lt;p&gt;public function __construct ($title) {
+$this-&amp;gt;title = $title;
+}&lt;/p&gt;
+
+&lt;p&gt;public function addIncredient(Incredient $in) {
+$this-&amp;gt;ingredients[] = $in;
+}&lt;/p&gt;
+
+&lt;p&gt;public function current ()  {   return current ($this-&amp;gt;ingredients);    }
+public function key ()      {   return key($this-&amp;gt;ingredients);         }
+public function valid ()    {   return current ($this-&amp;gt;ingredients);    }
+public function rewind ()   {   return reset ($this-&amp;gt;ingredients);      }
+public function next ()     {   return next ($this-&amp;gt;ingredients);       }
+}&lt;/p&gt;
+
+&lt;p&gt;$cookieRecipe = new Recipe(&amp;ldquo;Chocolate Cookie&amp;rdquo;);
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Flour&amp;rsquo;,&amp;lsquo;2.5 cups&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Baking soda&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Salt&amp;rsquo;,&amp;lsquo;0.5 teaspoon&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Butter&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Sugar&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Brown Sugar&amp;rsquo;,&amp;lsquo;0.5 cup&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Vanilla extract&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Egg&amp;rsquo;,&amp;lsquo;1-2&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Chocolate chips&amp;rsquo;,&amp;lsquo;2 cups&amp;rsquo;));&lt;/p&gt;
+
+&lt;p&gt;// process recipe:
+foreach($cookieRecipe as $inc) {
+echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&amp;rdquo;&lt;br/&gt;&amp;rdquo;;
+}&lt;/p&gt;
+
+&lt;p&gt;As you see it&amp;rsquo;s pretty easy to have lists of objects in PHP. You might also think that always creating to some list-object over and over again is very odd and you&amp;rsquo;re right. For the most common tasks like &lt;a href=&#34;http://www.php.net/manual/en/class.arrayiterator.php&#34;&gt;iterating through arrays&lt;/a&gt;, &lt;a href=&#34;http://www.php.net/manual/en/class.directoryiterator.php&#34;&gt;directory-lists&lt;/a&gt; and a few more task you can use objects which are shipped with the Standard PHP Library ,which is also part of PHP since version 5 and mandatory in 5.3. So the example shown above could also look like this:&lt;/p&gt;
+
+&lt;p&gt;$recipe = array();
+$recipe[] = new Incredient(&amp;lsquo;Flour&amp;rsquo;,&amp;lsquo;2.5 cups&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Baking soda&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Salt&amp;rsquo;,&amp;lsquo;0.5 teaspoon&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Butter&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Sugar&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Brown Sugar&amp;rsquo;,&amp;lsquo;0.5 cup&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Vanilla extract&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Egg&amp;rsquo;,&amp;lsquo;1-2&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Chocolate chips&amp;rsquo;,&amp;lsquo;2 cups&amp;rsquo;);&lt;/p&gt;
+
+&lt;p&gt;$recipeIncObj = new ArrayObject($recipe);
+$ingredientsIt = $recipeIncObj-&amp;gt;getIterator();&lt;/p&gt;
+
+&lt;p&gt;foreach($ingredientsIt as $inc) {
+echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&amp;rdquo;&lt;br/&gt;&amp;rdquo;;
+}&lt;/p&gt;
+
+&lt;p&gt;As I said at the beginning, there are lots of situations where you might want to have a list for something and if you store that list in PHP the Iterator-pattern can keep your code clean and tasty :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Null-Object Pattern</title>
+      <link>https://blog.tolleiv.de/2008/07/null-object-pattern/</link>
+      <pubDate>Tue, 01 Jul 2008 17:58:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/07/null-object-pattern/</guid>
+      <description>&lt;p&gt;Very often you create a object with a factory and before you really start using it, you check if your factory really created a object or returned NULL. Or maybe you have a method where a object is passed in and in this situation you&amp;rsquo;ll have to do this check also.&lt;/p&gt;
+
+&lt;p&gt;Instead of typing the &amp;ldquo;if(object == null)&amp;rdquo; phrase again and again, you could use the Null-Object pattern, you&amp;rsquo;ll see that this can make some situations much clearer.&lt;/p&gt;
+
+&lt;p&gt;Basically Null-Object ensures that the client always receives a valid object for it&amp;rsquo;s interaction, so that there&amp;rsquo;s no need to do the check shown above again and again. This happens since your concrete Null-Object just shares the interface, or inherits from the same class as it&amp;rsquo;s effective counterpart, but it&amp;rsquo;s implementation just leaves out any effectiveness.
+&lt;a href=&#34;http://bp3.blogger.com/_l5fIZzJyYfc/SGpiDZ9m-rI/AAAAAAAAACo/nVuiUHE4E90/s1600-h/nullobject_pattern.png&#34;&gt;
+&lt;img src=&#34;http://bp3.blogger.com/_l5fIZzJyYfc/SGpiDZ9m-rI/AAAAAAAAACo/nVuiUHE4E90/s400/nullobject_pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt; So a code-example could look like this:&lt;/p&gt;
+
+&lt;p&gt;class CookieFactory {
+public function makeInstance() {
+if(date(&amp;lsquo;l&amp;rsquo;)==&amp;lsquo;Monday&amp;rsquo;) return new NullCookie();
+return new RealCookie();
+}
+}&lt;/p&gt;
+
+&lt;p&gt;interface iCookie {
+function getCalories();
+}&lt;/p&gt;
+
+&lt;p&gt;class RealCookie implements iCookie {
+protected $calories=250;
+public function getCalories() {
+return $this-&amp;gt;calories;
+}
+}&lt;/p&gt;
+
+&lt;p&gt;class NullCookie implements iCookie {
+public function getCalories() {
+return 0;
+}
+}&lt;/p&gt;
+
+&lt;p&gt;I think you can imagine what happens when you make use of the CookieFactory - diet on monday ;)&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;re also some disadvantages, your clients normally don&amp;rsquo;t have a chance to react that there&amp;rsquo;s something special happening, also the clients must &amp;ldquo;share&amp;rdquo; the same expectation what &amp;ldquo;do nothing&amp;rdquo; means, the number of required Null-Objects might be very large and unhandy and the Null-Object shares a very deep knowledge with the real one, so that it might be a large effort to create it if the real object is complex too.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m so glad that today is tuesday :P&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Façade [GoF]</title>
+      <link>https://blog.tolleiv.de/2008/06/fa%C3%A7ade-gof/</link>
+      <pubDate>Mon, 16 Jun 2008 23:33:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/fa%C3%A7ade-gof/</guid>
+      <description>&lt;p&gt;If a child is in the mood to eat a fresh cookie it normally asks his granny for one. Like this:&lt;/p&gt;
+
+&lt;p&gt;Child: Grannyyyyy?&lt;br /&gt;
+Granny: Yes my dear?&lt;br /&gt;
+Child: Could you mix about 2 cups of sugar, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; cup of butter and &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; cup of milk in a saucepan and boil it for a minute. And could you, after you removed the saucepan from the heat, mix in some cocoa powder and 3 cups quick cooking oats and form some cookies? Pleeease?&lt;/p&gt;
+
+&lt;p&gt;Hm you&amp;rsquo;re right that&amp;rsquo;s not very realistic - it&amp;rsquo;s more like: &amp;ldquo;Grannyyyy? Could I have a cooookieee pleeeease?&amp;rdquo; &amp;hellip;.the granny knows what to do and the child will get it&amp;rsquo;s cookie&lt;/p&gt;
+
+&lt;p&gt;So what happens if you have a pice of software which provides &lt;strike&gt;cookies&lt;/strike&gt; some services for other parts of your software? The most people (especially programmers) are lazy and they won&amp;rsquo;t remember all the details of a complex structure. They remember the place or object which can run a certain task but there&amp;rsquo;s no need to know the deeper structure of that object - the only thing which is important if your using a service of an object is that it doesn&amp;rsquo;t fail.&lt;br /&gt;
+So the Façade pattern is a structural pattern which more or less describes that you create a object with an simplified interface, so that you can hide complex structures. You can also use a Façade to wrap up some poorly designed APIs into a single well designed API. And the larges benefit of a Façade object is that it makes APIs more readable and therefore enables flexible and easy development.&lt;/p&gt;
+
+&lt;p&gt;So maybe you&amp;rsquo;re missing the example-code for this pattern, but since it&amp;rsquo;s not that concrete as others, I&amp;rsquo;ve not implemented a  special example for it. But I already used a Facade in some way, if you look at the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification pattern&lt;/a&gt;, you&amp;rsquo;ll find the functions getSmallChocolateCookies() and getLargeCookies(). Both show in a tasty way what I described  here :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Inherit abstract functions....</title>
+      <link>https://blog.tolleiv.de/2008/06/inherit-abstract-functions..../</link>
+      <pubDate>Wed, 11 Jun 2008 20:28:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/inherit-abstract-functions..../</guid>
+      <description>&lt;p&gt;A error I find from time to time when I work with inheritance is this one:&lt;/p&gt;
+
+&lt;p&gt;Fatal error: Can&amp;rsquo;t inherit abstract function Cookie::setFlavor() (previously declared abstract in ChocolateCookie) in &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;This happens when you try to define multiple abstract classes or interfaces with the same abstract functions - it&amp;rsquo;s right that this errors shows up, but today I stuck on this error for a while because I did not see the reason for that - so that&amp;rsquo;s a reminder for me ;)&lt;/p&gt;
+
+&lt;p&gt;And the tasty example to reproduce this error:&lt;/p&gt;
+
+&lt;p&gt;abstract class Cookie {&lt;br /&gt;
+abstract public function setFlavor($flavor);&lt;br /&gt;
+}&lt;/p&gt;
+
+&lt;p&gt;abstract class ChocolateCookie extends Cookie {&lt;br /&gt;
+abstract public function setFlavor($flavor);&lt;br /&gt;
+}&lt;/p&gt;
+
+&lt;p&gt;There are also some rejected bugreports about that :P &lt;a href=&#34;http://bugs.php.net/bug.php?id=35057&#34;&gt;#35057&lt;/a&gt; &lt;a href=&#34;http://bugs.php.net/bug.php?id=35832&#34;&gt;#35832&lt;/a&gt; &lt;a href=&#34;http://bugs.php.net/bug.php?id=41145&#34;&gt;#41145&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Self-extracting PHP archive</title>
+      <link>https://blog.tolleiv.de/2008/06/self-extracting-php-archive/</link>
+      <pubDate>Sat, 07 Jun 2008 21:30:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/self-extracting-php-archive/</guid>
+      <description>&lt;p&gt;The __halt_compiler(); function in php enables to store some additional data in a php-file without blowing up the memory. A very nice possibility is to use this for a self-extracting php file as installation-packages of your php application.
+A wile ago I created a script which automatically creates such a archive and I think you might like it&amp;hellip;.for the impatient ones: &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.php&#34;&gt;Download&lt;/a&gt; / &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.zip&#34;&gt;Download as Zip&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before I start to show how the entire script works I&amp;rsquo;d like to show you a small example so that you can see how the __halt_compiler(); function can be used to store some data at the end of a file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$fp = fopen(__FILE__, ‘r’);
+fseek($fp, __COMPILER_HALT_OFFSET__);
+$i=0;
+while($buffer = fgets($fp)) {
+    echo ($i++). “:”. $buffer.“&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;”;
+};
+__HALT_COMPILER();Line 1
+Line 2
+Line 3
+Last line 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first thing you might mention is, that the closing &amp;ldquo;?&amp;gt;&amp;rdquo; is missing, but since the function-name is nearly self-explaining you should realize very fast what the output of the script might be ;)&lt;/p&gt;
+
+&lt;p&gt;If that&amp;rsquo;s working the question is what&amp;rsquo;s needed for a script which is meant to create and extract a archive? The first thing is a way to create the archive itself. I used the PHP-builtin &lt;a href=&#34;http://de3.php.net/manual/en/ref.zip.php&#34;&gt;ZipArchive&lt;/a&gt; for that. The second thing is a script which is able to extract this archiv (using the method show above). That&amp;rsquo;s handled by the following snippet:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;try {
+    $zipfilename = md5(time()).‘archive.zip’; //remove with tempname()
+    $fp_tmp = fopen($zipfilename,‘w’);
+    $fp_cur = fopen(__FILE__, ‘r’);
+    fseek($fp_cur, __COMPILER_HALT_OFFSET__);
+    $i=0;
+    while($buffer = fread($fp_cur,10240)) {
+        fwrite($fp_tmp,$buffer);
+    }
+    fclose($fp_cur);
+    fclose($fp_tmp);
+    $zipfile = new ZipArchive();
+    if($zipfile-&amp;gt;open($zipfilename)===true) { 
+        if(!$zipfile-&amp;gt;extractTo(‘.’)) throw new Exception(‘extraction failed…’);
+    } else throw new Exception(‘reading archive failed’);
+    $zipfile-&amp;gt;close();
+    unlink($zipfilename);
+} catch (Exception $e) {
+    printf(“Error:&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;%s&amp;lt;br&amp;gt;%s&amp;gt;”,$e-&amp;gt;getMessage(),$e-&amp;gt;getTraceAsString());
+};
+__HALT_COMPILER();[zipdata is appended here later] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you see that&amp;rsquo;s no rocket-science just read the data, pass it to the ZipArchive object via a temporary file and extract the archive.
+If that&amp;rsquo;s working then you need a script which brings the PHP extraction script and the zip-data together. And since we want to have a single script for the creation of our self extracting php archive, it would be very odd if we&amp;rsquo;d place the &amp;ldquo;template&amp;rdquo; for the extraction in a separate file. That&amp;rsquo;s the reason why I just use the same method as above for this script and this time the data is php code instead of zip-data:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;try {
+    $sourcefolder = ‘compressthis/’;                 // maybe you want to get this via CLI argument …
+    $targetname = ‘phparchive.php’;                    
+    $zipfilename = md5(time()).‘archive.zip’;         // replace with tempname()
+
+    // create a archive from the submitted folder
+    $zipfile = new ZipArchive();
+    $zipfile-&amp;gt;open($zipfilename,ZipArchive::CREATE);
+    addFiles2Zip($zipfile,$sourcefolder,true);
+    $zipfile-&amp;gt;close();
+
+    // compile the selfextracting php-archive
+    $fp_dest =fopen($targetname,‘w’);    
+    $fp_cur = fopen(__FILE__, ‘r’);
+    fseek($fp_cur, __COMPILER_HALT_OFFSET__);
+    $i=0;
+    while($buffer = fgets($fp_cur)) {
+        fwrite($fp_dest,$buffer);
+    }
+    fclose($fp_cur);
+    $fp_zip = fopen($zipfilename,‘r’);
+    while($buffer = fread($fp_zip,10240)) {
+        fwrite($fp_dest,$buffer);
+    }
+    fclose($fp_zip);
+    fclose($fp_dest);
+    unlink($zipfilename);
+
+} catch (Exception $e) {
+ echo $e-&amp;gt;getTraceAsString();
+}
+
+function 
+addFiles2Zip(ZipArchive $zip,$path,$removeFirstFolder=false) {
+    $d = opendir($path);
+    while($file = readdir($d)) {
+        if ($file == “.” || $file == “..”) continue;
+        $curfile=($removeFirstFolder)?substr($path.$file,strpos($path,‘/’)+1):$path.$file;
+        if(is_dir($path.$file)) {
+            $zip-&amp;gt;addEmptyDir($curfile);
+            addFiles2Zip($zip,$path.$file.‘/’,$removeFirstFolder);    
+        } else {
+            $zip-&amp;gt;addFile($path.$file,$curfile);
+        }    
+    }
+    closedir($d);
+}
+
+
+__HALT_COMPILER();[the script shown above]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you all wrap up into a single script the you&amp;rsquo;ll have something like the &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.php&#34;&gt;script I already mentioned.&lt;/a&gt;
+I think that it could be useful to have a version with a better error-handling and maybe also some CLI functions so that there&amp;rsquo;s no need to edit the script itself everytime&amp;hellip; I&amp;rsquo;ll keep you updated as soon as I have something like that :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comparing PHP Best Practises</title>
+      <link>https://blog.tolleiv.de/2008/06/comparing-php-best-practises/</link>
+      <pubDate>Mon, 02 Jun 2008 15:37:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/comparing-php-best-practises/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re still wondering whether the single- or double quotes are processed faster in PHP you might want to look at &lt;a href=&#34;http://www.phpbench.com/&#34;&gt;phpbench.com&lt;/a&gt;. They don&amp;rsquo;t provide any ground breaking new insights, but they show in a very nice way what&amp;rsquo;s best pratice when it comes to arrays, strings and loops&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Value Object [DDD]</title>
+      <link>https://blog.tolleiv.de/2008/05/value-object-ddd/</link>
+      <pubDate>Fri, 30 May 2008 04:39:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/value-object-ddd/</guid>
+      <description>&lt;p&gt;This metaphor does not fit completely, and the &amp;ldquo;Money-Example&amp;rdquo; is omnipresent, but I really like the pattern and so that&amp;rsquo;s the story:&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say you have your grannies recipe for a chocolate cookie and you want to keep this in mind, but also you like to somehow experiment with some new or different ingredients. Normally you just keep in mind what you changed and later you write down the new recipe. But from time to time you might want to compare the two recipes or maybe you want to make cookies with the new and the changed recipes. In this situation it&amp;rsquo;s really good to have both written down on paper. ;)&lt;/p&gt;
+
+&lt;p&gt;In the world of OOP you could think of a solution using the &lt;a href=&#34;http://cookiepattern.blogspot.com/search/label/memento?max-results=100&#34;&gt;Memento-Pattern&lt;/a&gt; but this doesn&amp;rsquo;t really fit the situation and it&amp;rsquo;s also some kind of overhead. That&amp;rsquo;s the reason why the Value Object is the pattern of my choice.&lt;/p&gt;
+
+&lt;p&gt;So let&amp;rsquo;s look at the recipes again - we want to add and remove ingredients without modifying the original recipe and we want to compare the resulting recipes. We don&amp;rsquo;t need to track a special identity of our recipes since we&amp;rsquo;re only &amp;ldquo;collecting&amp;rdquo; ingredients.&lt;/p&gt;
+
+&lt;p&gt;The idea of the Value Object is that every every method which somehow transforms the state of a object always returns a new object and the old object stays untouched. Whenever needed you should also implement a method to compare objects, I must concede that the common &amp;ldquo;Money Example&amp;rdquo; shows much better when that&amp;rsquo;s needed &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Another edge of this pattern in PHP is that you can use method-chaining to perform multiple actions within a single line of code. So just have a look at the example you will like it&amp;rsquo;s taste :)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Recipe {
+    protected $ingredients;
+
+    public function __construct($ingred=”) {
+        $this-&amp;gt;ingredients = implode(‘,’,array_unique(explode(‘,’,$ingred)));
+    }
+
+    public function addIncredient($ingred=”) {
+        return new Recipe($this-&amp;gt;ingredients.‘,’.$ingred);
+    }
+
+    public function removeIncredien($ingred=”) {
+        return new Recipe(preg_replace(‘/,{0,1}’.$ingred.‘,{0,1}/’,”,$this-&amp;gt;ingredients.‘,’));
+    }
+
+    public function printIncredients() {
+        echo str_replace(‘,’,‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’,$this-&amp;gt;ingredients);
+    }
+
+    public function equals(Recipe $recipe) {
+        return (strcmp($this-&amp;gt;ingredients,$recipe-&amp;gt;ingredients)===0)?true:false;
+    }
+}
+
+
+$granniesRecipe = new Recipe(‘flour,baking soda,sugar,salt,butter,vanilla,chocolate’);
+$aNewRecipe = $granniesRecipe-&amp;gt;addIncredient(‘lemon’);
+$coconutRecipe = $granniesRecipe-&amp;gt;removeIncredien(‘chocolate’)-&amp;gt;addIncredient(‘coconut’);
+
+// check if that worked:
+echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;&amp;lt;strong&amp;gt; Grannies Cookie Recipe – Incredients are:&amp;lt;/strong&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
+$granniesRecipe-&amp;gt;printIncredients();
+echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;&amp;lt;strong&amp;gt; A new Cookie Recipe could look like:&amp;lt;/strong&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
+$aNewRecipe-&amp;gt;printIncredients();
+echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;&amp;lt;strong&amp;gt; A coconut cookie would look like:&amp;lt;/strong&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
+$coconutRecipe-&amp;gt;printIncredients();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The implementation is a bit odd, since it only collects the names of the ingredients but not the amount, but including the amounts of incredients would not change the concept  and that&amp;rsquo;s why I left it out. I hope you got a idea how the pattern works - the main thing is that there&amp;rsquo;s no identity and that new objects are instantiated as soon as the state of the old one would change.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PHP FastCGI vs. PHP as a module</title>
+      <link>https://blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</link>
+      <pubDate>Sat, 24 May 2008 17:40:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/php-fastcgi-vs.-php-as-a-module/</guid>
+      <description>&lt;p&gt;The apachelounge.org guy published a very interesting stat which compares the &lt;a href=&#34;http://www.apachelounge.com/forum/viewtopic.php?p=10991&#34;&gt;memory-usage of PHP/FastCGI and PHP/as module&lt;/a&gt; and that&amp;rsquo;s really interesting:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDfQbt7tygI/AAAAAAAAABY/D72W5ZIj22c/s1600-h/httpd-ram-week.png&#34;&gt;&lt;img src=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDfQbt7tygI/AAAAAAAAABY/D72W5ZIj22c/s400/httpd-ram-week.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s no comment about performance and in early versions FastCGI/PHP was a bottleneck but maybe these days are gone :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PHP sucks? not really!</title>
+      <link>https://blog.tolleiv.de/2008/05/php-sucks-not-really/</link>
+      <pubDate>Thu, 22 May 2008 06:35:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/php-sucks-not-really/</guid>
+      <description>&lt;p&gt;There are so many people from outside of the PHP World and lots of them are complaining about PHP and their reasons are mostly so ridiculous. In most cases they just say that PHP code sucks.&lt;br /&gt;
+The PHP 10.0 Blog brought up some good arguments about that and I fully agree - it&amp;rsquo;s not the language that produces sucking code, it&amp;rsquo;s the guy who wrote it down. &lt;a href=&#34;http://php100.wordpress.com/2008/05/21/secret-of-php/&#34;&gt;Click&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>error_reposting and exceptions....</title>
+      <link>https://blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../</link>
+      <pubDate>Tue, 20 May 2008 21:40:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../</guid>
+      <description>&lt;p&gt;I just found this line:&lt;/p&gt;
+
+&lt;p&gt;set_error_handler(create_function(&amp;lsquo;$x, $y&amp;rsquo;, &amp;lsquo;throw new Exception($y, $x);&amp;rsquo;), E_ALL~E_NOTICE);&lt;/p&gt;
+
+&lt;p&gt;in the comments on php.net and did a short test to see whether it works. Normally I used to have a global function which passes all the errors through a logging-chain (FILE/MAIL/DISPLAY) but having exceptions could be more comfortable because you might sometimes want to make decisions locally and not on a global scope and just setting and re-setting the error-handler is not the best idea for this&amp;hellip; I&amp;rsquo;m not sure if I get used to it, because the error-handling function did a good job for the last years &amp;hellip; we&amp;rsquo;ll see :)&lt;br /&gt;
+So that&amp;rsquo;s the full example code:&lt;/p&gt;
+
+&lt;p&gt;set_error_handler(create_function(&amp;lsquo;$x, $y&amp;rsquo;, &amp;lsquo;throw new Exception($y, $x);&amp;rsquo;), E_ALL);&lt;br /&gt;
+try {&lt;/p&gt;
+
+&lt;p&gt;$errors = array(&lt;br /&gt;
+                    E_USER_WARNING =&amp;gt; &amp;ldquo;something might be wrong&amp;rdquo;,&lt;br /&gt;
+                    E_USER_NOTICE =&amp;gt; &amp;ldquo;it works but I don&amp;rsquo;t like it&amp;rdquo;,&lt;br /&gt;
+                    E_USER_ERROR =&amp;gt; &amp;ldquo;something went completly wrong&amp;rdquo;,&lt;br /&gt;
+);&lt;/p&gt;
+
+&lt;p&gt;//    echo $name; //should cause a E_NOTICE&lt;/p&gt;
+
+&lt;p&gt;foreach($errors as $code=&amp;gt;$msg) {&lt;br /&gt;
+    try {&lt;br /&gt;
+        trigger_error($msg,$code);&lt;br /&gt;
+    }&lt;br /&gt;
+    catch (Exception $e) {&lt;br /&gt;
+        if(!in_array($e-&amp;gt;getCode(),array(E_USER_WARNING,E_USER_NOTICE))) {&lt;br /&gt;
+            throw $e;&lt;br /&gt;
+        }&lt;br /&gt;
+        else {&lt;br /&gt;
+            // not a big deal we can push this into a log-file and continue or work&amp;hellip;&lt;br /&gt;
+            echo &amp;ldquo;local exception: (&amp;ldquo;.$e-&amp;gt;getCode(). &amp;ldquo;) &amp;ldquo;.$e-&amp;gt;getMessage().&amp;rdquo;&lt;br/&gt;&amp;rdquo;;&lt;br /&gt;
+        }&lt;br /&gt;
+    }&lt;br /&gt;
+}&lt;/p&gt;
+
+&lt;p&gt;}&lt;br /&gt;
+catch (Exception $e) {&lt;br /&gt;
+echo &amp;ldquo;global exception:&amp;ldquo;.$e-&amp;gt;getMessage().&amp;rdquo;&lt;br/&gt;&amp;rdquo;;&lt;br /&gt;
+}&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Preview to PHP 5.3</title>
+      <link>https://blog.tolleiv.de/2008/05/preview-to-php-5.3/</link>
+      <pubDate>Mon, 19 May 2008 05:15:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/preview-to-php-5.3/</guid>
+      <description>&lt;p&gt;One of the mayor updates since PHP 5.0 is upcoming with the 5.3 version, this is also a major step forward to PHP 6 - I love to have namespaces and appreciate the split of E_NOTICE and E_DEPRECATED. Also other features like the native MySQL support ( I hope this really raises the performance), the array_replace/array_replace_recursive functions and also dynamic calls to static functions &amp;ldquo;$classname::$functionname($parameter);&amp;rdquo; sound very cool. So I really look forward to have it on the server (or at least on my laptop) :P&lt;/p&gt;
+
+&lt;p&gt;Regarding the namespaces I&amp;rsquo;ve one idea: maybe someday someone will invent a common namespace &amp;ldquo;php::clean&amp;rdquo; which fixes all the small inconsistencies within function-names and parameter-styles &amp;hellip; that would be really great ;)&lt;/p&gt;
+
+&lt;p&gt;A nice article with a more detailed look into namespaces and the other inventions in 5.3 can be found on &lt;a href=&#34;http://www.sitepoint.com/article/whats-new-php-5-3&#34;&gt;sitepoint.com&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

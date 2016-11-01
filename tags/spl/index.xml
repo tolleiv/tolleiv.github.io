@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/spl/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/spl/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Iterator [GoF]</title>
+      <link>https://blog.tolleiv.de/2008/07/iterator-gof/</link>
+      <pubDate>Mon, 07 Jul 2008 17:30:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/07/iterator-gof/</guid>
+      <description>&lt;p&gt;Lot&amp;rsquo;s of people like to write down things into lists, so that they can go through that list later and check whether everything was fine. Normally every recipe has a list ~ there&amp;rsquo;s always a list of ingredients at the beginning of the recipe.
+This short example shows how such a list can be processed in PHP. So why would you want to have something else than a array to hold your objects? - My example still uses a array to hold the objects (uni- or bidirectional lists would also be possible) but it adds a kind of a facade to the array so that the common managements-tasks are handled within the List-Object. Everything you need for this example is present in PHP since version 5.0. The basic steps you need to do is to provide a &amp;ldquo;Object&amp;rdquo; and an &amp;ldquo;ObjectList&amp;rdquo; which implements the native &lt;a href=&#34;http://www.php.net/manual/en/language.oop5.iterations.php&#34;&gt;&amp;ldquo;Iterator&amp;rdquo;&lt;/a&gt; interface and then you&amp;rsquo;re able to have very handy lists :)&lt;/p&gt;
+
+&lt;p&gt;class Incredient {&lt;/p&gt;
+
+&lt;p&gt;public $name,$amount;
+public function __construct($name,$amount) {
+$this-&amp;gt;name = $name;
+$this-&amp;gt;amount = $amount;
+}
+}&lt;/p&gt;
+
+&lt;p&gt;class Recipe implements Iterator {
+public $title;
+private $ingredients;&lt;/p&gt;
+
+&lt;p&gt;public function __construct ($title) {
+$this-&amp;gt;title = $title;
+}&lt;/p&gt;
+
+&lt;p&gt;public function addIncredient(Incredient $in) {
+$this-&amp;gt;ingredients[] = $in;
+}&lt;/p&gt;
+
+&lt;p&gt;public function current ()  {   return current ($this-&amp;gt;ingredients);    }
+public function key ()      {   return key($this-&amp;gt;ingredients);         }
+public function valid ()    {   return current ($this-&amp;gt;ingredients);    }
+public function rewind ()   {   return reset ($this-&amp;gt;ingredients);      }
+public function next ()     {   return next ($this-&amp;gt;ingredients);       }
+}&lt;/p&gt;
+
+&lt;p&gt;$cookieRecipe = new Recipe(&amp;ldquo;Chocolate Cookie&amp;rdquo;);
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Flour&amp;rsquo;,&amp;lsquo;2.5 cups&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Baking soda&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Salt&amp;rsquo;,&amp;lsquo;0.5 teaspoon&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Butter&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Sugar&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Brown Sugar&amp;rsquo;,&amp;lsquo;0.5 cup&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Vanilla extract&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Egg&amp;rsquo;,&amp;lsquo;1-2&amp;rsquo;));
+$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Chocolate chips&amp;rsquo;,&amp;lsquo;2 cups&amp;rsquo;));&lt;/p&gt;
+
+&lt;p&gt;// process recipe:
+foreach($cookieRecipe as $inc) {
+echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&amp;rdquo;&lt;br/&gt;&amp;rdquo;;
+}&lt;/p&gt;
+
+&lt;p&gt;As you see it&amp;rsquo;s pretty easy to have lists of objects in PHP. You might also think that always creating to some list-object over and over again is very odd and you&amp;rsquo;re right. For the most common tasks like &lt;a href=&#34;http://www.php.net/manual/en/class.arrayiterator.php&#34;&gt;iterating through arrays&lt;/a&gt;, &lt;a href=&#34;http://www.php.net/manual/en/class.directoryiterator.php&#34;&gt;directory-lists&lt;/a&gt; and a few more task you can use objects which are shipped with the Standard PHP Library ,which is also part of PHP since version 5 and mandatory in 5.3. So the example shown above could also look like this:&lt;/p&gt;
+
+&lt;p&gt;$recipe = array();
+$recipe[] = new Incredient(&amp;lsquo;Flour&amp;rsquo;,&amp;lsquo;2.5 cups&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Baking soda&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Salt&amp;rsquo;,&amp;lsquo;0.5 teaspoon&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Butter&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Sugar&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Brown Sugar&amp;rsquo;,&amp;lsquo;0.5 cup&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Vanilla extract&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Egg&amp;rsquo;,&amp;lsquo;1-2&amp;rsquo;);
+$recipe[] = new Incredient(&amp;lsquo;Chocolate chips&amp;rsquo;,&amp;lsquo;2 cups&amp;rsquo;);&lt;/p&gt;
+
+&lt;p&gt;$recipeIncObj = new ArrayObject($recipe);
+$ingredientsIt = $recipeIncObj-&amp;gt;getIterator();&lt;/p&gt;
+
+&lt;p&gt;foreach($ingredientsIt as $inc) {
+echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&amp;rdquo;&lt;br/&gt;&amp;rdquo;;
+}&lt;/p&gt;
+
+&lt;p&gt;As I said at the beginning, there are lots of situations where you might want to have a list for something and if you store that list in PHP the Iterator-pattern can keep your code clean and tasty :)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

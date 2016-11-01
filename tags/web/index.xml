@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/web/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Peter Sunde talking about flattr</title>
+      <link>https://blog.tolleiv.de/2010/08/peter-sunde-talking-about-flattr/</link>
+      <pubDate>Mon, 02 Aug 2010 15:11:59 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/08/peter-sunde-talking-about-flattr/</guid>
+      <description>&lt;p&gt;Markus Beckedahl&amp;rsquo;s interview with Peter Sunde brought up some interesting insights into the system of &lt;a href=&#34;https://flattr.com/&#34;&gt;flattr.com&lt;/a&gt; and the idea behind it. So if you&amp;rsquo;re interested in &lt;a href=&#34;https://flattr.com/&#34;&gt;flattr.com&lt;/a&gt; you should  listen the &lt;a href=&#34;http://www.netzpolitik.org/2010/npp095-peter-sunde-uber-flattr/&#34;&gt;podcast on netzpolitik.org&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;My favorite quote:&lt;em&gt;&amp;ldquo;In the end stupid stuff founds good stuff&amp;rdquo;&lt;/em&gt; P. Sunde&lt;/p&gt;
+
+&lt;p&gt;Another (shorter) interview taken during the Hacknight in Malmö can be found on &lt;a href=&#34;http://www.nrli.tv/post/877506283/peter-sunde-discusses-flattr-an-interview-with&#34;&gt;nrli.tv&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>www.encodechain.com</title>
+      <link>https://blog.tolleiv.de/2009/08/www.encodechain.com/</link>
+      <pubDate>Sat, 08 Aug 2009 12:54:13 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/08/www.encodechain.com/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2009/08/encodingchain-0.1.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2009/08/encodingchain-0.1-300x221.png&#34; alt=&#34;encodingchain-0.1&#34; /&gt;&lt;/a&gt;I just &amp;ldquo;released&amp;rdquo; &lt;a href=&#34;http://www.encodechain.com&#34;&gt;encodechain.com&lt;/a&gt;. A little tool which enables to combine various popular PHP conversion methods and to check how they affect your input&amp;hellip; feel free to give me some feedback :)&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m also not sure whether I choose the right name for it &amp;hellip; O_o&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Firefox 3.7 sneak....</title>
+      <link>https://blog.tolleiv.de/2009/07/firefox-3.7-sneak..../</link>
+      <pubDate>Wed, 22 Jul 2009 21:59:31 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/07/firefox-3.7-sneak..../</guid>
+      <description>&lt;p&gt;I just stumbled over some Firefox 3.7 screens. It seems that the mozilla developers plan/brainstormed to change same smallers parts:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Embracing Glass:&lt;/strong&gt; Toolbar and Tabs using Glass. Buttons translucent and slightly glossy to meld with the toolbar. Raised 3D lookachieve tactile &amp;ldquo;feel&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Page Button:&lt;/strong&gt; Connect the Page button to the left side of the tab area. Directly connected to the Page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Tools/Bookmark Bar:&lt;/strong&gt; Connecting the Tools button to the side of the Window to emphasize the fact that it is used for customizing and changing the UI. Adding a button next to that to toggle the Bookmarks Bar which is turned off by default.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://wiki.mozilla.org/images/d/d4/Mockup-Vista-001.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Looks pretty cool - but see yourself wihin the &lt;a href=&#34;https://wiki.mozilla.org/Firefox/3.7_Windows_Theme_Mockups&#34;&gt;mozilla wiki&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Wolfram Alpha ... knows the answer :P</title>
+      <link>https://blog.tolleiv.de/2009/06/wolfram-alpha-...-knows-the-answer-p/</link>
+      <pubDate>Tue, 02 Jun 2009 20:36:49 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/06/wolfram-alpha-...-knows-the-answer-p/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www25.wolframalpha.com/input/?i=The+answer+to+life%2C+the+universe+and+everything&#34;&gt;The answer to life, the universe and everything&lt;/a&gt; &amp;lt;&amp;lt; that was easy but what about famous people like &lt;a href=&#34;http://www25.wolframalpha.com/input/?i=homer+simpson&#34;&gt;Homer Simpson&lt;/a&gt;? D&amp;rsquo;oh! OK last try - &lt;a href=&#34;http://www25.wolframalpha.com/input/?i=tolleiv&#34;&gt;any results for &amp;lsquo;tolleiv&amp;rsquo;&lt;/a&gt; .. no? thanks :(&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

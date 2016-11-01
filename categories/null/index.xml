@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/categories/null/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/categories/null/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Null-Object Pattern</title>
+      <link>https://blog.tolleiv.de/2008/07/null-object-pattern/</link>
+      <pubDate>Tue, 01 Jul 2008 17:58:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/07/null-object-pattern/</guid>
+      <description>&lt;p&gt;Very often you create a object with a factory and before you really start using it, you check if your factory really created a object or returned NULL. Or maybe you have a method where a object is passed in and in this situation you&amp;rsquo;ll have to do this check also.&lt;/p&gt;
+
+&lt;p&gt;Instead of typing the &amp;ldquo;if(object == null)&amp;rdquo; phrase again and again, you could use the Null-Object pattern, you&amp;rsquo;ll see that this can make some situations much clearer.&lt;/p&gt;
+
+&lt;p&gt;Basically Null-Object ensures that the client always receives a valid object for it&amp;rsquo;s interaction, so that there&amp;rsquo;s no need to do the check shown above again and again. This happens since your concrete Null-Object just shares the interface, or inherits from the same class as it&amp;rsquo;s effective counterpart, but it&amp;rsquo;s implementation just leaves out any effectiveness.
+&lt;a href=&#34;http://bp3.blogger.com/_l5fIZzJyYfc/SGpiDZ9m-rI/AAAAAAAAACo/nVuiUHE4E90/s1600-h/nullobject_pattern.png&#34;&gt;
+&lt;img src=&#34;http://bp3.blogger.com/_l5fIZzJyYfc/SGpiDZ9m-rI/AAAAAAAAACo/nVuiUHE4E90/s400/nullobject_pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt; So a code-example could look like this:&lt;/p&gt;
+
+&lt;p&gt;class CookieFactory {
+public function makeInstance() {
+if(date(&amp;lsquo;l&amp;rsquo;)==&amp;lsquo;Monday&amp;rsquo;) return new NullCookie();
+return new RealCookie();
+}
+}&lt;/p&gt;
+
+&lt;p&gt;interface iCookie {
+function getCalories();
+}&lt;/p&gt;
+
+&lt;p&gt;class RealCookie implements iCookie {
+protected $calories=250;
+public function getCalories() {
+return $this-&amp;gt;calories;
+}
+}&lt;/p&gt;
+
+&lt;p&gt;class NullCookie implements iCookie {
+public function getCalories() {
+return 0;
+}
+}&lt;/p&gt;
+
+&lt;p&gt;I think you can imagine what happens when you make use of the CookieFactory - diet on monday ;)&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;re also some disadvantages, your clients normally don&amp;rsquo;t have a chance to react that there&amp;rsquo;s something special happening, also the clients must &amp;ldquo;share&amp;rdquo; the same expectation what &amp;ldquo;do nothing&amp;rdquo; means, the number of required Null-Objects might be very large and unhandy and the Null-Object shares a very deep knowledge with the real one, so that it might be a large effort to create it if the real object is complex too.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m so glad that today is tuesday :P&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

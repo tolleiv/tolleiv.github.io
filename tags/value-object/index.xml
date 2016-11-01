@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/value-object/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/value-object/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Value Object [DDD]</title>
+      <link>https://blog.tolleiv.de/2008/05/value-object-ddd/</link>
+      <pubDate>Fri, 30 May 2008 04:39:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/value-object-ddd/</guid>
+      <description>&lt;p&gt;This metaphor does not fit completely, and the &amp;ldquo;Money-Example&amp;rdquo; is omnipresent, but I really like the pattern and so that&amp;rsquo;s the story:&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say you have your grannies recipe for a chocolate cookie and you want to keep this in mind, but also you like to somehow experiment with some new or different ingredients. Normally you just keep in mind what you changed and later you write down the new recipe. But from time to time you might want to compare the two recipes or maybe you want to make cookies with the new and the changed recipes. In this situation it&amp;rsquo;s really good to have both written down on paper. ;)&lt;/p&gt;
+
+&lt;p&gt;In the world of OOP you could think of a solution using the &lt;a href=&#34;http://cookiepattern.blogspot.com/search/label/memento?max-results=100&#34;&gt;Memento-Pattern&lt;/a&gt; but this doesn&amp;rsquo;t really fit the situation and it&amp;rsquo;s also some kind of overhead. That&amp;rsquo;s the reason why the Value Object is the pattern of my choice.&lt;/p&gt;
+
+&lt;p&gt;So let&amp;rsquo;s look at the recipes again - we want to add and remove ingredients without modifying the original recipe and we want to compare the resulting recipes. We don&amp;rsquo;t need to track a special identity of our recipes since we&amp;rsquo;re only &amp;ldquo;collecting&amp;rdquo; ingredients.&lt;/p&gt;
+
+&lt;p&gt;The idea of the Value Object is that every every method which somehow transforms the state of a object always returns a new object and the old object stays untouched. Whenever needed you should also implement a method to compare objects, I must concede that the common &amp;ldquo;Money Example&amp;rdquo; shows much better when that&amp;rsquo;s needed &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Another edge of this pattern in PHP is that you can use method-chaining to perform multiple actions within a single line of code. So just have a look at the example you will like it&amp;rsquo;s taste :)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Recipe {
+    protected $ingredients;
+
+    public function __construct($ingred=”) {
+        $this-&amp;gt;ingredients = implode(‘,’,array_unique(explode(‘,’,$ingred)));
+    }
+
+    public function addIncredient($ingred=”) {
+        return new Recipe($this-&amp;gt;ingredients.‘,’.$ingred);
+    }
+
+    public function removeIncredien($ingred=”) {
+        return new Recipe(preg_replace(‘/,{0,1}’.$ingred.‘,{0,1}/’,”,$this-&amp;gt;ingredients.‘,’));
+    }
+
+    public function printIncredients() {
+        echo str_replace(‘,’,‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’,$this-&amp;gt;ingredients);
+    }
+
+    public function equals(Recipe $recipe) {
+        return (strcmp($this-&amp;gt;ingredients,$recipe-&amp;gt;ingredients)===0)?true:false;
+    }
+}
+
+
+$granniesRecipe = new Recipe(‘flour,baking soda,sugar,salt,butter,vanilla,chocolate’);
+$aNewRecipe = $granniesRecipe-&amp;gt;addIncredient(‘lemon’);
+$coconutRecipe = $granniesRecipe-&amp;gt;removeIncredien(‘chocolate’)-&amp;gt;addIncredient(‘coconut’);
+
+// check if that worked:
+echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;&amp;lt;strong&amp;gt; Grannies Cookie Recipe – Incredients are:&amp;lt;/strong&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
+$granniesRecipe-&amp;gt;printIncredients();
+echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;&amp;lt;strong&amp;gt; A new Cookie Recipe could look like:&amp;lt;/strong&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
+$aNewRecipe-&amp;gt;printIncredients();
+echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;&amp;lt;strong&amp;gt; A coconut cookie would look like:&amp;lt;/strong&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
+$coconutRecipe-&amp;gt;printIncredients();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The implementation is a bit odd, since it only collects the names of the ingredients but not the amount, but including the amounts of incredients would not change the concept  and that&amp;rsquo;s why I left it out. I hope you got a idea how the pattern works - the main thing is that there&amp;rsquo;s no identity and that new objects are instantiated as soon as the state of the old one would change.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

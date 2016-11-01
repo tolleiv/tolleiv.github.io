@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/viral-web/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/viral-web/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>tiny update...</title>
+      <link>https://blog.tolleiv.de/2010/05/tiny-update.../</link>
+      <pubDate>Sat, 08 May 2010 16:20:34 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/05/tiny-update.../</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m pretty busy in these days and unfortunately there&amp;rsquo;s not much time to write blogposts. In detail there&amp;rsquo;s currently a long list of feature wishes and bugs for TemplaVoila which need my attention and in addition I also already started to prepare a workshop for the &lt;a href=&#34;http://t3dd10.typo3.org/&#34;&gt;T3DD10&lt;/a&gt; about Git*.&lt;/p&gt;
+
+&lt;p&gt;Just to keep this blog alive this is what I found interesting during the last weeks:&lt;/p&gt;
+
+&lt;p&gt;For TYPO3 enthusiasts especially the changes within the TYPO3 Core regarding the integration of further T3UX09 results and all the small changes which happen to get 4.4 ready might be of the biggest interest (&lt;a href=&#34;https://svn.typo3.org/TYPO3v4/Core/trunk/ChangeLog&#34;&gt;https://svn.typo3.org/TYPO3v4/Core/trunk/ChangeLog&lt;/a&gt;). Besides that Sebastian Kurfürst tweeted that he finished the last chapter of his Extbase/Fluid book and Amazon says that they deliver it in the first weeks of July. I think once his book is out we&amp;rsquo;ll see much more people starting to work with Extbase and Fluid.
+It also seems that the TYPO3 v5 project &amp;ndash; called &amp;ldquo;Phoenix&amp;rdquo; &amp;ndash; is getting more and more relevant. They decided to &lt;a href=&#34;http://news.typo3.org/news/article/scrumify-phoenix/&#34;&gt;scrumify the delvelopment&lt;/a&gt; and started to do Sprints to achieve quick and visible results. Sounds like a good way to go - let&amp;rsquo;s see how long they keep that up. Besides that there&amp;rsquo;s also an interesting mail Robert Lemke posted in a newsgroup to answer the rumors about the why v5 takes so long and why they had to start from scratch and so on - &lt;a href=&#34;http://lists.typo3.org/pipermail/typo3-dev/2010-April/039958.html&#34;&gt;very interesting statements&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Besides that you might like these bits and bytes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://sebastian-bergmann.de/archives/885-Stubbing-Hard-Coded-Dependencies.html&#34;&gt;Sebastian Bergmanns &amp;ldquo;testing untestable code&amp;rdquo; series&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.normansblog.de/demos/browser-support-checklist-css3/&#34;&gt;CSS3 browser compatibility checklist&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://buzz.typo3.org/teams/core/article/43-treasure-trove-the-system-registry/&#34;&gt;TYPO3 4.3 Treasure Trove: the system registry&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;*If anyone wants to help with the Git workshop or has suggestions feel free to contact me. I don&amp;rsquo;t feel really prepared for it yet but I also think that someone has to present Git to the TYPO3 community since Subversion kinda sucks in certain aspects - also the workshop itself is not confirmed yet but I&amp;rsquo;m pretty sure it will happen since lot&amp;rsquo;s of people are interested to hear about it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Browser... hmmm</title>
+      <link>https://blog.tolleiv.de/2009/07/browser...-hmmm/</link>
+      <pubDate>Sun, 26 Jul 2009 21:49:55 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/07/browser...-hmmm/</guid>
+      <description>&lt;p&gt;The guys from Google tried to find out what a browser is :P&lt;/p&gt;
+
+&lt;p&gt;[youtube]&lt;a href=&#34;http://www.youtube.com/watch?v=o4MwTvtyrUQ[/youtube&#34;&gt;http://www.youtube.com/watch?v=o4MwTvtyrUQ[/youtube&lt;/a&gt;]&lt;/p&gt;
+
+&lt;p&gt;(&lt;a href=&#34;http://sethgodin.typepad.com/seths_blog/2009/07/best-new-way-to-make-an-internal-sale.html&#34;&gt;via)&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Firefox 3.7 sneak....</title>
+      <link>https://blog.tolleiv.de/2009/07/firefox-3.7-sneak..../</link>
+      <pubDate>Wed, 22 Jul 2009 21:59:31 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/07/firefox-3.7-sneak..../</guid>
+      <description>&lt;p&gt;I just stumbled over some Firefox 3.7 screens. It seems that the mozilla developers plan/brainstormed to change same smallers parts:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Embracing Glass:&lt;/strong&gt; Toolbar and Tabs using Glass. Buttons translucent and slightly glossy to meld with the toolbar. Raised 3D lookachieve tactile &amp;ldquo;feel&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Page Button:&lt;/strong&gt; Connect the Page button to the left side of the tab area. Directly connected to the Page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Tools/Bookmark Bar:&lt;/strong&gt; Connecting the Tools button to the side of the Window to emphasize the fact that it is used for customizing and changing the UI. Adding a button next to that to toggle the Bookmarks Bar which is turned off by default.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://wiki.mozilla.org/images/d/d4/Mockup-Vista-001.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Looks pretty cool - but see yourself wihin the &lt;a href=&#34;https://wiki.mozilla.org/Firefox/3.7_Windows_Theme_Mockups&#34;&gt;mozilla wiki&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fancy Wolfram Alpha queries .... </title>
+      <link>https://blog.tolleiv.de/2009/07/fancy-wolfram-alpha-queries-..../</link>
+      <pubDate>Fri, 17 Jul 2009 21:30:14 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/07/fancy-wolfram-alpha-queries-..../</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve just got a tiny url from a friend ( &lt;a href=&#34;http://www06.wolframalpha.com/input/?i=Plot3D[x*y+%281+-+x^2+-+y^2%29%2C+{x%2C+0%2C+1}%2C+{y%2C+0%2C+1}]&#34;&gt;click &lt;/a&gt;) and this shows that Wolfram Alpha can also plot complex functions in a very nice way. All this is pretty amazing and I just found out that there are ton&amp;rsquo;s of examples how they process data ~ either by &lt;a href=&#34;http://www06.wolframalpha.com/examples/PlottingAndGraphics.html&#34;&gt;plotting mathematical things&lt;/a&gt;, &lt;a href=&#34;http://www06.wolframalpha.com/input/?i=C6H5COOH&#34;&gt;calculation chemical stuff&lt;/a&gt;, &lt;a href=&#34;http://www06.wolframalpha.com/examples/StringProcessing.html&#34;&gt;doing string-analyses&lt;/a&gt; or &lt;a href=&#34;http://www06.wolframalpha.com/input/?i=Julia+set+-0.40%2B0.65I&#34;&gt;plotting fractals&lt;/a&gt; :)&lt;/p&gt;
+
+&lt;p&gt;Btw - google looses on all of these queries :P &lt;a href=&#34;http://www.google.com/search?hl=en&amp;amp;site=&amp;amp;q=Plot3D[x*y+%281+-+x^2+-+y^2%29%2C+{x%2C+0%2C+1}%2C+{y%2C+0%2C+1}]&amp;amp;btnG=Search&#34;&gt;(1)&lt;/a&gt; &lt;a href=&#34;http://www.google.com/search?hl=en&amp;amp;q=plot+sin+x+cos+y&amp;amp;aq=f&amp;amp;oq=&amp;amp;aqi=&#34;&gt;(2)&lt;/a&gt; &lt;a href=&#34;http://www.google.com/search?hl=en&amp;amp;q=C6H5COOH&amp;amp;aq=f&amp;amp;oq=&amp;amp;aqi=&#34;&gt;(3)&lt;/a&gt; &lt;a href=&#34;http://www.google.com/search?hl=en&amp;amp;q=ROT13+%22A+quick+brown+fox+jumps+over+the+lazy+dog.%22&amp;amp;aq=f&amp;amp;oq=&amp;amp;aqi=&#34;&gt;(4)&lt;/a&gt; &lt;a href=&#34;http://www.google.com/search?hl=en&amp;amp;q=Julia+set+-0.40%2B0.65I&amp;amp;aq=f&amp;amp;oq=&amp;amp;aqi=&#34;&gt;(5)&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

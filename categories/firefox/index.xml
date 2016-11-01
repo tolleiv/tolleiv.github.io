@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/categories/firefox/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/categories/firefox/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Firefox 3 RC1</title>
+      <link>https://blog.tolleiv.de/2008/05/firefox-3-rc1/</link>
+      <pubDate>Sun, 18 May 2008 16:11:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/firefox-3-rc1/</guid>
+      <description>&lt;p&gt;I just saw that the first Release Candidate of Firefox 3 is available for &lt;a href=&#34;http://www.mozilla.com/en-US/firefox/all-rc.html&#34;&gt;download&lt;/a&gt; . As with the most of the Beta-versions I also checked this update because I&amp;rsquo;m really excited to get the &lt;a href=&#34;http://www.mozilla.com/en-US/firefox/3.0rc1/releasenotes/#whatsnew&#34;&gt;new features&lt;/a&gt;, but after 5 minutes (again) I removed it from my PC. Non of my extensions is working in FF3 (except the dictionary), it still destroys the Frames in TYPO3 (&lt;a href=&#34;http://typo3.org/extensions/repository/view/mn_ff3_be_bugfix/0.0.2/&#34;&gt;there&amp;rsquo;s a bugfix-extension for that&lt;/a&gt;) and the memory-usage is still very high,10% lower than in FF2 but still high.&lt;br /&gt;
+So I postponed the update and  kept on running &lt;a href=&#34;http://www.mozilla.com/en-US/firefox/all.html&#34;&gt;Firefox 2&lt;/a&gt;, at least until the next Release Candidate ;)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

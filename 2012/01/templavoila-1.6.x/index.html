@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TemplaVoila 1.6.x | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="https://blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">January 16, 2012</h2>
+    <h1 class="title">TemplaVoila 1.6.x</h1>
+    <div class="content">
+      <p>Quite some things changed in the past months and I never found the time to clear up my mind and write up a summary.</p>
+
+<p>First of all <a href="http://typo3.org/extensions/repository/view/templavoila/current/">TemplaVoila 1.6</a> was released parallel to <a href="http://typo3.org/download/release-notes/typo3-46/">TYPO3 4.6</a>. It shipped with 22 bug and compatibility fixes. In general the 1.6.x branch is supposed to be compatible with TYPO3 4.4+ which also made it possible to clean up the extension quite a bit. In addition to that TemplaVoila 1.6.1 will show up in the TER in the next few hours. It fixes 10 additional issues.</p>
+
+<p>Besides that, the main repository for TemplaVoila was moved to <a href="git.typo3.org/TYPO3v4/Extensions/templavoila">git.typo3.org</a> and the old Subversion repository and my Github repository have been removed. The new repository location also enables and enforces a new way to contribute code changes for the project. Comparable to the TYPO3v4 Core every change request can be sent to Gerrit, where I can review the changes before they get merged into the repository. That workflow turns out to be very efficient for me. A detailed summary on how to contribute code to any repository hosted on <a href="http://git.typo3.org">git.typo3.org</a> can be found on <a href="http://wiki.typo3.org/Contribution_Walkthrough_Tutorials">wiki.typo3.org</a>. To sum up some of the steps - here&rsquo;s how you submit a patch*:</p>
+
+<pre><code>git clone git://git.typo3.org/TYPO3v4/Extensions/templavoila.git
+cd templavoila
+scp -p -P 29418 &lt;username&gt;@review.typo3.org:hooks/commit-msg .git/hooks/
+git checkout -b workingBranch
+# ... work on the files ...
+git add &lt;changedFile&gt;
+git commit
+git push origin HEAD:refs/for/master/&lt;topic&gt;
+</code></pre>
+
+<p>A further general change to the team happend more or less silently. During 2011 nobody from the old team or any new developer showed interest in the project and only few contributors helped with bugfixes or reviews. Due to that I also changed my attitude regarding future releases.
+I&rsquo;m currently planning to release one version parallel with every main TYPO3 4.x release, to make sure that TemplaVoila works in new versions and to make sure people can enjoy TYPO3 with TemplaVoila in the future as well. I&rsquo;ll also try to keep it compatible with all &ldquo;stable&rdquo; releases and aim to keep the issue count within the bugtracker as low as possible.
+But I&rsquo;m not planning to integrate new major features such as the field content sliding (use <a href="http://typo3.org/extensions/repository/view/kb_tv_cont_slide/current/">EXT:kb_tv_cont_slide</a> please) or a context sensitive content wizard (a.k.a &ldquo;content firewall&rdquo;). Also major refactorings won&rsquo;t happen because they&rsquo;d consume far too much of my time - therefore also the desperately needed update of the mapping module or a new new page module will not be implemented in the near future.</p>
+
+<p>Nevertheless I&rsquo;m open for any type of contribution and I&rsquo;d be happy to review and test any patch showing up in Mantis or Gerrit - I&rsquo;m just not able to spent a major part of my freetime for it.</p>
+
+<hr />
+
+<ul>
+<li>You have to sign the <a href="http://typo3.org/about/licenses">Contributor License Agreement</a> to be able to push any change - it can be found on <a href="http://typo3.org/about/licenses">typo3.org</a></li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'tolleiv';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

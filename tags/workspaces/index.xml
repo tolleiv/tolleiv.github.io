@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/workspaces/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/workspaces/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>TYPO3 workspaces</title>
+      <link>https://blog.tolleiv.de/2010/06/typo3-workspaces/</link>
+      <pubDate>Tue, 15 Jun 2010 17:54:47 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/06/typo3-workspaces/</guid>
+      <description>&lt;p&gt;One of the enterprise features TYPO3 has to offer is versioning and workspace handling. &lt;a href=&#34;http://typo3.org/community/people/kaspers-korner/&#34;&gt;Kasper&lt;/a&gt; did a great job when he initially brough these featues into TYPO3. Unfortunately during the last years they became orphans and nobody really took care of them. There are multiple reasons for that, one was that Kasper didn&amp;rsquo;t allow big changes, another one was that everyone was somehow able to live with the existing odds they had but probable the most important one was that it was just to complicated to improve them alone without knowing the big picture.&lt;/p&gt;
+
+&lt;p&gt;The good news is that these times are over and that some important changes to improve workspace handling are planned for
+ the upcomming TYPO3 4.5 (read more on &lt;a href=&#34;http://news.typo3.org/news/article/bringing-workspaces-up-to-speed/&#34;&gt;TYPO3.org&lt;/a&gt;) and the cool news is that I was lucky enough to be part of that team and that I was able to attend a great &amp;ldquo;kickoff&amp;rdquo; meeting two weeks ago.&lt;/p&gt;
+
+&lt;p&gt;What changes we plan can be found on &lt;a href=&#34;http://news.typo3.org/news/article/bringing-workspaces-up-to-speed/&#34;&gt;TYPO3.org&lt;/a&gt;, a detailed protocol of the meeting can be found &lt;a href=&#34;http://forge.typo3.org/attachments/download/3190/2010-06-01_TYPO3_Versioning_and_Workspaces_Meeting.pdf&#34;&gt;here&lt;/a&gt; in addition.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m happy to be part of that and I hope everyone on the team can keep up his/her motivation.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Update see &lt;a href=&#34;http://news.typo3.org/news/article/t3dd10-workspace-progress/&#34;&gt;typo3.org&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

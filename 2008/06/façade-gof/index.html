@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Façade [GoF] | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="https://blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">June 16, 2008</h2>
+    <h1 class="title">Façade [GoF]</h1>
+    <div class="content">
+      <p>If a child is in the mood to eat a fresh cookie it normally asks his granny for one. Like this:</p>
+
+<p>Child: Grannyyyyy?<br />
+Granny: Yes my dear?<br />
+Child: Could you mix about 2 cups of sugar, <sup>1</sup>&frasl;<sub>2</sub> cup of butter and <sup>1</sup>&frasl;<sub>2</sub> cup of milk in a saucepan and boil it for a minute. And could you, after you removed the saucepan from the heat, mix in some cocoa powder and 3 cups quick cooking oats and form some cookies? Pleeease?</p>
+
+<p>Hm you&rsquo;re right that&rsquo;s not very realistic - it&rsquo;s more like: &ldquo;Grannyyyy? Could I have a cooookieee pleeeease?&rdquo; &hellip;.the granny knows what to do and the child will get it&rsquo;s cookie</p>
+
+<p>So what happens if you have a pice of software which provides <strike>cookies</strike> some services for other parts of your software? The most people (especially programmers) are lazy and they won&rsquo;t remember all the details of a complex structure. They remember the place or object which can run a certain task but there&rsquo;s no need to know the deeper structure of that object - the only thing which is important if your using a service of an object is that it doesn&rsquo;t fail.<br />
+So the Façade pattern is a structural pattern which more or less describes that you create a object with an simplified interface, so that you can hide complex structures. You can also use a Façade to wrap up some poorly designed APIs into a single well designed API. And the larges benefit of a Façade object is that it makes APIs more readable and therefore enables flexible and easy development.</p>
+
+<p>So maybe you&rsquo;re missing the example-code for this pattern, but since it&rsquo;s not that concrete as others, I&rsquo;ve not implemented a  special example for it. But I already used a Facade in some way, if you look at the <a href="http://www.cookiepattern.com/2008/05/specification-ddd.html">Specification pattern</a>, you&rsquo;ll find the functions getSmallChocolateCookies() and getLargeCookies(). Both show in a tasty way what I described  here :)</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'tolleiv';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

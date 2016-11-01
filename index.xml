@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <lastBuildDate>Tue, 17 Nov 2015 08:43:33 +0000</lastBuildDate>
+    <atom:link href="https://blog.tolleiv.de/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Enrich Zabbix monitoring with additional data from Pingdom</title>
+      <link>https://blog.tolleiv.de/2015/11/enrich-zabbix-monitoring-with-additional-data-from-pingdom/</link>
+      <pubDate>Tue, 17 Nov 2015 08:43:33 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2015/11/enrich-zabbix-monitoring-with-additional-data-from-pingdom/</guid>
+      <description>
+
+&lt;p&gt;If you’re running your own monitoring system which has to observe services for global customers, you might have considered to spin up some monitoring slaves around the world to gather accurate availability data. Unfortunately bringing up these slaves is time consuming and expensive to some extend. On the other hand services like Pingdom provide global monitoring for low budget. But using these splits your monitoring infrastructure into two parts and brings drawbacks when it comes to reporting and alerting. This blog post explains how to combine both, an internal monitoring system like Zabbix and external monitoring data from Pingdom in one place, to gather global availability data and keep alerting and event handling centralised.&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites:&lt;/h2&gt;
+
+&lt;p&gt;Before data can be pulled from one service to the other both have to be working on it’s own. Therefore I assume that your webservice/website is running on one or more Linux* hosts which are already monitored with Zabbix &lt;a href=&#34;#zabbix&#34;&gt;[2]&lt;/a&gt;. You should have access to the Zabbix server and the hosts. Along with that I also assume that you’ve access to Pingdom and it’s API &lt;a href=&#34;#pingdom&#34;&gt;[3]&lt;/a&gt;, you should have a couple of checks configured already &lt;a href=&#34;#pingdomcfg&#34;&gt;[4]&lt;/a&gt;. Furthermore I assume that you’re able to work on the Linux command line.
+In addition to all of that, I suggest that you open up a second browser tab with the Gist &lt;a href=&#34;#gist&#34;&gt;[1]&lt;/a&gt; which holds all prepared scripts and configuration.&lt;/p&gt;
+
+&lt;h2 id=&#34;understanding-the-data-flow&#34;&gt;Understanding the data flow:&lt;/h2&gt;
+
+&lt;p&gt;The first thing to dive into is the high level data flow. As described initially, data should be pulled from Pingdom through the API and pushed into Zabbix. Pulling the data from Pingdom is easy with a simple curl request against &lt;code&gt;https://api.pingdom.com/api/2.0/checks&lt;/code&gt; which would then return the most recent monitoring data as JSON. When the data is available, the list has to be limited to the relevant information and mapped into a format which can be transferred to Zabbix. The &lt;code&gt;zabbix_sender&lt;/code&gt; utility will then be used to actually push the data to Zabbix. Once this is done, Zabbix has to be prepared to receive the data within related monitoring items and triggers which need to be configured for alerting. But first things first &amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;mapping-and-filtering-data-for-zabbix&#34;&gt;Mapping and filtering data for Zabbix:&lt;/h2&gt;
+
+&lt;p&gt;Pulling data from Pingdom with the &lt;code&gt;/checks&lt;/code&gt; endpoint (see &lt;a href=&#34;#pingdomapi&#34;&gt;[5]&lt;/a&gt; for full reference) might give you much more than you need, therefore I’d suggest that you add some tags to the Pingdom checks which you want to pull into Zabbix and then just fetch these with &lt;code&gt;/checks?tag=zabbix&lt;/code&gt;. If you’re using Zabbix proxy systems along with the Zabbix server, you should then use one tag per proxy, so that each proxy is able to pull just their related checks**.&lt;/p&gt;
+
+&lt;p&gt;You will get a response which looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{ &amp;quot;checks&amp;quot;: [
+    {
+      &amp;quot;hostname&amp;quot;: &amp;quot;example.com&amp;quot;,
+      &amp;quot;id&amp;quot;: 85975,
+      &amp;quot;lasterrortime&amp;quot;: 1297446423,
+      &amp;quot;lastresponsetime&amp;quot;: 355,
+      &amp;quot;lasttesttime&amp;quot;: 1300977363,
+      &amp;quot;name&amp;quot;: &amp;quot;example.com homepage&amp;quot;,
+      &amp;quot;resolution&amp;quot;: 1,
+      &amp;quot;status&amp;quot;: &amp;quot;up&amp;quot;,
+      &amp;quot;type&amp;quot;: &amp;quot;http&amp;quot;,
+      &amp;quot;tags&amp;quot;: [{
+        &amp;quot;name&amp;quot;: &amp;quot;zabbix&amp;quot;,
+        &amp;quot;type&amp;quot;: &amp;quot;au&amp;quot;,
+        &amp;quot;count&amp;quot;: 2
+      }]
+     }
+]}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that you’re able to retrieve data, it has to be filtered and mapped to a format which zabbix_sender understands. This is done with the following steps:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Splitting up the long checks array into multiple separated objects&lt;/li&gt;
+&lt;li&gt;Filtering out the relevant fields from each object&lt;/li&gt;
+&lt;li&gt;Transforming the timestamps from integer to string representations&lt;/li&gt;
+&lt;li&gt;Mapping the status field into an integer - this will make it easier to define triggers in Zabbix later on&lt;/li&gt;
+&lt;li&gt;Combining all fields of the object into an array with two event data strings&lt;/li&gt;
+&lt;li&gt;Splitting up the array to have one zabbix_sender event per line&lt;/li&gt;
+&lt;li&gt;Adding in some text block which relates to the Zabbix item key to have a fully defined zabbix_sender event&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All this is done with this small snippet***:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;$json&amp;quot; \
+  | jq -r &#39;.checks[]&#39; \
+  | jq -r &#39;{time:.lasttesttime, key:.name ,status:.status, responsetime:.lastresponsetime}&#39; \
+  | jq -r &#39;.time=(.time | tostring)&#39; \
+  | jq -r &#39;.responsetime=(.responsetime | tostring)&#39; \
+  | jq -r &#39;def mapping: {&amp;quot;up&amp;quot;:&amp;quot;2&amp;quot;,&amp;quot;paused&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;down&amp;quot;:&amp;quot;0&amp;quot;};.status=mapping[.status]&#39; \
+  | jq -r &#39;[.key + &amp;quot;,status] &amp;quot; + .time + &amp;quot; &amp;quot; + .status, .key + &amp;quot;,time] &amp;quot; + .time + &amp;quot; &amp;quot; + .responsetime]&#39; \
+  | jq -r &#39;.[]&#39; \
+  | sed -e &#39;s~ ~ pingdom.response[~1&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you might have guessed, the tool which is used mainly ‘jq’ is a powerful json processing tool which by itself is worth a long article. You’ll find the manual here &lt;a href=&#34;#jq&#34;&gt;[6]&lt;/a&gt; and a great introduction within the well known &amp;lsquo;7 command-line tools for data science’ article &lt;a href=&#34;#dscl&#34;&gt;[7]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;After the filtering is done, the result looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;example.com pingdom.response[homepage,status] 1300977363 2
+example.com pingdom.response[homepage,time] 1300977363 355
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You see that this will report data for two Zabbix items with the keys &lt;code&gt;pingdom.response[homepage,status]&lt;/code&gt; and &lt;code&gt;pingdom.response[homepage,time]&lt;/code&gt;. If you’re just interested in the state but not the timings you could simplify the filtering command by 2 or 3 lines and have a much more straight forward flow.&lt;/p&gt;
+
+&lt;h2 id=&#34;zabbix-check-discovery&#34;&gt;Zabbix check discovery:&lt;/h2&gt;
+
+&lt;p&gt;Once the script is ready and able to send valid data to Zabbix, you&amp;rsquo;ve to make sure that Zabbix also associates it to a host and the related items. So you&amp;rsquo;ve to bring up a template and configure the trapper items [8]. But in case you want to have more than one Pingdom check per host you run into issues with that straight forward approach. You’d either have to configure a new item by hand for every new Pingdom check or let the low level discovery (LLD) of Zabbix do that for you. With the LLD approach in place, Zabbix will be able to detect new checks on his own and create the related items or triggers automatically.&lt;/p&gt;
+
+&lt;p&gt;The Zabbix low level discovery needs some input to know which checks exists. This is done with a JSON file on the related host:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;data&amp;quot;:[
+    { &amp;quot;{#NAME}&amp;quot;:&amp;quot;homepage&amp;quot;, &amp;quot;{#URL}&amp;quot;:&amp;quot;http://example.org/&amp;quot; },
+    { &amp;quot;{#NAME}&amp;quot;:&amp;quot;newsletterform&amp;quot;, &amp;quot;{#URL}&amp;quot;:&amp;quot;http://example.org/newsletter.html&amp;quot; }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Generating this JSON with a similar processing chain like above isn’t really hard and it helps Zabbix to pick up the data needed for low level discovery. Once the JSON file is in place it can be picked up with the Zabbix agent and the &lt;code&gt;vfs.file.contents[/etc/zabbix/pingdom_lld.json,UTF8]&lt;/code&gt; discovery configuration. In order to retrieve data from the discovered checks, you’ll have to bring up some discovery items. As described before these should be Zabbix trapper items with the keys &lt;code&gt;pingdom.response[{#NAME},status]&lt;/code&gt; and &lt;code&gt;pingdom.response[{#NAME},time]&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You’ll find a prepared Zabbix Template XML within my Gist &lt;a href=&#34;#gistfile&#34;&gt;[9]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;distribution-when-working-with-zabbix-proxy-setups&#34;&gt;Distribution when working with Zabbix-Proxy setups:&lt;/h2&gt;
+
+&lt;p&gt;The steps described so far will give you nice results if you’re working with a single central Zabbix server. They might not work if you run your Zabbix installation with multiple Zabbix proxies instead. The reason for this is that the zabbix_sender is also supposed to send the data to the Zabbix proxy which was configured for the monitored host. Therefore the script which pulls the data from Pingdom should run on each Zabbix proxy and just pull the data for the relevant hosts. To avoid that each proxy pulls all the data and then fails to send it to Zabbix the call to the Pingdom API should be limited. This can be done with a slight modification to the API call. Instead of having a single tag for all checks which relate to Zabbix, checks should be tagged related to their proxy e.g. with &lt;code&gt;/checks?tag=zabbix_dc1&lt;/code&gt; vs. &lt;code&gt;/checks?tag=zabbix_dc2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;putting-it-all-together&#34;&gt;Putting it all together:&lt;/h2&gt;
+
+&lt;p&gt;Once all your script and configuration is in place you’ll receive Pingdom monitoring data within Zabbix and you’ll be able to configure triggers and relate other monitoring data to it.&lt;/p&gt;
+
+&lt;p&gt;In case you use some sort of provisioning tool (Puppet, Check, Cfengine, Ansible, Salt, …) you should also consider to move the definition of the Pingdom checks into that tool and roll out all the configuration from a central spot.&lt;/p&gt;
+
+&lt;p&gt;Last but not least, it would be great if you’d leave a comment and whether you think this approach is of any use for you or not. In case you use a similar approach with other vendors like Sentry &lt;a href=&#34;#sentry&#34;&gt;[10]&lt;/a&gt; or Port-Monitor &lt;a href=&#34;#portmonitor&#34;&gt;[11]&lt;/a&gt; I’d love to see how you pull the data in. Also feel free to leave questions in the comments below, share the link on Twitter or Facebook or Flattr it.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;remarks-references&#34;&gt;Remarks &amp;amp; references:&lt;/h3&gt;
+
+&lt;p&gt;* the introduced setup is not limited to Linux hosts, but so far the related Zabbix Template is not ready to be used with Windows - but that should not be a big problem as long as you have your Zabbix Proxy/Server running on Linux.&lt;/p&gt;
+
+&lt;p&gt;** this comes from a limitation in the zabbix_sender with binds the sender to the Zabbix proxy&lt;/p&gt;
+
+&lt;p&gt;*** readable simplifications welcome&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a name=&#34;gist&#34;&gt;[ 1] - &lt;a href=&#34;https://gist.github.com/tolleiv/2f49a7711e3040f2b25b&#34;&gt;gist.github.com/tolleiv/2f49a7711e3040f2b25b&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;zabbix&#34;&gt;[ 2] - &lt;a href=&#34;http://www.zabbix.com/&#34;&gt;www.zabbix.com/&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;pingdom&#34;&gt;[ 3] - &lt;a href=&#34;http://pingdom.com/&#34;&gt;pingdom.com/&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;pingdomcfg&#34;&gt;[ 4] - &lt;a href=&#34;https://www.pingdom.com/resources/tutorials/how-to-add-check&#34;&gt;www.pingdom.com/resources/tutorials/how-to-add-check&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;pingdomapi&#34;&gt;[ 5] - &lt;a href=&#34;https://www.pingdom.com/resources/api#MethodGet+Check+List&#34;&gt;www.pingdom.com/resources/api#MethodGet+Check+List&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;jq&#34;&gt;[ 6] - &lt;a href=&#34;https://stedolan.github.io/jq/manual/&#34;&gt;stedolan.github.io/jq/manual/&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;dscl&#34;&gt;[ 7] - &lt;a href=&#34;http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html&#34;&gt;jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;zabbixtrapper&#34;&gt;[ 8] - &lt;a href=&#34;https://www.zabbix.com/documentation/2.4/manual/config/items/itemtypes/trapper&#34;&gt;www.zabbix.com/documentation/2.4/manual/config/items/itemtypes/trapper&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;gistfile&#34;&gt;[ 9] - &lt;a href=&#34;https://gist.github.com/tolleiv/2f49a7711e3040f2b25b#file-zbx_template-xml&#34;&gt;gist.github.com/tolleiv/2f49a7711e3040f2b25b#file-zbx_template-xml&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;sentry&#34;&gt;[10] - &lt;a href=&#34;https://getsentry.com&#34;&gt;getsentry.com&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a name=&#34;portmonitor&#34;&gt;[11] - &lt;a href=&#34;https://www.port-monitor.com/&#34;&gt;www.port-monitor.com/&lt;/a&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Post mortem documentations or how to build knowledge during failures</title>
+      <link>https://blog.tolleiv.de/2015/01/post-mortem-documentations-or-how-to-build-knowledge-during-failures/</link>
+      <pubDate>Mon, 05 Jan 2015 22:18:26 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2015/01/post-mortem-documentations-or-how-to-build-knowledge-during-failures/</guid>
+      <description>
+
+&lt;p&gt;Few months ago I tried to get my head around Post-Mortem documentations and found it particularly hard to fill the gap between the publicly available documentations and my aim to have company internal documentations which teams could use to share knowledge and learn from past mistakes. During my research I came across lot’s of publicly available information which helped me to dive into the topic. But unfortunately information was widely distributed and I though that sharing my link collection could help to shorten your way a bit.&lt;/p&gt;
+
+&lt;h2 id=&#34;basics&#34;&gt;Basics&lt;/h2&gt;
+
+&lt;p&gt;Some good reads if you want to learn what Post-Mortems are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.uio.no/studier/emner/matnat/ifi/INF5180/v10/undervisningsmateriale/reading-materials/p08/post-mortems.pdf&#34;&gt;Postmortem reviews: purpose and approaches in software engineering&lt;/a&gt;  (Time invest 30 mins)&lt;/li&gt;
+&lt;li&gt;O’Reilly &amp;ldquo;&lt;a href=&#34;http://shop.oreilly.com/product/0636920000136.do&#34;&gt;Web Operations - Keeping the Data On Time&lt;/a&gt;“ — Chapter 13 &amp;ldquo;How to Make Failure Beautiful: The Art and Science of Postmortems&amp;rdquo;
+(Time invest 20 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cdlib.org/cdlinfo/2010/11/17/the-project-post-mortem-a-valuable-tool-for-continuous-improvement/&#34;&gt;The Project Post-Mortem: A Valuable Tool for Continuous Improvement&lt;/a&gt; (Time invest 5-15 mins)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;foundations&#34;&gt;Foundations&lt;/h2&gt;
+
+&lt;p&gt;If you want to look further into the topic, you’ve to deal with human error and failure. These will give you some idea how large this topic is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://web.mit.edu/2.75/resources/random/How%20Complex%20Systems%20Fail.pdf&#34;&gt;How Complex Systems Fail&lt;/a&gt; - Richard Cook (Time invest 15mins)&lt;/li&gt;
+&lt;li&gt;Velocity 2012 (Video): &lt;a href=&#34;http://www.youtube.com/watch?v=2S0k12uZR14&#34;&gt;How Complex Systems Fail&lt;/a&gt; - Richard Cook (Time invest 30 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.indecorous.com/fallible_humans/&#34;&gt;Fallible Humans&lt;/a&gt; (Time invest 35 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.oreilly.com/webops-perf/free/the-human-side-of-postmortems.csp&#34;&gt;The Human Side of Postmortems&lt;/a&gt; (Time invest 45 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.amazon.de/Field-Guide-Understanding-Human-Error/dp/0754648265&#34;&gt;Field Guide to Understanding Human Error&lt;/a&gt; - Sidney Dekker&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;instructions&#34;&gt;Instructions&lt;/h2&gt;
+
+&lt;p&gt;Adding up on top of that, there are lot’s of blog-posts, interviews and descriptions on how post-mortems should be conducted:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cmg.org/wp-content/uploads/2009/06/8022.pdf&#34;&gt;Say Goodbye to Post-Mortems. Say Hello to Effective Problem Management&lt;/a&gt; -(Time invest 30mins)&lt;/li&gt;
+&lt;li&gt;(Video) &lt;a href=&#34;http://youtu.be/ciIT2r_j050&#34;&gt;John Allspaw (Etsy) Interview - Velocity Santa Clara 2014&lt;/a&gt; (Time invest 30 mins)&lt;/li&gt;
+&lt;li&gt;(Slides) &lt;a href=&#34;http://velocityconf.com/velocity2013/public/schedule/detail/28251&#34;&gt;How to Run a Post-Mortem With Humans (Not Robots)&lt;/a&gt; (Time invest 10 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.pusher.com/dont-repeat-your-mistakes-conducting-post-mortems/&#34;&gt;Don’t Repeat your Mistakes: Conducting Post-mortems&lt;/a&gt; (Time invest 7 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://dimsboiv.uqac.ca/Cours/C2013/8INF851_Aut/tp_paper/paper/postmortem.pdf&#34;&gt;Extending Agile Methods: Postmortem Reviews as Extended Feedback&lt;/a&gt; (Time invest 20 mins)&lt;/li&gt;
+&lt;li&gt;(Slides) &lt;a href=&#34;http://www.slideshare.net/mobile/fullscreen/jhand2/its-not-your-fault-blameless-post-mortems/3&#34;&gt;It’s not your fault&lt;/a&gt; (Time invest 5 mins)&lt;/li&gt;
+&lt;li&gt;(Video) &lt;a href=&#34;https://sysadmincasts.com/episodes/20-how-to-write-an-incident-report-postmortem&#34;&gt;How to write an Incident Report / Postmortem&lt;/a&gt; (Time invest 5 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.travis-ci.com/2014-06-26-three-ingredients-to-a-great-postmortem/&#34;&gt;The Three Ingredients of a Great Postmortem&lt;/a&gt; (Time invest 5 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://codeascraft.com/2012/05/22/blameless-postmortems/&#34;&gt;Blameless PostMortems and a Just Culture&lt;/a&gt; (Time invest 10 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://vimeo.com/77206751&#34;&gt;Morgue: Helping Better Understand Events by Building a Post Mortem Tool - Bethany Macri&lt;/a&gt; (Time invest 33 mins)&lt;/li&gt;
+&lt;li&gt;(Slides) &lt;a href=&#34;http://www.unwiredcouch.com/talks/human-factors-postmortems/&#34;&gt;Human Factors and PostMortems&lt;/a&gt; (5 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.infoq.com/news/2014/07/blameless-post-mortems&#34;&gt;Blameless Post-Mortems&lt;/a&gt; (Time invest 5 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.paperplanes.de/2014/6/20/what-blameless-postmortem-taught-me.html&#34;&gt;What Adopting Blameless Post-Mortems Has Taught Me About Culture&lt;/a&gt; - Mathias Meyer (Time invest 7 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://everythingsysadmin.com/2012/09/more-outages.html&#34;&gt;DevOps: To increase reliability you need to have more outages&lt;/a&gt; (Time invest 7 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.jessicaharllee.com/notes/what-blameless-really-means/&#34;&gt;What blameless really means&lt;/a&gt; (Time invest 3 mins)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://radar.oreilly.com/tag/blameless-postmortem&#34;&gt;Postmortems, sans finger-pointing: The O’Reilly Radar Podcast&lt;/a&gt; (Time invest 30 mins)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;
+
+&lt;p&gt;Once you discovered all of that and you want to apply it in your team, there are even some tools available:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Etsy Morgue (&lt;a href=&#34;https://github.com/etsy/morgue&#34;&gt;Github&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.teresadietrich.net/?page_id=37&#34;&gt;Post Mortem Documents&lt;/a&gt; (incl. Excel template)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://de.slideshare.net/fattofatt/post-mortem-report&#34;&gt;Post Mortem Template&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With all of those you get a great insight in what type of culture you should establish in your team and essentially this makes up a good internal documentation and brings up good input for public statements. Which kind of filled the gap for me.&lt;/p&gt;
+
+&lt;h2 id=&#34;archives&#34;&gt;Archives&lt;/h2&gt;
+
+&lt;p&gt;Finally there’s a long list of links to existing documentations. First and foremost there’s a never ending list of post-mortem documentations on Tumblr:  &lt;a href=&#34;http://fuckyeahpostmortems.tumblr.com&#34;&gt;fuckyeahpostmortems.tumblr.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Looking closer into these, there are some examples which span across some well known companies:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.mailgun.com/what-happened-yesterday-and-what-we-are-doing-about-it/&#34;&gt;MailGun&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.pagerduty.com/2012/06/outage-post-mortem-june-14/&#34;&gt;PagerDuty&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/blog/1759-dns-outage-post-mortem&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://status.heroku.com/incidents/15&#34;&gt;Heroku Application Outage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Google App Engine Outage (&lt;a href=&#34;https://groups.google.com/forum/m/#!topic/google-appengine/p2QKJ0OSLc8&#34;&gt;1&lt;/a&gt;),(&lt;a href=&#34;http://googledevelopers.blogspot.ca/2013/05/google-api-infrastructure-outage_3.html&#34;&gt;2&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.getchef.com/blog/2014/07/10/berkshelf-v2-outage-postmortem/&#34;&gt;GetChef&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.zdnet.com/blog/btl/post-mortem-our-site-fail-wednesday-and-what-went-wrong/3023&#34;&gt;ZDNet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.joyent.com/blog/postmortem-for-outage-of-us-east-1-may-27-2014&#34;&gt;Joyent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://aws.amazon.com/de/message/65648/&#34;&gt;AWS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackstatus.net/post/97322396704/outage-postmortem-sepember-11th-2014&#34;&gt;StackExchange&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.dnsimple.com/2014/12/incident-report-ddos/&#34;&gt;DNSimple&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Other industries of course also have postmortem documentations or lessons learned which they share:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.wildfirelessons.net&#34;&gt;Fire fighting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.pixelprospector.com/the-big-list-of-postmortems/&#34;&gt;Indy game developers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.chubbybrain.com/blog/startup-failure-post-mortem/&#34;&gt;VC / Company startup failures&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&#34;offtopic&#34;&gt;Offtopic&lt;/h4&gt;
+
+&lt;p&gt;I’ve also learned that there are programming techniques which enable you to debug software fails on the algorithmic levels. E.g. for &lt;a href=&#34;http://dtrace.org/blogs/dap/2012/01/13/playing-with-nodev8-postmortem-debugging/&#34;&gt;NodeJS&lt;/a&gt; or &lt;a href=&#34;http://bashdb.sourceforge.net/pydb/pydb/lib/node36.html&#34;&gt;Python&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Chef cookbook dependecy visualization</title>
+      <link>https://blog.tolleiv.de/2014/07/chef-cookbook-dependecy-visualization/</link>
+      <pubDate>Sun, 06 Jul 2014 15:32:04 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2014/07/chef-cookbook-dependecy-visualization/</guid>
+      <description>
+
+&lt;div&gt;
+&lt;img src=&#34;https://blog.tolleiv.de/uploads/2014/07/smallgraph.png&#34; align=&#34;right&#34; markdown=&#34;1&#34; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In my &lt;a href=&#34;http://blog.tolleiv.de/2014/05/chef-qa-toolchain/&#34;&gt;previous post&lt;/a&gt; I&amp;rsquo;ve pointed out some tools which make your live with &lt;a href=&#34;http://www.getchef.com/chef/&#34;&gt;Chef&lt;/a&gt; much easier. Among these, &lt;a href=&#34;http://berkshelf.com/&#34;&gt;Berkshelf&lt;/a&gt; helps with managing cookbooks and their dependencies. Depending on your workflows these  can be very straight forward or grow very complex.&lt;/p&gt;
+
+&lt;p&gt;I had some free time and thought that visualizing these dependencies as graphs could be a fun weekend project. You can test out the results on &lt;a href=&#34;http://berksgraph.tolleiv.de/&#34;&gt;berksgraph.tolleiv.de&lt;/a&gt; yourself. Just upload your Berksfile.lock and you&amp;rsquo;ll see the result.&lt;/p&gt;
+
+&lt;h3 id=&#34;building-blocks&#34;&gt;Building blocks&lt;/h3&gt;
+
+&lt;p&gt;Esentially I&amp;rsquo;ve used &lt;a href=&#34;http://nodejs.org/api/stream.html&#34;&gt;Node.Js transform streams&lt;/a&gt; &lt;a href=&#34;http://nicolashery.com/parse-data-files-using-nodejs-streams/&#34;&gt;[1]&lt;/a&gt; &lt;a href=&#34;http://strongloop.com/strongblog/practical-examples-of-the-new-node-js-streams-api/&#34;&gt;[2]&lt;/a&gt; to parse the Berksfile.lock and generate &lt;a href=&#34;http://d3js.org/&#34;&gt;D3&lt;/a&gt; graph data. The graph data is transformed into a nice graph with &lt;a href=&#34;http://marvl.infotech.monash.edu/webcola/&#34;&gt;cola.js&lt;/a&gt;. In order to provide a nice interface for the application, everything was wrapped into an &lt;a href=&#34;http://expressjs.com/&#34;&gt;Express&lt;/a&gt; application which uploads the graph data to &lt;a href=&#34;https://github.com/tolleiv/berksfile-graphs/blob/master/lib/S3UploadStream.js&#34;&gt;Amazon S3&lt;/a&gt;. The actual hosting is done on one &lt;a href=&#34;https://devcenter.heroku.com/articles/getting-started-with-nodejs&#34;&gt;Heroku&lt;/a&gt; dyno.&lt;/p&gt;
+
+&lt;h3 id=&#34;examples&#34;&gt;Examples&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://berksgraph.tolleiv.de/grph?1404657586462#2014-07-06-fe9d7192c4c36da5279226d5d82ef3f93128a48e.js&#34;&gt;Very simple graph&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://berksgraph.tolleiv.de/grph?1404656042676#2014-07-06-04981e1185370fecf939ada2ef87ffda374c5e17.js&#34;&gt;Graph with moderate complexity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://berksgraph.tolleiv.de/grph?1404656118013#2014-07-06-51192e0f4bb8bfd2aab15551d4b31241eb295d18.js&#34;&gt;Complex graph&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Chef QA toolchain</title>
+      <link>https://blog.tolleiv.de/2014/05/chef-qa-toolchain/</link>
+      <pubDate>Sat, 24 May 2014 00:35:09 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2014/05/chef-qa-toolchain/</guid>
+      <description>
+
+&lt;p&gt;In the past years I&amp;rsquo;ve jumped into the role of the DevOps evangelist at AOE. As it seems this was quite successful and people joined in quickly. But due to the fact that DevOps for us also means that less trained colleges should participate in most parts of the codified infrastructure, it requires some quality assurance efforts in the background. An overview of the tools which help us to keep things clean, is what I wanted to share in this post.&lt;/p&gt;
+
+&lt;h3 id=&#34;tl-dr&#34;&gt;Tl;dr&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.getchef.com/chef/&#34;&gt;Chef&lt;/a&gt; - Great provisioning tool&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://berkshelf.com/&#34;&gt;Berkshelf&lt;/a&gt; - Easy dependency management&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://acrmp.github.io/foodcritic/&#34;&gt;Foodcritic&lt;/a&gt; - Chef specific lint&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://batsov.com/rubocop/&#34;&gt;Rubocop&lt;/a&gt; - Generic Ruby lint with autocorrect&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/test-kitchen&#34;&gt;Test-Kitchen&lt;/a&gt; - Real world test automation&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://serverspec.org/&#34;&gt;Serverspec&lt;/a&gt; - Intuitive good documented functional test library&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;provisioning-tools&#34;&gt;Provisioning tools&lt;/h3&gt;
+
+&lt;p&gt;The first part in the toolchain is &lt;a href=&#34;http://www.getchef.com/chef/&#34;&gt;Chef&lt;/a&gt; itself. We choose it over &lt;a href=&#34;http://puppetlabs.com/&#34;&gt;Puppet&lt;/a&gt; because it seemed to have a lower entry barrier and involved developers much better than the strict DSL of Puppet. We had some knowledge in our team for both tools, but in the end people sticked to Chef even on their private servers and that made the choice easy.&lt;/p&gt;
+
+&lt;h3 id=&#34;dependency-management&#34;&gt;Dependency management&lt;/h3&gt;
+
+&lt;p&gt;Nowadays we&amp;rsquo;re using &lt;a href=&#34;http://berkshelf.com/&#34;&gt;Berkshelf&lt;/a&gt; to maintain dependencies within our cookbooks and for our cookbook packages. The main reason to choose it over &lt;a href=&#34;https://github.com/applicationsonline/librarian-chef&#34;&gt;Librarian&lt;/a&gt;, which we used before, was that it is failing with more meaningful errors. Besides that it turned out to be more robust when it comes to circular dependencies between cookbooks. Both features are essential when working with beginners.&lt;/p&gt;
+
+&lt;h3 id=&#34;lint-tools&#34;&gt;Lint tools&lt;/h3&gt;
+
+&lt;p&gt;Once our team started to write cookbooks on their own, it turned out quickly that the understanding of Chef, the awareness of best practices and a unique coding style is hard to achieve without tools. And that&amp;rsquo;s where the following Ruby tools can help out a lot.&lt;/p&gt;
+
+&lt;p&gt;The first tool which should be used by everyone who typed more than two lines of Chef code is &lt;a href=&#34;http://acrmp.github.io/foodcritic/&#34;&gt;Foodcritic&lt;/a&gt;. It is analizing the cookbooks and responds with very cool and well documented error messages and code improvement suggestions. Along with them it guides every user to stick to Chef best practices.&lt;/p&gt;
+
+&lt;p&gt;The second tool is &lt;a href=&#34;http://batsov.com/rubocop/&#34;&gt;Rubocop&lt;/a&gt;, a well known Ruby static code analizer which enforces the &lt;a href=&#34;https://github.com/bbatsov/ruby-style-guide&#34;&gt;Ruby Style Guide&lt;/a&gt;. One of the most powerful features is the autocorrect option which helps to get rid of trivial problems. That&amp;rsquo;s especially important for developers who don&amp;rsquo;t use Ruby all day and who hate to think about &lt;em&gt;single vs. double quotes&lt;/em&gt; problems. Rubocop handles such problems automatically and keeps the code base in a consistent state.&lt;/p&gt;
+
+&lt;p&gt;An alternative to Rubocop would be &lt;a href=&#34;https://github.com/square/cane&#34;&gt;Cane&lt;/a&gt; - but that comes without the autocorrect feature. Further Ruby QA tools like &lt;a href=&#34;https://github.com/seattlerb/flay&#34;&gt;flay&lt;/a&gt;, &lt;a href=&#34;https://github.com/troessner/reek&#34;&gt;reek&lt;/a&gt; or &lt;a href=&#34;https://github.com/seattlerb/flay&#34;&gt;flog&lt;/a&gt; didn&amp;rsquo;t really apply to our Chef recipes or brought up too much false positives. This just created too much confusion and brought in too little value.&lt;/p&gt;
+
+&lt;h3 id=&#34;testing&#34;&gt;Testing&lt;/h3&gt;
+
+&lt;p&gt;There&amp;rsquo;s a large amount of tools which you could use to test recipes. &lt;a href=&#34;https://github.com/sethvargo/chefspec&#34;&gt;ChefSpec&lt;/a&gt; is the way to go when it comes to plain unit tests. It runs everything in Chef solo without actually converging anything on the system. Its speed is the biggest benefit and it is also the only way to properly test exception handling and broken paths in your recipes. Nowadays there&amp;rsquo;s no way around ChefSpec when you look into the official OpsCode cookbooks. It is covered in lot&amp;rsquo;s of blog posts as the entry point to cookbook testing (&lt;a href=&#34;https://sethvargo.com/unit-testing-chef-cookbooks/&#34;&gt;Unit testing Chef cookbooks&lt;/a&gt;, &lt;a href=&#34;http://jtimberman.housepub.org/blog/2013/05/09/starting-chefspec-example/&#34;&gt;Starting ChefSpec Example&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re interested to run functional or integration tests, you could use &lt;a href=&#34;https://github.com/sstephenson/bats&#34;&gt;Bats&lt;/a&gt;, &lt;a href=&#34;http://serverspec.org/&#34;&gt;Serverspec&lt;/a&gt;, &lt;a href=&#34;http://docs.seattlerb.org/minitest/&#34;&gt;Minitest&lt;/a&gt;, &lt;a href=&#34;https://github.com/calavera/rspec-chef&#34;&gt;Rspec&lt;/a&gt;, &lt;a href=&#34;https://github.com/Atalanta/cucumber-chef&#34;&gt;Cucumber&lt;/a&gt;, &lt;a href=&#34;https://code.google.com/p/shunit2/&#34;&gt;shUnit2&lt;/a&gt; and even plain &lt;a href=&#34;https://github.com/test-kitchen/busser-bash&#34;&gt;Bash&lt;/a&gt; scripts. All of the tools depend on a preceding converge step before the actual tests could check the results. That&amp;rsquo;s why you usually want to run the tests in a fixed virtualized environment. That&amp;rsquo;s provided with &lt;a href=&#34;https://github.com/test-kitchen&#34;&gt;Test-Kitchen&lt;/a&gt;. Every Test-Kitchen suite is pulled up as seperate environment with it&amp;rsquo;s own runlist and can then be tested fully isolated.&lt;/p&gt;
+
+&lt;p&gt;For our recipe QA my favorite functional testing tool is Serverspec. It provides an intuitive test structure (opposed to MiniTest) and comes with a long list of well documented &lt;a href=&#34;http://serverspec.org/resource_types.html&#34;&gt;predefined resources&lt;/a&gt;. But to encourage everyone to test as much as possible, I wouldn&amp;rsquo;t really limit the toolchain to a single tool, instead I brought up example implementations for most of them into our internal cookbooks. This way everyone could pick the tool they liked.&lt;/p&gt;
+
+&lt;p&gt;Good public examples for these testing libraries can be found on Github in various public cookbooks:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ChefSpec: &lt;a href=&#34;https://github.com/tas50/nagios/tree/master/spec&#34;&gt;1&lt;/a&gt;, &lt;a href=&#34;https://github.com/opscode-cookbooks/nginx/tree/master/spec&#34;&gt;2&lt;/a&gt;, &lt;a href=&#34;https://github.com/opscode-cookbooks/chef-splunk&#34;&gt;3&lt;/a&gt;, &lt;a href=&#34;https://github.com/opscode-cookbooks/yum/tree/master/spec/unit&#34;&gt;4&lt;/a&gt;, &lt;a href=&#34;https://github.com/opscode-cookbooks/rsyslog/tree/master/spec&#34;&gt;5&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Serverspec: &lt;a href=&#34;https://github.com/opscode-cookbooks/mysql/tree/master/test/integration&#34;&gt;1&lt;/a&gt;, &lt;a href=&#34;https://github.com/serverspec/specinfra/tree/master/spec&#34;&gt;2&lt;/a&gt;, &lt;a href=&#34;https://github.com/phlipper/chef-postgresql/tree/master/test/integration/server/serverspec&#34;&gt;3&lt;/a&gt;, &lt;a href=&#34;https://github.com/phlipper/chef-monit/tree/master/test/integration&#34;&gt;4&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Minitest: &lt;a href=&#34;https://github.com/opscode-cookbooks/ark/tree/master/files/default/tests/minitest&#34;&gt;1&lt;/a&gt;, &lt;a href=&#34;https://github.com/opscode-cookbooks/varnish/tree/master/files/default/test&#34;&gt;2&lt;/a&gt;, &lt;a href=&#34;https://github.com/elasticsearch/cookbook-elasticsearch/tree/master/tests&#34;&gt;3&lt;/a&gt;, &lt;a href=&#34;https://github.com/bflad/chef-docker/tree/master/test/cookbooks/docker_test/files/default/tests/minitest&#34;&gt;4&lt;/a&gt;, &lt;a href=&#34;https://github.com/ganglia/chef-ganglia/tree/master/test/cookbooks/ganglia_test/files/default/tests/minitest&#34;&gt;5&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bats: &lt;a href=&#34;https://github.com/opscode-cookbooks/lvm/tree/master/test/integration/create/bats&#34;&gt;1&lt;/a&gt;, &lt;a href=&#34;https://github.com/opscode-cookbooks/rsync/tree/master/test/integration&#34;&gt;2&lt;/a&gt;, &lt;a href=&#34;https://github.com/fnichol/chef-rbenv/tree/master/test/integration/system_ruby/bats&#34;&gt;3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Cucumber &lt;a href=&#34;http://www.jedi.be/blog/2011/03/29/vagrant-testing-testing-one-two/&#34;&gt;1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;documentation&#34;&gt;Documentation&lt;/h3&gt;
+
+&lt;p&gt;Last but not least, every cookbook should have a nice README and that could be rendered with &lt;a href=&#34;https://rubygems.org/gems/redcarpet&#34;&gt;redcarpet&lt;/a&gt; or if you&amp;rsquo;re supporting more than just Markdown you could just throw &lt;a href=&#34;https://github.com/github/markup&#34;&gt;github/markup&lt;/a&gt; at it.&lt;/p&gt;
+
+&lt;p&gt;Alternatively you could of course just host your cookbooks on Github, Bitbucket or on a self-hosted Gitlab. Then these would take over rendering.&lt;/p&gt;
+
+&lt;h3 id=&#34;fin&#34;&gt;Fin&lt;/h3&gt;
+
+&lt;p&gt;The above &lt;code&gt;Tl,dr&lt;/code&gt; section lined out my favorite tools. To sum up this post, I&amp;rsquo;d say that automation was essential for our setup. Each tool which I brought up in the post can be used for our internal recipes and all off them will be triggered by our CI server. With that toolchain at hand we were able to have fully open cookbooks were everyone can contribute easily. Besides that the tools lower the barrier for people who are new to Chef and they help the more integrated people to support others efficiently.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Socket.IO within concurrent processes</title>
+      <link>https://blog.tolleiv.de/2014/05/socket.io-within-concurrent-processes/</link>
+      <pubDate>Sun, 11 May 2014 15:43:53 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2014/05/socket.io-within-concurrent-processes/</guid>
+      <description>
+
+&lt;p&gt;The following is going to show some pitfalls and their solution when working with NodeJs, Socket.IO and concurrent processes.&lt;/p&gt;
+
+&lt;h3 id=&#34;basic-setup&#34;&gt;Basic setup&lt;/h3&gt;
+
+&lt;h4 id=&#34;socket-connections&#34;&gt;Socket connections&lt;/h4&gt;
+
+&lt;p&gt;In order to use socket communication with NodeJS a basic server side code block might look this &lt;a href=&#34;http://socket.io/&#34;&gt;see online docs&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var io = require(&#39;socket.io&#39;).listen(80);
+io.sockets.on(&#39;connection&#39;, function (socket) {
+  socket.emit(&#39;news&#39;, { hello: &#39;world&#39; });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This enables you to send some data through the socket connection to the client and with just a little more code it could even retrieve some data from the client. I left that part out to keep it simple.&lt;/p&gt;
+
+&lt;h4 id=&#34;event-emitters&#34;&gt;Event emitters&lt;/h4&gt;
+
+&lt;p&gt;The second component which I&amp;rsquo;ve to add in the mix is a simple &lt;a href=&#34;http://nodejs.org/api/events.html&#34;&gt;EventEmitter&lt;/a&gt;. It&amp;rsquo;s build like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var emitter = new (require(&#39;events&#39;).EventEmitter);
+ // listening to a given event:
+emitter.on(&amp;quot;news&amp;quot;, function (data) { console.log(data); });
+ // actually trigger the event:
+emitter.emit(&amp;quot;news&amp;quot;, {my: data})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The emitter would be used to gather data from within the program and the listeners would trigger &lt;code&gt;socket.emit(...)&lt;/code&gt; in case the event is relevant for the connected client. This way the program could be decoupled from the socket implementation and other listeners could use the same event data without additional event (a nice way to introduce logging).&lt;/p&gt;
+
+&lt;h4 id=&#34;concurrent-processes&#34;&gt;Concurrent processes&lt;/h4&gt;
+
+&lt;p&gt;Besides all the event logic, the application should run in a robust way and that&amp;rsquo;s typically done with the &lt;a href=&#34;http://nodejs.org/api/cluster.html&#34;&gt;cluster module&lt;/a&gt; like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var cluster = require(&#39;cluster&#39;);
+if (cluster.isMaster) {
+    var cpuCount = require(&#39;os&#39;).cpus().length;
+    for (var i = 0; i &amp;lt; cpuCount; i += 1) {
+        cluster.fork();
+    }
+    cluster.on(&#39;exit&#39;, function(worker) {
+        cluster.fork();
+    });
+} else {
+    // Your actual code come here
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s now the application entry point, it creates worker processes for the actual processing. In case a worker dies our application would keep running and a new worker process would come up.&lt;/p&gt;
+
+&lt;h3 id=&#34;mixing-the-incredients&#34;&gt;Mixing the incredients&lt;/h3&gt;
+
+&lt;p&gt;Throwing all this into the mix creates some problems. First of all, the worker processes use their own memory, so everything which is sent to the EventEmitter in one process can&amp;rsquo;t reach the others.&lt;/p&gt;
+
+&lt;p&gt;The second problem occurs when Socket.IO is included in the concurrent setup. Due to the fact that the worker processes are assign randomly to the clients, your actual work (e.g. triggered by HTTP requests) might been done in one process, while your socket connection might be established to another process. If you&amp;rsquo;d use the basic setup from above, your events would then never reach the right clients and therefore you&amp;rsquo;d loose information.&lt;/p&gt;
+
+&lt;h3 id=&#34;redis-store-helping-out&#34;&gt;Redis store helping out&lt;/h3&gt;
+
+&lt;p&gt;The solution is to replace the in-memory store of Socket.IO with a Redis based store (see &lt;a href=&#34;http://adamnengland.wordpress.com/2013/01/30/node-js-cluster-with-socket-io-and-express-3/&#34;&gt;Adam N England&lt;/a&gt; for further details). This would look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var RedisStore = require(&#39;socket.io/lib/stores/redis&#39;)
+    , redis = require(&#39;socket.io/node_modules/redis&#39;)
+    , pub = redis.createClient()
+    , sub = redis.createClient()
+    , client = redis.createClient();
+
+var io = require(&#39;socket.io&#39;).listen(80);
+io.set(&#39;store&#39;, new RedisStore({
+    redis: redis, redisPub: pub, redisSub: sub, redisClient: client
+}));
+io.sockets.on(&#39;connection&#39;, function (socket) {
+  socket.emit(&#39;news&#39;, { hello: &#39;world&#39; });
+});
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With that, the native &lt;a href=&#34;http://redis.io/topics/pubsub&#34;&gt;Redis Publisher/Subscriber&lt;/a&gt; functionality is used to implement the required interprocess communication and it makes sure all processes can react on the passed information.&lt;/p&gt;
+
+&lt;h4 id=&#34;eventemitter-replacement&#34;&gt;EventEmitter replacement&lt;/h4&gt;
+
+&lt;p&gt;In order to participate in that setup, all event based processes should then also start using the Redis functionality. Especially the events which are meant to &amp;ldquo;reach&amp;rdquo; out to the socket connection should be replaced with &lt;a href=&#34;https://github.com/mranney/node_redis#publish--subscribe&#34;&gt;Redis calls&lt;/a&gt; then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var redis = require(&#39;redis&#39;);
+
+  // subscription replace the event listener
+var sub = redisClient.createClient()
+sub.subscribe(&amp;quot;channelname&amp;quot;);
+sub.on(&amp;quot;message&amp;quot;, function (channel, msg) {
+   console.log(msg)
+})
+
+  // publishing replaces the event emitter
+var pub = redis.createClient();
+pub.publish(&amp;quot;channelname&amp;quot;, JSON.stringify({ my: data}));
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This introduces some latency into the system which &lt;a href=&#34;http://blog.lightstreamer.com/2013/05/benchmarking-socketio-vs-lightstreamer.html&#34;&gt;might cause scaling problems&lt;/a&gt; with higher numbers of clients - but first of all it enables higher numbers of clients at all.&lt;/p&gt;
+
+&lt;h3 id=&#34;final-setup&#34;&gt;Final setup&lt;/h3&gt;
+
+&lt;p&gt;The overall setup can be seen in the small demonstration app on &lt;a href=&#34;https://github.com/tolleiv/concurrent-sockets&#34;&gt;Github&lt;/a&gt;. Within that application a simple HTTP frontend call would trigger the events, which then report back through Redis and the Socket.IO connection. That&amp;rsquo;s quite trivial but complex enough to play with it and to run some tests against it.&lt;/p&gt;
+
+&lt;p&gt;Btw. reviewing the demo app works best starting from the related test within &lt;a href=&#34;https://github.com/tolleiv/concurrent-sockets/blob/master/spec/socket-spec.js&#34;&gt;spec/socket-spec.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;benchmarks&#34;&gt;Benchmarks&lt;/h3&gt;
+
+&lt;p&gt;The NodeJS Redis client comes with some nice &lt;a href=&#34;https://github.com/mranney/node_redis#performance&#34;&gt;benchmarks&lt;/a&gt; already. They reach up to 40000 ops/sec for simple calls with 50 concurrent connections.&lt;/p&gt;
+
+&lt;p&gt;For NodeJS there are tons of benchmarks around already - especially the &lt;a href=&#34;https://www.paypal-engineering.com/2013/11/22/node-js-at-paypal/&#34;&gt;PayPal benchmark&lt;/a&gt; and the &lt;a href=&#34;https://vividcortex.com/blog/2013/12/09/analysis-of-paypals-node-vs-java-benchmarks/&#34;&gt;related debate&lt;/a&gt;, which show that Node can outperform Java significantly, should be mentioned. Along with that the &lt;a href=&#34;http://drewww.github.io/socket.io-benchmarking/&#34;&gt;Practical socket.io Benchmarking&lt;/a&gt; by Drew Harry is worth a lookup.&lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s left for me is the question how many concurrent socket connections this could withstand and how all this scales depending on the amount of messages. The assumption from &lt;a href=&#34;http://mrjoes.github.io/2011/12/15/sockjs-bench.html&#34;&gt;existing benchmarks&lt;/a&gt; would be that every worker process should be able to bind ~2k socket connections with approx. 10k messages per second. But those are not closely related to the described setup and they leave room for further investigations.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Octopress migration</title>
+      <link>https://blog.tolleiv.de/2014/05/octopress-migration/</link>
+      <pubDate>Sun, 04 May 2014 09:57:25 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2014/05/octopress-migration/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve finally managed to step away from Wordpress and migrated my blog to &lt;a href=&#34;http://octopress.org/&#34;&gt;Octopress&lt;/a&gt;. There were many reasons for me, the main reason was that I didn&amp;rsquo;t want to host it by myself anymore.&lt;/p&gt;
+
+&lt;p&gt;The migration itself was guided by some blog posts which helped me a lot to get insights into Octopress:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://zhen.org/blog/migrating-40000-posts-from-wordpress-to-octopress/&#34;&gt;Migrating 40,000 Posts From Wordpress to Octopress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://learnaholic.me/2012/10/15/octopress-seo-and-disabling-the-blog-route/&#34;&gt;Octopress SEO and Disabling the Blog Route&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://robdodson.me/blog/2012/04/30/custom-domain-with-octopress-and-github-pages/&#34;&gt;Custom Domain With Octopress and Github Pages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://luosky.com/2012/07/24/create-custom-rss-feed-for-octopress/&#34;&gt;Create Custom Rss Feed for Octopress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.higgsboson.tk/2013/01/20/add-flattr-to-octopress/&#34;&gt;Add Flattr to Octopress&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Besides that I managed to keep all the old URLs and migrated the comments to Diqus which went pretty smooth with very little configuration.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TemplaVoila - followup</title>
+      <link>https://blog.tolleiv.de/2013/06/templavoila---followup/</link>
+      <pubDate>Fri, 14 Jun 2013 09:45:54 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2013/06/templavoila---followup/</guid>
+      <description>
+
+&lt;p&gt;It seems that publishing the &lt;a href=&#34;http://blog.tolleiv.de/2013/06/templavoila-future/&#34;&gt;news regarding TemplaVoila&lt;/a&gt; came to the right time and it found its way through the community. But along with it, some irritation came up which needs some additional words.&lt;/p&gt;
+
+&lt;h3 id=&#34;will-there-be-a-typo3-cms-6-2-compatible-version-of-templavoila&#34;&gt;Will there be a TYPO3 CMS 6.2 compatible version of TemplaVoila?&lt;/h3&gt;
+
+&lt;p&gt;**As it seems: yes - **some members of the community offered their help. I&amp;rsquo;ll reach out to them in the next days and try to connect them as good as I can. I will of course support them as good as possible. I can&amp;rsquo;t really tell whether there will be a TER release for that or whether we&amp;rsquo;ll keep it in the Git repository only. That&amp;rsquo;s up for discussion - I made my point about that already and find it still valid. In case you&amp;rsquo;re interested to help (coding, documentation, anything) - just sent me a note.&lt;/p&gt;
+
+&lt;h3 id=&#34;was-it-a-black-day-for-the-community&#34;&gt;Was it a black day for the community?&lt;/h3&gt;
+
+&lt;p&gt;**I doubt that - **a &lt;a href=&#34;http://twitter.com/spacedani/status/343756724198576130&#34;&gt;single tweet&lt;/a&gt; mentioning people clapping on the news made a &lt;a href=&#34;http://lists.typo3.org/pipermail/typo3-german/2013-June/093272.html&#34;&gt;large wave&lt;/a&gt; through the newsgroups, nothing else. Most likely this was just a misunderstanding and most importantly it didn&amp;rsquo;t reflect the generally very positive feedback I got through all other canals.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-about-t3cs13&#34;&gt;What about #T3CS13?&lt;/h3&gt;
+
+&lt;p&gt;That&amp;rsquo;s first of all a great community event and everyone should reach out for #T3CS14 tickets next year. Nevertheless as it seems &lt;a href=&#34;http://lists.typo3.org/pipermail/typo3-english/2013-June/086209.html&#34;&gt;some people (still) clapped their hands&lt;/a&gt; when they heard the TemplaVoila news,&lt;a href=&#34;http://twitter.com/StGebert/status/343675163814006784&#34;&gt; which seemed very inappropriate&lt;/a&gt;. Due to that Jochen Weiland (one of the organizers) sent a personal apology to me and an &amp;ldquo;&lt;a href=&#34;http://twitter.com/t3cs/status/344432618688892928&#34;&gt;official tweet&lt;/a&gt;&amp;rdquo; for what happened at the #T3CS13. From my perspective this wasn&amp;rsquo;t even needed, but it&amp;rsquo;s nice that he did it anyways. The fact that &lt;a href=&#34;http://lists.typo3.org/pipermail/typo3-english/2013-June/086209.html&#34;&gt;Peter Pröll&lt;/a&gt; &lt;a href=&#34;http://twitter.com/robert_we/status/343751092254949376&#34;&gt;(proof)&lt;/a&gt; made a very clear statement during the event about some peoples misbehavior was already the right move. So let&amp;rsquo;s just close this chapter.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-are-the-alternatives-now&#34;&gt;What are the alternatives, now?&lt;/h3&gt;
+
+&lt;p&gt;We&amp;rsquo;ll see, but I hope that 6.2 or 6.3 will come along with a very strong suggestion in that regard and maybe a &amp;ldquo;Core candidate&amp;rdquo; extension/solution. Just to avoid that a double or triple-solution situation starts to grow once again.&lt;/p&gt;
+
+&lt;p&gt;Finally thanks for all the warm words and wishes. This made me very happy. Also please keep in mind that I just maintained TemplaVoila during the last 3-4 years and that I took over from Dmitry, Robert and Kasper.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TemplaVoila future</title>
+      <link>https://blog.tolleiv.de/2013/06/templavoila-future/</link>
+      <pubDate>Sat, 08 Jun 2013 07:20:34 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2013/06/templavoila-future/</guid>
+      <description>
+
+&lt;p&gt;If you followed some of my comments in the TYPO3 newsgroups recently, you&amp;rsquo;ve heard that I&amp;rsquo;m not very satisfied with the TYPO3 project in general and that&amp;rsquo;s also reflected in my activity for TemplaVoila. After a certain time of inactivity I even had to ask myself whether it&amp;rsquo;s wort to keep it in the TYPO3 universe or not. Due to the fact that this isn&amp;rsquo;t an easy decision, I created a pro and con list which I&amp;rsquo;d like to share, before I make conclusions.&lt;/p&gt;
+
+&lt;h3 id=&#34;why-templavoila-maintenance-should-continue&#34;&gt;Why TemplaVoila maintenance should continue:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;it made TYPO3 attractive for many less technical people (people who don&amp;rsquo;t even understand conditions or loops)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;it contains and combines concepts (language, workspaces, content structuring) which aren&amp;rsquo;t represented anyhow in other solutions&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;it is still used within the community and various indicators proof that it is still very popular&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;why-templavoila-should-not-be-maintained-anymore&#34;&gt;Why TemplaVoila should not be maintained anymore:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;it is not supported by the &lt;a href=&#34;http://lists.typo3.org/pipermail/typo3-team-core/2013-April/053866.html&#34;&gt;active contributors&lt;/a&gt; at all&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;it is constantly under some kind of PR-attack from the other solutions (which is very demotivating)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;it lacks a developer &amp;ldquo;community&amp;rdquo; or at least a team&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;it has a horribly outdated documentation which has to be overworked&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;code refactoring is not really possible, the code is horrible to maintain&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;it&amp;rsquo;s concepts can&amp;rsquo;t be ported anyhow to FLOW/extbase (extbase itself is broken when it comes to workspaces or languages - no way to port over alternative concepts for these)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;UI wise, Prototype and ExtJS have been used for it and need to be replaced with whatever the TYPO3 Core could offer&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;some of it&amp;rsquo;s concepts need to be reworked (language) to be much more useable&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;the TYPO3 Core changes in a way that extension maintenance is no fun at all&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;conclusions&#34;&gt;Conclusions:&lt;/h3&gt;
+
+&lt;p&gt;I could add further points to both lists, but in general you&amp;rsquo;ll get my point. All these have been on my mind for quite some time and I discussed them with various members of the TYPO3 community and I came to the conclusion that TemplaVoila should at least disappear from the TER to avoid that any new users start using it.&lt;/p&gt;
+
+&lt;p&gt;Along with that, I also came to the conclusion that handing over TemplaVoila back to Dmitry, Robert or Kasper wouldn&amp;rsquo;t make sense either - the remaining workload is enormous and a single developer alone would never be able to deliver anything with reasonable quality (incl. documentation).&lt;/p&gt;
+
+&lt;p&gt;This basically means that TemplaVoila won&amp;rsquo;t be actively distributed and supported by me and that there won&amp;rsquo;t be any new public releases. In order to keep up the ability to fix bugs, I&amp;rsquo;d offer to keep &lt;a href=&#34;http://forge.typo3.org/projects/extension-templavoila&#34;&gt;Forge+Git+Gerrit&lt;/a&gt; open and I&amp;rsquo;m still willing to review and merge patches (through Gerrit). Even though I didn&amp;rsquo;t see too much activity from others for TemplaVoila within Gerrit, I assume that this should be enough to support running projects.&lt;/p&gt;
+
+&lt;p&gt;To avoid that the discussion which might be needed for that announcement ends up in my blog, I&amp;rsquo;ll close the comments here and I&amp;rsquo;d love to invite you to comment within the related newsgroup entry in &lt;a href=&#34;http://lists.typo3.org/cgi-bin/mailman/listinfo/typo3-project-templavoila&#34;&gt;typo3.project.templavoila&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using genetic algorithms to optimize Apache Solr boost factors.</title>
+      <link>https://blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</link>
+      <pubDate>Thu, 06 Jun 2013 18:47:56 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18-150x150.png&#34; alt=&#34;Configuration interface.&#34; /&gt;&lt;/a&gt; Configuration interface.One thing I took along from last year&amp;rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&amp;rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&amp;rsquo;d like to share. If you want to have a look right away - the code can be found on &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-problem-to-solve&#34;&gt;The problem to solve:&lt;/h2&gt;
+
+&lt;p&gt;When running search indexes with Solr, one thing you might stumble opon is that you&amp;rsquo;ve various fields in your documents and you&amp;rsquo;ve to adjust their weights to get reasonable results. Finding those &amp;ldquo;boosting&amp;rdquo; values can be quite complex when you have many fields and many scenarios. Usually getting the values right is a task for very experienced integrators.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;   /solr/select?defType=dismax&amp;amp;q=my+query
+     &amp;amp;qf=title^**42**+description^**23**+footnotes^**5**+dalmatiners^**101**+foo^**9001**+comments
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Looking at it from a more technical perspective - when your Solr query looks like the one above, the question you&amp;rsquo;ve to answer is how the values for the highlighted numbers should look like to get &lt;em&gt;reasonable&lt;/em&gt; results.&lt;/p&gt;
+
+&lt;h2 id=&#34;measuring-reasonable&#34;&gt;Measuring &amp;ldquo;reasonable&amp;rdquo;:&lt;/h2&gt;
+
+&lt;p&gt;In order to solve the problem, the first thing we&amp;rsquo;ve to do, is to answer what we expect the outcome to look like. In other words, we&amp;rsquo;ve to measure how reasonable a specific solution is. For a search engine this can be done with some sample queries and some expectations along with that. The expectation could come in a form that we explicitly tell which documents we expect in the result lists of specific queries (and at predefined positions). Once we&amp;rsquo;ve these expectations, we can simple test agains the expectations and check whether or not specific boost factor values actually satisfy them.&lt;/p&gt;
+
+&lt;p&gt;A small example on that: In case we&amp;rsquo;ve a sample query with the expectation that document 123 appears in the first position and document 248 appears second. We could run this with two specific boost factor combinations (a) and (b). Along with (a) we might find that, document 123 actually ranks on position 8 and document 248 is found on position 4 and with (b) we&amp;rsquo;d find them on pos. 2 and pos. 14 - which one would we consider to be better?
+Comparing the &amp;ldquo;error&amp;rdquo; and &amp;ldquo;squared error&amp;rdquo; produced by (a) and (b) gives us a possible hint:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;(a): 8-1 + 4-2 = 7+2 = 9&lt;/li&gt;
+&lt;li&gt;(8-1)² + (4-2)² = 49+4 = 53&lt;/li&gt;
+&lt;li&gt;(b): 2-1 + 14-2 = 1+12 = 13&lt;/li&gt;
+&lt;li&gt;(2-1)² + (14-2)² = 1+144 = 145&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;While it&amp;rsquo;s not clear to compare both with just the normal error value comparision, the squared error shows clearly that (a) seems to outperform (b) in those cases and we should choose (a) for further considerations.&lt;/p&gt;
+
+&lt;p&gt;Being able to determine the &amp;ldquo;error&amp;rdquo; introduced by a specific solution then enables us to compare various solutions and helps us to play around with all sorts of optimizations.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-idea&#34;&gt;The idea:&lt;/h2&gt;
+
+&lt;p&gt;With a defined &amp;ldquo;cost function&amp;rdquo; like the one I introduced before, you&amp;rsquo;d be able to tackle the problem with some well known algorithmic solutions. Considering the boost factors to be represented as numerical vectors, we could use gradient methodologies to find good solutions. But having 20-40 fields per document would require to &amp;ldquo;search&amp;rdquo; a large numerical space and with gradient methods, this would result in a large amount of queries.&lt;/p&gt;
+
+&lt;p&gt;Another approach to run these optimizations, is to utilize genetic algorithms which kind of help to find good solutions within predictable amounts of time. You might know genetic algorithms for some lectures where people solved &lt;a href=&#34;http://www.math.hmc.edu/seniorthesis/archives/2001/kbryant/kbryant-2001-thesis.pdf&#34;&gt;traveling salesman problems&lt;/a&gt; and actually the only change you&amp;rsquo;d have to make is to exchange the traveling salesman cost function with the cost function you saw before and you&amp;rsquo;d be close to a solution already.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;With some more details:&lt;/strong&gt; Genetic algorithms take an amount of randomly generated possible solutions (called the &lt;em&gt;population&lt;/em&gt;) and try to find good solutions by applying the typical methods you know from your biology class (mutations, crossovers, natural selection). &lt;em&gt;Natural selection&lt;/em&gt; is done in a way that from each generation only the top 50% &amp;ldquo;survive and the rest of the population is filled up with now solutions generated through &lt;em&gt;mutations&lt;/em&gt; (random parameter changes of existing solutions) and &lt;em&gt;crossovers&lt;/em&gt; (interchanging parts of two existing solutions to create a third one). All solutions are always measured and compared on their response to the defined cost function and this way we&amp;rsquo;re always able to determine the &amp;ldquo;best known solution&amp;rdquo; even after very short time.&lt;/p&gt;
+
+&lt;p&gt;If that sounds too high-level. For the shown query from above, the vector [42,23,5,101,9001,1] is the vector I used. In addition let&amp;rsquo;s considering we have another vector [1,1,1,1,1,1] with equal weights for all fields. Assuming those are our fittest vectors at a given time, we could derive new possible solutions by mutating them (e.g. [42,23,5,101,9001,1] ~&amp;gt; [42,23,5,101,505,1] ) or creating a cross-over between both ( [42,23,5,101,9001,1] &amp;amp; [1,1,1,1,1,1] ~&amp;gt; [42,23,5,1,1,1]). Even adding new random vectors to our population might add some value. Once we found enough new vectors to have a population of a decent size, we&amp;rsquo;d compare the fitness and keep only the top 50% and continue our process until we reach convergence or a fixed iteration limit.&lt;/p&gt;
+
+&lt;p&gt;A drawback of the genetic algorithm is that it might not deliver the optimal result, because it never found it. But that&amp;rsquo;s just how nature works too. So it&amp;rsquo;s more that you&amp;rsquo;ve to sacrifice &amp;ldquo;training runtime&amp;rdquo; over accuracy or vice versa.&lt;/p&gt;
+
+&lt;h2 id=&#34;implementation&#34;&gt;Implementation:&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43-150x150.png&#34; alt=&#34;10 generation optimization&#34; /&gt;&lt;/a&gt; 10 generation optimizationThere&amp;rsquo;s really not too much to say other than that the code can be found in &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;. I used NodeJS with ExpressJs, SocketIO and an Twitter Bootstrap interface to have a relatively good looking and somewhat performing proof-of-concept. I used that setup, because NodeJS seems to me as the most easiest way to talk to Solr and it &amp;ldquo;promises&amp;rdquo; to be performant even with larger examples. SocketIO helped a lot to ease the pain when it comes to Server &amp;lt;&amp;gt; Client communication. The only drawback of that setup is the that everything had to be turned into something which is able to deal with asynchronous processing. This makes the algorithmic parts look a bit odd and bloated - but for me the benefits outweigh the odds.&lt;/p&gt;
+
+&lt;h2 id=&#34;final-thoughts&#34;&gt;Final thoughts:&lt;/h2&gt;
+
+&lt;p&gt;The proof-of-concept, which you&amp;rsquo;ll find on the Github repository, demonstrates that such type of optimization can work and that&amp;rsquo;s more or less all I wanted to do with it.&lt;/p&gt;
+
+&lt;p&gt;You can use the NodeJS tool with any of your Solr indexes and just go ahead and try it yourself. There are many parts which aren&amp;rsquo;t too accurate yet, especially the measuring could maybe done better with precision and recall measurements - but I assume that any type of cost function would work for now, that&amp;rsquo;s why P/R wasn&amp;rsquo;t implemented along with the tool. Also I&amp;rsquo;m not a NodeJS expert and the code might not follow best practice atm. - I&amp;rsquo;d be very happy to change that if anyone is interested to help?&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;When I did a small presentation during the &lt;a href=&#34;http://berlinbuzzwords.de/wiki/barcamp&#34;&gt;Berlin Buzzwords bar camp&lt;/a&gt; I also got some other questions which don&amp;rsquo;t necessarily relate to just this implementation but to all sorts of automated optimizations.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The first question was, how to get the list of example queries and the &amp;ldquo;expected&amp;rdquo; documents for them.&lt;/em&gt; For now I assume that most applications at least know their top 50 or top 100 search and they should be able to predefine &amp;ldquo;relevant&amp;rdquo; documents for those searches. That&amp;rsquo;s at least what I assume everyone should have. Another way to generate the test data is to do some log file analyses and check the search and pick/weight the documents people clicked from within the results. This should also help to get some results.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Another questions related to that was wether long tail would fall behind with that approach.&lt;/em&gt; As this is only a proof-of-concept, I wasn&amp;rsquo;t really able to answer this. But I assume that long-tail searches would still benefit a lot more from the relevance certain documents gain due to high TF-IDF scores and those should then outweigh the &amp;ldquo;scoring bias&amp;rdquo; in a way. Another approach (known from machine learning) could be to leave out the top 1% of the documents (and searches) and just optimize for the rest of the top X% and afterwards check wether the top 1% still performs good - this way long tail could be &amp;ldquo;protected a bit more.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;And the last question was whether I tested other (gradient based) algorithms already.&lt;/em&gt; The answer was and is, no. So far this only ran on my MacBook and I really didn&amp;rsquo;t want to benchmark my CPU. The code itself is somewhat prepared to take other optimization methods but I didn&amp;rsquo;t add in others. If you&amp;rsquo;re interested to do so - I&amp;rsquo;d be happy to accept your pull-requests.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Re: How to move on? #TYPO3</title>
+      <link>https://blog.tolleiv.de/2012/12/re-how-to-move-on-</link>
+      <pubDate>Sat, 22 Dec 2012 09:11:02 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2012/12/re-how-to-move-on-</guid>
+      <description>
+
+&lt;p&gt;As I wanted to answer &lt;a href=&#34;https://twitter.com/robertlemke&#34;&gt;Robert&amp;rsquo;s&lt;/a&gt; post but didn&amp;rsquo;t like the privacy of our Core-internal list, here&amp;rsquo;s some kind of response to it. Alongside I&amp;rsquo;ll try to explain the current situation and problems a bit***.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-happend&#34;&gt;What happend?&lt;/h3&gt;
+
+&lt;p&gt;In his post Robert kind of gave up his attempts to establish a TYPO3 product board [1]. The reasons for this are very wide-spread and mainly the various flame-wars in the last year and the very personal attacts brought him to the conclusion to:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;no longer invest my time into setting up or participating in an overall product team&lt;/li&gt;
+&lt;li&gt;refrain from trying to establish leadership for the TYPO3 project&lt;/li&gt;
+&lt;li&gt;concentrate on Flow and Neos and invite teams to participate in frequent meetings about it&lt;/li&gt;
+&lt;li&gt;unsubscribe from the core internal mailing list&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Even thought this shortens his entire mail a bit - that&amp;rsquo;s the bottom line it comes down to****.&lt;/p&gt;
+
+&lt;p&gt;Looking at the recording of the &amp;ldquo;Not-the-product-board&amp;rdquo; [7] meeting from last Tuesday [2] it seems that these steps aren&amp;rsquo;t necessary, as everybody seemed to be happy with the setup. So what&amp;rsquo;s the criticism actually about? Lucky enough I don&amp;rsquo;t have to describe it myself, but can cite an (again internal) response to an earlier mail from one of my fellow Core Team members:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Suddenly, when you (Robert) left the steering committee of the T3A because of the
+new bodies and bylaws, you realized that there is no more power for you
+to decide about things. That&amp;rsquo;s why you brought up the concept of a
+product team. It&amp;rsquo;s an attempt to replace the former steering committee,
+which has backed up the decisions of the core team in a nice but
+undemocratic way.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In addition to these two standpoints we&amp;rsquo;ve a mixture of opinions and directions in our community and all of them cause quite some irritation [3,4,5]. With all these repeating fights and discussions Robert and (I guess) most of us ask ourselves how the community could avoid the fighting?&lt;/p&gt;
+
+&lt;p&gt;So what&amp;rsquo;s my opinion:&lt;/p&gt;
+
+&lt;h3 id=&#34;what-we-should-avoid&#34;&gt;What we should avoid&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Closed door meetings and private discussions&lt;/strong&gt; - most of the &amp;ldquo;emotional outbursts&amp;rdquo; we saw where caused when the seemingly final results where presented to the community out of the blue. The fact that Core-internal is still a vivid place is a problem and we all should be abandon it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Working without vision&lt;/strong&gt; - the long holding support (since 2006) for Neos and the nice drive gridelements got from it&amp;rsquo;s fans [9] are two good examples that a vision can move mountains. But we should renew the vision statement and provide roadmaps on how we want to achieve it - mainly to motivate contributors and to enable collaboration between the teams.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Leaders or leader groups&lt;/strong&gt; - other OpenSource products have their &lt;a href=&#34;http://en.wikipedia.org/wiki/Benevolent_dictatorship&#34;&gt;benevolent dictator&lt;/a&gt; - this wouldn&amp;rsquo;t work for our community. Their focus will never reach the entire community and in the end their decisions will always cause confusion. Imho Kasper made a great job to bring TYPO3 to life - but he/we saw that the &amp;ldquo;dictatorship&amp;rdquo; didn&amp;rsquo;t scale in the end [12] and imho Robert&amp;rsquo;s response and the controversy around the product board kind of shows that too.**&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Personal attacks&lt;/strong&gt; - nobody joined the TYPO3 community to fight, so there&amp;rsquo;s no reason to fight back. Within all controversy and disappointment everyone tries to improve TYPO3 in his way [10]&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;what-we-need&#34;&gt;What we need&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Diverse groups from all parts of the community&lt;/strong&gt; - there&amp;rsquo;s no other way to capture all ideas and to gather various people from the entire community. As a nice side effect they make the &amp;ldquo;surface&amp;rdquo; of our community much larger and might help to involve new users. Btw. our community manager&lt;a href=&#34;https://twitter.com/benvantende&#34;&gt; Ben van&amp;rsquo;t Ende &lt;/a&gt;will be happy to help kickstarting and coordinating groups.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Open meeting protocols and discussions&lt;/strong&gt; - to make sure there&amp;rsquo;s a chance for everyone to catch-up later and to avoid bad surprises as we saw during the rebranding [3] or during the version schema change [6] In both cases small groups of people made major (not necessarily bad) decisions on their own behind closed doors - the following controversies showed that good intentions can turn out very negative.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Clear communication structures in the groups&lt;/strong&gt; - to make sure things are &amp;ldquo;presented&amp;rdquo; appropriately. As see in [6] or in more recent situations [8] things would improve if groups had clear communication-channels. In [6] and [8]. seemingly official messages turned out to be personal attempts instead without actual &amp;ldquo;approval&amp;rdquo; / &amp;ldquo;consensus&amp;rdquo; from the related groups.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Rough product roadmaps&lt;/strong&gt; - They should exist to make sure people share a common vision but they should not be too straight to make sure nobody feels too bound to it. They should also exist to enable some kind of measurement. We should be able to ask the Neos or CMS team whether they &amp;ldquo;live&amp;rdquo; along their vision or whether it would be better to adjust it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Constructive honesty&lt;/strong&gt; - people should discuss openly, in a respectful way [11]. Technical doubts and constructive criticism should be allowed, but it should be fair.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;what-does-that-mean-for-our-products&#34;&gt;What does that mean for our products?&lt;/h3&gt;
+
+&lt;p&gt;Honestly: I don&amp;rsquo;t know. Looking at the current situations with the lists from above: we have tons of groups working in many directions, we have a group that agreed on a common product-vision  (two times) [13], but the group communicates behind closed doors. I&amp;rsquo;m not aware of any Neos or Flow roadmaps, but TYPO3 CMS has at least a (short) roadmap [14]. The Core team doesn&amp;rsquo;t have clear communication structures yet and as shown this raises ton&amp;rsquo;s of confusion. In addition our discussions tend to get very personal. It seems that sth. like a &amp;ldquo;product board&amp;rdquo; could help but&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;product-board-and-leadership&#34;&gt;Product board and leadership&lt;/h3&gt;
+
+&lt;p&gt;On one hand I don&amp;rsquo;t like the way how the &amp;ldquo;product board&amp;rdquo; was positioned in the beginning - it should not lead anything or decide anything. On the other hand it&amp;rsquo;s great to have a group of people taking care to formulate a vision. The access to this group should be open to everyone, not just group leaders. Inner-circles, Top-10 groups, leader groups, Core-internal discussions should be avoided and open group-&amp;ldquo;setups&amp;rdquo; should be emphasized.&lt;/p&gt;
+
+&lt;p&gt;Hope this made sense?&lt;/p&gt;
+
+&lt;h4 id=&#34;read-on&#34;&gt;Read on:*&lt;/h4&gt;
+
+&lt;p&gt;[1] - &lt;a href=&#34;https://docs.google.com/document/pub?id=18d92GAehVbU_eSZRCTjJga5pGxopkd7qYB0KNukc-Ys&#34;&gt;Google Doc: Product Board (or “Product Team”)&lt;/a&gt;
+[2] - &lt;a href=&#34;http://www.youtube.com/watch?v=NzeOjXD_3mA&amp;amp;feature=youtu.be&#34;&gt;TYPO3 Product Hangout (On Air)x&lt;/a&gt;
+[3] - &lt;a href=&#34;http://typo3blogger.de/die-marke-typo3-erfindet-sich-neu/&#34;&gt;Die Marke TYPO3 erfindet sich neu&lt;/a&gt;
+[4] - &lt;a href=&#34;http://lists.typo3.org/pipermail/typo3-english/2012-October/082582.html&#34;&gt;Rebranding: Get the green back&lt;/a&gt;
+[5] - &lt;a href=&#34;http://typo3blogger.de/wieviel-kommunikation-und-roadmaps-braucht-ein-open-source-projekt/&#34;&gt;Wieviel Kommunikation und Roadmaps braucht ein Open Source Projekt?&lt;/a&gt;
+[6] - &lt;a href=&#34;http://buzz.typo3.org/people/xavier-perseguers/article/typo3-60-at-the-corner-how-is-it-possible/&#34;&gt;TYPO3 6.0 at the corner? How is it possible?&lt;/a&gt;
+[7] - &lt;a href=&#34;http://twitter.com/kdambekalns/status/281337939999457280&#34;&gt;@kdambekalns: Now a first #TYPO3 &amp;ldquo;product …&amp;rdquo; meeting, not official, no decisions, nothing.&lt;/a&gt;
+[8] - &lt;a href=&#34;http://twitter.com/WrYBiT/status/280618569077760002&#34;&gt;@WrYBiT: @benvantende .. I expected, a mail by you and a news on T3O about it&amp;hellip; &lt;/a&gt;
+[9] - &lt;a href=&#34;http://www.startnext.de/typo3-grid-elements-2-0&#34;&gt;Startnext: Verbessertes TYPO3-Backend mit neuen Features&lt;/a&gt;
+[10] - &lt;a href=&#34;https://twitter.com/tom_noise/status/280624859501957120&#34;&gt;@tom_noice: . @thomas_hempel The discussions are there because so many people care.&lt;/a&gt;
+[11] - &lt;a href=&#34;http://typo3.org/community/code-of-conduct/&#34;&gt;Community Code of Conduct&lt;/a&gt;
+[12] - &lt;a href=&#34;http://typo3.org/videos/play/king-for-a-day-but-not-for-a-lifetime/&#34;&gt;King for a day, but not for a lifetime&lt;/a&gt;
+[13] - &lt;a href=&#34;http://typo3.org/news/article/the-phoenix-team-reports-on-the-developer-days-2012/&#34;&gt;The Phoenix team reports on the Developer Days 2012&lt;/a&gt;
+[14] - &lt;a href=&#34;http://lists.typo3.org/pipermail/typo3-team-core/2012-December/052936.html&#34;&gt;Proposal for the upcoming Roadmap and LTS&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;take your time to read the endless lines of comments.
+** Imho &lt;a href=&#34;https://twitter.com/ohader&#34;&gt;Oliver Hader&lt;/a&gt; choose a good attempt to (not)&amp;ldquo;lead&amp;rdquo; the Core Team - more in the sense of &amp;ldquo;managing&amp;rdquo; and &amp;ldquo;enabling&amp;rdquo; without ruling
+*** Some tweets and messages from the Core members might have been quite confusing without the context
+**** I&amp;rsquo;d prefer not to play TYPO3-leaks here, so it&amp;rsquo;s up to Robert and the others to publish their mails by themselfs&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TYPO3 login state and Varnish cache</title>
+      <link>https://blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</link>
+      <pubDate>Mon, 10 Dec 2012 15:56:46 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2012/12/typo3-login-state-and-varnish-cache/</guid>
+      <description>
+
+&lt;p&gt;Caching is hard in complex page setups with user specific content, especially when public pages change their content once a user is logged in. TYPO3 is smart enough to deal with the login state properly and cache appropriately. Once Varnish is involved, it&amp;rsquo;s quite tricky to cache as much as possible without loosing the dynamic content. But it&amp;rsquo;s not impossible and here&amp;rsquo;s my summary how we resolved it for &lt;a href=&#34;http://typo3.org&#34;&gt;typo3.org&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;setup&#34;&gt;Setup&lt;/h4&gt;
+
+&lt;p&gt;The basic Varnish setup is more or less always the same and best described by&lt;a href=&#34;http://www.fabrizio-branca.de/nginx-varnish-apache-magento-typo3.html&#34;&gt; Farbrizio Branca&lt;/a&gt;. On top of that we need   some TypoScript parameter tweaking to get the cache-control-headers in TYPO3 straight - &lt;a href=&#34;http://www.typo3-media.com/blog/website-caching-login.html&#34;&gt;Daniel Pötzinger&amp;rsquo;s article&lt;/a&gt; covers them best. Another very handy thing which can be found in Fabrizio&amp;rsquo;s blog is the&lt;a href=&#34;http://www.fabrizio-branca.de/make-your-magento-store-fly-using-varnish.html&#34;&gt; simplified flow chart&lt;/a&gt; for the various &lt;a href=&#34;https://www.varnish-cache.org/trac/wiki/VCLExampleDefault&#34;&gt;Varnish subroutines&lt;/a&gt;.Based on that all pages should be cached properly and your site should run smoothly. But in case you have a page with personalized content, you&amp;rsquo;ll have to reconsider some parts.&lt;/p&gt;
+
+&lt;h4 id=&#34;problem&#34;&gt;Problem&lt;/h4&gt;
+
+&lt;p&gt;The&lt;a href=&#34;http://typo3.org/events/add-new-event/new/&#34;&gt; event submission page on typo3.org&lt;/a&gt; is a good example. In case the user is not logged in (a.k.a &lt;em&gt;public page&lt;/em&gt;), we just want to show a message which guides him to the login. If there&amp;rsquo;s a login active (a.k.a &lt;em&gt;user page&lt;/em&gt;), we&amp;rsquo;ll show the submission form instead. In both cases we could cache the content nicely, but how would we ensure that Varnish delivers the correct content?&lt;/p&gt;
+
+&lt;h4 id=&#34;solution&#34;&gt;Solution&lt;/h4&gt;
+
+&lt;p&gt;Ajax could be a solution, but for large sites it&amp;rsquo;s usually smarter to avoid as much JavaScript as possible. EdgeSideIncludes (ESI) are another option, but I agree with &lt;a href=&#34;http://www.typo3-media.com/blog/website-caching-login.html&#34;&gt;Daniel&lt;/a&gt;, they&amp;rsquo;re not really useful in this case and I&amp;rsquo;d rather go with Ajax than with ESI.&lt;/p&gt;
+
+&lt;p&gt;What we want in this scenario, is to cache the _public page _in Varnish and pass to the _user page_ generated by TYPO3 if we find that the user is logged in. But this should of course only happen on pages where this is really necessary - normal pages should just ignore the login state of the user. Therefore we need sth. to distinguish _normal_ from _login specific_ pages in Varnish. Lucky enough TYPO3 already provides a field in the pages properties which allows this distinction. Using the &lt;strong&gt;Login Behaviour (pages.fe_login_mode)&lt;/strong&gt; field, you can enable and disable the user-login for specific branches and pages*. As we want to whitelist _login specific_ pages, our root page should have the default setting &amp;ldquo;Disable Login&amp;rdquo; - this will be inherited to all sub-pages. All the _login specific_ pages should have the setting &amp;ldquo;Re-Enable login&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Once this is done, we need a way to carry that out to Varnish. We improved &lt;a href=&#34;http://forge.typo3.org/projects/extension-cacheinfo&#34;&gt;EXT:cacheinfo&lt;/a&gt; for that purpose, with that it now carries a &amp;ldquo;&lt;strong&gt;loginAllowedInBranch&lt;/strong&gt;&amp;rdquo; or &amp;ldquo;&lt;strong&gt;noLoginAllowedInBranch&lt;/strong&gt;&amp;rdquo; value in the &amp;ldquo;&lt;strong&gt;X-T3CacheInfo&amp;rdquo;&lt;/strong&gt; header. Using all that, the Varnish VCL can be extended to make use of it like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sub vcl_hit {
+  if (obj.http.X-T3CacheInfo ~ &amp;quot;loginAllowedInBranch&amp;quot;) {
+    set obj.http.Cache-Control = &amp;quot;private&amp;quot;;
+    if (req.http.Cookie ~ &amp;quot;(e_typo_user|PHPSESSID|_pk_.*)&amp;quot;) {
+      # Do not cache requests which come from a logged in user
+      return (pass);
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is straight forward. For every page which allows logins, we make sure that the client does not keep them in his cache. In case we&amp;rsquo;re actually on such a page and find the related login-cookies, we pass the request along to TYPO3, otherwise we deliver the &lt;em&gt;public page&lt;/em&gt; right away from the cache. The fact that we pass the request along to TYPO3 in some cases doesn&amp;rsquo;t mean that we&amp;rsquo;ll deliver the &lt;em&gt;user page&lt;/em&gt;, it just indicates that we&amp;rsquo;ve to rely on TYPO3 to make the right choice based on the actual login state.&lt;/p&gt;
+
+&lt;h4 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h4&gt;
+
+&lt;p&gt;For me the beauty here lies in the simplicity. Once you managed to wrap your head around the &lt;a href=&#34;http://www.fabrizio-branca.de/make-your-magento-store-fly-using-varnish.html&#34;&gt;flow chart&lt;/a&gt; and once you managed to deliver appropriate meta-data to Varnish, many more complex scenarios can be resolved equally.&lt;/p&gt;
+
+&lt;p&gt;As most of the typo3.org stuff, this solution came from a great team. In this case &lt;a href=&#34;https://twitter.com/stucki&#34;&gt;Michael Stucki&lt;/a&gt; and &lt;a href=&#34;https://twitter.com/danpoetz&#34;&gt;Daniel Pötzinger&lt;/a&gt; helped to craft the final solution - thanks guys :)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the naming of the field&amp;rsquo;s labels is really irritating - especially &amp;ldquo;0 - Enable login&amp;rdquo; should be &amp;ldquo;Inherit setting&amp;rdquo; as it really does not force any setting.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Finding TypoScript errors.</title>
+      <link>https://blog.tolleiv.de/2012/02/finding-typoscript-errors./</link>
+      <pubDate>Thu, 16 Feb 2012 16:02:31 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2012/02/finding-typoscript-errors./</guid>
+      <description>&lt;p&gt;When you work on TypoScript templates in TYPO3, errors might show up in the TypoScript Object Browser. Within the error messages you&amp;rsquo;ll see a more or less detailed error description with the related line number. Within most setups these line numbers won&amp;rsquo;t relate to any of your sys_template records or TypoScript files directly. But they still provide value if you know how they help to find the right spot. As it&amp;rsquo;s not too obvious how to find the right spot I&amp;rsquo;ve created a little screenshot series to guide you to the broken spots in your templates.&lt;/p&gt;
+
+&lt;p&gt;So that&amp;rsquo;s what you might see in your TypoScript Object Browser:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-error.png&#34; alt=&#34;The error message from your TypoScript Object Browser might look like this.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt; Switching from there to the Template Analyzer:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer.png&#34; alt=&#34;Switching to the TypoScript analyzer&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;At the bottom of the Template Analyzer, you&amp;rsquo;ll find a &amp;ldquo;Complete TS&amp;rdquo; section and a link ~which looks like normal text.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-complete.png&#34; alt=&#34;And you&#39;ll find a link to the fully concatenated TypoScript of your current page.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Clicking on that link will give you the entire concatenated TypoScript and here you&amp;rsquo;ll also find that the line numbers finally match to the error message.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/02/typoscript-analyzer-error.png&#34; alt=&#34;And you&#39;ll find that the line numbers are now what you saw in the error message before (might need some scrolling).&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A well hidden gem which works most likely in all TYPO3 4.x versions ;)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Edit: In the meantime, Ingo&amp;rsquo;s patch made it through the review process. So users of TYPO3 4.7 and above will find a nice and handy &amp;ldquo;Show details&amp;rdquo; link next to the error message. Makes it much much faster to find the broken spot. Thanks Ingo :) / (&lt;a href=&#34;http://twitter.com/irnnr&#34;&gt;@irnnr&lt;/a&gt;)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Visualizing TYPO3 Core activity</title>
+      <link>https://blog.tolleiv.de/2012/01/visualizing-typo3-core-activity/</link>
+      <pubDate>Fri, 20 Jan 2012 08:00:12 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2012/01/visualizing-typo3-core-activity/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;DISCLAIMER: Don&amp;rsquo;t take the following too serious - when reading this post please keep in mind that the TYPO3 community itself consists of much more than just the Core team activity - many things take place outside of code repositories and can&amp;rsquo;t be measured anyhow. &lt;strong&gt;Every&lt;/strong&gt; contribution is important and &lt;strong&gt;every&lt;/strong&gt; single action has value.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Using Gerrit sometimes feels quite lonesome - you don&amp;rsquo;t really see who&amp;rsquo;s active and you don&amp;rsquo;t really get a feeling on how much is done in the TYPO3 Core at a certain point. To visualize on how active the contributors are and to show the most active members I applied a little scoring and summed up the results for the time since 2006.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.tolleiv.de/impact-chart&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/01/TYPO3-Core-impact.png&#34; alt=&#34;Snippet of the impact chart.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The scoring is quite easy - every author of a patch gets 10 points, testers get 3 and reviewers 1 point*. Looking at the stats it seems that even the statistics pulled from the old Subversion days seem to meet up with today&amp;rsquo;s numbers - of course we&amp;rsquo;ve to keep in mind that everything which was pulled from Subversion doesn&amp;rsquo;t really point to the author but to the actual committer (except if there was a &amp;ldquo;Thanks to XXXXX&amp;rdquo; reference in the commit).&lt;/p&gt;
+
+&lt;p&gt;To visualize the numbers I choose a &lt;a href=&#34;https://github.com/blog/219-impact-graph-speedups&#34;&gt;Github&lt;/a&gt; like &lt;a href=&#34;http://blog.tolleiv.de/impact-chart&#34;&gt;impact chart&lt;/a&gt;**. Each contributor has it&amp;rsquo;s own color and line in it and whenever he got active the width of the line scales up. To maintain the overview the scale of the width isn&amp;rsquo;t linear and every contributor who&amp;rsquo;s not within the &amp;ldquo;Top 20&amp;rdquo; had to be scaled down to &amp;ldquo;1&amp;rdquo;. The line stops if the contributor didn&amp;rsquo;t get active anymore. The scores are grouped and compared by month.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.tolleiv.de/impact-chart/stat.html&#34;&gt;&lt;img src=&#34;https://blog.tolleiv.de/uploads/2012/01/Core-Stats-January20121.png&#34; alt=&#34;Snapshot of the &amp;quot;Top 20&amp;quot; stats taken Jan. 14th 2012&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In addition to the chart I also created a &lt;a href=&#34;http://blog.tolleiv.de/impact-chart/stat.html&#34;&gt;table based overview for the &amp;ldquo;Top 20&amp;rdquo;&lt;/a&gt; contributors with their score***.&lt;/p&gt;
+
+&lt;p&gt;Few things I got from the numbers. There have been 290 contributors already - simply amazing. Comparing the (huge) scores of the release managers with their fellow contributors shows once more that they can be really proud about the job they did or do. It&amp;rsquo;s also quite cool to see that many people keep sticking around. And finally it was quite surprising to see that our community manager &lt;a href=&#34;https://twitter.com/benvantende&#34;&gt;Ben van&amp;rsquo;t Ende&lt;/a&gt; can also be found in the stats. Besides that it&amp;rsquo;s up to everyone else to find their conclusions from these numbers. I hope it&amp;rsquo;s motivating everyone to see that the community is active as always.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The script I created to generate the charts isn&amp;rsquo;t too nice at the moment, &lt;del&gt;but I promise to publish it once I cleaned it up a bit. If you can&amp;rsquo;t wait to get your hands on it, feel free to send me a mail or tweet.&lt;/del&gt; - but I published it anyways: &lt;a href=&#34;https://github.com/tolleiv/Repo-Activity-Monitor&#34;&gt;github.com/tolleiv/Repo-Activity-Monitor&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Links in short: &lt;a href=&#34;http://blog.tolleiv.de/impact-chart&#34;&gt;Impact chart&lt;/a&gt;, &lt;a href=&#34;http://blog.tolleiv.de/impact-chart/stat.html&#34;&gt;Monthly &amp;ldquo;Top 20&amp;rdquo; tables&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The scoring includes the commits to the Core master and all related submodule commits. Unfortunately the submodule commits don&amp;rsquo;t hold the reviewer and tester information. Also some of the latest changes made in the submodules may not show up at the moment because the submodule pointers haven&amp;rsquo;t been updated yet.
+** Inspired by the incredible RaphaëlJS vector graphics library which is distributed with an MIT license and can be found on &lt;a href=&#34;http://raphaeljs.com/&#34;&gt;raphaeljs.com&lt;/a&gt;
+*** Again - don&amp;rsquo;t take it too serious - the scoring doesn&amp;rsquo;t take into account that some patches can be written in 15 minutes where others take days. It also only uses the final testers and reviewers mentioned in the commit message, other contributions are not counted atm&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TemplaVoila 1.6.x</title>
+      <link>https://blog.tolleiv.de/2012/01/templavoila-1.6.x/</link>
+      <pubDate>Mon, 16 Jan 2012 07:10:33 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2012/01/templavoila-1.6.x/</guid>
+      <description>&lt;p&gt;Quite some things changed in the past months and I never found the time to clear up my mind and write up a summary.&lt;/p&gt;
+
+&lt;p&gt;First of all &lt;a href=&#34;http://typo3.org/extensions/repository/view/templavoila/current/&#34;&gt;TemplaVoila 1.6&lt;/a&gt; was released parallel to &lt;a href=&#34;http://typo3.org/download/release-notes/typo3-46/&#34;&gt;TYPO3 4.6&lt;/a&gt;. It shipped with 22 bug and compatibility fixes. In general the 1.6.x branch is supposed to be compatible with TYPO3 4.4+ which also made it possible to clean up the extension quite a bit. In addition to that TemplaVoila 1.6.1 will show up in the TER in the next few hours. It fixes 10 additional issues.&lt;/p&gt;
+
+&lt;p&gt;Besides that, the main repository for TemplaVoila was moved to &lt;a href=&#34;git.typo3.org/TYPO3v4/Extensions/templavoila&#34;&gt;git.typo3.org&lt;/a&gt; and the old Subversion repository and my Github repository have been removed. The new repository location also enables and enforces a new way to contribute code changes for the project. Comparable to the TYPO3v4 Core every change request can be sent to Gerrit, where I can review the changes before they get merged into the repository. That workflow turns out to be very efficient for me. A detailed summary on how to contribute code to any repository hosted on &lt;a href=&#34;http://git.typo3.org&#34;&gt;git.typo3.org&lt;/a&gt; can be found on &lt;a href=&#34;http://wiki.typo3.org/Contribution_Walkthrough_Tutorials&#34;&gt;wiki.typo3.org&lt;/a&gt;. To sum up some of the steps - here&amp;rsquo;s how you submit a patch*:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone git://git.typo3.org/TYPO3v4/Extensions/templavoila.git
+cd templavoila
+scp -p -P 29418 &amp;lt;username&amp;gt;@review.typo3.org:hooks/commit-msg .git/hooks/
+git checkout -b workingBranch
+# ... work on the files ...
+git add &amp;lt;changedFile&amp;gt;
+git commit
+git push origin HEAD:refs/for/master/&amp;lt;topic&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A further general change to the team happend more or less silently. During 2011 nobody from the old team or any new developer showed interest in the project and only few contributors helped with bugfixes or reviews. Due to that I also changed my attitude regarding future releases.
+I&amp;rsquo;m currently planning to release one version parallel with every main TYPO3 4.x release, to make sure that TemplaVoila works in new versions and to make sure people can enjoy TYPO3 with TemplaVoila in the future as well. I&amp;rsquo;ll also try to keep it compatible with all &amp;ldquo;stable&amp;rdquo; releases and aim to keep the issue count within the bugtracker as low as possible.
+But I&amp;rsquo;m not planning to integrate new major features such as the field content sliding (use &lt;a href=&#34;http://typo3.org/extensions/repository/view/kb_tv_cont_slide/current/&#34;&gt;EXT:kb_tv_cont_slide&lt;/a&gt; please) or a context sensitive content wizard (a.k.a &amp;ldquo;content firewall&amp;rdquo;). Also major refactorings won&amp;rsquo;t happen because they&amp;rsquo;d consume far too much of my time - therefore also the desperately needed update of the mapping module or a new new page module will not be implemented in the near future.&lt;/p&gt;
+
+&lt;p&gt;Nevertheless I&amp;rsquo;m open for any type of contribution and I&amp;rsquo;d be happy to review and test any patch showing up in Mantis or Gerrit - I&amp;rsquo;m just not able to spent a major part of my freetime for it.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You have to sign the &lt;a href=&#34;http://typo3.org/about/licenses&#34;&gt;Contributor License Agreement&lt;/a&gt; to be able to push any change - it can be found on &lt;a href=&#34;http://typo3.org/about/licenses&#34;&gt;typo3.org&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Further reading 2011</title>
+      <link>https://blog.tolleiv.de/2011/12/further-reading-2011/</link>
+      <pubDate>Fri, 30 Dec 2011 10:00:01 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2011/12/further-reading-2011/</guid>
+      <description>&lt;p&gt;Holiday time is usually a great opportunity to take time for things which didn&amp;rsquo;t really fit into the passed by year and to pick up things which help me to see beyond my nose. Along with some paper work and some house work there&amp;rsquo;s quite a list of programming related things I read and tried during the last days. And to give you some inspiration here&amp;rsquo;s my list:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://pragprog.com/book/tpp/the-pragmatic-programmer&#34;&gt;The Pragmatic Programmer: From Journeyman to Master&lt;/a&gt; - a must read for every programmer and once in a while worth to take a look at. It also opens up tons of other topics which you should be pragmatic at.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.cs.utexas.edu/~shmat/courses/cs345/whyfp.pdf&#34;&gt;Why Functional Programming Matters&lt;/a&gt; - introducing the concepts of lazy evaluation and high-order functions for a couple of mathematical examples. With &lt;a href=&#34;http://streamjs.org/&#34;&gt;Steam.js&lt;/a&gt; as implementation of lazy evaluation in JavaScript.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://research.google.com/archive/mapreduce.html&#34;&gt;MapReduce: Simplified Data Processing on Large Clusters&lt;/a&gt; - every now and then I&amp;rsquo;m trying to get my hands dirty with &lt;a href=&#34;http://couchdb.apache.org/&#34;&gt;CouchDB&lt;/a&gt; and re-reading this paper and the related works is always a good start.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Some texts worth looking at when it comes to user stories &lt;a href=&#34;http://benmabey.com/2008/05/19/imperative-vs-declarative-scenarios-in-user-stories.html&#34;&gt;Imperative vs Declarative Scenarios in User Stories&lt;/a&gt;, &lt;a href=&#34;http://www.codesqueeze.com/the-easy-way-to-writing-good-user-stories/&#34;&gt;The Easy Way to Writing Good User Stories&lt;/a&gt;, &lt;a href=&#34;http://trailridgeconsulting.com/files/user-story-primer.pdf&#34;&gt;A User Story Primer&lt;/a&gt;, &lt;a href=&#34;http://blog.nayima.be/2009/12/30/how-do-you-estimate-the-business-value-of-user-stories/&#34;&gt;How do you estimate the Business Value of User Stories? You don’t.&lt;/a&gt;, &lt;a href=&#34;http://blog.josephwilk.net/agile/story-smells-the-valueless-story.html&#34;&gt;Story Smells: The Valueless Story&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://aslakhellesoy.com/post/11055981222/the-training-wheels-came-off&#34;&gt;The training wheels came off&lt;/a&gt; - shows how valuable BDD scenarios should look like and why the cucumber-rails (ruby gem) stopped shipping predefined step definitions to enforce better scenarios among newcomers.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.codesqueeze.com/what-your-dog-can-teach-you-about-building-teams/&#34;&gt;What Your Dog Can Teach You About Building Teams&lt;/a&gt; - a blog post which has a good point, it misses some background information though. In depth insights might come from &lt;a href=&#34;http://www.management30.com/book/&#34;&gt;Management 3.0: Leading Agile Developers, Developing Agile Leaders&lt;/a&gt; and &lt;a href=&#34;http://mikecohnsignatureseries.com/books/coaching-agile-teams&#34;&gt;Coaching Agile Teams: A Companion for ScrumMasters, Agile Coaches, and Project Managers&lt;/a&gt; which I won&amp;rsquo;t have time to look into :(&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.rubyinside.com/screencast-coding-conways-game-of-life-in-ruby-the-tdd-way-with-rspec-5564.html&#34;&gt;Coding Conway’s Game of Life in Ruby the TDD Way with RSpec #1&lt;/a&gt; - a great screencast showing TDD in action with Ruby and RSpec. This 50min screencast shows how things evolve during TDD coding sessions and how models can grow within test suits.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What&amp;rsquo;s on your list?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/version-control/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/version-control/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Using git svn for TYPO3 extension development</title>
+      <link>https://blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</link>
+      <pubDate>Wed, 30 Jun 2010 06:00:30 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/06/using-git-svn-for-typo3-extension-development/</guid>
+      <description>
+
+&lt;p&gt;When I first saw a presentation about Git 2 years ago I liked it, but I was convinced that Subversion covers all I need. Things have changed and especially the bad performance of Subversion for larger repositories and the need to commit things without messing up the official trunk motivated me to look up how to get started with Git. If you need more reasons why you should look into Git, you&amp;rsquo;ll find them in [7] - anyways it&amp;rsquo;s worth to have a look how I managed to work with it ;)&lt;/p&gt;
+
+&lt;p&gt;There are basically 2½ different tasks during the &amp;ldquo;daily&amp;rdquo; development.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Create a local working copy a.k.a clone the repository&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fix a bug or implement a feature and create a patch file with the changes&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Receive a patch and review it - eventually commit the changes&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&#34;0-repository-initialization&#34;&gt;0. Repository initialization&lt;/h4&gt;
+
+&lt;p&gt;Getting started and creating the repository from an existing Subversion repository looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir templavoila
+cd templavoila
+git svn init -t tags -b branches -T trunk https://svn.typo3.org/TYPO3v4/Extensions/templavoila
+git-svn fetch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will pull the entire SVN history into your local Git repository - use &amp;ldquo;git-svn fetch -r &amp;rdquo; to reduce the amount of imported revisions.&lt;/p&gt;
+
+&lt;p&gt;To keep your repository up-to-date you need these commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git stash
+git-svn fetch
+git rebase trunk
+git stash apply
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you followed the SVN trunk/tags/branches convention you should see that it also finds tags and branches during the import. But using &amp;ldquo;git branch&amp;rdquo; afterwards you&amp;rsquo;ll see that there&amp;rsquo;s only one local branch called &amp;ldquo;master&amp;rdquo;. That&amp;rsquo;s where Git shows it&amp;rsquo;s strength the first time, because it distinguishes between local and remote branches. Work can only be done within local branches, whereas the existing SVN branches are only recognized as &amp;ldquo;remote&amp;rdquo; branches so far. To list all remote branches you can use &amp;ldquo;git branch -r&amp;rdquo;. If you followed the trunk/tags/branches convention, you should see your SVN tags and branches within this list - otherwise you might want to read [8]. To make a remote (SVN) branch available in your local repository use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git checkout --track -b tv_1-4 templavoila_1-4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;1-working-with-the-repository&#34;&gt;1. Working with the repository&lt;/h4&gt;
+
+&lt;p&gt;Starting to work on a new feature or a bug always starts with a new branch in git:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git branch issue00012345
+git checkout issue00012345
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You&amp;rsquo;re now working in the &amp;ldquo;issue00012345&amp;rdquo; branch and all commits will just be committed to that branch. Once you made changes  you can either just commit all modifications with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git commit -a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or add particular files and commit only these files with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git add fileA
+git add fileB
+git commit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or with a nice pre commit preview which lets you decide which lines you want to commit:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git add --patch
+git commit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Preparing the patch for the mailingslist:&lt;/strong&gt;
+In a pure Git workflow &amp;ldquo;git format-patch&amp;rdquo; is used to communicate patches, but due to the fact that there&amp;rsquo;s a Subversion repository involved either the old style diff / patch or a workaround needs to be used to communicate changes.
+Creating a patch which works for the mailinglist can basically be done using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git diff --no-prefix master &amp;gt; myPatchFile.patch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;An alternative workaround to create proper SVN diff files (including svn revision etc..) can be found in [10] it&amp;rsquo;s used very straight forward:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git svn-diff &amp;gt; mySvnPatchFile.patch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;2-review-and-commit-patches&#34;&gt;2. Review and commit patches&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Reviewing the patch someone sent to the list:&lt;/strong&gt;
+As &amp;ldquo;usual&amp;rdquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;patch -p0 &amp;lt; myPatchFile.patch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;can be used to apply patch files.&lt;/p&gt;
+
+&lt;p&gt;Once the files passed the review the changes can be committed using &amp;ldquo;&lt;strong&gt;git add&lt;/strong&gt;&amp;rdquo; and &amp;ldquo;&lt;strong&gt;git commit&lt;/strong&gt;&amp;rdquo; as shown before.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Committing to Subversion:&lt;/strong&gt;
+Once you committed everything to your local repository you&amp;rsquo;re able to perform this command to &amp;ldquo;forward&amp;rdquo; your commits to the Subversion repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git svn dcommit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Practically every single commit within git will also be reflected as a single Subversion commit. For several reason this might not always suit your situation.As a workaround you could merge all commits during the merge of your feature branches into the master branch using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git merge --commit --squash issue00012345
+git svn dcommit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Of course I don&amp;rsquo;t recommend to do this for your regular work since have small granular commits is always better.&lt;/p&gt;
+
+&lt;h4 id=&#34;sources-and-further-reading&#34;&gt;Sources and further reading&lt;/h4&gt;
+
+&lt;p&gt;[1] &lt;a href=&#34;http://spyced.blogspot.com/2009/06/patch-oriented-development-made-sane.html&#34;&gt;Patch-oriented development made sane with git-svn&lt;/a&gt;
+[2] &lt;a href=&#34;http://utsl.gen.nz/talks/git-svn/intro.html#using&#34;&gt;An introduction to git-svn for Subversion/SVK users and deserters&lt;/a&gt;
+[3] &lt;a href=&#34;http://git-scm.org/course/svn.html&#34;&gt;Git - SVN Crash Course&lt;/a&gt;
+[4] &lt;a href=&#34;http://trac.parrot.org/parrot/wiki/git-svn-tutorial&#34;&gt;Getting the GIT checkout&lt;/a&gt;
+[5] &lt;a href=&#34;http://nathanj.github.com/gitguide/tour.html&#34;&gt;An Illustrated Guide to Git on Windows&lt;/a&gt;
+[6] &lt;a href=&#34;http://stackoverflow.com/questions/1129688/git-svn-workflow-feature-branches-and-merge&#34;&gt;git svn workflow -
+feature branches and merge&lt;/a&gt;
+[7] &lt;a href=&#34;http://whygitisbetterthanx.com/#any-workflow&#34;&gt;whygitisbetterthanx.com&lt;/a&gt;
+[8] &lt;a href=&#34;http://www.dmo.ca/blog/20070608113513/&#34;&gt;Multiple branches using git-svn&lt;/a&gt;
+[9] &lt;a href=&#34;http://www.viget.com/extend/effectively-using-git-with-subversion/&#34;&gt;Effectively using Git with subversion&lt;/a&gt;
+[10] &lt;a href=&#34;http://mojodna.net/2009/02/24/my-work-git-workflow.html&#34;&gt;Git Workflow with Upstream SVN&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;notes&#34;&gt;Notes&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Don&amp;rsquo;t try to dcommit to &lt;a href=&#34;https://svn.typo3.org/TYPO3v4/Extensions/templavoila&#34;&gt;https://svn.typo3.org/TYPO3v4/Extensions/templavoila&lt;/a&gt; unless you know what you&amp;rsquo;re doing - I just used it to show you that it&amp;rsquo;s even working with large history projects.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For projects hosted on forge.typo3.org there might be a native git support soon - stay tuned&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Let me know if you had problems with any of the snippets&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Further information about the review process for the TYPO3 Core and several other TYPO3 related projects can be found on &lt;a href=&#34;http://typo3.org/teams/core/resources/maintenance-policy/&#34;&gt;typo3.org&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

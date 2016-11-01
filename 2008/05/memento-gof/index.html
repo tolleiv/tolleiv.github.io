@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memento [GoF] | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="https://blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">May 13, 2008</h2>
+    <h1 class="title">Memento [GoF]</h1>
+    <div class="content">
+      <p>Let&rsquo;s say you got a cookie from a repository your granny and you&rsquo;re not sure if you like the new taste. Wouldn&rsquo;t it be cool if you could just try it and revoke the operation first bite if you don&rsquo;t like it?</p>
+
+<p>In the world of OOP thats a easy job which can be handled by the so called memento pattern - you just save the inner state of the object  within a memento object and revoke you actions whenever you like&hellip;</p>
+
+<p>As UML the example looks like this:
+<a href="http://bp2.blogger.com/_l5fIZzJyYfc/SClV6dPibdI/AAAAAAAAABA/bFyT-BEsqrU/s1600-h/memento-pattern.png"><img src="http://bp2.blogger.com/_l5fIZzJyYfc/SClV6dPibdI/AAAAAAAAABA/bFyT-BEsqrU/s400/memento-pattern.png" alt="" /></a>
+Show PHP Source Code</p>
+
+<pre><code>class CookieMemento {
+    protected $flavor,$size;    
+    public function __construct($flavor,$size=100) {
+        $this-&gt;flavor=$flavor;
+        $this-&gt;size=$size;
+    }
+    public function getMemento() {
+        return new CookieMemento($this-&gt;flavor,$this-&gt;size);
+    }
+    public function setMemento(CookieMemento $memento) {
+        $this-&gt;flavor=$memento-&gt;flavor;
+        $this-&gt;size=$memento-&gt;size;
+    }    
+}
+
+class Cookie extends CookieMemento {
+
+    public function eat($reduceValue) {     
+        $this-&gt;size-=($reduceValue&gt;$this-&gt;size)?$this-&gt;size:$reduceValue;        
+    }    
+
+    public function printStatus() {
+        echo ‘This cookie is a ’.$this-&gt;flavor.‘ cookie which has a size of ’.$this-&gt;size.‘.&lt;br&gt;&lt;/br&gt;’;
+    }
+}
+
+class Client { 
+    public function run() {
+        $theCookie = new Cookie(‘chocolate’,100);
+        $theMemento = $theCookie-&gt;getMemento();
+        echo $theCookie-&gt;printStatus();        
+        $theCookie-&gt;eat(50);
+        echo $theCookie-&gt;printStatus();       
+        $theCookie-&gt;eat(50);
+        echo $theCookie-&gt;printStatus();       
+        echo ‘Hm I\’d like to eat it again …. *grin*&lt;br&gt;&lt;/br&gt;’;
+        $theCookie-&gt;setMemento($theMemento);
+        echo $theCookie-&gt;printStatus();
+        echo ‘ *biggrin* ’;
+    }
+}
+
+$cookieMonster = new Client();
+$cookieMonster-&gt;run();
+</code></pre>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'tolleiv';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

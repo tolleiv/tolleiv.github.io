@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/categories/memento/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/categories/memento/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Memento [GoF]</title>
+      <link>https://blog.tolleiv.de/2008/05/memento-gof/</link>
+      <pubDate>Tue, 13 May 2008 07:59:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/memento-gof/</guid>
+      <description>&lt;p&gt;Let&amp;rsquo;s say you got a cookie from a repository your granny and you&amp;rsquo;re not sure if you like the new taste. Wouldn&amp;rsquo;t it be cool if you could just try it and revoke the operation first bite if you don&amp;rsquo;t like it?&lt;/p&gt;
+
+&lt;p&gt;In the world of OOP thats a easy job which can be handled by the so called memento pattern - you just save the inner state of the object  within a memento object and revoke you actions whenever you like&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;As UML the example looks like this:
+&lt;a href=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SClV6dPibdI/AAAAAAAAABA/bFyT-BEsqrU/s1600-h/memento-pattern.png&#34;&gt;&lt;img src=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SClV6dPibdI/AAAAAAAAABA/bFyT-BEsqrU/s400/memento-pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;
+Show PHP Source Code&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class CookieMemento {
+    protected $flavor,$size;    
+    public function __construct($flavor,$size=100) {
+        $this-&amp;gt;flavor=$flavor;
+        $this-&amp;gt;size=$size;
+    }
+    public function getMemento() {
+        return new CookieMemento($this-&amp;gt;flavor,$this-&amp;gt;size);
+    }
+    public function setMemento(CookieMemento $memento) {
+        $this-&amp;gt;flavor=$memento-&amp;gt;flavor;
+        $this-&amp;gt;size=$memento-&amp;gt;size;
+    }    
+}
+
+class Cookie extends CookieMemento {
+
+    public function eat($reduceValue) {     
+        $this-&amp;gt;size-=($reduceValue&amp;gt;$this-&amp;gt;size)?$this-&amp;gt;size:$reduceValue;        
+    }    
+
+    public function printStatus() {
+        echo ‘This cookie is a ’.$this-&amp;gt;flavor.‘ cookie which has a size of ’.$this-&amp;gt;size.‘.&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
+    }
+}
+
+class Client { 
+    public function run() {
+        $theCookie = new Cookie(‘chocolate’,100);
+        $theMemento = $theCookie-&amp;gt;getMemento();
+        echo $theCookie-&amp;gt;printStatus();        
+        $theCookie-&amp;gt;eat(50);
+        echo $theCookie-&amp;gt;printStatus();       
+        $theCookie-&amp;gt;eat(50);
+        echo $theCookie-&amp;gt;printStatus();       
+        echo ‘Hm I\’d like to eat it again …. *grin*&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
+        $theCookie-&amp;gt;setMemento($theMemento);
+        echo $theCookie-&amp;gt;printStatus();
+        echo ‘ *biggrin* ’;
+    }
+}
+
+$cookieMonster = new Client();
+$cookieMonster-&amp;gt;run();
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

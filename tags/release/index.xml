@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/release/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/release/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Crawler 3.1 release &#43; podcast</title>
+      <link>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</link>
+      <pubDate>Wed, 31 Mar 2010 22:35:20 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</guid>
+      <description>&lt;p&gt;Nearly a month after version 3.0.5, we published 3.1.0 of the well known crawler extension today. The main work for that step was related to several bugfixes, a better scheduler integration, some CLI-API enhancements, better testcases and (finally) some documentation updates. Most kudos go to Michael Klapper who took over the responsibility for this release and who also fixed a decent amount of bugs.
+You can download the extension in the &lt;a href=&#34;http://typo3.org/extensions/repository/view/crawler/current/&#34;&gt;TER &lt;/a&gt; and hopefully this time OpenOffice didn&amp;rsquo;t trick us again and you&amp;rsquo;ll be able to see a shiny new extension manual on typo3.org as well.&lt;/p&gt;
+
+&lt;p&gt;Besides that, Kasper just released the podcast with me talking about version 3.0 of the crawler and about further improvements for the staticpub extension. You&amp;rsquo;ll find that on &lt;a href=&#34;http://typo3.org/podcasts/kasper&#34;&gt;typo3.org/podcasts/kasper&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TemplaVoila 1.4.2 released</title>
+      <link>https://blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</link>
+      <pubDate>Mon, 15 Mar 2010 23:39:53 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/03/templavoila-1.4.2-released/</guid>
+      <description>&lt;p&gt;Yesterday the 2nd team release of TemplaVoila was uploaded into the &lt;a href=&#34;http://typo3.org/extensions/repository/view/templavoila/current/&#34;&gt;TER&lt;/a&gt;. It&amp;rsquo;s basically a maintenance release which fixes more than 100 bugs. But since we haven&amp;rsquo;t been that straight distinguishing between bug and usability feature, you&amp;rsquo;ll see a couple of new things within this release.&lt;/p&gt;
+
+&lt;p&gt;The high level release notes are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;page module is now customizable with CSS and JavaScript&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;handling of static data structures are improved and fully working now&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;wizards are improved, new page wizard is more explaining&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;visual cleanups&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;new hooks for eTypes (elements added by mapping interface)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;new classes for preview in page module, easy to override by extensions&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;added missing localisations&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;enhanced drag-and-drop in page module&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;over 100 Bugs are fixed&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;updated manual&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;During the installation your TYPO3 Extension Manager will ask to perform a couple of database upgrades. These upgrades aren&amp;rsquo;t really critical because they just enlarge some database fields, which will make sure that your data really fit&amp;rsquo;s in.&lt;/p&gt;
+
+&lt;p&gt;Just to point one thing out - especially the page module has been improved to be more flexible in certain parts.&lt;/p&gt;
+
+&lt;p&gt;These lines of TSConfig can be used to add CSS or JavaScript into the page module and enable easy customizations:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mod.web_txtemplavoilaM1.stylesheet = ../fileadmin/css/tvpagemodule.css
+
+mod.web_txtemplavoilaM1.javascript {
+  file1 = ../fileadmin/templates/js/jquery.js
+  file2 = ../fileadmin/templates/css/backend.js
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Further customizations is provided using the &amp;ldquo;&lt;strong&gt;mod.web_txtemplavoilaM1.blindIcons&lt;/strong&gt;&amp;rdquo; configuration or with individual content preview classes (configured though &amp;ldquo;&lt;strong&gt;$GLOBALS[&amp;lsquo;TYPO3_CONF_VARS&amp;rsquo;][&amp;lsquo;EXTCONF&amp;rsquo;][&amp;lsquo;templavoila&amp;rsquo;][&amp;lsquo;mod1&amp;rsquo;][&amp;lsquo;renderPreviewContent&amp;rsquo;]&lt;/strong&gt;&amp;rdquo; - see ext_localconf.php).&lt;/p&gt;
+
+&lt;p&gt;We haven&amp;rsquo;t discussed what the direction for the next versions really looks like. From my perspective better TYPO3 integration, some kind of code cleanup and also the integration of some features which arise with TYPO3 4.4 will be somehow on our schedule. But since &lt;a href=&#34;http://blog.tolleiv.de/2010/03/re-farewell-templavoila/&#34;&gt;TemplaVoila isn&amp;rsquo;t a one man show anymore&lt;/a&gt;, this isn&amp;rsquo;t just my decision and in addition I&amp;rsquo;d like to encourage everyone to send feedback, bugfixes or new features just to give us an impression what you like or dislike in the current version.&lt;/p&gt;
+
+&lt;p&gt;Last but not least, I&amp;rsquo;d like to thank everyone who was somehow involved in the release, especially Steffen Kamper who shared lot of inspiration and who has spent many hours to debug and fix some really tricky issues.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>crawler extension version 3.0.5 released</title>
+      <link>https://blog.tolleiv.de/2010/02/crawler-extension-version-3.0.5-released/</link>
+      <pubDate>Sun, 28 Feb 2010 15:36:56 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/02/crawler-extension-version-3.0.5-released/</guid>
+      <description>&lt;p&gt;Quite some time after the 4.3 release of TYPO3, we published the necessary compatibility version of the crawler extension. Besides the compatibility fixes for TYPO3 and also for PHP 5.3 we also included some handy features:&lt;/p&gt;
+
+&lt;p&gt;First of all there&amp;rsquo;s now, besides the CLI interface, also a full integration with the scheduler extension, which is available in TYPO3 4.3. This enables to setup crawler runs and manage all crawler releated tasks through the TYPO3 backend.&lt;/p&gt;
+
+&lt;p&gt;The &amp;ldquo;crawler_flush&amp;rdquo; interface was added to the CLI (and scheduler). It helps to clean up the crawler queue and enables to remove finished or unfinished entries.&lt;/p&gt;
+
+&lt;p&gt;In addition the CLI was cleaned up a little bit and behaves more intuitive in most situations. Also the help pages should now really tell you what options you have.&lt;/p&gt;
+
+&lt;p&gt;And last but not least we&amp;rsquo;ve added the possibility to avoid an additional HTTP request and have the crawler rendering the page directly.&lt;/p&gt;
+
+&lt;p&gt;Big kudos for their work and their support goes especially to Mick, Fabrizio and Timo from AOE media.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TemplaVoila 1.4 released...</title>
+      <link>https://blog.tolleiv.de/2009/11/templavoila-1.4-released.../</link>
+      <pubDate>Thu, 26 Nov 2009 20:00:19 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/11/templavoila-1.4-released.../</guid>
+      <description>&lt;p&gt;A new version of  TemplaVoila (&lt;a href=&#34;http://typo3.org/extensions/repository/view/templavoila/current/&#34;&gt;ter&lt;/a&gt;) (&lt;a href=&#34;http://forge.typo3.org/projects/show/extension-templavoila&#34;&gt;forge&lt;/a&gt;) has just been released. Besides the great fact that this is the first &lt;strong&gt;team-release&lt;/strong&gt; of TemplaVoila, the high-level improvements within the pagemodule (drag&amp;rsquo;n&amp;rsquo;drop),  the mapping module and the FCE editing forms and besides lot&amp;rsquo;s of bug fixes, there are a few very nice features which make the day-to-day work with TemplaVoila much easier.&lt;/p&gt;
+
+&lt;p&gt;The list of things which happend in 1.4 can be seen on bugs.typo3.org (&lt;a href=&#34;http://tinyurl.com/yb9wsnk&#34;&gt;preselected filter&lt;/a&gt;). The following list contain my favorite fixes which happened unter the hood:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1) Delete content within the pagemodule (instead of unlinking)&lt;/strong&gt;
+By default you will still see the &amp;ldquo;unlink&amp;rdquo; icon within the pagemodule but one small setting within User- or PageTSconfig will show up delete buttons as well. There are two modes:
+_mod.web_txtemplavoilaM1.enableDeleteIconForLocalElements = 1 _
+will show unlink and delete icons for local elements side-by-side
+_mod.web_txtemplavoilaM1.enableDeleteIconForLocalElements = 2 _
+will show the delete icon and hide the unlink icon whenever possible.&lt;/p&gt;
+
+&lt;p&gt;Details: &lt;a href=&#34;http://bugs.typo3.org/view.php?id=6869&#34;&gt;http://bugs.typo3.org/view.php?id=6869&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2) Skip edit screen after a new content element was created&lt;/strong&gt;
+Especially for container items it&amp;rsquo;s anoying that the TYPO3 edit screen opens up after such an item was created. The setting &lt;em&gt;noEditOnCreation&lt;/em&gt;** **within the meta configuration part of your datastructure can be used to change that.&lt;/p&gt;
+
+&lt;p&gt;Details: &lt;a href=&#34;http://bugs.typo3.org/view.php?id=8079&#34;&gt;http://bugs.typo3.org/view.php?id=8079&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;**3) Hide TemplaVoila field values and cleanup the pagemodule
+&lt;strong&gt;Another problem within large projects is a messed up pagemodule. Very often the field data of flexible content elements shows up without any chance to hide it. Use  _disableDataPreview&lt;/strong&gt; **_within the meta configuration part of your datastructure to change that.&lt;/p&gt;
+
+&lt;p&gt;Details: &lt;a href=&#34;http://bugs.typo3.org/view.php?id=11520&#34;&gt;http://bugs.typo3.org/view.php?id=11520&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4) Define default record values&lt;/strong&gt;
+A proper setup contains good default values. Within datastructures you can define default values for your flexform-fields and from now on TemplaVoila also provides the possibility to define default-values for the fields of the parent record. The &amp;ldquo;default / TCEForms / &lt;fieldname&gt;&amp;rdquo; parts within the meta configuration part of your datastructure does this. Very useful usage for container elemente is:&lt;/p&gt;
+
+&lt;p&gt;&lt;meta type=&#34;array&#34;&gt;
+&lt;langDisable&gt;1&lt;/langDisable&gt;
+&lt;default&gt;
+&lt;TCEForms&gt;
+&lt;sys_language_uid&gt;-1&lt;/sys_language_uid&gt;
+&lt;/TCEForms&gt;
+&lt;/default&gt;
+&lt;/meta&gt;&lt;/p&gt;
+
+&lt;p&gt;Details: &lt;a href=&#34;http://bugs.typo3.org/view.php?id=8759&#34;&gt;http://bugs.typo3.org/view.php?id=8759&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s also a completly new &amp;ldquo;New content element&amp;rdquo;-wizard which can be configured with PageTSConfig - this wizard brings some additional feature for default-value configuration. I&amp;rsquo;m going to bring that up in another post soon.&lt;/p&gt;
+
+&lt;p&gt;**5) sectionCount / sectionPos register in TypoScript
+**Rending fields which are nested in sections is not always fun. Expecially when it comes to position detection for the current item. Two new registers try to help in such situtations:&lt;/p&gt;
+
+&lt;p&gt;tx_templavoila_pi1.sectionCount holds the overall amount of items within the current section
+tx_templavoila_pi1.sectionPos holds the position of the curren titem -starting with 1&lt;/p&gt;
+
+&lt;p&gt;Example:
+10 = TEXT
+10.value = (last item)
+10.if.equals.data = register:tx_templavoila_pi1.sectionPos
+10.if.value.data = register:tx_templavoila_pi1.sectionCount&lt;/p&gt;
+
+&lt;p&gt;Details: &lt;a href=&#34;http://bugs.typo3.org/view.php?id=7263&#34;&gt;http://bugs.typo3.org/view.php?id=7263&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;noEditOnCreation
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>imagemap_wizard 0.5.3</title>
+      <link>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</link>
+      <pubDate>Thu, 22 Oct 2009 19:18:39 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</guid>
+      <description>&lt;p&gt;Last Sunday I&amp;rsquo;ve released the first official stable version of my &lt;a href=&#34;http://blog.tolleiv.de/2009/07/typo3-extensions/&#34;&gt;imagemap_wizard&lt;/a&gt; extension &lt;a href=&#34;http://typo3.org/extensions/repository/view/imagemap_wizard/current/&#34;&gt;(TER&lt;/a&gt;).
+I though that&amp;rsquo;s a good moment to review the introduction text on the project-homepage and that&amp;rsquo;s how it looks like - &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;forge.typo3.org/projects/show/extension-imagemap_wizard&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Especially due to the missing/broken TER download counter I&amp;rsquo;m still not sure whether the work was worth it. I hope some marketing and the given information about all the cool featutes is enough for newbees and TYPO3 pro&amp;rsquo;s. to  switch over to this extension ;)&lt;/p&gt;
+
+&lt;p&gt;The 0.6 releases will focus on some UI and usability improvements and looking at my old overall schedule for the 1.0 release there&amp;rsquo;s &amp;ldquo;only&amp;rdquo; one big feature missing - the integration into regular content elements (e.g. &amp;ldquo;text w/image&amp;rdquo;).  So stay tuned :D&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

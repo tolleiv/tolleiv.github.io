@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/extension/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/extension/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>TYPO3 4.4 sprites in your extension...</title>
+      <link>https://blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</link>
+      <pubDate>Sun, 25 Jul 2010 08:00:29 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</guid>
+      <description>
+
+&lt;p&gt;TYPO3 4.4 ships with a long list of improvements. One of them is the sprite API which was developed during T3UXW09. It extends the iconWorks API and enables to retrieve any backend-icon from a central sprite.&lt;/p&gt;
+
+&lt;p&gt;As extension maintainer there are several ways to use these new parts of the API you can either just use it to display core icons, you can include your own icons and retrieve it with the new API or you can include your own sprite and retrieve the separate icons.&lt;/p&gt;
+
+&lt;h4 id=&#34;use-sprite-icons&#34;&gt;Use sprite icons&lt;/h4&gt;
+
+&lt;p&gt;Using sprite icons is pretty easy, to get a checkmark icon you could use this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;t3lib_iconWorks::getSpriteIcon(&#39;status-dialog-ok&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The list of all available icons can be retrieved using the &amp;lsquo;&lt;strong&gt;&lt;a href=&#34;http://typo3.org/extensions/repository/view/spriteiconoverview/current/&#34;&gt;spriteiconoverview&lt;/a&gt;&lt;/strong&gt;&amp;rsquo; extension which I just recently pushed into the TER ;)&lt;/p&gt;
+
+&lt;h4 id=&#34;add-your-own-icons&#34;&gt;Add your own icons&lt;/h4&gt;
+
+&lt;p&gt;The API also provides the possibility to include your extension&amp;rsquo;s icons using either single icons or your own icon sprite.
+Using single icons can be done with the following code in your ext_tables.php or ext_localconf.php:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$icons = array(
+     &#39;myicon&#39; =&amp;gt; t3lib_extMgm::extRelPath(&#39;myextension&#39;) . &#39;myicon.gif&#39;
+);
+t3lib_SpriteManager::addSingleIcons($icons, &#39;myextension&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Using this icon is easy again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;t3lib_iconWorks::getSpriteIcon(&#39;extensions-myextension-myicon&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If your extension comes with a larger amount of icons you might want to use your own sprite. This includes your sprite as a image file and a CSS file. The css file should look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;.t3-icon-extensions-myextension {
+     background-image:url(../../typo3conf/ext/myextension/myextension_sprite.gif);
+}
+.t3-icon-extensions-myextension-icon1 { background-position: 0px 0px; }
+.t3-icon-extensions-myextension-icon2 { background-position: 0px -16px; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The path to your sprite needs to be relative to the typo3temp/sprites/ folder, from where the (temporary) merged CSS file will be included.
+This sprite can be included using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$icons = array(
+     &#39;extensions-myextension-icon1&#39;,
+     &#39;extensions-myextension-icon2&#39;
+);
+t3lib_SpriteManager::addIconSprite(
+     $icons,
+     t3lib_extMgm::siteRelPath(&#39;myextension&#39;) . &#39;myextension_sprite.css&#39;
+);              
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you see it&amp;rsquo;s quite easy to include the new API, the API provides some further options for overlays and further modifications which I didn&amp;rsquo;t mention here. And as a final motivation this is a comparison between old and new API to get a &amp;ldquo;back&amp;rdquo; button:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// old API
+$icon = &#39;&amp;lt;img&#39; . t3lib_iconWorks::skinImg($this-&amp;gt;doc-&amp;gt;backPath,&#39;gfx/goback.gif&#39;,&#39;width=&amp;quot;14&amp;quot; height=&amp;quot;14&amp;quot;&#39;) . &#39;alt=&amp;quot;&amp;quot; /&amp;gt;&#39;;
+
+// new API
+$icon = t3lib_iconWorks::getSpriteIcon(&#39;actions-view-go-back&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;The sprite API is quite new and my knowledge about how to use it is also relatively fresh - so please let me know if you&amp;rsquo;ve any remarks or questions.&lt;/p&gt;
+
+&lt;h2 id=&#34;btw-special-kudos-for-his-involvement-during-the-implementation-of-this-nice-feature-and-many-many-thanks-for-helping-me-to-understand-it-to-steffen-ritter-http-www-rs-websystems-de&#34;&gt;Btw. special kudos for his involvement during the implementation of this nice feature and many many thanks for helping me to understand it, to &lt;a href=&#34;http://www.rs-websystems.de/&#34;&gt;Steffen Ritter&lt;/a&gt;  :)&lt;/h2&gt;
+
+&lt;p&gt;Further reading:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;If you&amp;rsquo;ve never heard of sprites you might want to read this article an &lt;a href=&#34;http://www.alistapart.com/articles/sprites&#34;&gt;alistapart.com&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://typo3.org/download/release-notes/typo3-44/&#34;&gt;TYPO3 4.4 release notes&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://news.typo3.org/news/article/t3dd10-its-all-about-sprites/&#34;&gt;news.typo3.org - T3DD10: It&amp;rsquo;s all about sprites&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://typo3.org/extensions/repository/view/spriteiconoverview/current/&#34;&gt;spriteiconoverview&lt;/a&gt; extension&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Crawler 3.1 release &#43; podcast</title>
+      <link>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</link>
+      <pubDate>Wed, 31 Mar 2010 22:35:20 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/03/crawler-3.1-release-&#43;-podcast/</guid>
+      <description>&lt;p&gt;Nearly a month after version 3.0.5, we published 3.1.0 of the well known crawler extension today. The main work for that step was related to several bugfixes, a better scheduler integration, some CLI-API enhancements, better testcases and (finally) some documentation updates. Most kudos go to Michael Klapper who took over the responsibility for this release and who also fixed a decent amount of bugs.
+You can download the extension in the &lt;a href=&#34;http://typo3.org/extensions/repository/view/crawler/current/&#34;&gt;TER &lt;/a&gt; and hopefully this time OpenOffice didn&amp;rsquo;t trick us again and you&amp;rsquo;ll be able to see a shiny new extension manual on typo3.org as well.&lt;/p&gt;
+
+&lt;p&gt;Besides that, Kasper just released the podcast with me talking about version 3.0 of the crawler and about further improvements for the staticpub extension. You&amp;rsquo;ll find that on &lt;a href=&#34;http://typo3.org/podcasts/kasper&#34;&gt;typo3.org/podcasts/kasper&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Handling data in TYPO3 with tcemain</title>
+      <link>https://blog.tolleiv.de/2010/03/handling-data-in-typo3-with-tcemain/</link>
+      <pubDate>Tue, 02 Mar 2010 07:05:16 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2010/03/handling-data-in-typo3-with-tcemain/</guid>
+      <description>&lt;p&gt;TYPO3 is (by definition) a powerful tool when it comes to data. Besides creating, updating and deleting data there are also localizing and versioning, logging and even rollbacks. All this is provided through the GUI of TYPO3 and all the technical stuff in working under the hood of TYPO3 for nearly every piece of data. But what if you&amp;rsquo;re asked to write a script which imports or updates data, how can you make sure that all this is done in a TYPO3 compatible way?&lt;/p&gt;
+
+&lt;p&gt;The lazy programmers approach is to write up SQL, but that&amp;rsquo;s not what&amp;rsquo;s recommended if you still want the full TYPO3 featureset to be available for you (without reinventing the wheel). In this case the TYPO3 core class tslib_tcemain (short tcemain) is what you&amp;rsquo;re looking for. For the mentioned tasks there are two main functions relevant - &lt;strong&gt;process_cmdmap()&lt;/strong&gt; and &lt;strong&gt;process_datamap()&lt;/strong&gt;. The &lt;strong&gt;process_cmdmap()&lt;/strong&gt; performs actions like &amp;ldquo;move&amp;rdquo;, &amp;ldquo;copy&amp;rdquo;, &amp;ldquo;localize&amp;rdquo;, &amp;ldquo;version&amp;rdquo; (create, stage, swap, flush), &amp;ldquo;delete&amp;rdquo; and &amp;ldquo;undelete&amp;rdquo;. The &lt;strong&gt;process_datamap()&lt;/strong&gt; does the rest - creating records, updating datafields. Controlling both of them is done with configuration arrays and that&amp;rsquo;s how it looks like**:&lt;/p&gt;
+
+&lt;p&gt;*&lt;em&gt;Creating a record&lt;/em&gt;: **&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$data = array();
+$data[&#39;tt_content&#39;][&#39;NEW&#39;] = array(
+    &#39;pid&#39; =&amp;gt; 100,
+    &#39;header&#39; =&amp;gt; &#39;A new thing&#39;
+);
+
+$tce = t3lib_div::makeInstance (&#39;t3lib_TCEmain&#39;);
+$tce-&amp;gt;start ($data, array());
+$tce-&amp;gt;process_datamap ();
+
+echo &amp;quot;The new element has the uid &amp;quot;.$tce-&amp;gt;substNEWwithIDs[&#39;NEW&#39;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Creates a new tt_content record on page 100 with the header set to &amp;ldquo;A new thing&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Updating data*:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$data = array();
+$data[&#39;tt_content&#39;][&#39;110&#39;] = array(
+    &#39;header&#39; =&amp;gt; &#39;A really new thing&#39;
+);
+
+$tce = t3lib_div::makeInstance (&#39;t3lib_TCEmain&#39;);
+$tce-&amp;gt;start ($data, array());
+$tce-&amp;gt;process_datamap ();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Updates the header field of the content element with the uid 110 to &amp;ldquo;A really new thing&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Move data from one page to another*:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$cmd = array();
+$cmd[&#39;tt_content&#39;][&#39;110&#39;][&#39;move&#39;] = 101;
+
+$tce = t3lib_div::makeInstance (&#39;t3lib_TCEmain&#39;);
+$tce-&amp;gt;start (array(), $cmd);
+$tce-&amp;gt;process_cmdmap ();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Moves the tt_content record with the uid 110 to the page 101.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Copy data from one page to another*:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$cmd = array();
+$cmd[&#39;tt_content&#39;][&#39;110&#39;][&#39;copy&#39;] = 101;
+
+$tce = t3lib_div::makeInstance (&#39;t3lib_TCEmain&#39;);
+$tce-&amp;gt;start (array(), $cmd);
+$tce-&amp;gt;process_cmdmap ();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Copythe tt_content record with the uid 110 to the page 101.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Localize your record*:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$cmd = array();
+$cmd[&#39;tt_content&#39;][&#39;110&#39;][&#39;localize&#39;] = 5;
+
+$tce = t3lib_div::makeInstance (&#39;t3lib_TCEmain&#39;);
+$tce-&amp;gt;start (array(), $cmd);
+$tce-&amp;gt;process_cmdmap ();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This creates a localization for the language 5 of the tt_content record with uid 110 (assuming that the tt_content record 110 is a default language record).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Delete*:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$cmd = array();
+$cmd[&#39;tt_content&#39;][&#39;110&#39;][&#39;delete&#39;] = true;
+
+$tce = t3lib_div::makeInstance (&#39;t3lib_TCEmain&#39;);
+$tce-&amp;gt;start (array(), $cmd);
+$tce-&amp;gt;process_cmdmap ();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Deletes the tt_content record with the uid 110.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Undelete*:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$cmd = array();
+$cmd[&#39;tt_content&#39;][&#39;110&#39;][&#39;undelete&#39;] = true;
+
+$tce = t3lib_div::makeInstance (&#39;t3lib_TCEmain&#39;);
+$tce-&amp;gt;start (array(), $cmd);
+$tce-&amp;gt;process_cmdmap ();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restores the tt_content record with the uid 110 - if it&amp;rsquo;s deleted.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Running the codes requires a TYPO3 backend context with a logged in backend user who has the right to perform all these actions. In addition tcemain has some configuration options to change the behaviour of the actions, e.g. &amp;ldquo;$enableLogging&amp;rdquo; or &amp;ldquo;$bypassWorkspaceRestrictions&amp;rdquo; - they come with useful defaults but you might need to change them in certain situations ~ so looking into the code documentation might save you some time.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;**  I left out the &amp;ldquo;version&amp;rdquo; part since this requires some more explanation than just a few lines of code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>imagemap_wizard 0.5.3</title>
+      <link>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</link>
+      <pubDate>Thu, 22 Oct 2009 19:18:39 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</guid>
+      <description>&lt;p&gt;Last Sunday I&amp;rsquo;ve released the first official stable version of my &lt;a href=&#34;http://blog.tolleiv.de/2009/07/typo3-extensions/&#34;&gt;imagemap_wizard&lt;/a&gt; extension &lt;a href=&#34;http://typo3.org/extensions/repository/view/imagemap_wizard/current/&#34;&gt;(TER&lt;/a&gt;).
+I though that&amp;rsquo;s a good moment to review the introduction text on the project-homepage and that&amp;rsquo;s how it looks like - &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;forge.typo3.org/projects/show/extension-imagemap_wizard&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Especially due to the missing/broken TER download counter I&amp;rsquo;m still not sure whether the work was worth it. I hope some marketing and the given information about all the cool featutes is enough for newbees and TYPO3 pro&amp;rsquo;s. to  switch over to this extension ;)&lt;/p&gt;
+
+&lt;p&gt;The 0.6 releases will focus on some UI and usability improvements and looking at my old overall schedule for the 1.0 release there&amp;rsquo;s &amp;ldquo;only&amp;rdquo; one big feature missing - the integration into regular content elements (e.g. &amp;ldquo;text w/image&amp;rdquo;).  So stay tuned :D&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TYPO3 crawler extension</title>
+      <link>https://blog.tolleiv.de/2009/09/typo3-crawler-extension/</link>
+      <pubDate>Fri, 11 Sep 2009 07:36:08 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/09/typo3-crawler-extension/</guid>
+      <description>&lt;p&gt;Cool thing just happend after a couple of months we finally released the new version of the famous crawler extension. Read more on &lt;a href=&#34;http://forge.typo3.org/news/show/181&#34;&gt;forge,typo3.org&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TYPO3 extensions ....</title>
+      <link>https://blog.tolleiv.de/2009/07/typo3-extensions-..../</link>
+      <pubDate>Sun, 26 Jul 2009 19:20:18 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/07/typo3-extensions-..../</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m currently within the preparation for some exams therefore my day&amp;rsquo;s aren&amp;rsquo;t very fancy at all - and that&amp;rsquo;s why I just decided to introduce some TYPO3 extensions - especially TYPO3 extensions where I&amp;rsquo;m somehow involved ;)&lt;/p&gt;
+
+&lt;p&gt;The mentioned extensions are all created by AOEmedia or in cooperation with &lt;a href=&#34;http://www.aoemedia.com&#34;&gt;AOEmedia&lt;/a&gt;, they&amp;rsquo;re actively maintained and they work within regular TYPO3 environments with all TYPO3 features -lot&amp;rsquo;s of other extensions don&amp;rsquo;t support l10n and workspaces - ours do ;) Please use the mentioned pages on forge.typo3.org to get feedback on your bugs within the mentioned extensions.&lt;/p&gt;
+
+&lt;p&gt;Ok let&amp;rsquo;s start:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../wp-content/uploads/2009/07/39b125d4f5-197x300.png&#34; alt=&#34;Imagemap Wizard preview&#34; /&gt;&lt;strong&gt;imagemap_wizard (&lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;forge&lt;/a&gt;)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;My favorite extension - I started it on the T3DD08 and it took 6 months to finish the first alpha. After 1 year it&amp;rsquo;s now a very flexible and fully integrated way to create imagemaps within TYPO3. I&amp;rsquo;m very proud that it comes without any XCLASSes and that it can just be used like regular content elements. Localization and workspaces are also supported and the imagemaps are created on frontend-like images. E.g. the uploaded image can be transformed with some installed filters and you&amp;rsquo;ll see the applied filters also in the preview while creating your imagemap - that&amp;rsquo;s pretty cool since there&amp;rsquo;s no other imagemap-tool which offers such an integration. And the editing of the imagemap itself is done with a (hopefully) intuitive point&amp;amp;click interface :) &amp;hellip; more details on &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;forge.typo3.org&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;crawler (&lt;a href=&#34;http://forge.typo3.org/projects/show/extension-crawler&#34;&gt;forge&lt;/a&gt;)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The crawler is a widely know extension within the TYPO3 community - initially Kasper himself implemented the crawler and he handed over the maintenance for the crawler and it&amp;rsquo;s associated extension staticpub to AOEmedia - during the last year we made a lot of small improvements and currently we&amp;rsquo;re making really big changes to get multiprocess-support and  a better &amp;ldquo;configuration-interface&amp;rdquo; into the extension. The biggest task was that we had to stay compatible with the old API because it&amp;rsquo;s also widely know within the community ;) &amp;hellip; a release of the new crawler version will follow very soon :) - more details about the crawler and &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-crawler&#34;&gt;forge.typo3.org&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;aoe_realurlpath (&lt;a href=&#34;http://forge.typo3.org/projects/show/extension-aoe_realurl&#34;&gt;forge&lt;/a&gt;)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;RealURL is a powerful extension to generate readable and SEO friendly extensions within TYPO3, unfortunately RealURLs pathgenerations wasn&amp;rsquo;t very flexible in the past and especially localization wasn&amp;rsquo;t represented the way as you might expect it therefore &lt;a href=&#34;http://www.typo3-media.com&#34;&gt;Daniel&lt;/a&gt; implemented an extension which did the path-generations in a more predictable and flexible way. During the last months we added lot&amp;rsquo;s of Unit tests and added lot&amp;rsquo;s of additional feature for some other special cases (mostly connected to l10n) - the extension itself has a stable state and the testcases make development for this extension very easy - it&amp;rsquo;s still a tricky job to implement new features though.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s it for today - I think there&amp;rsquo;ll be some additional posts on other extensions.&lt;/p&gt;
+
+&lt;p&gt;Followups: &lt;a href=&#34;http://www.typo3-media.com/blog/article/talking-about-10-extensions-part-i.html&#34;&gt;Daniel about 10 extensions&lt;/a&gt; , &lt;a href=&#34;http://typo3.org/extensions/repository/popular/&#34;&gt;popular exntensions on TYPO3.org&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

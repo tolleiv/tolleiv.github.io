@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/categories/facade/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/categories/facade/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Façade [GoF]</title>
+      <link>https://blog.tolleiv.de/2008/06/fa%C3%A7ade-gof/</link>
+      <pubDate>Mon, 16 Jun 2008 23:33:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/fa%C3%A7ade-gof/</guid>
+      <description>&lt;p&gt;If a child is in the mood to eat a fresh cookie it normally asks his granny for one. Like this:&lt;/p&gt;
+
+&lt;p&gt;Child: Grannyyyyy?&lt;br /&gt;
+Granny: Yes my dear?&lt;br /&gt;
+Child: Could you mix about 2 cups of sugar, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; cup of butter and &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; cup of milk in a saucepan and boil it for a minute. And could you, after you removed the saucepan from the heat, mix in some cocoa powder and 3 cups quick cooking oats and form some cookies? Pleeease?&lt;/p&gt;
+
+&lt;p&gt;Hm you&amp;rsquo;re right that&amp;rsquo;s not very realistic - it&amp;rsquo;s more like: &amp;ldquo;Grannyyyy? Could I have a cooookieee pleeeease?&amp;rdquo; &amp;hellip;.the granny knows what to do and the child will get it&amp;rsquo;s cookie&lt;/p&gt;
+
+&lt;p&gt;So what happens if you have a pice of software which provides &lt;strike&gt;cookies&lt;/strike&gt; some services for other parts of your software? The most people (especially programmers) are lazy and they won&amp;rsquo;t remember all the details of a complex structure. They remember the place or object which can run a certain task but there&amp;rsquo;s no need to know the deeper structure of that object - the only thing which is important if your using a service of an object is that it doesn&amp;rsquo;t fail.&lt;br /&gt;
+So the Façade pattern is a structural pattern which more or less describes that you create a object with an simplified interface, so that you can hide complex structures. You can also use a Façade to wrap up some poorly designed APIs into a single well designed API. And the larges benefit of a Façade object is that it makes APIs more readable and therefore enables flexible and easy development.&lt;/p&gt;
+
+&lt;p&gt;So maybe you&amp;rsquo;re missing the example-code for this pattern, but since it&amp;rsquo;s not that concrete as others, I&amp;rsquo;ve not implemented a  special example for it. But I already used a Facade in some way, if you look at the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification pattern&lt;/a&gt;, you&amp;rsquo;ll find the functions getSmallChocolateCookies() and getLargeCookies(). Both show in a tasty way what I described  here :)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

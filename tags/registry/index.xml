@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/registry/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/registry/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Singelton [GoF]</title>
+      <link>https://blog.tolleiv.de/2008/05/singelton-gof/</link>
+      <pubDate>Fri, 23 May 2008 21:40:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/05/singelton-gof/</guid>
+      <description>&lt;p&gt;Tis pattern is a very well know and a often discussed one.&lt;/p&gt;
+
+&lt;p&gt;Explaining it the tasty way: let&amp;rsquo;s say you have exactly one well know place where you store all your cookies and whenever you need one you can easy point to that place. Normally that&amp;rsquo;s really comfortable because whatever you do with it, you don&amp;rsquo;t have to search some place where you can find a cookie, you just go to that single &amp;ldquo;cookie tin&amp;rdquo; (or wherever you store cookies) and put a new cookie into it ;)&lt;/p&gt;
+
+&lt;p&gt;In modern OOP the singleton is not very popular, Eric Evans simple calls it anti-pattern. It makes it much harder to test your software and normally the user of the class, not the class itself, should know how many instances are needed.&lt;/p&gt;
+
+&lt;p&gt;But nevertheless for small applications it&amp;rsquo;s very comfortable to use it in some situations and as long as you&amp;rsquo;re also familiar with the drawbacks I think it&amp;rsquo;s ok to consider using it&amp;hellip;.&lt;/p&gt;
+
+&lt;p&gt;So the example shows a cookie tin and how to use it and by the way it also implements some kind of lowlevel registry by using the &lt;a href=&#34;http://www.php.net/manual/en/language.oop5.magic.php&#34;&gt;PHP5 magic methods&lt;/a&gt;, but that&amp;rsquo;s another story ;)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/**
+* CookieTin a.k.a Singleton object
+* we want to force our application
+* to hold exactly one CookieTin object
+*/
+class CookieTin {
+    private $_cookies=array();
+
+    /* generic singleton part start*/
+
+    private static $_instance=NULL;
+    // prevent instatiation from the outside
+    private function __construct() { }
+
+    // prevent cloning
+    private function __clone() {}
+
+    public static function getInstance() {
+        if(!self::$_instance) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
+    }
+    /* generic singleton part end */
+
+    /* registry part start */
+    public static function __set($key,Cookie $value) {
+        echo “call setter\n”;
+        self::$_instance-&amp;gt;_cookies[$key] = $value;
+    }
+
+    public static function __get($key) {
+        echo “call getter\n”;
+        return self::$_instance-&amp;gt;_cookies[$key];
+    }
+
+    public static function __isset($key) {
+        echo “call isset\n”;
+        return isset(self::$_instance-&amp;gt;_cookies[$key]);
+    }
+
+    public static function __unset($key) {
+        echo “call unset\n”;
+        unset(self::$_instance-&amp;gt;_cookies[$key]);
+    }
+/* registry part end */
+}
+/**
+* Dummy Cookie
+*/
+class Cookie {
+    public $name,$flavor;
+}
+
+
+
+
+
+
+
+$tin = CookieTin::getInstance();
+if(!isset($tin-&amp;gt;granniescookie)) {
+    $tin-&amp;gt;granniescookie = new Cookie();
+    $tin-&amp;gt;granniescookie-&amp;gt;name=“Grannies chocolate wonder”;
+    $tin-&amp;gt;granniescookie-&amp;gt;flavor=“chocolate”;
+}
+
+CookieTin::getInstance()-&amp;gt;granniescookie-&amp;gt;flavor = “chocolte chips”;
+
+var_dump($tin);
+unset(CookieTin::getInstance()-&amp;gt;granniescookie);
+var_dump($tin);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The really important things happen in the last lines where the CookieTin is accessed statically and this change also (as you will see yourself) is reflected in the local instance if the $tin.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

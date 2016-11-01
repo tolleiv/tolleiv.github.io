@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/categories/zip/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/categories/zip/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Self-extracting PHP archive</title>
+      <link>https://blog.tolleiv.de/2008/06/self-extracting-php-archive/</link>
+      <pubDate>Sat, 07 Jun 2008 21:30:00 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2008/06/self-extracting-php-archive/</guid>
+      <description>&lt;p&gt;The __halt_compiler(); function in php enables to store some additional data in a php-file without blowing up the memory. A very nice possibility is to use this for a self-extracting php file as installation-packages of your php application.
+A wile ago I created a script which automatically creates such a archive and I think you might like it&amp;hellip;.for the impatient ones: &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.php&#34;&gt;Download&lt;/a&gt; / &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.zip&#34;&gt;Download as Zip&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before I start to show how the entire script works I&amp;rsquo;d like to show you a small example so that you can see how the __halt_compiler(); function can be used to store some data at the end of a file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$fp = fopen(__FILE__, ‘r’);
+fseek($fp, __COMPILER_HALT_OFFSET__);
+$i=0;
+while($buffer = fgets($fp)) {
+    echo ($i++). “:”. $buffer.“&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;”;
+};
+__HALT_COMPILER();Line 1
+Line 2
+Line 3
+Last line 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first thing you might mention is, that the closing &amp;ldquo;?&amp;gt;&amp;rdquo; is missing, but since the function-name is nearly self-explaining you should realize very fast what the output of the script might be ;)&lt;/p&gt;
+
+&lt;p&gt;If that&amp;rsquo;s working the question is what&amp;rsquo;s needed for a script which is meant to create and extract a archive? The first thing is a way to create the archive itself. I used the PHP-builtin &lt;a href=&#34;http://de3.php.net/manual/en/ref.zip.php&#34;&gt;ZipArchive&lt;/a&gt; for that. The second thing is a script which is able to extract this archiv (using the method show above). That&amp;rsquo;s handled by the following snippet:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;try {
+    $zipfilename = md5(time()).‘archive.zip’; //remove with tempname()
+    $fp_tmp = fopen($zipfilename,‘w’);
+    $fp_cur = fopen(__FILE__, ‘r’);
+    fseek($fp_cur, __COMPILER_HALT_OFFSET__);
+    $i=0;
+    while($buffer = fread($fp_cur,10240)) {
+        fwrite($fp_tmp,$buffer);
+    }
+    fclose($fp_cur);
+    fclose($fp_tmp);
+    $zipfile = new ZipArchive();
+    if($zipfile-&amp;gt;open($zipfilename)===true) { 
+        if(!$zipfile-&amp;gt;extractTo(‘.’)) throw new Exception(‘extraction failed…’);
+    } else throw new Exception(‘reading archive failed’);
+    $zipfile-&amp;gt;close();
+    unlink($zipfilename);
+} catch (Exception $e) {
+    printf(“Error:&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;%s&amp;lt;br&amp;gt;%s&amp;gt;”,$e-&amp;gt;getMessage(),$e-&amp;gt;getTraceAsString());
+};
+__HALT_COMPILER();[zipdata is appended here later] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you see that&amp;rsquo;s no rocket-science just read the data, pass it to the ZipArchive object via a temporary file and extract the archive.
+If that&amp;rsquo;s working then you need a script which brings the PHP extraction script and the zip-data together. And since we want to have a single script for the creation of our self extracting php archive, it would be very odd if we&amp;rsquo;d place the &amp;ldquo;template&amp;rdquo; for the extraction in a separate file. That&amp;rsquo;s the reason why I just use the same method as above for this script and this time the data is php code instead of zip-data:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;try {
+    $sourcefolder = ‘compressthis/’;                 // maybe you want to get this via CLI argument …
+    $targetname = ‘phparchive.php’;                    
+    $zipfilename = md5(time()).‘archive.zip’;         // replace with tempname()
+
+    // create a archive from the submitted folder
+    $zipfile = new ZipArchive();
+    $zipfile-&amp;gt;open($zipfilename,ZipArchive::CREATE);
+    addFiles2Zip($zipfile,$sourcefolder,true);
+    $zipfile-&amp;gt;close();
+
+    // compile the selfextracting php-archive
+    $fp_dest =fopen($targetname,‘w’);    
+    $fp_cur = fopen(__FILE__, ‘r’);
+    fseek($fp_cur, __COMPILER_HALT_OFFSET__);
+    $i=0;
+    while($buffer = fgets($fp_cur)) {
+        fwrite($fp_dest,$buffer);
+    }
+    fclose($fp_cur);
+    $fp_zip = fopen($zipfilename,‘r’);
+    while($buffer = fread($fp_zip,10240)) {
+        fwrite($fp_dest,$buffer);
+    }
+    fclose($fp_zip);
+    fclose($fp_dest);
+    unlink($zipfilename);
+
+} catch (Exception $e) {
+ echo $e-&amp;gt;getTraceAsString();
+}
+
+function 
+addFiles2Zip(ZipArchive $zip,$path,$removeFirstFolder=false) {
+    $d = opendir($path);
+    while($file = readdir($d)) {
+        if ($file == “.” || $file == “..”) continue;
+        $curfile=($removeFirstFolder)?substr($path.$file,strpos($path,‘/’)+1):$path.$file;
+        if(is_dir($path.$file)) {
+            $zip-&amp;gt;addEmptyDir($curfile);
+            addFiles2Zip($zip,$path.$file.‘/’,$removeFirstFolder);    
+        } else {
+            $zip-&amp;gt;addFile($path.$file,$curfile);
+        }    
+    }
+    closedir($d);
+}
+
+
+__HALT_COMPILER();[the script shown above]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you all wrap up into a single script the you&amp;rsquo;ll have something like the &lt;a href=&#34;http://588299e40f6cb98516d7458.googlepages.com/createziparchive-0.5.1.php&#34;&gt;script I already mentioned.&lt;/a&gt;
+I think that it could be useful to have a version with a better error-handling and maybe also some CLI functions so that there&amp;rsquo;s no need to edit the script itself everytime&amp;hellip; I&amp;rsquo;ll keep you updated as soon as I have something like that :)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

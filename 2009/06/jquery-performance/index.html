@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery performance | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="https://blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">June 15, 2009</h2>
+    <h1 class="title">jQuery performance</h1>
+    <div class="content">
+      <p>jQuery 1.3 made a huge step especially towards better performance. But it&rsquo;s not only the framework, from time to time it&rsquo;s the developer who should care about performance too. Artzstudio.com made up a really good summary of <a href="http://www.artzstudio.com/2009/04/jquery-performance-rules/">how you should change your coding-style to achieve a higher performance with jQuery</a>.</p>
+
+<p>In my opinion the most important things are:</p>
+
+<ol>
+<li><p><a href="http://www.artzstudio.com/2009/04/jquery-performance-rules/#descend-from-id">Use ID selectors whenever possible</a> since this can be directly mapped to <strong>getElementById()</strong> it much faster then all the other selectors</p></li>
+
+<li><p><a href="http://www.artzstudio.com/2009/04/jquery-performance-rules/#harness-chaining">Use chaining whenever possible</a> since it will reuse the already selected element whichout additional selectors</p></li>
+
+<li><p><a href="http://www.artzstudio.com/2009/04/jquery-performance-rules/#limit-dom-manipulation">Limit direct DOM manipulation</a> obviously browsers don&rsquo;t like it therefor you should avoid it ;)</p></li>
+
+<li><p>Distinguish between <a href="http://www.artzstudio.com/2009/04/jquery-performance-rules/#defer-to-window-load"><strong>$(window).load()</strong> and <strong>$(documen).ready()</strong></a></p></li>
+</ol>
+
+<p>Besides this single resource there&rsquo;s also the <a href="http://www.tvidesign.co.uk/blog/improve-your-jquery-25-excellent-tips.aspx">list with 25 jQuery tips from tvidesign.co.uk </a>which contains lot&rsquo;s of useful stuff. And of course there are ton&rsquo;s of cheat sheets lying around in the web - you should at least use one ;) .</p>
+
+<p><a href="http://acodingfool.typepad.com/blog/jquery-13-cheat-sheet.html">(http://acodingfool.typepad.com/blog/jquery-13-cheat-sheet.html</a>)
+(<a href="http://www.gscottolson.com/weblog/2008/01/11/jquery-cheat-sheet/">http://www.gscottolson.com/weblog/2008/01/11/jquery-cheat-sheet/</a>)
+(<a href="http://colorcharge.com/jquery/">http://colorcharge.com/jquery/</a>)
+(<a href="http://www.gmtaz.com/index.php/jquery-13-cheatsheet-wallpaper/">http://www.gmtaz.com/index.php/jquery-13-cheatsheet-wallpaper/</a>)</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'tolleiv';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

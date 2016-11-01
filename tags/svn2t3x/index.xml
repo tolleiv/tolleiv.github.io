@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog.tolleiv.de ...  </title>
+    <link>https://blog.tolleiv.de/tags/svn2t3x/index.xml</link>
+    <description>Recent content on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <atom:link href="https://blog.tolleiv.de/tags/svn2t3x/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>TYPO3 extensions from Subversion</title>
+      <link>https://blog.tolleiv.de/2009/06/typo3-extensions-from-subversion/</link>
+      <pubDate>Mon, 01 Jun 2009 11:08:47 +0000</pubDate>
+      
+      <guid>https://blog.tolleiv.de/2009/06/typo3-extensions-from-subversion/</guid>
+      <description>&lt;p&gt;[&lt;img src=&#34;https://blog.tolleiv.de/uploads/2009/06/svn2t3x-snap-150x150.png&#34; alt=&#34;Subversion to T3X conversion tool&#34; /&gt;(/uploads/2009/06/svn2t3x-snap.png)&lt;/p&gt;
+
+&lt;p&gt;From time to time it&amp;rsquo;s really buggin me that some &amp;ldquo;TYPO3 integrators&amp;rdquo; don&amp;rsquo;t have PHP skills. And since Subversion is imho the most important tool within groups of developers, their missing PHP skills are a real downside because they can&amp;rsquo;t use the newest extension version directly out of the Subversion repository. Therefore I decided to create a handy little tool which enables to generate TYPO3 &lt;em&gt;.t3x extension-files from any&lt;/em&gt; Subversion repository.&lt;/p&gt;
+
+&lt;p&gt;I started this yesterday and the tool is already running fine - it seems to work pretty good with forge.typo3.org. There&amp;rsquo;re just a couple of small problems I&amp;rsquo;m facing right now ( 1) unsigned SSL certificates, 2) security, 3) security, 4) Extension-key extraction, 5) testing, 6) Web 2.0 design ;) ) ..  so stay tuned :D&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

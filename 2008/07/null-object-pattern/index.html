@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Null-Object Pattern | blog.tolleiv.de ...  </title>
+<link rel="stylesheet" href="https://blog.tolleiv.de//css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://blog.tolleiv.de/"><h1 class="title is-4">blog.tolleiv.de ...  </h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://blog.tolleiv.de/imprint">
+            <span class="icon">
+              <i class="fa fa-hand-o-right"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/about">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://github.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/tolleiv">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">July 1, 2008</h2>
+    <h1 class="title">Null-Object Pattern</h1>
+    <div class="content">
+      <p>Very often you create a object with a factory and before you really start using it, you check if your factory really created a object or returned NULL. Or maybe you have a method where a object is passed in and in this situation you&rsquo;ll have to do this check also.</p>
+
+<p>Instead of typing the &ldquo;if(object == null)&rdquo; phrase again and again, you could use the Null-Object pattern, you&rsquo;ll see that this can make some situations much clearer.</p>
+
+<p>Basically Null-Object ensures that the client always receives a valid object for it&rsquo;s interaction, so that there&rsquo;s no need to do the check shown above again and again. This happens since your concrete Null-Object just shares the interface, or inherits from the same class as it&rsquo;s effective counterpart, but it&rsquo;s implementation just leaves out any effectiveness.
+<a href="http://bp3.blogger.com/_l5fIZzJyYfc/SGpiDZ9m-rI/AAAAAAAAACo/nVuiUHE4E90/s1600-h/nullobject_pattern.png">
+<img src="http://bp3.blogger.com/_l5fIZzJyYfc/SGpiDZ9m-rI/AAAAAAAAACo/nVuiUHE4E90/s400/nullobject_pattern.png" alt="" /></a> So a code-example could look like this:</p>
+
+<p>class CookieFactory {
+public function makeInstance() {
+if(date(&lsquo;l&rsquo;)==&lsquo;Monday&rsquo;) return new NullCookie();
+return new RealCookie();
+}
+}</p>
+
+<p>interface iCookie {
+function getCalories();
+}</p>
+
+<p>class RealCookie implements iCookie {
+protected $calories=250;
+public function getCalories() {
+return $this-&gt;calories;
+}
+}</p>
+
+<p>class NullCookie implements iCookie {
+public function getCalories() {
+return 0;
+}
+}</p>
+
+<p>I think you can imagine what happens when you make use of the CookieFactory - diet on monday ;)</p>
+
+<p>There&rsquo;re also some disadvantages, your clients normally don&rsquo;t have a chance to react that there&rsquo;s something special happening, also the clients must &ldquo;share&rdquo; the same expectation what &ldquo;do nothing&rdquo; means, the number of required Null-Objects might be very large and unhandy and the Null-Object shares a very deep knowledge with the real one, so that it might be a large effort to create it if the real object is complex too.</p>
+
+<p>I&rsquo;m so glad that today is tuesday :P</p>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'tolleiv';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tolleiv">tolleiv</a> 2016 - <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> - Powered by Hugo</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/php.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/javascript.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/ruby.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
