@@ -1,0 +1,34 @@
++++
+title = "Bookmarks to followup on in Oktober"
+date = "2016-11-02T20:10:01+01:00"
+
++++
+
+Here's a list of things I bookmarked last month which I found worth sharing. There are lot of Kubernetes related articles among them as this is my area of interest for me at the moment.
+
+* [Why you shouldn't trust successful people's advice](https://www.youtube.com/watch?v=1k7jeQQdqPA&feature=youtu.be) <small> on www.youtube.com</small><br/>
+   Why you shouldn't trust successful people's advice, at least not without looking left and right too.<br/>
+Time invest: 5min
+* [The misunderstood Docker tag: latest](https://medium.com/@mccode/the-misunderstood-docker-tag-latest-af3babfd6375#.yhxjxvkyc) <small>by Marc Campbell on medium.com</small><br/>
+   Docker images have a tag named latest which doesn’t work as most people expect. This post explains why you shouldn't use it.<br/>
+Time invest: 3min
+* [An Open Letter To Monitoring/Metrics/Alerting Companies](http://www.kitchensoap.com/2015/05/01/openlettertomonitoringproducts/) <small> on www.kitchensoap.com</small><br/>
+   John Allspaw on what he expects from hosted monitoring/metrics/alerts solution. A good article to come back to every new and then, whenever some new service pops out into the market.<br/>
+Time invest: 5min
+* [What to add to your Gitignore File](https://zellwk.com/blog/gitignore/) <small> on zellwk.com</small><br/>
+Time invest: 9min
+* [Running containers without Docker](http://jvns.ca/blog/2016/10/26/running-container-without-docker/) <small> on jvns.ca</small><br/>
+   Julia Evans explains her approach to adopt container technology in their company. Indeed a very pragmatic approach to get things going without getting overwhelmed.<br/>
+Time invest: 8min
+* [Graceful shutdown with Node.js and Kubernetes](https://blog.risingstack.com/graceful-shutdown-node-js-kubernetes/) <small> on blog.risingstack.com</small><br/>
+   Running applications within Kubernetes implicates that they have to shut down some time. Here's a great write up how this should be done gracefully.<br/>
+Time invest: 9min
+* [5 More Reasons to Love Kubernetes](https://www.linux.com/blog/5-more-reasons-love-kubernetes) <small> on www.linux.com</small><br/>
+   Good summary on what you can look for when you operate Kubernetes. <br/>
+Time invest: 10min
+* [Introducing GitHub Community Guidelines](https://github.com/blog/2267-introducing-github-community-guidelines) <small> on github.com</small><br/>
+Time invest: 2min
+* [A busy Java developers guide to developing microservices on Kubernetes and docker](https://medium.com/m/global-identity?redirectUrl=https://blog.fabric8.io/a-busy-java-developers-guide-to-developing-microservices-on-kubernetes-and-docker-98b7b9816fdf) <small>by James Strachan on blog.fabric8.io</small><br/>
+   A nice guide for #Java developers, developing microservices on Kubernetes and docker.
+<br/>
+Time invest: 9min
