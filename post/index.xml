@@ -7,8 +7,47 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <lastBuildDate>Tue, 01 Nov 2016 21:15:38 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 02 Nov 2016 20:10:01 +0100</lastBuildDate>
     <atom:link href="//blog.tolleiv.de/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Bookmarks to followup on in Oktober</title>
+      <link>//blog.tolleiv.de/2016/11/bookmarks-to-followup-on-in-oktober/</link>
+      <pubDate>Wed, 02 Nov 2016 20:10:01 +0100</pubDate>
+      
+      <guid>//blog.tolleiv.de/2016/11/bookmarks-to-followup-on-in-oktober/</guid>
+      <description>&lt;p&gt;Here&amp;rsquo;s a list of things I bookmarked last month which I found worth sharing. There are lot of Kubernetes related articles among them as this is my area of interest for me at the moment.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=1k7jeQQdqPA&amp;amp;feature=youtu.be&#34;&gt;Why you shouldn&amp;rsquo;t trust successful people&amp;rsquo;s advice&lt;/a&gt; &lt;small&gt; on www.youtube.com&lt;/small&gt;&lt;br/&gt;
+Why you shouldn&amp;rsquo;t trust successful people&amp;rsquo;s advice, at least not without looking left and right too.&lt;br/&gt;
+Time invest: 5min&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/@mccode/the-misunderstood-docker-tag-latest-af3babfd6375#.yhxjxvkyc&#34;&gt;The misunderstood Docker tag: latest&lt;/a&gt; &lt;small&gt;by Marc Campbell on medium.com&lt;/small&gt;&lt;br/&gt;
+Docker images have a tag named latest which doesn’t work as most people expect. This post explains why you shouldn&amp;rsquo;t use it.&lt;br/&gt;
+Time invest: 3min&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.kitchensoap.com/2015/05/01/openlettertomonitoringproducts/&#34;&gt;An Open Letter To Monitoring/Metrics/Alerting Companies&lt;/a&gt; &lt;small&gt; on www.kitchensoap.com&lt;/small&gt;&lt;br/&gt;
+John Allspaw on what he expects from hosted monitoring/metrics/alerts solution. A good article to come back to every new and then, whenever some new service pops out into the market.&lt;br/&gt;
+Time invest: 5min&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zellwk.com/blog/gitignore/&#34;&gt;What to add to your Gitignore File&lt;/a&gt; &lt;small&gt; on zellwk.com&lt;/small&gt;&lt;br/&gt;
+Time invest: 9min&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://jvns.ca/blog/2016/10/26/running-container-without-docker/&#34;&gt;Running containers without Docker&lt;/a&gt; &lt;small&gt; on jvns.ca&lt;/small&gt;&lt;br/&gt;
+Julia Evans explains her approach to adopt container technology in their company. Indeed a very pragmatic approach to get things going without getting overwhelmed.&lt;br/&gt;
+Time invest: 8min&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.risingstack.com/graceful-shutdown-node-js-kubernetes/&#34;&gt;Graceful shutdown with Node.js and Kubernetes&lt;/a&gt; &lt;small&gt; on blog.risingstack.com&lt;/small&gt;&lt;br/&gt;
+Running applications within Kubernetes implicates that they have to shut down some time. Here&amp;rsquo;s a great write up how this should be done gracefully.&lt;br/&gt;
+Time invest: 9min&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.linux.com/blog/5-more-reasons-love-kubernetes&#34;&gt;5 More Reasons to Love Kubernetes&lt;/a&gt; &lt;small&gt; on www.linux.com&lt;/small&gt;&lt;br/&gt;
+Good summary on what you can look for when you operate Kubernetes. &lt;br/&gt;
+Time invest: 10min&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/blog/2267-introducing-github-community-guidelines&#34;&gt;Introducing GitHub Community Guidelines&lt;/a&gt; &lt;small&gt; on github.com&lt;/small&gt;&lt;br/&gt;
+Time invest: 2min&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/m/global-identity?redirectUrl=https://blog.fabric8.io/a-busy-java-developers-guide-to-developing-microservices-on-kubernetes-and-docker-98b7b9816fdf&#34;&gt;A busy Java developers guide to developing microservices on Kubernetes and docker&lt;/a&gt; &lt;small&gt;by James Strachan on blog.fabric8.io&lt;/small&gt;&lt;br/&gt;
+A nice guide for #Java developers, developing microservices on Kubernetes and docker.
+&lt;br/&gt;
+Time invest: 9min&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Another blogging software migration</title>
@@ -884,42 +923,6 @@ undemocratic way.&lt;/p&gt;
 &lt;li&gt;The scoring includes the commits to the Core master and all related submodule commits. Unfortunately the submodule commits don&amp;rsquo;t hold the reviewer and tester information. Also some of the latest changes made in the submodules may not show up at the moment because the submodule pointers haven&amp;rsquo;t been updated yet.
 ** Inspired by the incredible RaphaëlJS vector graphics library which is distributed with an MIT license and can be found on &lt;a href=&#34;http://raphaeljs.com/&#34;&gt;raphaeljs.com&lt;/a&gt;
 *** Again - don&amp;rsquo;t take it too serious - the scoring doesn&amp;rsquo;t take into account that some patches can be written in 15 minutes where others take days. It also only uses the final testers and reviewers mentioned in the commit message, other contributions are not counted atm&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>TemplaVoila 1.6.x</title>
-      <link>//blog.tolleiv.de/2012/01/templavoila-1.6.x/</link>
-      <pubDate>Mon, 16 Jan 2012 07:10:33 +0000</pubDate>
-      
-      <guid>//blog.tolleiv.de/2012/01/templavoila-1.6.x/</guid>
-      <description>&lt;p&gt;Quite some things changed in the past months and I never found the time to clear up my mind and write up a summary.&lt;/p&gt;
-
-&lt;p&gt;First of all &lt;a href=&#34;http://typo3.org/extensions/repository/view/templavoila/current/&#34;&gt;TemplaVoila 1.6&lt;/a&gt; was released parallel to &lt;a href=&#34;http://typo3.org/download/release-notes/typo3-46/&#34;&gt;TYPO3 4.6&lt;/a&gt;. It shipped with 22 bug and compatibility fixes. In general the 1.6.x branch is supposed to be compatible with TYPO3 4.4+ which also made it possible to clean up the extension quite a bit. In addition to that TemplaVoila 1.6.1 will show up in the TER in the next few hours. It fixes 10 additional issues.&lt;/p&gt;
-
-&lt;p&gt;Besides that, the main repository for TemplaVoila was moved to &lt;a href=&#34;git.typo3.org/TYPO3v4/Extensions/templavoila&#34;&gt;git.typo3.org&lt;/a&gt; and the old Subversion repository and my Github repository have been removed. The new repository location also enables and enforces a new way to contribute code changes for the project. Comparable to the TYPO3v4 Core every change request can be sent to Gerrit, where I can review the changes before they get merged into the repository. That workflow turns out to be very efficient for me. A detailed summary on how to contribute code to any repository hosted on &lt;a href=&#34;http://git.typo3.org&#34;&gt;git.typo3.org&lt;/a&gt; can be found on &lt;a href=&#34;http://wiki.typo3.org/Contribution_Walkthrough_Tutorials&#34;&gt;wiki.typo3.org&lt;/a&gt;. To sum up some of the steps - here&amp;rsquo;s how you submit a patch*:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone git://git.typo3.org/TYPO3v4/Extensions/templavoila.git
-cd templavoila
-scp -p -P 29418 &amp;lt;username&amp;gt;@review.typo3.org:hooks/commit-msg .git/hooks/
-git checkout -b workingBranch
-# ... work on the files ...
-git add &amp;lt;changedFile&amp;gt;
-git commit
-git push origin HEAD:refs/for/master/&amp;lt;topic&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A further general change to the team happend more or less silently. During 2011 nobody from the old team or any new developer showed interest in the project and only few contributors helped with bugfixes or reviews. Due to that I also changed my attitude regarding future releases.
-I&amp;rsquo;m currently planning to release one version parallel with every main TYPO3 4.x release, to make sure that TemplaVoila works in new versions and to make sure people can enjoy TYPO3 with TemplaVoila in the future as well. I&amp;rsquo;ll also try to keep it compatible with all &amp;ldquo;stable&amp;rdquo; releases and aim to keep the issue count within the bugtracker as low as possible.
-But I&amp;rsquo;m not planning to integrate new major features such as the field content sliding (use &lt;a href=&#34;http://typo3.org/extensions/repository/view/kb_tv_cont_slide/current/&#34;&gt;EXT:kb_tv_cont_slide&lt;/a&gt; please) or a context sensitive content wizard (a.k.a &amp;ldquo;content firewall&amp;rdquo;). Also major refactorings won&amp;rsquo;t happen because they&amp;rsquo;d consume far too much of my time - therefore also the desperately needed update of the mapping module or a new new page module will not be implemented in the near future.&lt;/p&gt;
-
-&lt;p&gt;Nevertheless I&amp;rsquo;m open for any type of contribution and I&amp;rsquo;d be happy to review and test any patch showing up in Mantis or Gerrit - I&amp;rsquo;m just not able to spent a major part of my freetime for it.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;You have to sign the &lt;a href=&#34;http://typo3.org/about/licenses&#34;&gt;Contributor License Agreement&lt;/a&gt; to be able to push any change - it can be found on &lt;a href=&#34;http://typo3.org/about/licenses&#34;&gt;typo3.org&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
