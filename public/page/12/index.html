@@ -30,6 +30,12 @@
             </span>
           </a>
           
+          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
           <a class="level-item" href="https://github.com/tolleiv">
             <span class="icon">
               <i class="fa fa-github"></i>
@@ -38,13 +44,31 @@
           
           <a class="level-item" href="https://twitter.com/tolleiv">
             <span class="icon">
-              <i class="fa fa-twitter"></i>
+              <i class="fa fa-twitter-square"></i>
             </span>
           </a>
           
-          <a class="level-item" href="//blog.tolleiv.de/index.xml">
+          <a class="level-item" href="http://www.linkedin.com/pub/tolleiv-nietsch/25/a0a/857">
             <span class="icon">
-              <i class="fa fa-rss"></i>
+              <i class="fa fa-linkedin-square"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://www.xing.com/profile/Tolleiv_Nietsch">
+            <span class="icon">
+              <i class="fa fa-xing-square"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="http://stackexchange.com/users/40352/pagid?tab=accounts">
+            <span class="icon">
+              <i class="fa fa-stack-exchange"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="http://tolleiv.tumblr.com/">
+            <span class="icon">
+              <i class="fa fa-tumblr-square"></i>
             </span>
           </a>
           
@@ -56,6 +80,40 @@
 
 <section class="section">
   <div class="container">
+    
+    <article>
+      <h2 class="subtitle is-6">May 20, 2008</h2>
+      <h1 class="title"><a href="//blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../">error_reposting and exceptions....</a></h1>
+      <div class="content">
+        I just found this line:
+set_error_handler(create_function(&lsquo;$x, $y&rsquo;, &lsquo;throw new Exception($y, $x);&rsquo;), E_ALL~E_NOTICE);
+in the comments on php.net and did a short test to see whether it works. Normally I used to have a global function which passes all the errors through a logging-chain (FILE/MAIL/DISPLAY) but having exceptions could be more comfortable because you might sometimes want to make decisions locally and not on a global scope and just setting and re-setting the error-handler is not the best idea for this&hellip; I&rsquo;m not sure if I get used to it, because the error-handling function did a good job for the last years &hellip; we&rsquo;ll see :)
+        
+        ...<a class="button is-link" href="//blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../" style="height:28px">
+          Read more
+          <span class="icon is-small">
+            <i class="fa fa-angle-double-right"></i>
+          </span>
+        </a>
+        
+      </div>
+    </article>
+    
+    <article>
+      <h2 class="subtitle is-6">May 19, 2008</h2>
+      <h1 class="title"><a href="//blog.tolleiv.de/2008/05/preview-to-php-5.3/">Preview to PHP 5.3</a></h1>
+      <div class="content">
+        One of the mayor updates since PHP 5.0 is upcoming with the 5.3 version, this is also a major step forward to PHP 6 - I love to have namespaces and appreciate the split of E_NOTICE and E_DEPRECATED. Also other features like the native MySQL support ( I hope this really raises the performance), the array_replace/array_replace_recursive functions and also dynamic calls to static functions &ldquo;$classname::$functionname($parameter);&rdquo; sound very cool. So I really look forward to have it on the server (or at least on my laptop) :P
+        
+        ...<a class="button is-link" href="//blog.tolleiv.de/2008/05/preview-to-php-5.3/" style="height:28px">
+          Read more
+          <span class="icon is-small">
+            <i class="fa fa-angle-double-right"></i>
+          </span>
+        </a>
+        
+      </div>
+    </article>
     
     <article>
       <h2 class="subtitle is-6">May 18, 2008</h2>
@@ -174,22 +232,6 @@ So maybe you already know the situation ;) , your granny is going to bake cookie
       </div>
     </article>
     
-    <article>
-      <h2 class="subtitle is-6">September 22, 2007</h2>
-      <h1 class="title"><a href="//blog.tolleiv.de/2007/09/t3con07/">T3CON07</a></h1>
-      <div class="content">
-        Visiting the T3CON07 was one of the best choices I made in the last weeks. After years of being in touch with some people on newslists and working with this great CMS its so great to finally meat some of them. I found lots of new inspiration and motivation for the upcoming tasks and found some new perspectives as well. New topics like the content repository, TYPO3 version 5 and large scale localization also found my attention.
-        
-        ...<a class="button is-link" href="//blog.tolleiv.de/2007/09/t3con07/" style="height:28px">
-          Read more
-          <span class="icon is-small">
-            <i class="fa fa-angle-double-right"></i>
-          </span>
-        </a>
-        
-      </div>
-    </article>
-    
   </div>
 </section>
 <section class="section">
@@ -210,7 +252,7 @@ So maybe you already know the situation ;) , your granny is going to bake cookie
       <div class="level-right is-marginless">
         <div class="level-item">
           
-          <a class="button is-disabled">
+          <a class="button" href="//blog.tolleiv.de/page/13/">
             Older
             <span class="icon is-small is-marginless">
               <i class="fa fa-angle-right"></i>

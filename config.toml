@@ -49,13 +49,29 @@ copyright = "&copy; <a href=\"https://github.com/tolleiv\">tolleiv</a> 2016 - <a
     fa_icon = "fa-user"
 
 [[params.social]]
+	url = "/index.xml"
+	fa_icon = "fa-rss"
+
+[[params.social]]
 	url = "https://github.com/tolleiv"
 	fa_icon = "fa-github"
 
 [[params.social]]
 	url = "https://twitter.com/tolleiv"
-	fa_icon = "fa-twitter"
+	fa_icon = "fa-twitter-square"
 
 [[params.social]]
-	url = "/index.xml"
-	fa_icon = "fa-rss"
+	url = "http://www.linkedin.com/pub/tolleiv-nietsch/25/a0a/857"
+	fa_icon = "fa-linkedin-square"
+
+[[params.social]]
+	url = "https://www.xing.com/profile/Tolleiv_Nietsch"
+	fa_icon = "fa-xing-square"
+
+[[params.social]]
+	url = "http://stackexchange.com/users/40352/pagid?tab=accounts"
+	fa_icon = "fa-stack-exchange"
+
+[[params.social]]
+	url = "http://tolleiv.tumblr.com/"
+	fa_icon = "fa-tumblr-square"
