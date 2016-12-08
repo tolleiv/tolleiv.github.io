@@ -2,11 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>//blog.tolleiv.de/</loc>
-    <lastmod>2016-11-02T20:10:01+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>//blog.tolleiv.de/2016/11/bookmarks-to-followup-on-in-oktober/</loc>
     <lastmod>2016-11-02T20:10:01+01:00</lastmod>
   </url>
@@ -609,6 +604,682 @@
   <url>
     <loc>//blog.tolleiv.de/2007/09/t3con07/</loc>
     <lastmod>2007-09-22T23:27:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/algorithm/</loc>
+    <lastmod>2009-04-16T20:10:35+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/algorithm/</loc>
+    <lastmod>2008-07-29T19:25:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/anti-pattern/</loc>
+    <lastmod>2008-05-23T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/anti-pattern/</loc>
+    <lastmod>2008-05-23T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/apache/</loc>
+    <lastmod>2010-01-23T17:19:42+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/bash/</loc>
+    <lastmod>2009-06-18T21:54:34+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/behavioral/</loc>
+    <lastmod>2008-07-07T17:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/behavioral/</loc>
+    <lastmod>2008-07-07T17:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/chef/</loc>
+    <lastmod>2014-07-06T15:32:04+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/coding/</loc>
+    <lastmod>2013-06-06T18:47:56+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/comic/</loc>
+    <lastmod>2008-06-15T22:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/compression/</loc>
+    <lastmod>2008-06-07T21:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/compression/</loc>
+    <lastmod>2008-06-07T21:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/crawler/</loc>
+    <lastmod>2010-03-31T22:35:20+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/creational/</loc>
+    <lastmod>2008-06-20T17:29:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/creational/</loc>
+    <lastmod>2008-06-23T18:20:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/css/</loc>
+    <lastmod>2009-04-29T20:06:23+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/css/</loc>
+    <lastmod>2008-05-14T22:02:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/data/</loc>
+    <lastmod>2013-06-06T18:47:56+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/database/</loc>
+    <lastmod>2008-06-20T17:29:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/database/</loc>
+    <lastmod>2008-06-20T17:29:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/debug/</loc>
+    <lastmod>2012-02-16T16:02:31+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/design/</loc>
+    <lastmod>2009-04-23T21:15:13+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/devops/</loc>
+    <lastmod>2015-01-05T22:18:26+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/encodingchain/</loc>
+    <lastmod>2009-08-08T12:54:13+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/errors/</loc>
+    <lastmod>2008-06-11T20:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/exceptions/</loc>
+    <lastmod>2008-05-20T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/extbase/</loc>
+    <lastmod>2011-11-30T17:17:02+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/extension/</loc>
+    <lastmod>2010-07-25T08:00:29+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/extracting/</loc>
+    <lastmod>2008-06-07T21:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/extracting/</loc>
+    <lastmod>2008-06-07T21:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/facade/</loc>
+    <lastmod>2008-06-16T23:33:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/factory/</loc>
+    <lastmod>2008-06-20T17:29:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/factory/</loc>
+    <lastmod>2008-06-23T18:20:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/firefox/</loc>
+    <lastmod>2008-05-18T16:11:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/git/</loc>
+    <lastmod>2010-09-03T15:52:14+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/graffiti/</loc>
+    <lastmod>2009-05-06T20:46:55+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/iterator/</loc>
+    <lastmod>2008-07-07T17:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/iterator/</loc>
+    <lastmod>2008-07-07T17:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/java/</loc>
+    <lastmod>2009-05-24T09:28:48+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/javascript/</loc>
+    <lastmod>2009-06-24T23:00:33+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/jquery/</loc>
+    <lastmod>2009-08-08T12:54:13+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/layout/</loc>
+    <lastmod>2009-04-29T20:06:23+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/london/</loc>
+    <lastmod>2009-10-13T20:24:19+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/memento/</loc>
+    <lastmod>2008-05-13T07:59:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/memento/</loc>
+    <lastmod>2008-05-13T07:59:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/mock/</loc>
+    <lastmod>2008-05-17T20:02:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/movie/</loc>
+    <lastmod>2008-07-02T19:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/mp3/</loc>
+    <lastmod>2009-05-24T13:47:05+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/music/</loc>
+    <lastmod>2009-05-24T13:47:05+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/null/</loc>
+    <lastmod>2008-07-01T17:58:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/null/</loc>
+    <lastmod>2008-07-01T17:58:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/offtopic/</loc>
+    <lastmod>2009-10-13T20:24:19+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/offtopic/</loc>
+    <lastmod>2008-07-15T17:26:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/pattern/</loc>
+    <lastmod>2011-11-30T17:17:02+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/pattern/</loc>
+    <lastmod>2011-11-30T17:17:02+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/php/</loc>
+    <lastmod>2009-08-17T21:38:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/php/</loc>
+    <lastmod>2008-08-08T17:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/phpunit/</loc>
+    <lastmod>2009-08-17T21:38:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/phpunit/</loc>
+    <lastmod>2008-05-17T20:02:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/plugin/</loc>
+    <lastmod>2008-06-05T01:11:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/plugin/</loc>
+    <lastmod>2008-06-05T01:11:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/post/</loc>
+    <lastmod>2016-11-02T20:10:01+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/prototype/</loc>
+    <lastmod>2008-05-27T23:17:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/prototype/</loc>
+    <lastmod>2013-06-06T18:47:56+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/query/</loc>
+    <lastmod>2008-06-20T17:29:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/query/</loc>
+    <lastmod>2008-06-20T17:29:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/registry/</loc>
+    <lastmod>2008-05-23T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/registry/</loc>
+    <lastmod>2008-05-23T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/release/</loc>
+    <lastmod>2010-03-31T22:35:20+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/service/</loc>
+    <lastmod>2008-05-15T14:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/service/</loc>
+    <lastmod>2008-05-15T14:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/shell/</loc>
+    <lastmod>2009-06-18T21:54:34+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/shellscript/</loc>
+    <lastmod>2008-07-10T21:55:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/singleton/</loc>
+    <lastmod>2008-05-23T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/singleton/</loc>
+    <lastmod>2008-05-23T21:40:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/soccer/</loc>
+    <lastmod>2009-05-04T20:44:46+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/solr/</loc>
+    <lastmod>2013-06-06T18:47:56+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/specification/</loc>
+    <lastmod>2008-06-20T17:29:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/specification/</loc>
+    <lastmod>2008-06-20T17:29:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/spl/</loc>
+    <lastmod>2008-07-07T17:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/spl/</loc>
+    <lastmod>2008-07-07T17:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/sprite/</loc>
+    <lastmod>2010-07-25T08:00:29+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/structural/</loc>
+    <lastmod>2008-05-12T22:59:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/structural/</loc>
+    <lastmod>2008-05-12T22:59:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/stumble/</loc>
+    <lastmod>2008-07-03T21:37:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/svn2t3x/</loc>
+    <lastmod>2009-06-01T11:08:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/t3dd/</loc>
+    <lastmod>2008-05-13T22:15:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/t3o/</loc>
+    <lastmod>2012-12-10T15:56:46+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/tdd/</loc>
+    <lastmod>2008-05-17T20:02:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/templavoila/</loc>
+    <lastmod>2012-01-16T07:10:33+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/ter/</loc>
+    <lastmod>2009-04-23T21:15:13+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/tests/</loc>
+    <lastmod>2008-05-17T20:02:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/travel/</loc>
+    <lastmod>2009-05-06T20:46:55+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/typo3/</loc>
+    <lastmod>2012-12-10T15:56:46+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/typo3/</loc>
+    <lastmod>2011-11-30T17:17:02+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/value-object/</loc>
+    <lastmod>2008-05-30T04:39:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/value-object/</loc>
+    <lastmod>2008-05-30T04:39:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/varnish/</loc>
+    <lastmod>2012-12-10T15:56:46+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/version-control/</loc>
+    <lastmod>2010-06-30T06:00:30+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/video/</loc>
+    <lastmod>2009-05-04T20:32:05+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/video/</loc>
+    <lastmod>2008-07-10T22:43:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/vimeo/</loc>
+    <lastmod>2009-04-26T08:00:43+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/viral-web/</loc>
+    <lastmod>2010-05-08T16:20:34+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/visualization/</loc>
+    <lastmod>2012-01-20T08:00:12+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/web/</loc>
+    <lastmod>2010-08-02T15:11:59+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/workspaces/</loc>
+    <lastmod>2010-06-15T17:54:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/youtube/</loc>
+    <lastmod>2009-04-25T23:51:43+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/tags/zip/</loc>
+    <lastmod>2008-06-07T21:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/categories/zip/</loc>
+    <lastmod>2008-06-07T21:30:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//blog.tolleiv.de/</loc>
+    <lastmod>2016-11-02T20:10:01+01:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>
