@@ -27,13 +27,13 @@ after_success:
 
 deploy:
   provider: s3
-  region: eu-west-1
+  skip_cleanup: true
+  region: "eu-west-1"
   access_key_id: AKIAJN5D3QF2XWAQXUUA
   secret_access_key:
     secure: eWI05xiYAqVYKNaT3ndXy2qZUOWTMKMlBgBnQMQX3ewKY9HxDWeEJeDhknJTDjSjhj9bsKl+zImsdFSdNX+zPb9Iu3FkRy7FA1zFNXHVAQF/MJ6M34z7Rr/Cakkk85+7zatKLBQGy+X9htNjTxjUwsbOV3blO1YA2HFiac+OkuIp11XbsKlKgicvosKoymJFGDoJstNcoZNC24jryzSVlrW6aMMuzRC/2wNywn2GIRB2+v/QPy6Lw/AMzxJSA7ZPOtBwdF41F66wOtviTiFYPqQU9XZxh+Zr0JdoVPDEXPGPmkpDbrERY38GZfobh188SVBfcLFtVjxDLamSfPwGZj6UwaGr1FHmUUPWHRtCuNwplnc5aylqq6GnSE1DAJVRBg5JtiHjGHJAq7A5WBv8/ppF0SxM2xnNA7SnWMBPg3pingR2ac+yf7aKGYG9RXDxKy0iHoaDcz9EcV+5cko1AVxVl6X7EUGQ+yof3d2OdJ/drpOLU13hJRKylXASPu/MSPXdmW7jbPzS5iYzAHi8lFP3adNcbEFkn41g02a7GDN1JKM+ONWnEbiYTNJwOb78jPa8eI2T0kaJjziZcUlcXVzbX9fHCuqqH92CqBOjw7eJB7UfVE4ocPIaDc1iteAkyDziEJI8flmnvBJ3PZozB/utln8ptN0lbJkXbLVwXPw=
-  bucket: de.tolleiv.blog.static
+  bucket: "de.tolleiv.blog.static"
   local_dir: public
-  skip_cleanup: true
   detect_encoding: true
   default_text_charset: utf-8
   acl: public_read
