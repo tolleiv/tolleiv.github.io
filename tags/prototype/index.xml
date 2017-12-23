@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Prototype on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/prototype/index.xml</link>
+    <link>//blog.tolleiv.de/tags/prototype/</link>
     <description>Recent content in Prototype on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/prototype/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 May 2008 23:17:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/prototype/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Prototype [GoF]</title>
@@ -15,56 +18,7 @@
       <pubDate>Tue, 27 May 2008 23:17:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/prototype-gof/</guid>
-      <description>&lt;p&gt;Imagine a cookie-oven which produces tasty cookies with chocolate crumbles. How do you ensure that the 1000th cookie still has the same taste as the first?
-You might think that this is an easy task - just write down the recipe and follow the described steps&amp;hellip;you know the result in real life - the 1000th cookie normally tasts like the 1st but you always had the &amp;ldquo;overhead&amp;rdquo; to read the recipe and go through the steps again and again.
-In OOP it&amp;rsquo;s much easier to follow the recipe just instantiate a new Object and  there you go&amp;hellip; no matter if it&amp;rsquo;s the 1st or the 1000th - it&amp;rsquo;ll always taste look similar.
-But the &amp;ldquo;recipe-overhead&amp;rdquo; is still there in a way and especially when you have larger objects whose construction is time-consuming you might want to somehow get rid of it. And that&amp;rsquo;s where a Prototype can help you out - you just create the first Cookie Object and then you use the handy magic method __clone to create new objects.
-Instead of just using __clone the pattern suggests a class (some kind of a factory-class) so that you can also encapsulate the creation of the objects (and also possible adjustments you might want to make after the creation/clone).&lt;/p&gt;
-
-&lt;p&gt;So the example just shows a cookie-machine which makes use of the prototype-pattern to create new cookies (depending on the cookie you throw in before)&amp;hellip; yummy&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDrXY97tyhI/AAAAAAAAABg/1sAhpbVe2kI/s1600-h/prototype_pattern.png&#34;&gt;&lt;img src=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDrXY97tyhI/AAAAAAAAABg/1sAhpbVe2kI/s400/prototype_pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;abstract class Cookie {
-function __clone() {    }
-abstract public function printFlavor();
-}&lt;/p&gt;
-
-&lt;p&gt;class CoconutCookie extends Cookie {
-public function printFlavor() {
-echo &amp;lsquo;Coconut Flavor&lt;br/&gt;&amp;rsquo;;
-}
-}
-class ChocolateCookie extends Cookie {
-public function printFlavor() {
-echo &amp;lsquo;Chocolate Flavor&lt;br/&gt;&amp;rsquo;;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;class CookieMachine {
-protected $cookie;
-public function __construct(Cookie $cookie) {
-$this-&amp;gt;cookie = $cookie;
-}
-public function makeCookie() {
-return clone $this-&amp;gt;cookie;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;The client-code can look like this:&lt;/p&gt;
-
-&lt;p&gt;$coconutCookie = new CoconutCookie();
-$coconutCookieMachine = new CookieMachine($coconutCookie);&lt;/p&gt;
-
-&lt;p&gt;$chocolateCookie = new ChocolateCookie();
-$chocolateCookieMachine = new CookieMachine($chocolateCookie);&lt;/p&gt;
-
-&lt;p&gt;//while(true) {
-for($i=0;$i&lt;5;$i++) {
-$coconutCookieMachine-&gt;makeCookie()-&amp;gt;printFlavor();
-$chocolateCookieMachine-&amp;gt;makeCookie()-&amp;gt;printFlavor();
-}&lt;/p&gt;
-</description>
+      <description>Imagine a cookie-oven which produces tasty cookies with chocolate crumbles. How do you ensure that the 1000th cookie still has the same taste as the first? You might think that this is an easy task - just write down the recipe and follow the described steps&amp;hellip;you know the result in real life - the 1000th cookie normally tasts like the 1st but you always had the &amp;ldquo;overhead&amp;rdquo; to read the recipe and go through the steps again and again.</description>
     </item>
     
     <item>
@@ -73,65 +27,8 @@ $chocolateCookieMachine-&amp;gt;makeCookie()-&amp;gt;printFlavor();
       <pubDate>Mon, 12 May 2008 22:59:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/decorator-gof/</guid>
-      <description>&lt;p&gt;As the first pattern I&amp;rsquo;d like to introduce the decorator pattern - it&amp;rsquo;s one of the [GoF]- structural patterns. It enables to extend the functionality of a existing method by wrapping a so called decorator-object.&lt;/p&gt;
-
-&lt;p&gt;So maybe you already know the situation ;) , your granny  is going to bake cookies and you think of how they gonna taste - so cookie is our main-object and the different additional spices and other options which refine the taste of the cookies are the decoration for it. The cookies, pardon main-objects, are fine without the decoration but they&amp;rsquo;re much better with and the best thing is that you&amp;rsquo;re able to combine the decorations&amp;hellip; yummy&lt;/p&gt;
-
-&lt;p&gt;So that&amp;rsquo;s how this would look like more technically:
-&lt;a href=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SCjU0tPibZI/AAAAAAAAAAU/uuR_geevSdw/s1600-h/decorator-pattern.png&#34;&gt;&lt;img src=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SCjU0tPibZI/AAAAAAAAAAU/uuR_geevSdw/s400/decorator-pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;stract class Cookie {
-    protected $flavor;
-    public function __construct($flavor) {
-        $this-&amp;gt;flavor=$flavor;
-    }    
-    abstract public function descripeFlavor();
-}
-
-class GrannysCookie extends Cookie {
-    public function descripeFlavor() {
-        echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;Granny baked a cookie which has a taste of ’;
-        echo $this-&amp;gt;flavor;
-    }
-}
-
-abstract class CookieDecorator extends Cookie {
-    protected $cookie;
-    public function __construct(Cookie $cookie) {
-        $this-&amp;gt;cookie = $cookie;
-    }    
-    //abstract public function descripeFlavor();    
-}
-
-class FreshCookieDecorator extends CookieDecorator {
-    public function descripeFlavor() {
-        $this-&amp;gt;cookie-&amp;gt;descripeFlavor();
-        echo ‘ which smells fresh from the oven’;
-    }
-}
-
-class CrumbleCookieDecorator extends CookieDecorator {
-    public function descripeFlavor() {        
-        $this-&amp;gt;cookie-&amp;gt;descripeFlavor();
-        echo ‘ it has tasty crumbles ’;
-    }
-}
-
-$cookie = new GrannysCookie(‘chocolate’);
-$cookie-&amp;gt;descripeFlavor();
-
-$crumbleCookie = new CrumbleCookieDecorator($cookie);
-$crumbleCookie-&amp;gt;descripeFlavor();
-
-$freshCookie = new FreshCookieDecorator($cookie);
-$freshCookie-&amp;gt;descripeFlavor();
-
-$freshAndCrumbledCookie = new FreshCookieDecorator($crumbleCookie);
-$freshAndCrumbledCookie-&amp;gt;descripeFlavor();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Decorator_pattern&#34;&gt;additional Information&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>As the first pattern I&amp;rsquo;d like to introduce the decorator pattern - it&amp;rsquo;s one of the [GoF]- structural patterns. It enables to extend the functionality of a existing method by wrapping a so called decorator-object.
+So maybe you already know the situation ;) , your granny is going to bake cookies and you think of how they gonna taste - so cookie is our main-object and the different additional spices and other options which refine the taste of the cookies are the decoration for it.</description>
     </item>
     
   </channel>

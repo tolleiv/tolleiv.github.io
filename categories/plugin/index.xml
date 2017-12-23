@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Plugin on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/plugin/index.xml</link>
+    <link>//blog.tolleiv.de/categories/plugin/</link>
     <description>Recent content in Plugin on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/plugin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Jun 2008 01:11:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/plugin/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Plugin [PoEAA]</title>
@@ -15,88 +18,8 @@
       <pubDate>Thu, 05 Jun 2008 01:11:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/06/plugin-poeaa/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m sure you&amp;rsquo;re pretty often in the situation that you have to switch something depending on the context you&amp;rsquo;re currently in. For example most people change their eating habits before summer - I also do :P&lt;/p&gt;
-
-&lt;p&gt;Sometimes this is what you also want to have in your software. To achieve different behaviour you normally just implement two different classes or aggregates and since they have the same &amp;ldquo;meaning&amp;rdquo; they normally share a interface (a.k.a Separated Interface). But who decides which implementation fits into the current environment/context?&lt;/p&gt;
-
-&lt;p&gt;The easiest way is to have a Factory Method with a small condition to decide this, but this method might grow very fast if you have various options. In this situation its also a matter of form to move this decision into some kind of configuration(-file) so that there&amp;rsquo;s only on file which differs in various environments.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://martinfowler.com/eaaCatalog/plugin.html&#34;&gt;Martin Fowler&lt;/a&gt; suggests to place some kind of mapping into the configuration-file, so that your Factory knows which implementation to instantiate in the current context. The key for the mapping in this case is the name of the Separated Interface.&lt;/p&gt;
-
-&lt;p&gt;As you see in the example code below, there are Cookie Tins which create contain Cookies and depending on the current month you want to use a more or less restrictive Cookie Tin. In May, June and July you restrict your application to create max. 5 cookies, the rest of the year you don&amp;rsquo;t care :P&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    // The Separated Interface
-interface CookieTin {
-    public function getCookieInstance();
-}
-
-class NormalTin implements CookieTin {
-    public function getCookieInstance() {
-        return new Cookie();
-    }
-}
-
-class DietTin implements CookieTin {
-    protected $i=0;
-    public function getCookieInstance() {
-        return ($this-&amp;gt;i++ &amp;lt; 5)?new Cookie():new NullCookie();
-    }
-}
-
-// The Factory which supports Plugin-Creation
-class CookieTinFactory {
-    public static function getPlugin( $class ) {
-        try {
-            return new $GLOBALS[&#39;Plugins&#39;][$class]();
-        } catch( Exception $e) {
-            // maybe call some default implementation if the mapping is wrong
-        }
-    }
-}
-
-
-
-
-
-
-
-class Cookie {
-    public function printCalories() {
-        echo ’200 ‘;
-    }
-}
-
-class NullCookie extends Cookie{
-    public function printCalories() { }
-}
-
-
-
-
-
-
-
-// This is usually in a configuration-file, normally this should
-// also sit in a XML structure….
-
-// That’s what it would be in 300 days/year
-$GLOBALS[&#39;Plugins&#39;][&#39;CookieTin&#39;] = “NormalTin”;
-// That’s what we have to turn it to before summer
-if(in_array(date(‘n’),array(5,6,7))) {
-    $GLOBALS[&#39;Plugins&#39;][&#39;CookieTin&#39;] = “DietTin”;
-}
-
-$tin = CookieTinFactory::getPlugin(‘CookieTin’);
-$i=10;
-while($i–) {
-    $cookie = $tin-&amp;gt;getCookieInstance();
-    $cookie-&amp;gt;printCalories();
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A very common use-case for this is the changed behaviour in a testing-environment compared to the production-environment.
-There&amp;rsquo;s something else in the example beside the Plugin Pattern - I also made use of the Special Case (the NullCookie) pattern  which I&amp;rsquo;m going to show in a future post&amp;hellip;.&lt;/p&gt;
-</description>
+      <description>I&amp;rsquo;m sure you&amp;rsquo;re pretty often in the situation that you have to switch something depending on the context you&amp;rsquo;re currently in. For example most people change their eating habits before summer - I also do :P
+Sometimes this is what you also want to have in your software. To achieve different behaviour you normally just implement two different classes or aggregates and since they have the same &amp;ldquo;meaning&amp;rdquo; they normally share a interface (a.</description>
     </item>
     
   </channel>

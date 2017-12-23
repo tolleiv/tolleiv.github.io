@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on blog.tolleiv.de ...  </title>
+    <link>//blog.tolleiv.de/tags/</link>
+    <description>Recent content in Tags on blog.tolleiv.de ...  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
+    <lastBuildDate>Thu, 16 Apr 2009 20:10:35 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Algorithm</title>
+      <link>//blog.tolleiv.de/tags/algorithm/</link>
+      <pubDate>Thu, 16 Apr 2009 20:10:35 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Anti Pattern</title>
+      <link>//blog.tolleiv.de/tags/anti-pattern/</link>
+      <pubDate>Fri, 23 May 2008 21:40:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/anti-pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Apache</title>
+      <link>//blog.tolleiv.de/tags/apache/</link>
+      <pubDate>Sat, 23 Jan 2010 17:19:42 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/apache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bash</title>
+      <link>//blog.tolleiv.de/tags/bash/</link>
+      <pubDate>Thu, 18 Jun 2009 21:54:34 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Behavioral</title>
+      <link>//blog.tolleiv.de/tags/behavioral/</link>
+      <pubDate>Mon, 07 Jul 2008 17:30:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/behavioral/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Compression</title>
+      <link>//blog.tolleiv.de/tags/compression/</link>
+      <pubDate>Sat, 07 Jun 2008 21:30:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/compression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crawler</title>
+      <link>//blog.tolleiv.de/tags/crawler/</link>
+      <pubDate>Wed, 31 Mar 2010 22:35:20 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/crawler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Creational</title>
+      <link>//blog.tolleiv.de/tags/creational/</link>
+      <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/creational/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Css</title>
+      <link>//blog.tolleiv.de/tags/css/</link>
+      <pubDate>Wed, 29 Apr 2009 20:06:23 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/css/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data</title>
+      <link>//blog.tolleiv.de/tags/data/</link>
+      <pubDate>Thu, 06 Jun 2013 18:47:56 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Database</title>
+      <link>//blog.tolleiv.de/tags/database/</link>
+      <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Debug</title>
+      <link>//blog.tolleiv.de/tags/debug/</link>
+      <pubDate>Thu, 16 Feb 2012 16:02:31 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/debug/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Design</title>
+      <link>//blog.tolleiv.de/tags/design/</link>
+      <pubDate>Thu, 23 Apr 2009 21:15:13 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Encodingchain</title>
+      <link>//blog.tolleiv.de/tags/encodingchain/</link>
+      <pubDate>Sat, 08 Aug 2009 12:54:13 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/encodingchain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Extbase</title>
+      <link>//blog.tolleiv.de/tags/extbase/</link>
+      <pubDate>Wed, 30 Nov 2011 17:17:02 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/extbase/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Extension</title>
+      <link>//blog.tolleiv.de/tags/extension/</link>
+      <pubDate>Sun, 25 Jul 2010 08:00:29 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/extension/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Extracting</title>
+      <link>//blog.tolleiv.de/tags/extracting/</link>
+      <pubDate>Sat, 07 Jun 2008 21:30:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/extracting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Factory</title>
+      <link>//blog.tolleiv.de/tags/factory/</link>
+      <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/factory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>//blog.tolleiv.de/tags/git/</link>
+      <pubDate>Fri, 03 Sep 2010 15:52:14 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Graffiti</title>
+      <link>//blog.tolleiv.de/tags/graffiti/</link>
+      <pubDate>Wed, 06 May 2009 20:46:55 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/graffiti/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Iterator</title>
+      <link>//blog.tolleiv.de/tags/iterator/</link>
+      <pubDate>Mon, 07 Jul 2008 17:30:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/iterator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>//blog.tolleiv.de/tags/java/</link>
+      <pubDate>Sun, 24 May 2009 09:28:48 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Javascript</title>
+      <link>//blog.tolleiv.de/tags/javascript/</link>
+      <pubDate>Wed, 24 Jun 2009 23:00:33 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jquery</title>
+      <link>//blog.tolleiv.de/tags/jquery/</link>
+      <pubDate>Sat, 08 Aug 2009 12:54:13 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/jquery/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>London</title>
+      <link>//blog.tolleiv.de/tags/london/</link>
+      <pubDate>Tue, 13 Oct 2009 20:24:19 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/london/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Memento</title>
+      <link>//blog.tolleiv.de/tags/memento/</link>
+      <pubDate>Tue, 13 May 2008 07:59:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/memento/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mp3</title>
+      <link>//blog.tolleiv.de/tags/mp3/</link>
+      <pubDate>Sun, 24 May 2009 13:47:05 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/mp3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Music</title>
+      <link>//blog.tolleiv.de/tags/music/</link>
+      <pubDate>Sun, 24 May 2009 13:47:05 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/music/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Null</title>
+      <link>//blog.tolleiv.de/tags/null/</link>
+      <pubDate>Tue, 01 Jul 2008 17:58:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/null/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Offtopic</title>
+      <link>//blog.tolleiv.de/tags/offtopic/</link>
+      <pubDate>Tue, 13 Oct 2009 20:24:19 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/offtopic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pattern</title>
+      <link>//blog.tolleiv.de/tags/pattern/</link>
+      <pubDate>Wed, 30 Nov 2011 17:17:02 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Php</title>
+      <link>//blog.tolleiv.de/tags/php/</link>
+      <pubDate>Mon, 17 Aug 2009 21:38:45 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Phpunit</title>
+      <link>//blog.tolleiv.de/tags/phpunit/</link>
+      <pubDate>Mon, 17 Aug 2009 21:38:45 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/phpunit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Plugin</title>
+      <link>//blog.tolleiv.de/tags/plugin/</link>
+      <pubDate>Thu, 05 Jun 2008 01:11:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/plugin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Prototype</title>
+      <link>//blog.tolleiv.de/tags/prototype/</link>
+      <pubDate>Tue, 27 May 2008 23:17:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/prototype/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Query</title>
+      <link>//blog.tolleiv.de/tags/query/</link>
+      <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/query/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Registry</title>
+      <link>//blog.tolleiv.de/tags/registry/</link>
+      <pubDate>Fri, 23 May 2008 21:40:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/registry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Release</title>
+      <link>//blog.tolleiv.de/tags/release/</link>
+      <pubDate>Wed, 31 Mar 2010 22:35:20 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/release/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Service</title>
+      <link>//blog.tolleiv.de/tags/service/</link>
+      <pubDate>Thu, 15 May 2008 14:00:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/service/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shell</title>
+      <link>//blog.tolleiv.de/tags/shell/</link>
+      <pubDate>Thu, 18 Jun 2009 21:54:34 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Singleton</title>
+      <link>//blog.tolleiv.de/tags/singleton/</link>
+      <pubDate>Fri, 23 May 2008 21:40:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/singleton/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Soccer</title>
+      <link>//blog.tolleiv.de/tags/soccer/</link>
+      <pubDate>Mon, 04 May 2009 20:44:46 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/soccer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Solr</title>
+      <link>//blog.tolleiv.de/tags/solr/</link>
+      <pubDate>Thu, 06 Jun 2013 18:47:56 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/solr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Specification</title>
+      <link>//blog.tolleiv.de/tags/specification/</link>
+      <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/specification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spl</title>
+      <link>//blog.tolleiv.de/tags/spl/</link>
+      <pubDate>Mon, 07 Jul 2008 17:30:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/spl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sprite</title>
+      <link>//blog.tolleiv.de/tags/sprite/</link>
+      <pubDate>Sun, 25 Jul 2010 08:00:29 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/sprite/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Structural</title>
+      <link>//blog.tolleiv.de/tags/structural/</link>
+      <pubDate>Mon, 12 May 2008 22:59:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/structural/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Svn2t3x</title>
+      <link>//blog.tolleiv.de/tags/svn2t3x/</link>
+      <pubDate>Mon, 01 Jun 2009 11:08:47 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/svn2t3x/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>T3o</title>
+      <link>//blog.tolleiv.de/tags/t3o/</link>
+      <pubDate>Mon, 10 Dec 2012 15:56:46 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/t3o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Templavoila</title>
+      <link>//blog.tolleiv.de/tags/templavoila/</link>
+      <pubDate>Mon, 16 Jan 2012 07:10:33 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/templavoila/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ter</title>
+      <link>//blog.tolleiv.de/tags/ter/</link>
+      <pubDate>Thu, 23 Apr 2009 21:15:13 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/ter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tests</title>
+      <link>//blog.tolleiv.de/tags/tests/</link>
+      <pubDate>Sat, 17 May 2008 20:02:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/tests/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Travel</title>
+      <link>//blog.tolleiv.de/tags/travel/</link>
+      <pubDate>Wed, 06 May 2009 20:46:55 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/travel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Typo3</title>
+      <link>//blog.tolleiv.de/tags/typo3/</link>
+      <pubDate>Mon, 10 Dec 2012 15:56:46 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/typo3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Value Object</title>
+      <link>//blog.tolleiv.de/tags/value-object/</link>
+      <pubDate>Fri, 30 May 2008 04:39:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/value-object/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Varnish</title>
+      <link>//blog.tolleiv.de/tags/varnish/</link>
+      <pubDate>Mon, 10 Dec 2012 15:56:46 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/varnish/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Version Control</title>
+      <link>//blog.tolleiv.de/tags/version-control/</link>
+      <pubDate>Wed, 30 Jun 2010 06:00:30 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/version-control/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Video</title>
+      <link>//blog.tolleiv.de/tags/video/</link>
+      <pubDate>Mon, 04 May 2009 20:32:05 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/video/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vimeo</title>
+      <link>//blog.tolleiv.de/tags/vimeo/</link>
+      <pubDate>Sun, 26 Apr 2009 08:00:43 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/vimeo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Viral Web</title>
+      <link>//blog.tolleiv.de/tags/viral-web/</link>
+      <pubDate>Sat, 08 May 2010 16:20:34 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/viral-web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualization</title>
+      <link>//blog.tolleiv.de/tags/visualization/</link>
+      <pubDate>Fri, 20 Jan 2012 08:00:12 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>//blog.tolleiv.de/tags/web/</link>
+      <pubDate>Mon, 02 Aug 2010 15:11:59 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Workspaces</title>
+      <link>//blog.tolleiv.de/tags/workspaces/</link>
+      <pubDate>Tue, 15 Jun 2010 17:54:47 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/workspaces/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Youtube</title>
+      <link>//blog.tolleiv.de/tags/youtube/</link>
+      <pubDate>Sat, 25 Apr 2009 23:51:43 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/youtube/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zip</title>
+      <link>//blog.tolleiv.de/tags/zip/</link>
+      <pubDate>Sat, 07 Jun 2008 21:30:00 +0000</pubDate>
+      
+      <guid>//blog.tolleiv.de/tags/zip/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

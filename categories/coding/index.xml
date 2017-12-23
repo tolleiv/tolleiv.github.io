@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Coding on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/coding/index.xml</link>
+    <link>//blog.tolleiv.de/categories/coding/</link>
     <description>Recent content in Coding on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/coding/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Jun 2013 18:47:56 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/coding/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Using genetic algorithms to optimize Apache Solr boost factors.</title>
@@ -15,70 +18,7 @@
       <pubDate>Thu, 06 Jun 2013 18:47:56 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18-150x150.png&#34; alt=&#34;Configuration interface.&#34; /&gt;&lt;/a&gt; Configuration interface.One thing I took along from last year&amp;rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&amp;rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&amp;rsquo;d like to share. If you want to have a look right away - the code can be found on &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-problem-to-solve&#34;&gt;The problem to solve:&lt;/h2&gt;
-
-&lt;p&gt;When running search indexes with Solr, one thing you might stumble opon is that you&amp;rsquo;ve various fields in your documents and you&amp;rsquo;ve to adjust their weights to get reasonable results. Finding those &amp;ldquo;boosting&amp;rdquo; values can be quite complex when you have many fields and many scenarios. Usually getting the values right is a task for very experienced integrators.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;   /solr/select?defType=dismax&amp;amp;q=my+query
-     &amp;amp;qf=title^**42**+description^**23**+footnotes^**5**+dalmatiners^**101**+foo^**9001**+comments
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Looking at it from a more technical perspective - when your Solr query looks like the one above, the question you&amp;rsquo;ve to answer is how the values for the highlighted numbers should look like to get &lt;em&gt;reasonable&lt;/em&gt; results.&lt;/p&gt;
-
-&lt;h2 id=&#34;measuring-reasonable&#34;&gt;Measuring &amp;ldquo;reasonable&amp;rdquo;:&lt;/h2&gt;
-
-&lt;p&gt;In order to solve the problem, the first thing we&amp;rsquo;ve to do, is to answer what we expect the outcome to look like. In other words, we&amp;rsquo;ve to measure how reasonable a specific solution is. For a search engine this can be done with some sample queries and some expectations along with that. The expectation could come in a form that we explicitly tell which documents we expect in the result lists of specific queries (and at predefined positions). Once we&amp;rsquo;ve these expectations, we can simple test agains the expectations and check whether or not specific boost factor values actually satisfy them.&lt;/p&gt;
-
-&lt;p&gt;A small example on that: In case we&amp;rsquo;ve a sample query with the expectation that document 123 appears in the first position and document 248 appears second. We could run this with two specific boost factor combinations (a) and (b). Along with (a) we might find that, document 123 actually ranks on position 8 and document 248 is found on position 4 and with (b) we&amp;rsquo;d find them on pos. 2 and pos. 14 - which one would we consider to be better?
-Comparing the &amp;ldquo;error&amp;rdquo; and &amp;ldquo;squared error&amp;rdquo; produced by (a) and (b) gives us a possible hint:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;(a): 8-1 + 4-2 = 7+2 = 9&lt;/li&gt;
-&lt;li&gt;(8-1)² + (4-2)² = 49+4 = 53&lt;/li&gt;
-&lt;li&gt;(b): 2-1 + 14-2 = 1+12 = 13&lt;/li&gt;
-&lt;li&gt;(2-1)² + (14-2)² = 1+144 = 145&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;While it&amp;rsquo;s not clear to compare both with just the normal error value comparision, the squared error shows clearly that (a) seems to outperform (b) in those cases and we should choose (a) for further considerations.&lt;/p&gt;
-
-&lt;p&gt;Being able to determine the &amp;ldquo;error&amp;rdquo; introduced by a specific solution then enables us to compare various solutions and helps us to play around with all sorts of optimizations.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-idea&#34;&gt;The idea:&lt;/h2&gt;
-
-&lt;p&gt;With a defined &amp;ldquo;cost function&amp;rdquo; like the one I introduced before, you&amp;rsquo;d be able to tackle the problem with some well known algorithmic solutions. Considering the boost factors to be represented as numerical vectors, we could use gradient methodologies to find good solutions. But having 20-40 fields per document would require to &amp;ldquo;search&amp;rdquo; a large numerical space and with gradient methods, this would result in a large amount of queries.&lt;/p&gt;
-
-&lt;p&gt;Another approach to run these optimizations, is to utilize genetic algorithms which kind of help to find good solutions within predictable amounts of time. You might know genetic algorithms for some lectures where people solved &lt;a href=&#34;http://www.math.hmc.edu/seniorthesis/archives/2001/kbryant/kbryant-2001-thesis.pdf&#34;&gt;traveling salesman problems&lt;/a&gt; and actually the only change you&amp;rsquo;d have to make is to exchange the traveling salesman cost function with the cost function you saw before and you&amp;rsquo;d be close to a solution already.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;With some more details:&lt;/strong&gt; Genetic algorithms take an amount of randomly generated possible solutions (called the &lt;em&gt;population&lt;/em&gt;) and try to find good solutions by applying the typical methods you know from your biology class (mutations, crossovers, natural selection). &lt;em&gt;Natural selection&lt;/em&gt; is done in a way that from each generation only the top 50% &amp;ldquo;survive and the rest of the population is filled up with now solutions generated through &lt;em&gt;mutations&lt;/em&gt; (random parameter changes of existing solutions) and &lt;em&gt;crossovers&lt;/em&gt; (interchanging parts of two existing solutions to create a third one). All solutions are always measured and compared on their response to the defined cost function and this way we&amp;rsquo;re always able to determine the &amp;ldquo;best known solution&amp;rdquo; even after very short time.&lt;/p&gt;
-
-&lt;p&gt;If that sounds too high-level. For the shown query from above, the vector [42,23,5,101,9001,1] is the vector I used. In addition let&amp;rsquo;s considering we have another vector [1,1,1,1,1,1] with equal weights for all fields. Assuming those are our fittest vectors at a given time, we could derive new possible solutions by mutating them (e.g. [42,23,5,101,9001,1] ~&amp;gt; [42,23,5,101,505,1] ) or creating a cross-over between both ( [42,23,5,101,9001,1] &amp;amp; [1,1,1,1,1,1] ~&amp;gt; [42,23,5,1,1,1]). Even adding new random vectors to our population might add some value. Once we found enough new vectors to have a population of a decent size, we&amp;rsquo;d compare the fitness and keep only the top 50% and continue our process until we reach convergence or a fixed iteration limit.&lt;/p&gt;
-
-&lt;p&gt;A drawback of the genetic algorithm is that it might not deliver the optimal result, because it never found it. But that&amp;rsquo;s just how nature works too. So it&amp;rsquo;s more that you&amp;rsquo;ve to sacrifice &amp;ldquo;training runtime&amp;rdquo; over accuracy or vice versa.&lt;/p&gt;
-
-&lt;h2 id=&#34;implementation&#34;&gt;Implementation:&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43-150x150.png&#34; alt=&#34;10 generation optimization&#34; /&gt;&lt;/a&gt; 10 generation optimizationThere&amp;rsquo;s really not too much to say other than that the code can be found in &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;. I used NodeJS with ExpressJs, SocketIO and an Twitter Bootstrap interface to have a relatively good looking and somewhat performing proof-of-concept. I used that setup, because NodeJS seems to me as the most easiest way to talk to Solr and it &amp;ldquo;promises&amp;rdquo; to be performant even with larger examples. SocketIO helped a lot to ease the pain when it comes to Server &amp;lt;&amp;gt; Client communication. The only drawback of that setup is the that everything had to be turned into something which is able to deal with asynchronous processing. This makes the algorithmic parts look a bit odd and bloated - but for me the benefits outweigh the odds.&lt;/p&gt;
-
-&lt;h2 id=&#34;final-thoughts&#34;&gt;Final thoughts:&lt;/h2&gt;
-
-&lt;p&gt;The proof-of-concept, which you&amp;rsquo;ll find on the Github repository, demonstrates that such type of optimization can work and that&amp;rsquo;s more or less all I wanted to do with it.&lt;/p&gt;
-
-&lt;p&gt;You can use the NodeJS tool with any of your Solr indexes and just go ahead and try it yourself. There are many parts which aren&amp;rsquo;t too accurate yet, especially the measuring could maybe done better with precision and recall measurements - but I assume that any type of cost function would work for now, that&amp;rsquo;s why P/R wasn&amp;rsquo;t implemented along with the tool. Also I&amp;rsquo;m not a NodeJS expert and the code might not follow best practice atm. - I&amp;rsquo;d be very happy to change that if anyone is interested to help?&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;When I did a small presentation during the &lt;a href=&#34;http://berlinbuzzwords.de/wiki/barcamp&#34;&gt;Berlin Buzzwords bar camp&lt;/a&gt; I also got some other questions which don&amp;rsquo;t necessarily relate to just this implementation but to all sorts of automated optimizations.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;The first question was, how to get the list of example queries and the &amp;ldquo;expected&amp;rdquo; documents for them.&lt;/em&gt; For now I assume that most applications at least know their top 50 or top 100 search and they should be able to predefine &amp;ldquo;relevant&amp;rdquo; documents for those searches. That&amp;rsquo;s at least what I assume everyone should have. Another way to generate the test data is to do some log file analyses and check the search and pick/weight the documents people clicked from within the results. This should also help to get some results.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Another questions related to that was wether long tail would fall behind with that approach.&lt;/em&gt; As this is only a proof-of-concept, I wasn&amp;rsquo;t really able to answer this. But I assume that long-tail searches would still benefit a lot more from the relevance certain documents gain due to high TF-IDF scores and those should then outweigh the &amp;ldquo;scoring bias&amp;rdquo; in a way. Another approach (known from machine learning) could be to leave out the top 1% of the documents (and searches) and just optimize for the rest of the top X% and afterwards check wether the top 1% still performs good - this way long tail could be &amp;ldquo;protected a bit more.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;And the last question was whether I tested other (gradient based) algorithms already.&lt;/em&gt; The answer was and is, no. So far this only ran on my MacBook and I really didn&amp;rsquo;t want to benchmark my CPU. The code itself is somewhat prepared to take other optimization methods but I didn&amp;rsquo;t add in others. If you&amp;rsquo;re interested to do so - I&amp;rsquo;d be happy to accept your pull-requests.&lt;/p&gt;
-</description>
+      <description>Configuration interface.One thing I took along from last year&amp;rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&amp;rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&amp;rsquo;d like to share. If you want to have a look right away - the code can be found on Github.</description>
     </item>
     
     <item>
@@ -87,62 +27,8 @@ Comparing the &amp;ldquo;error&amp;rdquo; and &amp;ldquo;squared error&amp;rdquo
       <pubDate>Wed, 30 Nov 2011 17:17:02 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</guid>
-      <description>&lt;p&gt;A nice thing to have at hand is definately &lt;a href=&#34;http://en.wikipedia.org/wiki/Signals_and_slots&#34;&gt;Signal and Slots&lt;/a&gt;. I heard &lt;a href=&#34;http://f.oer.tel&#34;&gt;Felix&lt;/a&gt; talking about them quite often and I finally found a nice usecase and came to play with them a little bit this afternoon. And just to avoid that others have to look around too much to find how they can get them to work here&amp;rsquo;s how it&amp;rsquo;s working for me.&lt;/p&gt;
-
-&lt;p&gt;First of all you should understand the concept. This nice little &amp;ldquo;definition&amp;rdquo; (from &lt;a href=&#34;http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html&#34;&gt;flow3.typo3.org&lt;/a&gt;) sums it up pretty well:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;A signal, which contains event information as it makes sense in the case at hand, can be emitted (sent) by any part of the code and is received by one or more slots, which can be any function&lt;del&gt; in FLOW3&lt;/del&gt; in extbase.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To get this running in extbase, you&amp;rsquo;ve to get hold of the _Tx_Extbase_SignalSlot&lt;em&gt;Dispatcher&lt;/em&gt;, which is the central instance to manage all of it. Within Extbase that&amp;rsquo;s done easily with this snippet within your classes:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;   ...
-    /**
-     * @var Tx_Extbase_SignalSlot_Dispatcher
-     */
-    protected $signalSlotDispatcher;
-
-    /**
-     * @param Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher
-     */
-    public function injectSignalSlotDispatcher(Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher) {
-        $this-&amp;gt;signalSlotDispatcher = $signalSlotDispatcher;
-    }
-   ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next thing is to make use of it. The Slot (listener) part could look like one of following blocks. In all cases you define the Signal by it&amp;rsquo;s class (not necessarily a PHP Class) and it&amp;rsquo;s name. Next to that the Slot can either be defined by a Closure, an object with a method name or a PHP-Class and a method name.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;   ...
-// Using a closure
-$this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
-      &#39;Crunching&#39;, &#39;emitDataReady&#39;, function($data) { crunch($data) }, NULL, FALSE
-);
-   ...
-// Using a method of the current object
-$this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
-     &#39;Crunching&#39;, &#39;emitDataReady&#39;, $this, &#39;crunch&#39;, FALSE
-);
-   ...
-// Using a method of the specified class
-$this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
-     &#39;Crunching&#39;, &#39;emitDataReady&#39;, &#39;Cruncher&#39;, &#39;crunch&#39;, FALSE
-);
-   ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To trigger the Signal which invokes the Slots registered above, you&amp;rsquo;ve to run the following code.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$this-&amp;gt;signalSlotDispatcher-&amp;gt;dispatch(&#39;Crunching&#39;, &#39;emitDataReady&#39;, array($data));
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;One thing I found was that by default the _Tx_Extbase_SignalSlot&lt;em&gt;Dispatcher&lt;/em&gt; it not a Singleton in older extbase versions. Bastian fixed that already in the &lt;a href=&#34;https://review.typo3.org/#change,6785&#34;&gt;master&lt;/a&gt; and &lt;a href=&#34;https://review.typo3.org/#change,6786&#34;&gt;1-4&lt;/a&gt; branches and lucky enough this change was part within the TYPO3 4.6.1 release. But I think it&amp;rsquo;s still important to mention that this wasn&amp;rsquo;t the default from the beginning on.&lt;/p&gt;
-
-&lt;p&gt;Even if &lt;a href=&#34;http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html&#34;&gt;AOP is a nicer way to implement this feature&lt;/a&gt;, the extbase backport still works pretty straigh forward.&lt;/p&gt;
-
-&lt;p&gt;Edit: One thing I&amp;rsquo;ve to add - Felix is not &amp;ldquo;just&amp;rdquo; talking about Signal/Slots - he&amp;rsquo;s the one to thank for the &lt;a href=&#34;https://review.typo3.org/1563&#34;&gt;backport&lt;/a&gt;. And now that his &lt;a href=&#34;http://blog.foertel.com/2011/10/using-signalslots-in-extbase/&#34;&gt;blog&lt;/a&gt; is running again - this post seems like a summary ;)&lt;/p&gt;
-</description>
+      <description>A nice thing to have at hand is definately Signal and Slots. I heard Felix talking about them quite often and I finally found a nice usecase and came to play with them a little bit this afternoon. And just to avoid that others have to look around too much to find how they can get them to work here&amp;rsquo;s how it&amp;rsquo;s working for me.
+First of all you should understand the concept.</description>
     </item>
     
     <item>
@@ -151,13 +37,8 @@ $this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
       <pubDate>Thu, 22 Oct 2009 19:18:39 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/10/imagemap_wizard-0.5.3/</guid>
-      <description>&lt;p&gt;Last Sunday I&amp;rsquo;ve released the first official stable version of my &lt;a href=&#34;http://blog.tolleiv.de/2009/07/typo3-extensions/&#34;&gt;imagemap_wizard&lt;/a&gt; extension &lt;a href=&#34;http://typo3.org/extensions/repository/view/imagemap_wizard/current/&#34;&gt;(TER&lt;/a&gt;).
-I though that&amp;rsquo;s a good moment to review the introduction text on the project-homepage and that&amp;rsquo;s how it looks like - &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;forge.typo3.org/projects/show/extension-imagemap_wizard&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Especially due to the missing/broken TER download counter I&amp;rsquo;m still not sure whether the work was worth it. I hope some marketing and the given information about all the cool featutes is enough for newbees and TYPO3 pro&amp;rsquo;s. to  switch over to this extension ;)&lt;/p&gt;
-
-&lt;p&gt;The 0.6 releases will focus on some UI and usability improvements and looking at my old overall schedule for the 1.0 release there&amp;rsquo;s &amp;ldquo;only&amp;rdquo; one big feature missing - the integration into regular content elements (e.g. &amp;ldquo;text w/image&amp;rdquo;).  So stay tuned :D&lt;/p&gt;
-</description>
+      <description>Last Sunday I&amp;rsquo;ve released the first official stable version of my imagemap_wizard extension (TER). I though that&amp;rsquo;s a good moment to review the introduction text on the project-homepage and that&amp;rsquo;s how it looks like - forge.typo3.org/projects/show/extension-imagemap_wizard
+Especially due to the missing/broken TER download counter I&amp;rsquo;m still not sure whether the work was worth it. I hope some marketing and the given information about all the cool featutes is enough for newbees and TYPO3 pro&amp;rsquo;s.</description>
     </item>
     
     <item>
@@ -166,20 +47,10 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
       <pubDate>Mon, 17 Aug 2009 21:38:45 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/08/multiple-arguments-for-mocked-functions..../</guid>
-      <description>&lt;p&gt;If you look into the PHPUnit documentation (&lt;a href=&#34;http://www.phpunit.de/manual/3.3/en/test-doubles.html#test-doubles.mock-objects&#34;&gt; http://www.phpunit.de/manual/3.3/en/test-doubles.html#test-doubles.mock-objects&lt;/a&gt; ) you&amp;rsquo;ll see some nice examples but non of them shows how to translate a function with multiple arguments into a mock-assumption.&lt;/p&gt;
-
-&lt;p&gt;Within the examples you&amp;rsquo;ll find:
-&lt;code&gt;$observer-&amp;gt;expects($this-&amp;gt;once())-&amp;gt;method(&#39;update&#39;)  
--&amp;gt;with($this-&amp;gt;equalTo(&#39;something&#39;));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;So what if the &amp;ldquo;update&amp;rdquo; function has two arguments, pretty easy:
-&lt;code&gt;$observer-&amp;gt;expects($this-&amp;gt;once())-&amp;gt;method(&#39;update&#39;)  
--&amp;gt;with($this-&amp;gt;equalTo(&#39;something&#39;), $this-&amp;gt;equalTo(&#39;something else&#39;));
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;I guess Sebastian though that that there&amp;rsquo;s no need for documentation if something is so obvious :(&lt;/p&gt;
-</description>
+      <description>If you look into the PHPUnit documentation (http://www.phpunit.de/manual/3.3/en/test-doubles.html#test-doubles.mock-objects ) you&amp;rsquo;ll see some nice examples but non of them shows how to translate a function with multiple arguments into a mock-assumption.
+Within the examples you&amp;rsquo;ll find: $observer-&amp;gt;expects($this-&amp;gt;once())-&amp;gt;method(&#39;update&#39;) -&amp;gt;with($this-&amp;gt;equalTo(&#39;something&#39;)); 
+So what if the &amp;ldquo;update&amp;rdquo; function has two arguments, pretty easy: $observer-&amp;gt;expects($this-&amp;gt;once())-&amp;gt;method(&#39;update&#39;) -&amp;gt;with($this-&amp;gt;equalTo(&#39;something&#39;), $this-&amp;gt;equalTo(&#39;something else&#39;)); 
+I guess Sebastian though that that there&amp;rsquo;s no need for documentation if something is so obvious :(</description>
     </item>
     
     <item>
@@ -188,10 +59,8 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
       <pubDate>Sat, 08 Aug 2009 12:54:13 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/08/www.encodechain.com/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2009/08/encodingchain-0.1.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2009/08/encodingchain-0.1-300x221.png&#34; alt=&#34;encodingchain-0.1&#34; /&gt;&lt;/a&gt;I just &amp;ldquo;released&amp;rdquo; &lt;a href=&#34;http://www.encodechain.com&#34;&gt;encodechain.com&lt;/a&gt;. A little tool which enables to combine various popular PHP conversion methods and to check how they affect your input&amp;hellip; feel free to give me some feedback :)&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m also not sure whether I choose the right name for it &amp;hellip; O_o&lt;/p&gt;
-</description>
+      <description>I just &amp;ldquo;released&amp;rdquo; encodechain.com. A little tool which enables to combine various popular PHP conversion methods and to check how they affect your input&amp;hellip; feel free to give me some feedback :)
+I&amp;rsquo;m also not sure whether I choose the right name for it &amp;hellip; O_o</description>
     </item>
     
     <item>
@@ -200,23 +69,8 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
       <pubDate>Thu, 18 Jun 2009 21:54:34 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</guid>
-      <description>&lt;p&gt;If you use the shell and walk around in directories wouldn&amp;rsquo;t it be cool to have &amp;ldquo;cd &amp;hellip;&amp;rdquo; to move 2 levels up, &amp;ldquo;cd &amp;hellip;.&amp;rdquo; to move 3 levels up &amp;hellip;? I&amp;rsquo;m not sure if there&amp;rsquo;s an easier way to resolve it but the following lines work pretty nice so far and they just made it into my default .bashrc :P&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd() {
-    if [[ &amp;quot;$1&amp;quot; =~ ^\.\.\.+$  ]]; then
-        cd `echo &amp;quot;$1&amp;quot; | sed &#39;s/\./..\//g&#39; | sed &#39;s/^\.\.\///g&#39;`
-    else
-        builtin cd &amp;quot;$1&amp;quot;
-    fi
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For different older shell/bash versions you might need quotes around the regex.&lt;/p&gt;
-
-&lt;p&gt;Btw &lt;a href=&#34;http://books.google.de/books?id=WQCSxv9vfPkC&amp;amp;lpg=PA84&amp;amp;ots=OiT8hUe10J&amp;amp;dq=bash%20function%20with%20the%20same%20name%20as%20command&amp;amp;pg=PP1&#34;&gt;O&amp;rsquo;Reilly&amp;rsquo;s &amp;ldquo;Learning the Bash&amp;rdquo;&lt;/a&gt; is available within Google Books&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Edit: another very important bookmark for bashscripting is the &lt;a href=&#34;http://tldp.org/LDP/abs/html/&#34;&gt;Advanced Bash-Scripting Guide&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-</description>
+      <description>If you use the shell and walk around in directories wouldn&amp;rsquo;t it be cool to have &amp;ldquo;cd &amp;hellip;&amp;rdquo; to move 2 levels up, &amp;ldquo;cd &amp;hellip;.&amp;rdquo; to move 3 levels up &amp;hellip;? I&amp;rsquo;m not sure if there&amp;rsquo;s an easier way to resolve it but the following lines work pretty nice so far and they just made it into my default .bashrc :P
+cd() { if [[ &amp;quot;$1&amp;quot; =~ ^\.\.\.+$ ]]; then cd `echo &amp;quot;$1&amp;quot; | sed &#39;s/\.</description>
     </item>
     
     <item>
@@ -225,27 +79,9 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
       <pubDate>Mon, 15 Jun 2009 06:53:58 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/06/jquery-performance/</guid>
-      <description>&lt;p&gt;jQuery 1.3 made a huge step especially towards better performance. But it&amp;rsquo;s not only the framework, from time to time it&amp;rsquo;s the developer who should care about performance too. Artzstudio.com made up a really good summary of &lt;a href=&#34;http://www.artzstudio.com/2009/04/jquery-performance-rules/&#34;&gt;how you should change your coding-style to achieve a higher performance with jQuery&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;In my opinion the most important things are:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.artzstudio.com/2009/04/jquery-performance-rules/#descend-from-id&#34;&gt;Use ID selectors whenever possible&lt;/a&gt; since this can be directly mapped to &lt;strong&gt;getElementById()&lt;/strong&gt; it much faster then all the other selectors&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.artzstudio.com/2009/04/jquery-performance-rules/#harness-chaining&#34;&gt;Use chaining whenever possible&lt;/a&gt; since it will reuse the already selected element whichout additional selectors&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.artzstudio.com/2009/04/jquery-performance-rules/#limit-dom-manipulation&#34;&gt;Limit direct DOM manipulation&lt;/a&gt; obviously browsers don&amp;rsquo;t like it therefor you should avoid it ;)&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Distinguish between &lt;a href=&#34;http://www.artzstudio.com/2009/04/jquery-performance-rules/#defer-to-window-load&#34;&gt;&lt;strong&gt;$(window).load()&lt;/strong&gt; and &lt;strong&gt;$(documen).ready()&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Besides this single resource there&amp;rsquo;s also the &lt;a href=&#34;http://www.tvidesign.co.uk/blog/improve-your-jquery-25-excellent-tips.aspx&#34;&gt;list with 25 jQuery tips from tvidesign.co.uk &lt;/a&gt;which contains lot&amp;rsquo;s of useful stuff. And of course there are ton&amp;rsquo;s of cheat sheets lying around in the web - you should at least use one ;) .&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://acodingfool.typepad.com/blog/jquery-13-cheat-sheet.html&#34;&gt;(http://acodingfool.typepad.com/blog/jquery-13-cheat-sheet.html&lt;/a&gt;)
-(&lt;a href=&#34;http://www.gscottolson.com/weblog/2008/01/11/jquery-cheat-sheet/&#34;&gt;http://www.gscottolson.com/weblog/2008/01/11/jquery-cheat-sheet/&lt;/a&gt;)
-(&lt;a href=&#34;http://colorcharge.com/jquery/&#34;&gt;http://colorcharge.com/jquery/&lt;/a&gt;)
-(&lt;a href=&#34;http://www.gmtaz.com/index.php/jquery-13-cheatsheet-wallpaper/&#34;&gt;http://www.gmtaz.com/index.php/jquery-13-cheatsheet-wallpaper/&lt;/a&gt;)&lt;/p&gt;
-</description>
+      <description>jQuery 1.3 made a huge step especially towards better performance. But it&amp;rsquo;s not only the framework, from time to time it&amp;rsquo;s the developer who should care about performance too. Artzstudio.com made up a really good summary of how you should change your coding-style to achieve a higher performance with jQuery.
+In my opinion the most important things are:
+ Use ID selectors whenever possible since this can be directly mapped to getElementById() it much faster then all the other selectors</description>
     </item>
     
     <item>
@@ -254,12 +90,9 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
       <pubDate>Thu, 11 Jun 2009 07:27:34 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/06/my-jquery-1.3.2-update-experience/</guid>
-      <description>&lt;p&gt;Over the last days I did some small steps to clean up the code of my &lt;a href=&#34;http://forge.typo3.org/projects/show/extension-imagemap_wizard&#34;&gt;TYPO3 imagemap extension&lt;/a&gt;. During that process I wanted to update jQuery from 1.2.6 to 1.3.2. Initially this went fine but after some testing I found this strange error:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;[Exception... &amp;quot;&#39;Syntax error, unrecognized expression: #&#39; when calling method: [nsIDOMEventListener::handleEvent]&amp;quot;  nsresult: &amp;quot;0x8057001e (NS_ERROR_XPC_JS_THREW_STRING)&amp;quot;  location: &amp;quot;&amp;lt;unknown&amp;gt;&amp;quot;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Due to the &lt;em&gt;verbosity&lt;/em&gt; of the message (location &amp;ldquo;&lt;unknown&gt;&amp;rdquo; ) it wasn&amp;rsquo;t obvious for me that what&amp;rsquo;s going wrong. But right after I found the &lt;a href=&#34;http://dev.jquery.com/ticket/4323&#34;&gt;jQuery-bugtracker log #4323&lt;/a&gt; &lt;em&gt;($(&amp;lsquo;#&amp;rsquo; + myID) throws an exception in version 1.3.1 and 1.3.2 if myID is a zero length string)&lt;/em&gt; everything was clear. For some reason they&amp;rsquo;ve made the decission to add some strictness to their API so for the future always validate your selectors before you ask jQuery ;)&lt;/p&gt;
-</description>
+      <description>Over the last days I did some small steps to clean up the code of my TYPO3 imagemap extension. During that process I wanted to update jQuery from 1.2.6 to 1.3.2. Initially this went fine but after some testing I found this strange error:
+[Exception... &amp;quot;&#39;Syntax error, unrecognized expression: #&#39; when calling method: [nsIDOMEventListener::handleEvent]&amp;quot; nsresult: &amp;quot;0x8057001e (NS_ERROR_XPC_JS_THREW_STRING)&amp;quot; location: &amp;quot;&amp;lt;unknown&amp;gt;&amp;quot;
+Due to the verbosity of the message (location &amp;ldquo;&amp;rdquo; ) it wasn&amp;rsquo;t obvious for me that what&amp;rsquo;s going wrong.</description>
     </item>
     
     <item>
@@ -268,8 +101,7 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
       <pubDate>Sun, 24 May 2009 09:28:48 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/05/desktop-timetracking/</guid>
-      <description>&lt;p&gt;I just saw that Heiner already published a new (stable) version of his Desktop-Timetracking software.  Within this version he did a lot of refactoring - actually I helped out with some work and with lot&amp;rsquo;s of smart³ comments ;) - and I&amp;rsquo;m really proud that I got him into &lt;a href=&#34;en.wikipedia.org/wiki/Test-driven_development&#34;&gt;TDD&lt;/a&gt;. Check out &lt;a href=&#34;http://dpdesktop.sourceforge.net/wordpress/&#34;&gt;DPDesktop at sourceforge.net&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>I just saw that Heiner already published a new (stable) version of his Desktop-Timetracking software. Within this version he did a lot of refactoring - actually I helped out with some work and with lot&amp;rsquo;s of smart³ comments ;) - and I&amp;rsquo;m really proud that I got him into TDD. Check out DPDesktop at sourceforge.net</description>
     </item>
     
     <item>
@@ -278,8 +110,7 @@ I though that&amp;rsquo;s a good moment to review the introduction text on the p
       <pubDate>Thu, 16 Apr 2009 20:10:35 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/visualized-sorting-algorithms/</guid>
-      <description>&lt;p&gt;There are lot&amp;rsquo;s of visualizations for soting algorithms - this pages provides all relevant informations including runtime complexity and extra space requirements etc - and a easy to memorize domain name ;) ~ &lt;a href=&#34;http://www.sorting-algorithms.com/&#34;&gt;http://www.sorting-algorithms.com&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>There are lot&amp;rsquo;s of visualizations for soting algorithms - this pages provides all relevant informations including runtime complexity and extra space requirements etc - and a easy to memorize domain name ;) ~ http://www.sorting-algorithms.com</description>
     </item>
     
   </channel>

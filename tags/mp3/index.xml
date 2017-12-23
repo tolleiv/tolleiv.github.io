@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mp3 on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/mp3/index.xml</link>
+    <link>//blog.tolleiv.de/tags/mp3/</link>
     <description>Recent content in Mp3 on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/mp3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 May 2009 13:47:05 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/mp3/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>some free music</title>
@@ -15,13 +18,9 @@
       <pubDate>Sun, 24 May 2009 13:47:05 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/05/some-free-music/</guid>
-      <description>&lt;p&gt;This week my iPod also got some fresh music. Coldplay published their Live-Album &lt;a href=&#34;http://lrlrl.coldplay.com/leftright.html&#34;&gt;LeftRightLeftRightLeft&lt;/a&gt; (&lt;a href=&#34;http://www.spreeblick.com/2009/05/16/coldplays-%E2%80%9Eleftrightleftrightleft%E2%80%9C-livealbum-fur-lau-online/&#34;&gt;via&lt;/a&gt;), some blogs published &lt;a href=&#34;http://thelemurblog.com/mp3/Remix%20After%20All.zip&#34;&gt;Daft Punk remixes&lt;/a&gt; (&lt;a href=&#34;http://www.testspiel.de/archives/2009/05/18/daft-punk-remix-after-all/&#34;&gt;via&lt;/a&gt;), Mike Skinner from The Strees pushed some music via Twitter into the web &lt;a href=&#34;http://schakkerhart.com/wp-content/uploads/2009/05/TheStreets_TheTwitter_schakkerhartcom.rar&#34;&gt;&amp;ldquo;The Twitter&amp;rdquo;&lt;/a&gt; (&lt;a href=&#34;http://www.testspiel.de/archives/2009/05/18/download-tipp-the-streets-the-twitter-downloads/&#34;&gt;via&lt;/a&gt;) and just a few minutes ago the &lt;a href=&#34;http://www.subpop.com/cybersex&#34;&gt;Sub Pop CyberSex Sampler&lt;/a&gt; found the way into my iPod (&lt;a href=&#34;http://www.spreeblick.com/2009/05/24/sub-pop-cybersex-digital-sampler/&#34;&gt;via&lt;/a&gt;). Pretty good week so far :P&lt;/p&gt;
-
-&lt;p&gt;Finally a Beethoven-remix from Soulwax (&lt;a href=&#34;http://www.testspiel.de/archives/2009/05/06/beethovens-fuenfte-als-soulwax-edit/&#34;&gt;via&lt;/a&gt;)
-[audio:&lt;a href=&#34;http://cache03-music02.myspacecdn.com/61/std_9b57d13da38e4c6b80e3e8dddf7580a8.mp3&#34;&gt;http://cache03-music02.myspacecdn.com/61/std_9b57d13da38e4c6b80e3e8dddf7580a8.mp3&lt;/a&gt;]&lt;/p&gt;
-
-&lt;p&gt;Edit: &lt;a href=&#34;http://www.fuelyourcreativity.com/8-songs-music-to-feed-your-soul-during-crucial-design-moments/&#34;&gt;Music To Feed Your Soul During Crucial Design Moments&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>This week my iPod also got some fresh music. Coldplay published their Live-Album LeftRightLeftRightLeft (via), some blogs published Daft Punk remixes (via), Mike Skinner from The Strees pushed some music via Twitter into the web &amp;ldquo;The Twitter&amp;rdquo; (via) and just a few minutes ago the Sub Pop CyberSex Sampler found the way into my iPod (via). Pretty good week so far :P
+Finally a Beethoven-remix from Soulwax (via) [audio:http://cache03-music02.myspacecdn.com/61/std_9b57d13da38e4c6b80e3e8dddf7580a8.mp3]
+Edit: Music To Feed Your Soul During Crucial Design Moments</description>
     </item>
     
   </channel>

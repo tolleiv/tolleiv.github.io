@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Query on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/query/index.xml</link>
+    <link>//blog.tolleiv.de/tags/query/</link>
     <description>Recent content in Query on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/query/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Jun 2008 17:29:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/query/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Query Object [PoEEA]</title>
@@ -15,87 +18,7 @@
       <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/06/query-object-poeea/</guid>
-      <description>&lt;p&gt;Maybe you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification Pattern&lt;/a&gt; I explained some weeks ago. It enabled a easy and intuitive  searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification.
-Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory. The idea of the Query Object pattern is that it enables a usage, comparable to the specification pattern, for objects which are persisted in a database. The benefit is that it creates a query to exclude objects which won&amp;rsquo;t satisfy your needs and therefore you wont mess up the memory anymore.
-Once you have a query-object in place you should not get in touch with SQL anymore because it can encapsulate SQL completely, at least if you also have some kind of data mapping (coming soon), which is a great benefit for everyone who is not so familiar with SQL. (But don&amp;rsquo;t forget, regarding performance, SQL-optimization is a very important thing).&lt;/p&gt;
-
-&lt;p&gt;So what we need for the Query Object in first place is a object, I&amp;rsquo;ll use the Cookie out of the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;specification pattern post&lt;/a&gt; again. Then we need criteria-objects which hold the information for a single criteria, (determined by &amp;ldquo;database-field&amp;rdquo;, &amp;ldquo;operator&amp;rdquo; and &amp;ldquo;value&amp;rdquo;) and we also need the Query Objects itself to wrap up the SQL-querying and the object creation somehow.&lt;/p&gt;
-
-&lt;p&gt;A very simple example could look like this:&lt;/p&gt;
-
-&lt;p&gt;interface Critera {
-public function getWhereClause();
-}&lt;/p&gt;
-
-&lt;p&gt;class CookieCriteria implements Critera {&lt;/p&gt;
-
-&lt;p&gt;private $operator,$field,$value;&lt;/p&gt;
-
-&lt;p&gt;protected function __construct($operator,$field,$value) {
-$this-&amp;gt;operator=$operator;
-$this-&amp;gt;field=$field;
-$this-&amp;gt;value=$value;
-}&lt;/p&gt;
-
-&lt;p&gt;public function getWhereClause() {
-return implode(&amp;rdquo; &amp;ldquo;,array($this-&amp;gt;field,$this-&amp;gt;operator,$this-&amp;gt;value));
-}&lt;/p&gt;
-
-&lt;p&gt;public static function matches($field,$value) {
-return new CookieCriteria(&amp;ldquo;LIKE&amp;rdquo;,$field,&amp;lsquo;&amp;ldquo;&amp;rsquo;.$value.&amp;lsquo;&amp;rdquo;&amp;rsquo;);
-}&lt;/p&gt;
-
-&lt;p&gt;public static function greaterThan($field,$value) {
-return new CookieCriteria(&amp;ldquo;&amp;gt;&amp;rdquo;,$field,$value);
-}
-}&lt;/p&gt;
-
-&lt;p&gt;class CookieFinder {
-protected $criterias;&lt;/p&gt;
-
-&lt;p&gt;public function addCriteria(Critera $criteria) {
-$this-&amp;gt;criterias[] = $criteria;
-}&lt;/p&gt;
-
-&lt;p&gt;public function generateSQL() {
-$sql = &amp;ldquo;SELECT * FROM cookies&amp;rdquo;;&lt;/p&gt;
-
-&lt;p&gt;if(sizeof($this-&amp;gt;criterias)) {
-$where=array();
-reset($this-&amp;gt;criterias);
-while(list(,$criteria)=each($this-&amp;gt;criterias)) {
-$where[] = $criteria-&amp;gt;getWhereClause();
-}
-$sql.= sizeof($where)?&amp;rdquo; WHERE &amp;ldquo;.implode(&amp;rdquo; AND &amp;ldquo;,$where):&amp;ldquo;&amp;rdquo;;
-}
-return $sql;
-}&lt;/p&gt;
-
-&lt;p&gt;public function find() {
-$collection = array();
-if(!$result = mysql_query($this-&amp;gt;generateSQL())) {
-throw new Exception(mysql_errno());
-}
-while($row = mysql_fetch_assoc($result)) {
-$collection[] = new Cookie($row[&amp;lsquo;name&amp;rsquo;],$row[&amp;lsquo;flavor&amp;rsquo;],$name[&amp;lsquo;size&amp;rsquo;]);
-}
-return $collection;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;Possible client code could look like this:
-$finder = new CookieFinder();
-$finder-&amp;gt;addCriteria(CookieCriteria::matches(&amp;ldquo;name&amp;rdquo;,&amp;ldquo;Granny%&amp;rdquo;));
-$finder-&amp;gt;addCriteria(CookieCriteria::greaterThan(&amp;ldquo;size&amp;rdquo;,100));
-$cookies = $finder-&amp;gt;find();&lt;/p&gt;
-
-&lt;p&gt;We just pick up the Query Object, add one or more criteria and ask it to create the objects which fit them.&lt;/p&gt;
-
-&lt;p&gt;So this example is not as powerful as the one I used for the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification pattern&lt;/a&gt;, but it should be a easy task to create some kind of &amp;ldquo;nested criteria objects&amp;rdquo;.
-Query objects normally make use of data-mapping so that you can handle various classes, stored in different tables/databases, with a single and generic Query Object. This also enables to avoid SQL-Injection, since you&amp;rsquo;re able to validate the fields and values before you sent them to your database, also some kind of database abstraction would be possible.
-With the &amp;ldquo;Query Object by example&amp;rdquo;, which requires to build up a single object which is used as blueprint for the required objects, exists another flavor of this pattern which is very handy to use and more descriptive.
-But no matter which flavor you prefer, Query Objects bring some real benefits when you&amp;rsquo;ve to handle complex datasets - for smaller projects the effort might be to much so be careful where you use it.&lt;/p&gt;
-</description>
+      <description>Maybe you remember the Specification Pattern I explained some weeks ago. It enabled a easy and intuitive searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification. Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory.</description>
     </item>
     
   </channel>

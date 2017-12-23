@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Exceptions on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/exceptions/index.xml</link>
+    <link>//blog.tolleiv.de/categories/exceptions/</link>
     <description>Recent content in Exceptions on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/exceptions/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 May 2008 21:40:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/exceptions/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>error_reposting and exceptions....</title>
@@ -15,44 +18,9 @@
       <pubDate>Tue, 20 May 2008 21:40:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/error_reposting-and-exceptions..../</guid>
-      <description>&lt;p&gt;I just found this line:&lt;/p&gt;
-
-&lt;p&gt;set_error_handler(create_function(&amp;lsquo;$x, $y&amp;rsquo;, &amp;lsquo;throw new Exception($y, $x);&amp;rsquo;), E_ALL~E_NOTICE);&lt;/p&gt;
-
-&lt;p&gt;in the comments on php.net and did a short test to see whether it works. Normally I used to have a global function which passes all the errors through a logging-chain (FILE/MAIL/DISPLAY) but having exceptions could be more comfortable because you might sometimes want to make decisions locally and not on a global scope and just setting and re-setting the error-handler is not the best idea for this&amp;hellip; I&amp;rsquo;m not sure if I get used to it, because the error-handling function did a good job for the last years &amp;hellip; we&amp;rsquo;ll see :)&lt;br /&gt;
-So that&amp;rsquo;s the full example code:&lt;/p&gt;
-
-&lt;p&gt;set_error_handler(create_function(&amp;lsquo;$x, $y&amp;rsquo;, &amp;lsquo;throw new Exception($y, $x);&amp;rsquo;), E_ALL);&lt;br /&gt;
-try {&lt;/p&gt;
-
-&lt;p&gt;$errors = array(&lt;br /&gt;
-                    E_USER_WARNING =&amp;gt; &amp;ldquo;something might be wrong&amp;rdquo;,&lt;br /&gt;
-                    E_USER_NOTICE =&amp;gt; &amp;ldquo;it works but I don&amp;rsquo;t like it&amp;rdquo;,&lt;br /&gt;
-                    E_USER_ERROR =&amp;gt; &amp;ldquo;something went completly wrong&amp;rdquo;,&lt;br /&gt;
-);&lt;/p&gt;
-
-&lt;p&gt;//    echo $name; //should cause a E_NOTICE&lt;/p&gt;
-
-&lt;p&gt;foreach($errors as $code=&amp;gt;$msg) {&lt;br /&gt;
-    try {&lt;br /&gt;
-        trigger_error($msg,$code);&lt;br /&gt;
-    }&lt;br /&gt;
-    catch (Exception $e) {&lt;br /&gt;
-        if(!in_array($e-&amp;gt;getCode(),array(E_USER_WARNING,E_USER_NOTICE))) {&lt;br /&gt;
-            throw $e;&lt;br /&gt;
-        }&lt;br /&gt;
-        else {&lt;br /&gt;
-            // not a big deal we can push this into a log-file and continue or work&amp;hellip;&lt;br /&gt;
-            echo &amp;ldquo;local exception: (&amp;ldquo;.$e-&amp;gt;getCode(). &amp;ldquo;) &amp;ldquo;.$e-&amp;gt;getMessage().&amp;rdquo;&lt;br/&gt;&amp;rdquo;;&lt;br /&gt;
-        }&lt;br /&gt;
-    }&lt;br /&gt;
-}&lt;/p&gt;
-
-&lt;p&gt;}&lt;br /&gt;
-catch (Exception $e) {&lt;br /&gt;
-echo &amp;ldquo;global exception:&amp;ldquo;.$e-&amp;gt;getMessage().&amp;rdquo;&lt;br/&gt;&amp;rdquo;;&lt;br /&gt;
-}&lt;/p&gt;
-</description>
+      <description>I just found this line:
+set_error_handler(create_function(&amp;lsquo;$x, $y&amp;rsquo;, &amp;lsquo;throw new Exception($y, $x);&amp;rsquo;), E_ALL~E_NOTICE);
+in the comments on php.net and did a short test to see whether it works. Normally I used to have a global function which passes all the errors through a logging-chain (FILE/MAIL/DISPLAY) but having exceptions could be more comfortable because you might sometimes want to make decisions locally and not on a global scope and just setting and re-setting the error-handler is not the best idea for this&amp;hellip; I&amp;rsquo;m not sure if I get used to it, because the error-handling function did a good job for the last years &amp;hellip; we&amp;rsquo;ll see :)</description>
     </item>
     
   </channel>

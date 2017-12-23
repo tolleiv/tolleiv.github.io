@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Layout on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/layout/index.xml</link>
+    <link>//blog.tolleiv.de/categories/layout/</link>
     <description>Recent content in Layout on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/layout/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Apr 2009 20:06:23 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/layout/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>CSS Sprites ... a nice way to save bandwidth</title>
@@ -15,10 +18,8 @@
       <pubDate>Wed, 29 Apr 2009 20:06:23 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/css-sprites-...-a-nice-way-to-save-bandwidth/</guid>
-      <description>&lt;p&gt;I saw some of these sprites long time ago on some spiegel.de subpage and from time to time I see smaller sprites within stuff I get from our HTML-team - but this article and it&amp;rsquo;s insights into realworld design, is really great &amp;hellip; continue on &lt;a href=&#34;http://www.smashingmagazine.com/2009/04/27/the-mystery-of-css-sprites-techniques-tools-and-tutorials/&#34;&gt; Smashing Mag - The Mystery Of CSS Sprites&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;And that&amp;rsquo;s where you should start with it - as always AListApart is the best source for Web-Designers &amp;hellip; &lt;a href=&#34;http://www.alistapart.com/articles/sprites&#34;&gt;AListApart about Sprites&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>I saw some of these sprites long time ago on some spiegel.de subpage and from time to time I see smaller sprites within stuff I get from our HTML-team - but this article and it&amp;rsquo;s insights into realworld design, is really great &amp;hellip; continue on Smashing Mag - The Mystery Of CSS Sprites
+And that&amp;rsquo;s where you should start with it - as always AListApart is the best source for Web-Designers &amp;hellip; AListApart about Sprites</description>
     </item>
     
   </channel>

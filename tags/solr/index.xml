@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Solr on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/solr/index.xml</link>
+    <link>//blog.tolleiv.de/tags/solr/</link>
     <description>Recent content in Solr on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/solr/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Jun 2013 18:47:56 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/solr/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Using genetic algorithms to optimize Apache Solr boost factors.</title>
@@ -15,70 +18,7 @@
       <pubDate>Thu, 06 Jun 2013 18:47:56 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2013/06/using-genetic-algorithms-to-optimize-apache-solr-boost-factors./</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.08.18-150x150.png&#34; alt=&#34;Configuration interface.&#34; /&gt;&lt;/a&gt; Configuration interface.One thing I took along from last year&amp;rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&amp;rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&amp;rsquo;d like to share. If you want to have a look right away - the code can be found on &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-problem-to-solve&#34;&gt;The problem to solve:&lt;/h2&gt;
-
-&lt;p&gt;When running search indexes with Solr, one thing you might stumble opon is that you&amp;rsquo;ve various fields in your documents and you&amp;rsquo;ve to adjust their weights to get reasonable results. Finding those &amp;ldquo;boosting&amp;rdquo; values can be quite complex when you have many fields and many scenarios. Usually getting the values right is a task for very experienced integrators.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;   /solr/select?defType=dismax&amp;amp;q=my+query
-     &amp;amp;qf=title^**42**+description^**23**+footnotes^**5**+dalmatiners^**101**+foo^**9001**+comments
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Looking at it from a more technical perspective - when your Solr query looks like the one above, the question you&amp;rsquo;ve to answer is how the values for the highlighted numbers should look like to get &lt;em&gt;reasonable&lt;/em&gt; results.&lt;/p&gt;
-
-&lt;h2 id=&#34;measuring-reasonable&#34;&gt;Measuring &amp;ldquo;reasonable&amp;rdquo;:&lt;/h2&gt;
-
-&lt;p&gt;In order to solve the problem, the first thing we&amp;rsquo;ve to do, is to answer what we expect the outcome to look like. In other words, we&amp;rsquo;ve to measure how reasonable a specific solution is. For a search engine this can be done with some sample queries and some expectations along with that. The expectation could come in a form that we explicitly tell which documents we expect in the result lists of specific queries (and at predefined positions). Once we&amp;rsquo;ve these expectations, we can simple test agains the expectations and check whether or not specific boost factor values actually satisfy them.&lt;/p&gt;
-
-&lt;p&gt;A small example on that: In case we&amp;rsquo;ve a sample query with the expectation that document 123 appears in the first position and document 248 appears second. We could run this with two specific boost factor combinations (a) and (b). Along with (a) we might find that, document 123 actually ranks on position 8 and document 248 is found on position 4 and with (b) we&amp;rsquo;d find them on pos. 2 and pos. 14 - which one would we consider to be better?
-Comparing the &amp;ldquo;error&amp;rdquo; and &amp;ldquo;squared error&amp;rdquo; produced by (a) and (b) gives us a possible hint:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;(a): 8-1 + 4-2 = 7+2 = 9&lt;/li&gt;
-&lt;li&gt;(8-1)² + (4-2)² = 49+4 = 53&lt;/li&gt;
-&lt;li&gt;(b): 2-1 + 14-2 = 1+12 = 13&lt;/li&gt;
-&lt;li&gt;(2-1)² + (14-2)² = 1+144 = 145&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;While it&amp;rsquo;s not clear to compare both with just the normal error value comparision, the squared error shows clearly that (a) seems to outperform (b) in those cases and we should choose (a) for further considerations.&lt;/p&gt;
-
-&lt;p&gt;Being able to determine the &amp;ldquo;error&amp;rdquo; introduced by a specific solution then enables us to compare various solutions and helps us to play around with all sorts of optimizations.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-idea&#34;&gt;The idea:&lt;/h2&gt;
-
-&lt;p&gt;With a defined &amp;ldquo;cost function&amp;rdquo; like the one I introduced before, you&amp;rsquo;d be able to tackle the problem with some well known algorithmic solutions. Considering the boost factors to be represented as numerical vectors, we could use gradient methodologies to find good solutions. But having 20-40 fields per document would require to &amp;ldquo;search&amp;rdquo; a large numerical space and with gradient methods, this would result in a large amount of queries.&lt;/p&gt;
-
-&lt;p&gt;Another approach to run these optimizations, is to utilize genetic algorithms which kind of help to find good solutions within predictable amounts of time. You might know genetic algorithms for some lectures where people solved &lt;a href=&#34;http://www.math.hmc.edu/seniorthesis/archives/2001/kbryant/kbryant-2001-thesis.pdf&#34;&gt;traveling salesman problems&lt;/a&gt; and actually the only change you&amp;rsquo;d have to make is to exchange the traveling salesman cost function with the cost function you saw before and you&amp;rsquo;d be close to a solution already.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;With some more details:&lt;/strong&gt; Genetic algorithms take an amount of randomly generated possible solutions (called the &lt;em&gt;population&lt;/em&gt;) and try to find good solutions by applying the typical methods you know from your biology class (mutations, crossovers, natural selection). &lt;em&gt;Natural selection&lt;/em&gt; is done in a way that from each generation only the top 50% &amp;ldquo;survive and the rest of the population is filled up with now solutions generated through &lt;em&gt;mutations&lt;/em&gt; (random parameter changes of existing solutions) and &lt;em&gt;crossovers&lt;/em&gt; (interchanging parts of two existing solutions to create a third one). All solutions are always measured and compared on their response to the defined cost function and this way we&amp;rsquo;re always able to determine the &amp;ldquo;best known solution&amp;rdquo; even after very short time.&lt;/p&gt;
-
-&lt;p&gt;If that sounds too high-level. For the shown query from above, the vector [42,23,5,101,9001,1] is the vector I used. In addition let&amp;rsquo;s considering we have another vector [1,1,1,1,1,1] with equal weights for all fields. Assuming those are our fittest vectors at a given time, we could derive new possible solutions by mutating them (e.g. [42,23,5,101,9001,1] ~&amp;gt; [42,23,5,101,505,1] ) or creating a cross-over between both ( [42,23,5,101,9001,1] &amp;amp; [1,1,1,1,1,1] ~&amp;gt; [42,23,5,1,1,1]). Even adding new random vectors to our population might add some value. Once we found enough new vectors to have a population of a decent size, we&amp;rsquo;d compare the fitness and keep only the top 50% and continue our process until we reach convergence or a fixed iteration limit.&lt;/p&gt;
-
-&lt;p&gt;A drawback of the genetic algorithm is that it might not deliver the optimal result, because it never found it. But that&amp;rsquo;s just how nature works too. So it&amp;rsquo;s more that you&amp;rsquo;ve to sacrifice &amp;ldquo;training runtime&amp;rdquo; over accuracy or vice versa.&lt;/p&gt;
-
-&lt;h2 id=&#34;implementation&#34;&gt;Implementation:&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43.png&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2013/06/Bildschirmfoto-2013-05-29-um-18.10.43-150x150.png&#34; alt=&#34;10 generation optimization&#34; /&gt;&lt;/a&gt; 10 generation optimizationThere&amp;rsquo;s really not too much to say other than that the code can be found in &lt;a href=&#34;http://github.com/tolleiv/boostgenetics&#34;&gt;Github&lt;/a&gt;. I used NodeJS with ExpressJs, SocketIO and an Twitter Bootstrap interface to have a relatively good looking and somewhat performing proof-of-concept. I used that setup, because NodeJS seems to me as the most easiest way to talk to Solr and it &amp;ldquo;promises&amp;rdquo; to be performant even with larger examples. SocketIO helped a lot to ease the pain when it comes to Server &amp;lt;&amp;gt; Client communication. The only drawback of that setup is the that everything had to be turned into something which is able to deal with asynchronous processing. This makes the algorithmic parts look a bit odd and bloated - but for me the benefits outweigh the odds.&lt;/p&gt;
-
-&lt;h2 id=&#34;final-thoughts&#34;&gt;Final thoughts:&lt;/h2&gt;
-
-&lt;p&gt;The proof-of-concept, which you&amp;rsquo;ll find on the Github repository, demonstrates that such type of optimization can work and that&amp;rsquo;s more or less all I wanted to do with it.&lt;/p&gt;
-
-&lt;p&gt;You can use the NodeJS tool with any of your Solr indexes and just go ahead and try it yourself. There are many parts which aren&amp;rsquo;t too accurate yet, especially the measuring could maybe done better with precision and recall measurements - but I assume that any type of cost function would work for now, that&amp;rsquo;s why P/R wasn&amp;rsquo;t implemented along with the tool. Also I&amp;rsquo;m not a NodeJS expert and the code might not follow best practice atm. - I&amp;rsquo;d be very happy to change that if anyone is interested to help?&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;When I did a small presentation during the &lt;a href=&#34;http://berlinbuzzwords.de/wiki/barcamp&#34;&gt;Berlin Buzzwords bar camp&lt;/a&gt; I also got some other questions which don&amp;rsquo;t necessarily relate to just this implementation but to all sorts of automated optimizations.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;The first question was, how to get the list of example queries and the &amp;ldquo;expected&amp;rdquo; documents for them.&lt;/em&gt; For now I assume that most applications at least know their top 50 or top 100 search and they should be able to predefine &amp;ldquo;relevant&amp;rdquo; documents for those searches. That&amp;rsquo;s at least what I assume everyone should have. Another way to generate the test data is to do some log file analyses and check the search and pick/weight the documents people clicked from within the results. This should also help to get some results.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Another questions related to that was wether long tail would fall behind with that approach.&lt;/em&gt; As this is only a proof-of-concept, I wasn&amp;rsquo;t really able to answer this. But I assume that long-tail searches would still benefit a lot more from the relevance certain documents gain due to high TF-IDF scores and those should then outweigh the &amp;ldquo;scoring bias&amp;rdquo; in a way. Another approach (known from machine learning) could be to leave out the top 1% of the documents (and searches) and just optimize for the rest of the top X% and afterwards check wether the top 1% still performs good - this way long tail could be &amp;ldquo;protected a bit more.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;And the last question was whether I tested other (gradient based) algorithms already.&lt;/em&gt; The answer was and is, no. So far this only ran on my MacBook and I really didn&amp;rsquo;t want to benchmark my CPU. The code itself is somewhat prepared to take other optimization methods but I didn&amp;rsquo;t add in others. If you&amp;rsquo;re interested to do so - I&amp;rsquo;d be happy to accept your pull-requests.&lt;/p&gt;
-</description>
+      <description>Configuration interface.One thing I took along from last year&amp;rsquo;s ApacheCon was the idea to combine Apache Solr along with some mathematical search algorithms to figure out boost factor values. I did some work on that back then and on the way to this year&amp;rsquo;s BerlinBuzzwords. Now I finally have a proof-of-concept working which I&amp;rsquo;d like to share. If you want to have a look right away - the code can be found on Github.</description>
     </item>
     
   </channel>

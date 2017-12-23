@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Movie on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/movie/index.xml</link>
+    <link>//blog.tolleiv.de/categories/movie/</link>
     <description>Recent content in Movie on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/movie/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Jul 2008 19:30:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/movie/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>our wonderful nature</title>
@@ -15,10 +18,8 @@
       <pubDate>Wed, 02 Jul 2008 19:30:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/07/our-wonderful-nature/</guid>
-      <description>&lt;p&gt;Nice video I just found on some german page:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;amp;videoid=33359537&#34;&gt;Our wonderful nature by Tomer Eshed&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Nice video I just found on some german page:
+Our wonderful nature by Tomer Eshed</description>
     </item>
     
   </channel>

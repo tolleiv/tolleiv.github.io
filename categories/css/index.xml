@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Css on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/css/index.xml</link>
+    <link>//blog.tolleiv.de/categories/css/</link>
     <description>Recent content in Css on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/css/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 May 2008 22:02:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/css/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Homer Simpson as ASCII-Art</title>
@@ -15,8 +18,7 @@
       <pubDate>Wed, 14 May 2008 22:02:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/homer-simpson-as-ascii-art/</guid>
-      <description>&lt;p&gt;The rebirth of ASCII-Art that&amp;rsquo;s how one of the comments called it - Homer-Simpson as ASCII-Art with modern and valid CSS - that&amp;rsquo;s so awesome: &lt;a href=&#34;http://www.romancortes.com/blog/homer-css/&#34;&gt;http://www.romancortes.com/blog/homer-css/&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>The rebirth of ASCII-Art that&amp;rsquo;s how one of the comments called it - Homer-Simpson as ASCII-Art with modern and valid CSS - that&amp;rsquo;s so awesome: http://www.romancortes.com/blog/homer-css/</description>
     </item>
     
   </channel>

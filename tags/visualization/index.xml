@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Visualization on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/visualization/index.xml</link>
+    <link>//blog.tolleiv.de/tags/visualization/</link>
     <description>Recent content in Visualization on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/visualization/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Jan 2012 08:00:12 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/visualization/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Visualizing TYPO3 Core activity</title>
@@ -15,36 +18,8 @@
       <pubDate>Fri, 20 Jan 2012 08:00:12 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2012/01/visualizing-typo3-core-activity/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;DISCLAIMER: Don&amp;rsquo;t take the following too serious - when reading this post please keep in mind that the TYPO3 community itself consists of much more than just the Core team activity - many things take place outside of code repositories and can&amp;rsquo;t be measured anyhow. &lt;strong&gt;Every&lt;/strong&gt; contribution is important and &lt;strong&gt;every&lt;/strong&gt; single action has value.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Using Gerrit sometimes feels quite lonesome - you don&amp;rsquo;t really see who&amp;rsquo;s active and you don&amp;rsquo;t really get a feeling on how much is done in the TYPO3 Core at a certain point. To visualize on how active the contributors are and to show the most active members I applied a little scoring and summed up the results for the time since 2006.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.tolleiv.de/impact-chart&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/01/TYPO3-Core-impact.png&#34; alt=&#34;Snippet of the impact chart.&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The scoring is quite easy - every author of a patch gets 10 points, testers get 3 and reviewers 1 point*. Looking at the stats it seems that even the statistics pulled from the old Subversion days seem to meet up with today&amp;rsquo;s numbers - of course we&amp;rsquo;ve to keep in mind that everything which was pulled from Subversion doesn&amp;rsquo;t really point to the author but to the actual committer (except if there was a &amp;ldquo;Thanks to XXXXX&amp;rdquo; reference in the commit).&lt;/p&gt;
-
-&lt;p&gt;To visualize the numbers I choose a &lt;a href=&#34;https://github.com/blog/219-impact-graph-speedups&#34;&gt;Github&lt;/a&gt; like &lt;a href=&#34;http://blog.tolleiv.de/impact-chart&#34;&gt;impact chart&lt;/a&gt;**. Each contributor has it&amp;rsquo;s own color and line in it and whenever he got active the width of the line scales up. To maintain the overview the scale of the width isn&amp;rsquo;t linear and every contributor who&amp;rsquo;s not within the &amp;ldquo;Top 20&amp;rdquo; had to be scaled down to &amp;ldquo;1&amp;rdquo;. The line stops if the contributor didn&amp;rsquo;t get active anymore. The scores are grouped and compared by month.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.tolleiv.de/impact-chart/stat.html&#34;&gt;&lt;img src=&#34;//blog.tolleiv.de/uploads/2012/01/Core-Stats-January20121.png&#34; alt=&#34;Snapshot of the &amp;quot;Top 20&amp;quot; stats taken Jan. 14th 2012&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;In addition to the chart I also created a &lt;a href=&#34;http://blog.tolleiv.de/impact-chart/stat.html&#34;&gt;table based overview for the &amp;ldquo;Top 20&amp;rdquo;&lt;/a&gt; contributors with their score***.&lt;/p&gt;
-
-&lt;p&gt;Few things I got from the numbers. There have been 290 contributors already - simply amazing. Comparing the (huge) scores of the release managers with their fellow contributors shows once more that they can be really proud about the job they did or do. It&amp;rsquo;s also quite cool to see that many people keep sticking around. And finally it was quite surprising to see that our community manager &lt;a href=&#34;https://twitter.com/benvantende&#34;&gt;Ben van&amp;rsquo;t Ende&lt;/a&gt; can also be found in the stats. Besides that it&amp;rsquo;s up to everyone else to find their conclusions from these numbers. I hope it&amp;rsquo;s motivating everyone to see that the community is active as always.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;The script I created to generate the charts isn&amp;rsquo;t too nice at the moment, &lt;del&gt;but I promise to publish it once I cleaned it up a bit. If you can&amp;rsquo;t wait to get your hands on it, feel free to send me a mail or tweet.&lt;/del&gt; - but I published it anyways: &lt;a href=&#34;https://github.com/tolleiv/Repo-Activity-Monitor&#34;&gt;github.com/tolleiv/Repo-Activity-Monitor&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Links in short: &lt;a href=&#34;http://blog.tolleiv.de/impact-chart&#34;&gt;Impact chart&lt;/a&gt;, &lt;a href=&#34;http://blog.tolleiv.de/impact-chart/stat.html&#34;&gt;Monthly &amp;ldquo;Top 20&amp;rdquo; tables&lt;/a&gt;.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The scoring includes the commits to the Core master and all related submodule commits. Unfortunately the submodule commits don&amp;rsquo;t hold the reviewer and tester information. Also some of the latest changes made in the submodules may not show up at the moment because the submodule pointers haven&amp;rsquo;t been updated yet.
-** Inspired by the incredible RaphaëlJS vector graphics library which is distributed with an MIT license and can be found on &lt;a href=&#34;http://raphaeljs.com/&#34;&gt;raphaeljs.com&lt;/a&gt;
-*** Again - don&amp;rsquo;t take it too serious - the scoring doesn&amp;rsquo;t take into account that some patches can be written in 15 minutes where others take days. It also only uses the final testers and reviewers mentioned in the commit message, other contributions are not counted atm&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>DISCLAIMER: Don&amp;rsquo;t take the following too serious - when reading this post please keep in mind that the TYPO3 community itself consists of much more than just the Core team activity - many things take place outside of code repositories and can&amp;rsquo;t be measured anyhow. Every contribution is important and every single action has value.
+ Using Gerrit sometimes feels quite lonesome - you don&amp;rsquo;t really see who&amp;rsquo;s active and you don&amp;rsquo;t really get a feeling on how much is done in the TYPO3 Core at a certain point.</description>
     </item>
     
     <item>
@@ -53,12 +28,8 @@
       <pubDate>Fri, 24 Apr 2009 19:46:25 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/visualization..../</guid>
-      <description>&lt;p&gt;Wow check this out - &lt;a href=&#34;http://www.spreeblick.com&#34;&gt;Spreeblick&lt;/a&gt; one of Germanys most popular blogs had some kind of protest agains the governments  internet filter some days ago. They asked their users to click on a germany-map and leave a comment to &amp;ldquo;vote&amp;rdquo; against the filter.&lt;/p&gt;
-
-&lt;p&gt;Afterwards they published the XML-Data of this and &lt;a href=&#34;http://vimeo.com/rockitbaby&#34;&gt;Micheal Schieben&lt;/a&gt; published this very impressive &lt;a href=&#34;http://www.spreeblick.com/2009/04/24/von-laien-regiert-%e2%80%93-von-schieben-visualisiert/&#34;&gt;visualization of the internet-protest &lt;/a&gt;. It was produced with &lt;a href=&#34;http://www.processing.org/&#34;&gt;processing&lt;/a&gt; (one of my early loves) and he also published the &lt;a href=&#34;http://www.twoantennas.com/projects/protest-gegen-internetsperren/protest_gegen_internetsperren.pde&#34;&gt;source-code&lt;/a&gt; &amp;hellip; great work :)&lt;/p&gt;
-
-&lt;p&gt;[vimeo width=&amp;ldquo;400&amp;rdquo; height=&amp;ldquo;533&amp;rdquo;]&lt;a href=&#34;http://vimeo.com/4282254[/vimeo&#34;&gt;http://vimeo.com/4282254[/vimeo&lt;/a&gt;]&lt;/p&gt;
-</description>
+      <description>Wow check this out - Spreeblick one of Germanys most popular blogs had some kind of protest agains the governments internet filter some days ago. They asked their users to click on a germany-map and leave a comment to &amp;ldquo;vote&amp;rdquo; against the filter.
+Afterwards they published the XML-Data of this and Micheal Schieben published this very impressive visualization of the internet-protest . It was produced with processing (one of my early loves) and he also published the source-code &amp;hellip; great work :)</description>
     </item>
     
     <item>
@@ -67,8 +38,7 @@
       <pubDate>Thu, 16 Apr 2009 20:10:35 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/visualized-sorting-algorithms/</guid>
-      <description>&lt;p&gt;There are lot&amp;rsquo;s of visualizations for soting algorithms - this pages provides all relevant informations including runtime complexity and extra space requirements etc - and a easy to memorize domain name ;) ~ &lt;a href=&#34;http://www.sorting-algorithms.com/&#34;&gt;http://www.sorting-algorithms.com&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>There are lot&amp;rsquo;s of visualizations for soting algorithms - this pages provides all relevant informations including runtime complexity and extra space requirements etc - and a easy to memorize domain name ;) ~ http://www.sorting-algorithms.com</description>
     </item>
     
   </channel>

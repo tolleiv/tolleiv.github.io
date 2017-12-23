@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shell on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/shell/index.xml</link>
+    <link>//blog.tolleiv.de/tags/shell/</link>
     <description>Recent content in Shell on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Jun 2009 21:54:34 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>bash: small improvement for the &#34;cd&#34; builtin</title>
@@ -15,23 +18,8 @@
       <pubDate>Thu, 18 Jun 2009 21:54:34 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/06/bash-small-improvement-for-the-cd-builtin/</guid>
-      <description>&lt;p&gt;If you use the shell and walk around in directories wouldn&amp;rsquo;t it be cool to have &amp;ldquo;cd &amp;hellip;&amp;rdquo; to move 2 levels up, &amp;ldquo;cd &amp;hellip;.&amp;rdquo; to move 3 levels up &amp;hellip;? I&amp;rsquo;m not sure if there&amp;rsquo;s an easier way to resolve it but the following lines work pretty nice so far and they just made it into my default .bashrc :P&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd() {
-    if [[ &amp;quot;$1&amp;quot; =~ ^\.\.\.+$  ]]; then
-        cd `echo &amp;quot;$1&amp;quot; | sed &#39;s/\./..\//g&#39; | sed &#39;s/^\.\.\///g&#39;`
-    else
-        builtin cd &amp;quot;$1&amp;quot;
-    fi
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For different older shell/bash versions you might need quotes around the regex.&lt;/p&gt;
-
-&lt;p&gt;Btw &lt;a href=&#34;http://books.google.de/books?id=WQCSxv9vfPkC&amp;amp;lpg=PA84&amp;amp;ots=OiT8hUe10J&amp;amp;dq=bash%20function%20with%20the%20same%20name%20as%20command&amp;amp;pg=PP1&#34;&gt;O&amp;rsquo;Reilly&amp;rsquo;s &amp;ldquo;Learning the Bash&amp;rdquo;&lt;/a&gt; is available within Google Books&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Edit: another very important bookmark for bashscripting is the &lt;a href=&#34;http://tldp.org/LDP/abs/html/&#34;&gt;Advanced Bash-Scripting Guide&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-</description>
+      <description>If you use the shell and walk around in directories wouldn&amp;rsquo;t it be cool to have &amp;ldquo;cd &amp;hellip;&amp;rdquo; to move 2 levels up, &amp;ldquo;cd &amp;hellip;.&amp;rdquo; to move 3 levels up &amp;hellip;? I&amp;rsquo;m not sure if there&amp;rsquo;s an easier way to resolve it but the following lines work pretty nice so far and they just made it into my default .bashrc :P
+cd() { if [[ &amp;quot;$1&amp;quot; =~ ^\.\.\.+$ ]]; then cd `echo &amp;quot;$1&amp;quot; | sed &#39;s/\.</description>
     </item>
     
     <item>
@@ -40,18 +28,9 @@
       <pubDate>Tue, 28 Apr 2009 16:22:55 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/shell-command-translate/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;Translate, squeeze, and/or delete characters from standard input,
-writing to standard output.&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&amp;hellip; that&amp;rsquo;s the manpage description of the shell-command I just found (with the help of a good friend) &amp;hellip; and besides sed this is a very handy way to do simple string-operations on stdin.&lt;/p&gt;
-
-&lt;p&gt;He used it to replace (old) Mac newline characters with Unix newline charaters within files (as seen on &lt;a href=&#34;http://en.wikipedia.org/wiki/Newline&#34;&gt;wikipedia&lt;/a&gt;):
-&lt;code&gt;tr &#39;\r&#39; &#39;\n&#39; &amp;lt; old.file &amp;gt; new.file&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Btw I still think that it&amp;rsquo;s stupid that users still have all the hazzle with &lt;a href=&#34;http://en.wikipedia.org/wiki/Newline&#34;&gt;newline charaters&lt;/a&gt; - why can&amp;rsquo;t the OS-developers just recognize all types of newlines? :(&lt;/p&gt;
-</description>
+      <description>&amp;ldquo;Translate, squeeze, and/or delete characters from standard input, writing to standard output.&amp;rdquo;
+ &amp;hellip; that&amp;rsquo;s the manpage description of the shell-command I just found (with the help of a good friend) &amp;hellip; and besides sed this is a very handy way to do simple string-operations on stdin.
+He used it to replace (old) Mac newline characters with Unix newline charaters within files (as seen on wikipedia): tr &#39;\r&#39; &#39;\n&#39; &amp;lt; old.</description>
     </item>
     
     <item>
@@ -60,12 +39,8 @@ writing to standard output.&amp;rdquo;&lt;/p&gt;
       <pubDate>Fri, 24 Apr 2009 21:10:29 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/the-subshell-is-your-friend/</guid>
-      <description>&lt;p&gt;Today I tried to find a way to track the time of a shell-command and to log that runtime into a file. I was already aware of the **time **command which is a bash build-in. Due to that it passes its output directly to the user without using either stdout or stderr and therefore there&amp;rsquo;s no &amp;ldquo;easy&amp;rdquo; way to redirect the output directly into a file.&lt;/p&gt;
-
-&lt;p&gt;But bash als provides subshells and in this case that&amp;rsquo;s how you can use the output :P (which is passed on stderr in this case).&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;(time sleep 5) 2&amp;gt; time.log&lt;/code&gt;&lt;/p&gt;
-</description>
+      <description>Today I tried to find a way to track the time of a shell-command and to log that runtime into a file. I was already aware of the **time **command which is a bash build-in. Due to that it passes its output directly to the user without using either stdout or stderr and therefore there&amp;rsquo;s no &amp;ldquo;easy&amp;rdquo; way to redirect the output directly into a file.
+But bash als provides subshells and in this case that&amp;rsquo;s how you can use the output :P (which is passed on stderr in this case).</description>
     </item>
     
     <item>
@@ -74,8 +49,7 @@ writing to standard output.&amp;rdquo;&lt;/p&gt;
       <pubDate>Wed, 15 Apr 2009 19:22:38 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/...-much-better-way-to-use-your-shell/</guid>
-      <description>&lt;p&gt;[youtube]&lt;a href=&#34;http://www.youtube.com/watch?v=x7pPajOvQGo[/youtube&#34;&gt;http://www.youtube.com/watch?v=x7pPajOvQGo[/youtube&lt;/a&gt;]&lt;/p&gt;
-</description>
+      <description>[youtube]http://www.youtube.com/watch?v=x7pPajOvQGo[/youtube]</description>
     </item>
     
     <item>
@@ -84,15 +58,7 @@ writing to standard output.&amp;rdquo;&lt;/p&gt;
       <pubDate>Tue, 14 Apr 2009 20:14:42 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/find-the-newest-file-within-a-folder..../</guid>
-      <description>&lt;p&gt;These are two neat little commands to find the newest and oldest file within a folder and it&amp;rsquo;s subfolder:
-&lt;code&gt;find . -type f -printf &amp;quot;%T@ %p \n&amp;quot; | sort -n -k 1,1 | awk &#39;{print $2}&#39; | tail -n 1
-find . -type f -printf &amp;quot;%T@ %p \n&amp;quot; | sort -n -k 1,1 | awk &#39;{print $2}&#39; | head -n 1&lt;/code&gt;
-If you&amp;rsquo;d like to know how old/young these files are try these two:
-&lt;code&gt;find . -type f -printf &amp;quot;%T@ %C+ %p \n&amp;quot; | sort -n -k 1,1 | tail -n 1
-find . -type f -printf &amp;quot;%T@ %C+ %p \n&amp;quot; | sort -n -k 1,1 | head -n 1&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;I hope that&amp;rsquo;s a good starter for the &amp;ldquo;blog&amp;rdquo; :P&lt;/p&gt;
-</description>
+      <description>These are two neat little commands to find the newest and oldest file within a folder and it&amp;rsquo;s subfolder: find . -type f -printf &amp;quot;%T@ %p \n&amp;quot; | sort -n -k 1,1 | awk &#39;{print $2}&#39; | tail -n 1 find . -type f -printf &amp;quot;%T@ %p \n&amp;quot; | sort -n -k 1,1 | awk &#39;{print $2}&#39; | head -n 1 If you&amp;rsquo;d like to know how old/young these files are try these two: find .</description>
     </item>
     
   </channel>

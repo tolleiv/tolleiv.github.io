@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pattern on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/pattern/index.xml</link>
+    <link>//blog.tolleiv.de/categories/pattern/</link>
     <description>Recent content in Pattern on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/pattern/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Nov 2011 17:17:02 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/pattern/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Signal / Slots in Extbase</title>
@@ -15,62 +18,8 @@
       <pubDate>Wed, 30 Nov 2011 17:17:02 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2011/11/signal-/-slots-in-extbase/</guid>
-      <description>&lt;p&gt;A nice thing to have at hand is definately &lt;a href=&#34;http://en.wikipedia.org/wiki/Signals_and_slots&#34;&gt;Signal and Slots&lt;/a&gt;. I heard &lt;a href=&#34;http://f.oer.tel&#34;&gt;Felix&lt;/a&gt; talking about them quite often and I finally found a nice usecase and came to play with them a little bit this afternoon. And just to avoid that others have to look around too much to find how they can get them to work here&amp;rsquo;s how it&amp;rsquo;s working for me.&lt;/p&gt;
-
-&lt;p&gt;First of all you should understand the concept. This nice little &amp;ldquo;definition&amp;rdquo; (from &lt;a href=&#34;http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html&#34;&gt;flow3.typo3.org&lt;/a&gt;) sums it up pretty well:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;A signal, which contains event information as it makes sense in the case at hand, can be emitted (sent) by any part of the code and is received by one or more slots, which can be any function&lt;del&gt; in FLOW3&lt;/del&gt; in extbase.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To get this running in extbase, you&amp;rsquo;ve to get hold of the _Tx_Extbase_SignalSlot&lt;em&gt;Dispatcher&lt;/em&gt;, which is the central instance to manage all of it. Within Extbase that&amp;rsquo;s done easily with this snippet within your classes:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;   ...
-    /**
-     * @var Tx_Extbase_SignalSlot_Dispatcher
-     */
-    protected $signalSlotDispatcher;
-
-    /**
-     * @param Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher
-     */
-    public function injectSignalSlotDispatcher(Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher) {
-        $this-&amp;gt;signalSlotDispatcher = $signalSlotDispatcher;
-    }
-   ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next thing is to make use of it. The Slot (listener) part could look like one of following blocks. In all cases you define the Signal by it&amp;rsquo;s class (not necessarily a PHP Class) and it&amp;rsquo;s name. Next to that the Slot can either be defined by a Closure, an object with a method name or a PHP-Class and a method name.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;   ...
-// Using a closure
-$this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
-      &#39;Crunching&#39;, &#39;emitDataReady&#39;, function($data) { crunch($data) }, NULL, FALSE
-);
-   ...
-// Using a method of the current object
-$this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
-     &#39;Crunching&#39;, &#39;emitDataReady&#39;, $this, &#39;crunch&#39;, FALSE
-);
-   ...
-// Using a method of the specified class
-$this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
-     &#39;Crunching&#39;, &#39;emitDataReady&#39;, &#39;Cruncher&#39;, &#39;crunch&#39;, FALSE
-);
-   ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To trigger the Signal which invokes the Slots registered above, you&amp;rsquo;ve to run the following code.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$this-&amp;gt;signalSlotDispatcher-&amp;gt;dispatch(&#39;Crunching&#39;, &#39;emitDataReady&#39;, array($data));
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;One thing I found was that by default the _Tx_Extbase_SignalSlot&lt;em&gt;Dispatcher&lt;/em&gt; it not a Singleton in older extbase versions. Bastian fixed that already in the &lt;a href=&#34;https://review.typo3.org/#change,6785&#34;&gt;master&lt;/a&gt; and &lt;a href=&#34;https://review.typo3.org/#change,6786&#34;&gt;1-4&lt;/a&gt; branches and lucky enough this change was part within the TYPO3 4.6.1 release. But I think it&amp;rsquo;s still important to mention that this wasn&amp;rsquo;t the default from the beginning on.&lt;/p&gt;
-
-&lt;p&gt;Even if &lt;a href=&#34;http://flow3.typo3.org/documentation/guide/partiii/signalsandslots.html&#34;&gt;AOP is a nicer way to implement this feature&lt;/a&gt;, the extbase backport still works pretty straigh forward.&lt;/p&gt;
-
-&lt;p&gt;Edit: One thing I&amp;rsquo;ve to add - Felix is not &amp;ldquo;just&amp;rdquo; talking about Signal/Slots - he&amp;rsquo;s the one to thank for the &lt;a href=&#34;https://review.typo3.org/1563&#34;&gt;backport&lt;/a&gt;. And now that his &lt;a href=&#34;http://blog.foertel.com/2011/10/using-signalslots-in-extbase/&#34;&gt;blog&lt;/a&gt; is running again - this post seems like a summary ;)&lt;/p&gt;
-</description>
+      <description>A nice thing to have at hand is definately Signal and Slots. I heard Felix talking about them quite often and I finally found a nice usecase and came to play with them a little bit this afternoon. And just to avoid that others have to look around too much to find how they can get them to work here&amp;rsquo;s how it&amp;rsquo;s working for me.
+First of all you should understand the concept.</description>
     </item>
     
     <item>
@@ -79,75 +28,7 @@ $this-&amp;gt;signalSlotDispatcher-&amp;gt;connect(
       <pubDate>Mon, 07 Jul 2008 17:30:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/07/iterator-gof/</guid>
-      <description>&lt;p&gt;Lot&amp;rsquo;s of people like to write down things into lists, so that they can go through that list later and check whether everything was fine. Normally every recipe has a list ~ there&amp;rsquo;s always a list of ingredients at the beginning of the recipe.
-This short example shows how such a list can be processed in PHP. So why would you want to have something else than a array to hold your objects? - My example still uses a array to hold the objects (uni- or bidirectional lists would also be possible) but it adds a kind of a facade to the array so that the common managements-tasks are handled within the List-Object. Everything you need for this example is present in PHP since version 5.0. The basic steps you need to do is to provide a &amp;ldquo;Object&amp;rdquo; and an &amp;ldquo;ObjectList&amp;rdquo; which implements the native &lt;a href=&#34;http://www.php.net/manual/en/language.oop5.iterations.php&#34;&gt;&amp;ldquo;Iterator&amp;rdquo;&lt;/a&gt; interface and then you&amp;rsquo;re able to have very handy lists :)&lt;/p&gt;
-
-&lt;p&gt;class Incredient {&lt;/p&gt;
-
-&lt;p&gt;public $name,$amount;
-public function __construct($name,$amount) {
-$this-&amp;gt;name = $name;
-$this-&amp;gt;amount = $amount;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;class Recipe implements Iterator {
-public $title;
-private $ingredients;&lt;/p&gt;
-
-&lt;p&gt;public function __construct ($title) {
-$this-&amp;gt;title = $title;
-}&lt;/p&gt;
-
-&lt;p&gt;public function addIncredient(Incredient $in) {
-$this-&amp;gt;ingredients[] = $in;
-}&lt;/p&gt;
-
-&lt;p&gt;public function current ()  {   return current ($this-&amp;gt;ingredients);    }
-public function key ()      {   return key($this-&amp;gt;ingredients);         }
-public function valid ()    {   return current ($this-&amp;gt;ingredients);    }
-public function rewind ()   {   return reset ($this-&amp;gt;ingredients);      }
-public function next ()     {   return next ($this-&amp;gt;ingredients);       }
-}&lt;/p&gt;
-
-&lt;p&gt;$cookieRecipe = new Recipe(&amp;ldquo;Chocolate Cookie&amp;rdquo;);
-$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Flour&amp;rsquo;,&amp;lsquo;2.5 cups&amp;rsquo;));
-$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Baking soda&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;));
-$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Salt&amp;rsquo;,&amp;lsquo;0.5 teaspoon&amp;rsquo;));
-$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Butter&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;));
-$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Sugar&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;));
-$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Brown Sugar&amp;rsquo;,&amp;lsquo;0.5 cup&amp;rsquo;));
-$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Vanilla extract&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;));
-$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Egg&amp;rsquo;,&amp;lsquo;1-2&amp;rsquo;));
-$cookieRecipe-&amp;gt;addIncredient(new Incredient(&amp;lsquo;Chocolate chips&amp;rsquo;,&amp;lsquo;2 cups&amp;rsquo;));&lt;/p&gt;
-
-&lt;p&gt;// process recipe:
-foreach($cookieRecipe as $inc) {
-echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&amp;rdquo;&lt;br/&gt;&amp;rdquo;;
-}&lt;/p&gt;
-
-&lt;p&gt;As you see it&amp;rsquo;s pretty easy to have lists of objects in PHP. You might also think that always creating to some list-object over and over again is very odd and you&amp;rsquo;re right. For the most common tasks like &lt;a href=&#34;http://www.php.net/manual/en/class.arrayiterator.php&#34;&gt;iterating through arrays&lt;/a&gt;, &lt;a href=&#34;http://www.php.net/manual/en/class.directoryiterator.php&#34;&gt;directory-lists&lt;/a&gt; and a few more task you can use objects which are shipped with the Standard PHP Library ,which is also part of PHP since version 5 and mandatory in 5.3. So the example shown above could also look like this:&lt;/p&gt;
-
-&lt;p&gt;$recipe = array();
-$recipe[] = new Incredient(&amp;lsquo;Flour&amp;rsquo;,&amp;lsquo;2.5 cups&amp;rsquo;);
-$recipe[] = new Incredient(&amp;lsquo;Baking soda&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;);
-$recipe[] = new Incredient(&amp;lsquo;Salt&amp;rsquo;,&amp;lsquo;0.5 teaspoon&amp;rsquo;);
-$recipe[] = new Incredient(&amp;lsquo;Butter&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;);
-$recipe[] = new Incredient(&amp;lsquo;Sugar&amp;rsquo;,&amp;lsquo;1 cup&amp;rsquo;);
-$recipe[] = new Incredient(&amp;lsquo;Brown Sugar&amp;rsquo;,&amp;lsquo;0.5 cup&amp;rsquo;);
-$recipe[] = new Incredient(&amp;lsquo;Vanilla extract&amp;rsquo;,&amp;lsquo;1 teaspoon&amp;rsquo;);
-$recipe[] = new Incredient(&amp;lsquo;Egg&amp;rsquo;,&amp;lsquo;1-2&amp;rsquo;);
-$recipe[] = new Incredient(&amp;lsquo;Chocolate chips&amp;rsquo;,&amp;lsquo;2 cups&amp;rsquo;);&lt;/p&gt;
-
-&lt;p&gt;$recipeIncObj = new ArrayObject($recipe);
-$ingredientsIt = $recipeIncObj-&amp;gt;getIterator();&lt;/p&gt;
-
-&lt;p&gt;foreach($ingredientsIt as $inc) {
-echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&amp;rdquo;&lt;br/&gt;&amp;rdquo;;
-}&lt;/p&gt;
-
-&lt;p&gt;As I said at the beginning, there are lots of situations where you might want to have a list for something and if you store that list in PHP the Iterator-pattern can keep your code clean and tasty :)&lt;/p&gt;
-</description>
+      <description>Lot&amp;rsquo;s of people like to write down things into lists, so that they can go through that list later and check whether everything was fine. Normally every recipe has a list ~ there&amp;rsquo;s always a list of ingredients at the beginning of the recipe. This short example shows how such a list can be processed in PHP. So why would you want to have something else than a array to hold your objects?</description>
     </item>
     
     <item>
@@ -156,44 +37,8 @@ echo $inc-&amp;gt;name.&amp;ldquo; =&amp;gt; &amp;rdquo;.$inc-&amp;gt;amount.&
       <pubDate>Tue, 01 Jul 2008 17:58:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/07/null-object-pattern/</guid>
-      <description>&lt;p&gt;Very often you create a object with a factory and before you really start using it, you check if your factory really created a object or returned NULL. Or maybe you have a method where a object is passed in and in this situation you&amp;rsquo;ll have to do this check also.&lt;/p&gt;
-
-&lt;p&gt;Instead of typing the &amp;ldquo;if(object == null)&amp;rdquo; phrase again and again, you could use the Null-Object pattern, you&amp;rsquo;ll see that this can make some situations much clearer.&lt;/p&gt;
-
-&lt;p&gt;Basically Null-Object ensures that the client always receives a valid object for it&amp;rsquo;s interaction, so that there&amp;rsquo;s no need to do the check shown above again and again. This happens since your concrete Null-Object just shares the interface, or inherits from the same class as it&amp;rsquo;s effective counterpart, but it&amp;rsquo;s implementation just leaves out any effectiveness.
-&lt;a href=&#34;http://bp3.blogger.com/_l5fIZzJyYfc/SGpiDZ9m-rI/AAAAAAAAACo/nVuiUHE4E90/s1600-h/nullobject_pattern.png&#34;&gt;
-&lt;img src=&#34;http://bp3.blogger.com/_l5fIZzJyYfc/SGpiDZ9m-rI/AAAAAAAAACo/nVuiUHE4E90/s400/nullobject_pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt; So a code-example could look like this:&lt;/p&gt;
-
-&lt;p&gt;class CookieFactory {
-public function makeInstance() {
-if(date(&amp;lsquo;l&amp;rsquo;)==&amp;lsquo;Monday&amp;rsquo;) return new NullCookie();
-return new RealCookie();
-}
-}&lt;/p&gt;
-
-&lt;p&gt;interface iCookie {
-function getCalories();
-}&lt;/p&gt;
-
-&lt;p&gt;class RealCookie implements iCookie {
-protected $calories=250;
-public function getCalories() {
-return $this-&amp;gt;calories;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;class NullCookie implements iCookie {
-public function getCalories() {
-return 0;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;I think you can imagine what happens when you make use of the CookieFactory - diet on monday ;)&lt;/p&gt;
-
-&lt;p&gt;There&amp;rsquo;re also some disadvantages, your clients normally don&amp;rsquo;t have a chance to react that there&amp;rsquo;s something special happening, also the clients must &amp;ldquo;share&amp;rdquo; the same expectation what &amp;ldquo;do nothing&amp;rdquo; means, the number of required Null-Objects might be very large and unhandy and the Null-Object shares a very deep knowledge with the real one, so that it might be a large effort to create it if the real object is complex too.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m so glad that today is tuesday :P&lt;/p&gt;
-</description>
+      <description>Very often you create a object with a factory and before you really start using it, you check if your factory really created a object or returned NULL. Or maybe you have a method where a object is passed in and in this situation you&amp;rsquo;ll have to do this check also.
+Instead of typing the &amp;ldquo;if(object == null)&amp;rdquo; phrase again and again, you could use the Null-Object pattern, you&amp;rsquo;ll see that this can make some situations much clearer.</description>
     </item>
     
     <item>
@@ -202,83 +47,8 @@ return 0;
       <pubDate>Mon, 23 Jun 2008 18:20:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/06/factory-gof/</guid>
-      <description>&lt;p&gt;Do you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;Fa&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ç&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ade pattern&lt;/a&gt; post? Sure you do :) - I described a child which asked his granny whether she could bake some cookies. So how this happens in a formal way was describe within the&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt; Fa&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ç&lt;/a&gt;&lt;a href=&#34;http://www.cookiepattern.com/2008/06/faade-gof.html&#34;&gt;ade pattern&lt;/a&gt; post ;) but the basic action &amp;ldquo;to ask for sth.&amp;rdquo; is described here&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;As you might remember we had a child, probably a lazy one, which was in the mood to eat some cookies but since the cookie tin was empty it asked his granny to bake some new. In OOP thats nearly the same - when you&amp;rsquo;d to have a (complex) object and if you don&amp;rsquo;t already have one you need someone who creates it or you do it yourself but since you need remember all the steps to create it, that&amp;rsquo;s something for programmers who likes to type :P&lt;/p&gt;
-
-&lt;p&gt;So normally you create a method which wraps up all the code to create the complex object. Or maybe you have  a Aggregate and you don&amp;rsquo;t want that everyone needs to know how it is build up then this method should be the only way to access the Aggregate.&lt;/p&gt;
-
-&lt;p&gt;You see now how you can benefit when you have a Factory available - but there are also some drawbacks. Factories tend to be hard to extend - this happens because the factory has a very deep (mostly hard-coded) knowledge of the objects it creates and normally all the wiring happens statically. If you&amp;rsquo;re looking for a dynamic way to wire up your objects you might end making heavy use of reflection. In normal projects this might be a bit too much ;)&lt;/p&gt;
-
-&lt;p&gt;A normal factory method, for a cookie which requires to have 3 flavors, a predefined size and that it&amp;rsquo;s baked before anyone consumes it, could look like this:&lt;/p&gt;
-
-&lt;p&gt;class Cookie {&lt;/p&gt;
-
-&lt;p&gt;// &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;/*&lt;br /&gt;
-  * Create a Cookie object which consists&lt;br /&gt;
-  * of 3 flavors and has a defined size.&lt;br /&gt;
-  */&lt;br /&gt;
- public function getInstance() {&lt;br /&gt;
-     $c = new Cookie();&lt;br /&gt;
-     $c-&amp;gt;setFlavor(Cookie::randomFlavor());&lt;br /&gt;
-     $c-&amp;gt;setFlavor(Cookie::randomFlavor());&lt;br /&gt;
-     $c-&amp;gt;setFlavor(Cookie::randomFlavor());&lt;br /&gt;
-     $c-&amp;gt;setSize(Cookie::randomSize());&lt;br /&gt;
-     $c-&amp;gt;bakeIt();&lt;br /&gt;
-     return $c;&lt;br /&gt;
- }&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;If your software contains some complexity where you want to switch the used objects (created by a factory) without modifying the clients, which make use of the factory, you&amp;rsquo;ll end up with the so called Abtract factory.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s say you have two types of Cookies - the first one is a high-quality cookie with a bunch of different flavors and the second one is a normal chocolate-cookie. The high-quality cookie is created by your granny (slow but mind-blowing taste), the cookies with the lower quality are the result of mass-production. Your &amp;ldquo;client&amp;rdquo; is a wrapping machine which does everything to deliver the cookies to some customers.&lt;br /&gt;
-So the wrapping machine won&amp;rsquo;t care what kind of cookies are prepared for delivering and so it doesn&amp;rsquo;t matter who the creator is - the only thing it has to know is how it can access the cookies&amp;hellip; some kind of interface.&lt;br /&gt;
-So the entire szenario could look like this:&lt;/p&gt;
-
-&lt;p&gt;class Cookie {&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;interface CookieFactory {&lt;br /&gt;
- abstract function createCookie();&lt;br /&gt;
-}&lt;/p&gt;
-
-&lt;p&gt;class Granny implements CookieFactory {&lt;br /&gt;
- public function createCookie() {&lt;br /&gt;
-     $cookie = new Cookie();&lt;br /&gt;
-     // do some wierd cookie-creation stuff //&lt;br /&gt;
-     return $cookie;&lt;br /&gt;
- }&lt;br /&gt;
-}&lt;/p&gt;
-
-&lt;p&gt;class MassProduction implements CookieFactory {&lt;br /&gt;
- public function createCookie() {&lt;br /&gt;
-     return new Cookie();&lt;br /&gt;
- }&lt;br /&gt;
-}&lt;/p&gt;
-
-&lt;p&gt;class wrappingMachine {&lt;br /&gt;
- public function run(CookieFactory $factory) {&lt;br /&gt;
-     $i = 6;&lt;br /&gt;
-     $package=array();&lt;br /&gt;
-     while($i&amp;ndash;) {&lt;br /&gt;
-         $package[] = $factory-&amp;gt;createCookie();&lt;br /&gt;
-     }&lt;br /&gt;
-     return $package;&lt;br /&gt;
- }&lt;br /&gt;
-}&lt;/p&gt;
-
-&lt;p&gt;Client-code could look like this;&lt;/p&gt;
-
-&lt;p&gt;$wrapper = new wrappingMachine();&lt;br /&gt;
-$highQualityCookiePackage = $wrapper-&amp;gt;run(new Granny());&lt;br /&gt;
-$lowQualityCookiePackage = $wrapper-&amp;gt;run(new MassProduction());&lt;/p&gt;
-
-&lt;p&gt;Thats mostly what you can achieve with some normal Factories in the GoF-meaning. Some other interesting ways of object creation are the &lt;a href=&#34;http://www.cookiepattern.com/2008/06/plugin-poeaa.html&#34;&gt;Plugin pattern&lt;/a&gt; and the  &lt;a href=&#34;http://www.cookiepattern.com/2008/05/prototype-gof.html&#34;&gt;Prototype pattern&lt;/a&gt;. :)&lt;/p&gt;
-</description>
+      <description>Do you remember the Façade pattern post? Sure you do :) - I described a child which asked his granny whether she could bake some cookies. So how this happens in a formal way was describe within theFaçade pattern post ;) but the basic action &amp;ldquo;to ask for sth.&amp;rdquo; is described here&amp;hellip;
+As you might remember we had a child, probably a lazy one, which was in the mood to eat some cookies but since the cookie tin was empty it asked his granny to bake some new.</description>
     </item>
     
     <item>
@@ -287,87 +57,7 @@ $lowQualityCookiePackage = $wrapper-&amp;gt;run(new MassProduction());&lt;/p&gt;
       <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/06/query-object-poeea/</guid>
-      <description>&lt;p&gt;Maybe you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification Pattern&lt;/a&gt; I explained some weeks ago. It enabled a easy and intuitive  searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification.
-Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory. The idea of the Query Object pattern is that it enables a usage, comparable to the specification pattern, for objects which are persisted in a database. The benefit is that it creates a query to exclude objects which won&amp;rsquo;t satisfy your needs and therefore you wont mess up the memory anymore.
-Once you have a query-object in place you should not get in touch with SQL anymore because it can encapsulate SQL completely, at least if you also have some kind of data mapping (coming soon), which is a great benefit for everyone who is not so familiar with SQL. (But don&amp;rsquo;t forget, regarding performance, SQL-optimization is a very important thing).&lt;/p&gt;
-
-&lt;p&gt;So what we need for the Query Object in first place is a object, I&amp;rsquo;ll use the Cookie out of the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;specification pattern post&lt;/a&gt; again. Then we need criteria-objects which hold the information for a single criteria, (determined by &amp;ldquo;database-field&amp;rdquo;, &amp;ldquo;operator&amp;rdquo; and &amp;ldquo;value&amp;rdquo;) and we also need the Query Objects itself to wrap up the SQL-querying and the object creation somehow.&lt;/p&gt;
-
-&lt;p&gt;A very simple example could look like this:&lt;/p&gt;
-
-&lt;p&gt;interface Critera {
-public function getWhereClause();
-}&lt;/p&gt;
-
-&lt;p&gt;class CookieCriteria implements Critera {&lt;/p&gt;
-
-&lt;p&gt;private $operator,$field,$value;&lt;/p&gt;
-
-&lt;p&gt;protected function __construct($operator,$field,$value) {
-$this-&amp;gt;operator=$operator;
-$this-&amp;gt;field=$field;
-$this-&amp;gt;value=$value;
-}&lt;/p&gt;
-
-&lt;p&gt;public function getWhereClause() {
-return implode(&amp;rdquo; &amp;ldquo;,array($this-&amp;gt;field,$this-&amp;gt;operator,$this-&amp;gt;value));
-}&lt;/p&gt;
-
-&lt;p&gt;public static function matches($field,$value) {
-return new CookieCriteria(&amp;ldquo;LIKE&amp;rdquo;,$field,&amp;lsquo;&amp;ldquo;&amp;rsquo;.$value.&amp;lsquo;&amp;rdquo;&amp;rsquo;);
-}&lt;/p&gt;
-
-&lt;p&gt;public static function greaterThan($field,$value) {
-return new CookieCriteria(&amp;ldquo;&amp;gt;&amp;rdquo;,$field,$value);
-}
-}&lt;/p&gt;
-
-&lt;p&gt;class CookieFinder {
-protected $criterias;&lt;/p&gt;
-
-&lt;p&gt;public function addCriteria(Critera $criteria) {
-$this-&amp;gt;criterias[] = $criteria;
-}&lt;/p&gt;
-
-&lt;p&gt;public function generateSQL() {
-$sql = &amp;ldquo;SELECT * FROM cookies&amp;rdquo;;&lt;/p&gt;
-
-&lt;p&gt;if(sizeof($this-&amp;gt;criterias)) {
-$where=array();
-reset($this-&amp;gt;criterias);
-while(list(,$criteria)=each($this-&amp;gt;criterias)) {
-$where[] = $criteria-&amp;gt;getWhereClause();
-}
-$sql.= sizeof($where)?&amp;rdquo; WHERE &amp;ldquo;.implode(&amp;rdquo; AND &amp;ldquo;,$where):&amp;ldquo;&amp;rdquo;;
-}
-return $sql;
-}&lt;/p&gt;
-
-&lt;p&gt;public function find() {
-$collection = array();
-if(!$result = mysql_query($this-&amp;gt;generateSQL())) {
-throw new Exception(mysql_errno());
-}
-while($row = mysql_fetch_assoc($result)) {
-$collection[] = new Cookie($row[&amp;lsquo;name&amp;rsquo;],$row[&amp;lsquo;flavor&amp;rsquo;],$name[&amp;lsquo;size&amp;rsquo;]);
-}
-return $collection;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;Possible client code could look like this:
-$finder = new CookieFinder();
-$finder-&amp;gt;addCriteria(CookieCriteria::matches(&amp;ldquo;name&amp;rdquo;,&amp;ldquo;Granny%&amp;rdquo;));
-$finder-&amp;gt;addCriteria(CookieCriteria::greaterThan(&amp;ldquo;size&amp;rdquo;,100));
-$cookies = $finder-&amp;gt;find();&lt;/p&gt;
-
-&lt;p&gt;We just pick up the Query Object, add one or more criteria and ask it to create the objects which fit them.&lt;/p&gt;
-
-&lt;p&gt;So this example is not as powerful as the one I used for the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification pattern&lt;/a&gt;, but it should be a easy task to create some kind of &amp;ldquo;nested criteria objects&amp;rdquo;.
-Query objects normally make use of data-mapping so that you can handle various classes, stored in different tables/databases, with a single and generic Query Object. This also enables to avoid SQL-Injection, since you&amp;rsquo;re able to validate the fields and values before you sent them to your database, also some kind of database abstraction would be possible.
-With the &amp;ldquo;Query Object by example&amp;rdquo;, which requires to build up a single object which is used as blueprint for the required objects, exists another flavor of this pattern which is very handy to use and more descriptive.
-But no matter which flavor you prefer, Query Objects bring some real benefits when you&amp;rsquo;ve to handle complex datasets - for smaller projects the effort might be to much so be careful where you use it.&lt;/p&gt;
-</description>
+      <description>Maybe you remember the Specification Pattern I explained some weeks ago. It enabled a easy and intuitive searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification. Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory.</description>
     </item>
     
     <item>
@@ -376,19 +66,10 @@ But no matter which flavor you prefer, Query Objects bring some real benefits wh
       <pubDate>Mon, 16 Jun 2008 23:33:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/06/fa%C3%A7ade-gof/</guid>
-      <description>&lt;p&gt;If a child is in the mood to eat a fresh cookie it normally asks his granny for one. Like this:&lt;/p&gt;
-
-&lt;p&gt;Child: Grannyyyyy?&lt;br /&gt;
-Granny: Yes my dear?&lt;br /&gt;
-Child: Could you mix about 2 cups of sugar, &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; cup of butter and &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt; cup of milk in a saucepan and boil it for a minute. And could you, after you removed the saucepan from the heat, mix in some cocoa powder and 3 cups quick cooking oats and form some cookies? Pleeease?&lt;/p&gt;
-
-&lt;p&gt;Hm you&amp;rsquo;re right that&amp;rsquo;s not very realistic - it&amp;rsquo;s more like: &amp;ldquo;Grannyyyy? Could I have a cooookieee pleeeease?&amp;rdquo; &amp;hellip;.the granny knows what to do and the child will get it&amp;rsquo;s cookie&lt;/p&gt;
-
-&lt;p&gt;So what happens if you have a pice of software which provides &lt;strike&gt;cookies&lt;/strike&gt; some services for other parts of your software? The most people (especially programmers) are lazy and they won&amp;rsquo;t remember all the details of a complex structure. They remember the place or object which can run a certain task but there&amp;rsquo;s no need to know the deeper structure of that object - the only thing which is important if your using a service of an object is that it doesn&amp;rsquo;t fail.&lt;br /&gt;
-So the Façade pattern is a structural pattern which more or less describes that you create a object with an simplified interface, so that you can hide complex structures. You can also use a Façade to wrap up some poorly designed APIs into a single well designed API. And the larges benefit of a Façade object is that it makes APIs more readable and therefore enables flexible and easy development.&lt;/p&gt;
-
-&lt;p&gt;So maybe you&amp;rsquo;re missing the example-code for this pattern, but since it&amp;rsquo;s not that concrete as others, I&amp;rsquo;ve not implemented a  special example for it. But I already used a Facade in some way, if you look at the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification pattern&lt;/a&gt;, you&amp;rsquo;ll find the functions getSmallChocolateCookies() and getLargeCookies(). Both show in a tasty way what I described  here :)&lt;/p&gt;
-</description>
+      <description>If a child is in the mood to eat a fresh cookie it normally asks his granny for one. Like this:
+Child: Grannyyyyy?
+Granny: Yes my dear?
+Child: Could you mix about 2 cups of sugar, 1&amp;frasl;2 cup of butter and 1&amp;frasl;2 cup of milk in a saucepan and boil it for a minute. And could you, after you removed the saucepan from the heat, mix in some cocoa powder and 3 cups quick cooking oats and form some cookies?</description>
     </item>
     
     <item>
@@ -397,88 +78,8 @@ So the Façade pattern is a structural pattern which more or less describes that
       <pubDate>Thu, 05 Jun 2008 01:11:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/06/plugin-poeaa/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m sure you&amp;rsquo;re pretty often in the situation that you have to switch something depending on the context you&amp;rsquo;re currently in. For example most people change their eating habits before summer - I also do :P&lt;/p&gt;
-
-&lt;p&gt;Sometimes this is what you also want to have in your software. To achieve different behaviour you normally just implement two different classes or aggregates and since they have the same &amp;ldquo;meaning&amp;rdquo; they normally share a interface (a.k.a Separated Interface). But who decides which implementation fits into the current environment/context?&lt;/p&gt;
-
-&lt;p&gt;The easiest way is to have a Factory Method with a small condition to decide this, but this method might grow very fast if you have various options. In this situation its also a matter of form to move this decision into some kind of configuration(-file) so that there&amp;rsquo;s only on file which differs in various environments.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://martinfowler.com/eaaCatalog/plugin.html&#34;&gt;Martin Fowler&lt;/a&gt; suggests to place some kind of mapping into the configuration-file, so that your Factory knows which implementation to instantiate in the current context. The key for the mapping in this case is the name of the Separated Interface.&lt;/p&gt;
-
-&lt;p&gt;As you see in the example code below, there are Cookie Tins which create contain Cookies and depending on the current month you want to use a more or less restrictive Cookie Tin. In May, June and July you restrict your application to create max. 5 cookies, the rest of the year you don&amp;rsquo;t care :P&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    // The Separated Interface
-interface CookieTin {
-    public function getCookieInstance();
-}
-
-class NormalTin implements CookieTin {
-    public function getCookieInstance() {
-        return new Cookie();
-    }
-}
-
-class DietTin implements CookieTin {
-    protected $i=0;
-    public function getCookieInstance() {
-        return ($this-&amp;gt;i++ &amp;lt; 5)?new Cookie():new NullCookie();
-    }
-}
-
-// The Factory which supports Plugin-Creation
-class CookieTinFactory {
-    public static function getPlugin( $class ) {
-        try {
-            return new $GLOBALS[&#39;Plugins&#39;][$class]();
-        } catch( Exception $e) {
-            // maybe call some default implementation if the mapping is wrong
-        }
-    }
-}
-
-
-
-
-
-
-
-class Cookie {
-    public function printCalories() {
-        echo ’200 ‘;
-    }
-}
-
-class NullCookie extends Cookie{
-    public function printCalories() { }
-}
-
-
-
-
-
-
-
-// This is usually in a configuration-file, normally this should
-// also sit in a XML structure….
-
-// That’s what it would be in 300 days/year
-$GLOBALS[&#39;Plugins&#39;][&#39;CookieTin&#39;] = “NormalTin”;
-// That’s what we have to turn it to before summer
-if(in_array(date(‘n’),array(5,6,7))) {
-    $GLOBALS[&#39;Plugins&#39;][&#39;CookieTin&#39;] = “DietTin”;
-}
-
-$tin = CookieTinFactory::getPlugin(‘CookieTin’);
-$i=10;
-while($i–) {
-    $cookie = $tin-&amp;gt;getCookieInstance();
-    $cookie-&amp;gt;printCalories();
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A very common use-case for this is the changed behaviour in a testing-environment compared to the production-environment.
-There&amp;rsquo;s something else in the example beside the Plugin Pattern - I also made use of the Special Case (the NullCookie) pattern  which I&amp;rsquo;m going to show in a future post&amp;hellip;.&lt;/p&gt;
-</description>
+      <description>I&amp;rsquo;m sure you&amp;rsquo;re pretty often in the situation that you have to switch something depending on the context you&amp;rsquo;re currently in. For example most people change their eating habits before summer - I also do :P
+Sometimes this is what you also want to have in your software. To achieve different behaviour you normally just implement two different classes or aggregates and since they have the same &amp;ldquo;meaning&amp;rdquo; they normally share a interface (a.</description>
     </item>
     
     <item>
@@ -487,58 +88,8 @@ There&amp;rsquo;s something else in the example beside the Plugin Pattern - I al
       <pubDate>Fri, 30 May 2008 04:39:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/value-object-ddd/</guid>
-      <description>&lt;p&gt;This metaphor does not fit completely, and the &amp;ldquo;Money-Example&amp;rdquo; is omnipresent, but I really like the pattern and so that&amp;rsquo;s the story:&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s say you have your grannies recipe for a chocolate cookie and you want to keep this in mind, but also you like to somehow experiment with some new or different ingredients. Normally you just keep in mind what you changed and later you write down the new recipe. But from time to time you might want to compare the two recipes or maybe you want to make cookies with the new and the changed recipes. In this situation it&amp;rsquo;s really good to have both written down on paper. ;)&lt;/p&gt;
-
-&lt;p&gt;In the world of OOP you could think of a solution using the &lt;a href=&#34;http://cookiepattern.blogspot.com/search/label/memento?max-results=100&#34;&gt;Memento-Pattern&lt;/a&gt; but this doesn&amp;rsquo;t really fit the situation and it&amp;rsquo;s also some kind of overhead. That&amp;rsquo;s the reason why the Value Object is the pattern of my choice.&lt;/p&gt;
-
-&lt;p&gt;So let&amp;rsquo;s look at the recipes again - we want to add and remove ingredients without modifying the original recipe and we want to compare the resulting recipes. We don&amp;rsquo;t need to track a special identity of our recipes since we&amp;rsquo;re only &amp;ldquo;collecting&amp;rdquo; ingredients.&lt;/p&gt;
-
-&lt;p&gt;The idea of the Value Object is that every every method which somehow transforms the state of a object always returns a new object and the old object stays untouched. Whenever needed you should also implement a method to compare objects, I must concede that the common &amp;ldquo;Money Example&amp;rdquo; shows much better when that&amp;rsquo;s needed &amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;Another edge of this pattern in PHP is that you can use method-chaining to perform multiple actions within a single line of code. So just have a look at the example you will like it&amp;rsquo;s taste :)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Recipe {
-    protected $ingredients;
-
-    public function __construct($ingred=”) {
-        $this-&amp;gt;ingredients = implode(‘,’,array_unique(explode(‘,’,$ingred)));
-    }
-
-    public function addIncredient($ingred=”) {
-        return new Recipe($this-&amp;gt;ingredients.‘,’.$ingred);
-    }
-
-    public function removeIncredien($ingred=”) {
-        return new Recipe(preg_replace(‘/,{0,1}’.$ingred.‘,{0,1}/’,”,$this-&amp;gt;ingredients.‘,’));
-    }
-
-    public function printIncredients() {
-        echo str_replace(‘,’,‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’,$this-&amp;gt;ingredients);
-    }
-
-    public function equals(Recipe $recipe) {
-        return (strcmp($this-&amp;gt;ingredients,$recipe-&amp;gt;ingredients)===0)?true:false;
-    }
-}
-
-
-$granniesRecipe = new Recipe(‘flour,baking soda,sugar,salt,butter,vanilla,chocolate’);
-$aNewRecipe = $granniesRecipe-&amp;gt;addIncredient(‘lemon’);
-$coconutRecipe = $granniesRecipe-&amp;gt;removeIncredien(‘chocolate’)-&amp;gt;addIncredient(‘coconut’);
-
-// check if that worked:
-echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;&amp;lt;strong&amp;gt; Grannies Cookie Recipe – Incredients are:&amp;lt;/strong&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
-$granniesRecipe-&amp;gt;printIncredients();
-echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;&amp;lt;strong&amp;gt; A new Cookie Recipe could look like:&amp;lt;/strong&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
-$aNewRecipe-&amp;gt;printIncredients();
-echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;&amp;lt;strong&amp;gt; A coconut cookie would look like:&amp;lt;/strong&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
-$coconutRecipe-&amp;gt;printIncredients();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The implementation is a bit odd, since it only collects the names of the ingredients but not the amount, but including the amounts of incredients would not change the concept  and that&amp;rsquo;s why I left it out. I hope you got a idea how the pattern works - the main thing is that there&amp;rsquo;s no identity and that new objects are instantiated as soon as the state of the old one would change.&lt;/p&gt;
-</description>
+      <description>This metaphor does not fit completely, and the &amp;ldquo;Money-Example&amp;rdquo; is omnipresent, but I really like the pattern and so that&amp;rsquo;s the story:
+Let&amp;rsquo;s say you have your grannies recipe for a chocolate cookie and you want to keep this in mind, but also you like to somehow experiment with some new or different ingredients. Normally you just keep in mind what you changed and later you write down the new recipe.</description>
     </item>
     
     <item>
@@ -547,56 +98,7 @@ $coconutRecipe-&amp;gt;printIncredients();
       <pubDate>Tue, 27 May 2008 23:17:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/prototype-gof/</guid>
-      <description>&lt;p&gt;Imagine a cookie-oven which produces tasty cookies with chocolate crumbles. How do you ensure that the 1000th cookie still has the same taste as the first?
-You might think that this is an easy task - just write down the recipe and follow the described steps&amp;hellip;you know the result in real life - the 1000th cookie normally tasts like the 1st but you always had the &amp;ldquo;overhead&amp;rdquo; to read the recipe and go through the steps again and again.
-In OOP it&amp;rsquo;s much easier to follow the recipe just instantiate a new Object and  there you go&amp;hellip; no matter if it&amp;rsquo;s the 1st or the 1000th - it&amp;rsquo;ll always taste look similar.
-But the &amp;ldquo;recipe-overhead&amp;rdquo; is still there in a way and especially when you have larger objects whose construction is time-consuming you might want to somehow get rid of it. And that&amp;rsquo;s where a Prototype can help you out - you just create the first Cookie Object and then you use the handy magic method __clone to create new objects.
-Instead of just using __clone the pattern suggests a class (some kind of a factory-class) so that you can also encapsulate the creation of the objects (and also possible adjustments you might want to make after the creation/clone).&lt;/p&gt;
-
-&lt;p&gt;So the example just shows a cookie-machine which makes use of the prototype-pattern to create new cookies (depending on the cookie you throw in before)&amp;hellip; yummy&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDrXY97tyhI/AAAAAAAAABg/1sAhpbVe2kI/s1600-h/prototype_pattern.png&#34;&gt;&lt;img src=&#34;http://bp0.blogger.com/_l5fIZzJyYfc/SDrXY97tyhI/AAAAAAAAABg/1sAhpbVe2kI/s400/prototype_pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;abstract class Cookie {
-function __clone() {    }
-abstract public function printFlavor();
-}&lt;/p&gt;
-
-&lt;p&gt;class CoconutCookie extends Cookie {
-public function printFlavor() {
-echo &amp;lsquo;Coconut Flavor&lt;br/&gt;&amp;rsquo;;
-}
-}
-class ChocolateCookie extends Cookie {
-public function printFlavor() {
-echo &amp;lsquo;Chocolate Flavor&lt;br/&gt;&amp;rsquo;;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;class CookieMachine {
-protected $cookie;
-public function __construct(Cookie $cookie) {
-$this-&amp;gt;cookie = $cookie;
-}
-public function makeCookie() {
-return clone $this-&amp;gt;cookie;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;The client-code can look like this:&lt;/p&gt;
-
-&lt;p&gt;$coconutCookie = new CoconutCookie();
-$coconutCookieMachine = new CookieMachine($coconutCookie);&lt;/p&gt;
-
-&lt;p&gt;$chocolateCookie = new ChocolateCookie();
-$chocolateCookieMachine = new CookieMachine($chocolateCookie);&lt;/p&gt;
-
-&lt;p&gt;//while(true) {
-for($i=0;$i&lt;5;$i++) {
-$coconutCookieMachine-&gt;makeCookie()-&amp;gt;printFlavor();
-$chocolateCookieMachine-&amp;gt;makeCookie()-&amp;gt;printFlavor();
-}&lt;/p&gt;
-</description>
+      <description>Imagine a cookie-oven which produces tasty cookies with chocolate crumbles. How do you ensure that the 1000th cookie still has the same taste as the first? You might think that this is an easy task - just write down the recipe and follow the described steps&amp;hellip;you know the result in real life - the 1000th cookie normally tasts like the 1st but you always had the &amp;ldquo;overhead&amp;rdquo; to read the recipe and go through the steps again and again.</description>
     </item>
     
     <item>
@@ -605,166 +107,7 @@ $chocolateCookieMachine-&amp;gt;makeCookie()-&amp;gt;printFlavor();
       <pubDate>Thu, 15 May 2008 14:00:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/specification-ddd/</guid>
-      <description>&lt;p&gt;Maybe sometimes the cookie tin is filled with all sorts of cookies and only some of them are what you&amp;rsquo;d like in this special moment. Often it&amp;rsquo;s very easy to specify which cookie you like, but sometimes your wishes are very complex, for example if you look for grannies special cookie with chocolate, coconut and vanilla crumbles. This could lead into a real crumby problem if you try to sort all the cookies and then select eat the right one.&lt;/p&gt;
-
-&lt;p&gt;In the world of OOP it&amp;rsquo;s often much harder to collect a few objects out of a large number of different objects, also combining different requirements isn&amp;rsquo;t easy and that&amp;rsquo;s where the specification pattern can help you out. It implements some basic operations to combine requirements (AND, OR, NOT) and the only thing a concrete specification for a concrete class has to do is to implement a method (isSatisfied()) which is able to determine whether a object meats a requirement or not.&lt;/p&gt;
-
-&lt;p&gt;I splitted the generic part of the script and the cookie-example. The first part just implements the methods which are needed for the combination and provides a abstract class which is extended by the specifications in the second part. As you see the specification is combined which normally encapsulates the retrieval of the objects ,for example from a database. &amp;hellip;.just have a look it&amp;rsquo;s really easy to select the right cookie &amp;hellip; yummy&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SC115dPibfI/AAAAAAAAABQ/ZZfCsWJAwDA/s1600-h/specification_sequenze.png&#34;&gt;&lt;img src=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SC115dPibfI/AAAAAAAAABQ/ZZfCsWJAwDA/s400/specification_sequenze.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;interface Specification {
-    public function isSatisfiedBy($obj);
-    public function _and(Specification $spec);
-    public function _or(Specification $spec);
-    public function _not();
-}
-
-abstract class AbstractSpecification implements Specification {
-    public function isSatisfiedBy($obj) { }
-    public function _and(Specification $spec) {
-        return new AndSpecification($this, $spec);
-    }
-    public function _or(Specification $spec) {
-        return new OrSpecification($this, $spec);
-    }
-    public function _not() {
-        return new NotSpecification($this);
-    }
-}
-
-class AndSpecification extends AbstractSpecification {
-    private $spec1, $spec2;
-    public function __construct(Specification $spec1, Specification $spec2) {
-        $this-&amp;gt;spec1 = $spec1;
-        $this-&amp;gt;spec2 = $spec2;
-    }
-    public function isSatisfiedBy($obj) {
-        return $this-&amp;gt;spec1-&amp;gt;isSatisfiedBy($obj) &amp;amp;&amp;amp; $this-&amp;gt;spec2-&amp;gt;isSatisfiedBy($obj);
-    }
-}
-
-class OrSpecification extends AbstractSpecification {
-    private $spec1, $spec2;
-    public function __construct(Specification $spec1, Specification $spec2) {
-        $this-&amp;gt;spec1 = $spec1;
-        $this-&amp;gt;spec2 = $spec2;
-    }
-    public function isSatisfiedBy($obj) {
-        return $this-&amp;gt;spec1-&amp;gt;isSatisfiedBy($obj) || $this-&amp;gt;spec2-&amp;gt;isSatisfiedBy($obj);
-    }
-}
-
-class NotSpecification extends AbstractSpecification {
-    private $spec;
-    public function __construct(Specification $spec) {
-        $this-&amp;gt;spec = $spec;
-    }
-    public function isSatisfiedBy($obj) {
-        return !$this-&amp;gt;spec-&amp;gt;isSatisfiedBy($obj);
-    }
-}
-
-
-
-
-
-
-/**
-* Cookie object just a container for the relevant data.
-*
-*/
-class Cookie {
-    protected $name,$flavor,$size;
-    public function __construct($name=”,$flavor=‘chocolate’,$size=100) {
-    $this-&amp;gt;name=$name;
-    $this-&amp;gt;flavor = $flavor;
-    $this-&amp;gt;size = abs($size); // avoid negative size
-    }
-    public function getName() { return $this-&amp;gt;name; }
-    public function getFlavor() { return $this-&amp;gt;flavor; }
-    public function getSize() { return $this-&amp;gt;size; }
-}
-/**
-* Cookie service delivers cookies, offers some ways to select specific types of cookies
-*
-*/
-class CookieService {
-    protected $cookies = array();
-    /**
-    * Add a cookie to the collection
-    * name is used as identifier, thats not the best choice
-    * but it’s ok for the example
-    *
-    * @param Cookie $cookie
-    */
-    public function add(Cookie $cookie) {
-        $this-&amp;gt;cookies[$cookie-&amp;gt;getName()]=$cookie;
-    }
-    /**
-    * Generic method to check which objects fit the spec
-    *
-    * @param Specification $spec
-    */
-    private function filter(Specification $spec) {
-        $result=array();
-        reset($this-&amp;gt;cookies);
-        foreach($this-&amp;gt;cookies as $name=&amp;gt;$cookie) {
-            if($spec-&amp;gt;isSatisfiedBy($cookie)) {
-                $result[]=$cookie;
-            }
-        }
-        return $result;
-    }
-
-    public function getLargeCookies() {
-        $spec = new SmallCookieSpecification();
-        $spec = $spec-&amp;gt;_not();
-        return $this-&amp;gt;filter($spec);
-    }
-    public function getSmallChocolateCookies() {
-        $spec = new SmallCookieSpecification();
-        $spec = $spec-&amp;gt;_and(new ChocolateCookieSpecification());
-        return $this-&amp;gt;filter($spec);
-    }
-    public function loadDummyData() {
-        $this-&amp;gt;add(new Cookie(‘Granny\’s classic’,‘chocolate’,60));
-        $this-&amp;gt;add(new Cookie(‘Modern Jumbo’,‘moca,chocolate’,180));
-        $this-&amp;gt;add(new Cookie(‘Kitchen Sink’,‘macadamia,cranberrie’,90));
-        $this-&amp;gt;add(new Cookie(‘Vanilla Cloud’,‘vanilla’,120));
-        $this-&amp;gt;add(new Cookie(‘Chocolate chip’,‘coconut,chocolate’,160));
-    }
-}
-
-class SmallCookieSpecification extends AbstractSpecification {
-    public function isSatisfiedBy($obj) {
-        return $obj-&amp;gt;getSize() &amp;lt; 100;
-    }
-}
-
-class ChocolateCookieSpecification extends AbstractSpecification {
-    public function isSatisfiedBy($obj) {
-        return stristr(strtolower($obj-&amp;gt;getFlavor()),‘chocolate’) !== FALSE;
-    }
-}
-
-/**
-* Client code
-*/
-$service = new CookieService();
-$service-&amp;gt;loadDummyData();
-echo ‘
-
-’;
-var_dump($service-&amp;gt;getLargeCookies());
-var_dump($service-&amp;gt;getSmallChocolateCookies());
-echo ‘
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;’;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://martinfowler.com/apsupp/spec.pdf&#34;&gt;more information by E.Evans and M.Fowler&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Maybe sometimes the cookie tin is filled with all sorts of cookies and only some of them are what you&amp;rsquo;d like in this special moment. Often it&amp;rsquo;s very easy to specify which cookie you like, but sometimes your wishes are very complex, for example if you look for grannies special cookie with chocolate, coconut and vanilla crumbles. This could lead into a real crumby problem if you try to sort all the cookies and then select eat the right one.</description>
     </item>
     
     <item>
@@ -773,60 +116,8 @@ echo ‘
       <pubDate>Tue, 13 May 2008 07:59:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/memento-gof/</guid>
-      <description>&lt;p&gt;Let&amp;rsquo;s say you got a cookie from a repository your granny and you&amp;rsquo;re not sure if you like the new taste. Wouldn&amp;rsquo;t it be cool if you could just try it and revoke the operation first bite if you don&amp;rsquo;t like it?&lt;/p&gt;
-
-&lt;p&gt;In the world of OOP thats a easy job which can be handled by the so called memento pattern - you just save the inner state of the object  within a memento object and revoke you actions whenever you like&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;As UML the example looks like this:
-&lt;a href=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SClV6dPibdI/AAAAAAAAABA/bFyT-BEsqrU/s1600-h/memento-pattern.png&#34;&gt;&lt;img src=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SClV6dPibdI/AAAAAAAAABA/bFyT-BEsqrU/s400/memento-pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;
-Show PHP Source Code&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class CookieMemento {
-    protected $flavor,$size;    
-    public function __construct($flavor,$size=100) {
-        $this-&amp;gt;flavor=$flavor;
-        $this-&amp;gt;size=$size;
-    }
-    public function getMemento() {
-        return new CookieMemento($this-&amp;gt;flavor,$this-&amp;gt;size);
-    }
-    public function setMemento(CookieMemento $memento) {
-        $this-&amp;gt;flavor=$memento-&amp;gt;flavor;
-        $this-&amp;gt;size=$memento-&amp;gt;size;
-    }    
-}
-
-class Cookie extends CookieMemento {
-
-    public function eat($reduceValue) {     
-        $this-&amp;gt;size-=($reduceValue&amp;gt;$this-&amp;gt;size)?$this-&amp;gt;size:$reduceValue;        
-    }    
-
-    public function printStatus() {
-        echo ‘This cookie is a ’.$this-&amp;gt;flavor.‘ cookie which has a size of ’.$this-&amp;gt;size.‘.&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
-    }
-}
-
-class Client { 
-    public function run() {
-        $theCookie = new Cookie(‘chocolate’,100);
-        $theMemento = $theCookie-&amp;gt;getMemento();
-        echo $theCookie-&amp;gt;printStatus();        
-        $theCookie-&amp;gt;eat(50);
-        echo $theCookie-&amp;gt;printStatus();       
-        $theCookie-&amp;gt;eat(50);
-        echo $theCookie-&amp;gt;printStatus();       
-        echo ‘Hm I\’d like to eat it again …. *grin*&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;’;
-        $theCookie-&amp;gt;setMemento($theMemento);
-        echo $theCookie-&amp;gt;printStatus();
-        echo ‘ *biggrin* ’;
-    }
-}
-
-$cookieMonster = new Client();
-$cookieMonster-&amp;gt;run();
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>Let&amp;rsquo;s say you got a cookie from a repository your granny and you&amp;rsquo;re not sure if you like the new taste. Wouldn&amp;rsquo;t it be cool if you could just try it and revoke the operation first bite if you don&amp;rsquo;t like it?
+In the world of OOP thats a easy job which can be handled by the so called memento pattern - you just save the inner state of the object within a memento object and revoke you actions whenever you like&amp;hellip;</description>
     </item>
     
     <item>
@@ -835,65 +126,8 @@ $cookieMonster-&amp;gt;run();
       <pubDate>Mon, 12 May 2008 22:59:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/decorator-gof/</guid>
-      <description>&lt;p&gt;As the first pattern I&amp;rsquo;d like to introduce the decorator pattern - it&amp;rsquo;s one of the [GoF]- structural patterns. It enables to extend the functionality of a existing method by wrapping a so called decorator-object.&lt;/p&gt;
-
-&lt;p&gt;So maybe you already know the situation ;) , your granny  is going to bake cookies and you think of how they gonna taste - so cookie is our main-object and the different additional spices and other options which refine the taste of the cookies are the decoration for it. The cookies, pardon main-objects, are fine without the decoration but they&amp;rsquo;re much better with and the best thing is that you&amp;rsquo;re able to combine the decorations&amp;hellip; yummy&lt;/p&gt;
-
-&lt;p&gt;So that&amp;rsquo;s how this would look like more technically:
-&lt;a href=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SCjU0tPibZI/AAAAAAAAAAU/uuR_geevSdw/s1600-h/decorator-pattern.png&#34;&gt;&lt;img src=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SCjU0tPibZI/AAAAAAAAAAU/uuR_geevSdw/s400/decorator-pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;stract class Cookie {
-    protected $flavor;
-    public function __construct($flavor) {
-        $this-&amp;gt;flavor=$flavor;
-    }    
-    abstract public function descripeFlavor();
-}
-
-class GrannysCookie extends Cookie {
-    public function descripeFlavor() {
-        echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;Granny baked a cookie which has a taste of ’;
-        echo $this-&amp;gt;flavor;
-    }
-}
-
-abstract class CookieDecorator extends Cookie {
-    protected $cookie;
-    public function __construct(Cookie $cookie) {
-        $this-&amp;gt;cookie = $cookie;
-    }    
-    //abstract public function descripeFlavor();    
-}
-
-class FreshCookieDecorator extends CookieDecorator {
-    public function descripeFlavor() {
-        $this-&amp;gt;cookie-&amp;gt;descripeFlavor();
-        echo ‘ which smells fresh from the oven’;
-    }
-}
-
-class CrumbleCookieDecorator extends CookieDecorator {
-    public function descripeFlavor() {        
-        $this-&amp;gt;cookie-&amp;gt;descripeFlavor();
-        echo ‘ it has tasty crumbles ’;
-    }
-}
-
-$cookie = new GrannysCookie(‘chocolate’);
-$cookie-&amp;gt;descripeFlavor();
-
-$crumbleCookie = new CrumbleCookieDecorator($cookie);
-$crumbleCookie-&amp;gt;descripeFlavor();
-
-$freshCookie = new FreshCookieDecorator($cookie);
-$freshCookie-&amp;gt;descripeFlavor();
-
-$freshAndCrumbledCookie = new FreshCookieDecorator($crumbleCookie);
-$freshAndCrumbledCookie-&amp;gt;descripeFlavor();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Decorator_pattern&#34;&gt;additional Information&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>As the first pattern I&amp;rsquo;d like to introduce the decorator pattern - it&amp;rsquo;s one of the [GoF]- structural patterns. It enables to extend the functionality of a existing method by wrapping a so called decorator-object.
+So maybe you already know the situation ;) , your granny is going to bake cookies and you think of how they gonna taste - so cookie is our main-object and the different additional spices and other options which refine the taste of the cookies are the decoration for it.</description>
     </item>
     
   </channel>

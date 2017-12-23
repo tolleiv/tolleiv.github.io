@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Algorithm on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/algorithm/index.xml</link>
+    <link>//blog.tolleiv.de/categories/algorithm/</link>
     <description>Recent content in Algorithm on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Jul 2008 19:25:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>B-Tree simulation...</title>
@@ -15,8 +18,7 @@
       <pubDate>Tue, 29 Jul 2008 19:25:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/07/b-tree-simulation.../</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m just preparing for some of my computer science exams and in one of my researches I found a really great B-Tree simulation and I&amp;rsquo;d like to share it: &lt;a href=&#34;http://slady.net/java/bt/view.php&#34;&gt;http://slady.net/java/bt/view.php&lt;/a&gt; &amp;hellip;..&lt;/p&gt;
-</description>
+      <description>I&amp;rsquo;m just preparing for some of my computer science exams and in one of my researches I found a really great B-Tree simulation and I&amp;rsquo;d like to share it: http://slady.net/java/bt/view.php &amp;hellip;..</description>
     </item>
     
   </channel>

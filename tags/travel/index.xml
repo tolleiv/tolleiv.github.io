@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Travel on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/travel/index.xml</link>
+    <link>//blog.tolleiv.de/tags/travel/</link>
     <description>Recent content in Travel on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/travel/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 May 2009 20:46:55 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/travel/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Streetart ...</title>
@@ -15,10 +18,7 @@
       <pubDate>Wed, 06 May 2009 20:46:55 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/05/streetart-.../</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://www.smashingmagazine.com/2009/05/06/40-stunning-and-creative-graffiti-artworks/&#34;&gt;&lt;img src=&#34;http://farm1.static.flickr.com/226/455809879_60dceaff24.jpg?v=0&#34; alt=&#34;El niño de las pinturas ~CC by: http://www.elninodelaspinturas.com/&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Smashing Mag. just brought out a great collection of  &lt;a href=&#34;http://www.smashingmagazine.com/2009/05/06/40-stunning-and-creative-graffiti-artworks/&#34;&gt;graffiti artworks&lt;/a&gt;. Seems that they forgot some of the great stuff from spain ~ &lt;a href=&#34;http://www.flickr.com/search/?q=streetart%20granada&amp;amp;w=all&amp;amp;m=tags&#34;&gt;Flickr #1&lt;/a&gt;, &lt;a href=&#34;http://www.flickr.com/photos/tags/arteurbano/clusters/&#34;&gt;Flickr#2&lt;/a&gt;, &lt;a href=&#34;http://www.flickr.com/photos/tags/stencel/&#34;&gt;Flickr #3&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Smashing Mag. just brought out a great collection of graffiti artworks. Seems that they forgot some of the great stuff from spain ~ Flickr #1, Flickr#2, Flickr #3</description>
     </item>
     
     <item>
@@ -27,12 +27,8 @@
       <pubDate>Sun, 26 Apr 2009 08:00:43 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/around-the-world/</guid>
-      <description>&lt;p&gt;Seems that this year I might have the chance to travel a lot and I also planned to go to London. I hope that besides my business-trips I find some time to go to london this summer. I hope that video keeps my motivation a but higher: [vimeo]&lt;a href=&#34;http://vimeo.com/2169237[/vimeo&#34;&gt;http://vimeo.com/2169237[/vimeo&lt;/a&gt;]&lt;/p&gt;
-
-&lt;p&gt;Btw.  I learned to play &lt;a href=&#34;http://de.wikipedia.org/wiki/Daft_Punk&#34;&gt;Daft Punk&lt;/a&gt;&amp;rsquo;s &amp;ldquo;Around the world on a guitar 11 years ago. It is actually the only thing I every learned on a guitar &amp;mdash; maybe someone could borrow me a guitar for some days so that I can pratice again :D&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Update:&lt;a href=&#34;http://blog.tolleiv.de/2009/10/visiting-uk/&#34;&gt; it worked :D&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-</description>
+      <description>Seems that this year I might have the chance to travel a lot and I also planned to go to London. I hope that besides my business-trips I find some time to go to london this summer. I hope that video keeps my motivation a but higher: [vimeo]http://vimeo.com/2169237[/vimeo]
+Btw. I learned to play Daft Punk&amp;rsquo;s &amp;ldquo;Around the world on a guitar 11 years ago. It is actually the only thing I every learned on a guitar &amp;mdash; maybe someone could borrow me a guitar for some days so that I can pratice again :D</description>
     </item>
     
   </channel>

@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Structural on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/structural/index.xml</link>
+    <link>//blog.tolleiv.de/tags/structural/</link>
     <description>Recent content in Structural on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/structural/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 May 2008 22:59:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/structural/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Decorator [GoF]</title>
@@ -15,65 +18,8 @@
       <pubDate>Mon, 12 May 2008 22:59:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/decorator-gof/</guid>
-      <description>&lt;p&gt;As the first pattern I&amp;rsquo;d like to introduce the decorator pattern - it&amp;rsquo;s one of the [GoF]- structural patterns. It enables to extend the functionality of a existing method by wrapping a so called decorator-object.&lt;/p&gt;
-
-&lt;p&gt;So maybe you already know the situation ;) , your granny  is going to bake cookies and you think of how they gonna taste - so cookie is our main-object and the different additional spices and other options which refine the taste of the cookies are the decoration for it. The cookies, pardon main-objects, are fine without the decoration but they&amp;rsquo;re much better with and the best thing is that you&amp;rsquo;re able to combine the decorations&amp;hellip; yummy&lt;/p&gt;
-
-&lt;p&gt;So that&amp;rsquo;s how this would look like more technically:
-&lt;a href=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SCjU0tPibZI/AAAAAAAAAAU/uuR_geevSdw/s1600-h/decorator-pattern.png&#34;&gt;&lt;img src=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SCjU0tPibZI/AAAAAAAAAAU/uuR_geevSdw/s400/decorator-pattern.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;stract class Cookie {
-    protected $flavor;
-    public function __construct($flavor) {
-        $this-&amp;gt;flavor=$flavor;
-    }    
-    abstract public function descripeFlavor();
-}
-
-class GrannysCookie extends Cookie {
-    public function descripeFlavor() {
-        echo ‘&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;Granny baked a cookie which has a taste of ’;
-        echo $this-&amp;gt;flavor;
-    }
-}
-
-abstract class CookieDecorator extends Cookie {
-    protected $cookie;
-    public function __construct(Cookie $cookie) {
-        $this-&amp;gt;cookie = $cookie;
-    }    
-    //abstract public function descripeFlavor();    
-}
-
-class FreshCookieDecorator extends CookieDecorator {
-    public function descripeFlavor() {
-        $this-&amp;gt;cookie-&amp;gt;descripeFlavor();
-        echo ‘ which smells fresh from the oven’;
-    }
-}
-
-class CrumbleCookieDecorator extends CookieDecorator {
-    public function descripeFlavor() {        
-        $this-&amp;gt;cookie-&amp;gt;descripeFlavor();
-        echo ‘ it has tasty crumbles ’;
-    }
-}
-
-$cookie = new GrannysCookie(‘chocolate’);
-$cookie-&amp;gt;descripeFlavor();
-
-$crumbleCookie = new CrumbleCookieDecorator($cookie);
-$crumbleCookie-&amp;gt;descripeFlavor();
-
-$freshCookie = new FreshCookieDecorator($cookie);
-$freshCookie-&amp;gt;descripeFlavor();
-
-$freshAndCrumbledCookie = new FreshCookieDecorator($crumbleCookie);
-$freshAndCrumbledCookie-&amp;gt;descripeFlavor();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Decorator_pattern&#34;&gt;additional Information&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>As the first pattern I&amp;rsquo;d like to introduce the decorator pattern - it&amp;rsquo;s one of the [GoF]- structural patterns. It enables to extend the functionality of a existing method by wrapping a so called decorator-object.
+So maybe you already know the situation ;) , your granny is going to bake cookies and you think of how they gonna taste - so cookie is our main-object and the different additional spices and other options which refine the taste of the cookies are the decoration for it.</description>
     </item>
     
   </channel>

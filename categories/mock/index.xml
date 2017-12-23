@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mock on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/mock/index.xml</link>
+    <link>//blog.tolleiv.de/categories/mock/</link>
     <description>Recent content in Mock on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/mock/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 May 2008 20:02:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/mock/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Using Mocks within Tests</title>
@@ -15,42 +18,7 @@
       <pubDate>Sat, 17 May 2008 20:02:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/using-mocks-within-tests/</guid>
-      <description>&lt;p&gt;Let&amp;rsquo;s say you have some kind of process which creates cookies and which requires the cookies to bake before you deliver them to the customers. This process somehow touches two kinds of objects the cookie itself and a object which performs the process - the cookie oven.
-When you start to develop the oven how do you check whether the cookies are really baked or not? Since you can&amp;rsquo;t get rid of the dependency between the oven and the cookie, you have to simulate a real object and do the checks by hand - but wait there&amp;rsquo;s already a way to resolve it:
-PHPUnit ships with a very nice and comfortable function to create and check mock-objects and that&amp;rsquo;s exactly what we need in this situation where we somehow need to find out if our cookie really gets baked.
-The testcase for this scenario could look like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class TestCookieOven extends PHPUnit_Framework_TestCase {
-    public function testIfCookieIsBakenWithinFinishing() {
-        /* create the mock and expect the
-        bakeIt method to be called at least once */
-        $cookiemock = $this-&amp;gt;getMock(‘Cookie’, array(‘bakeIt’));
-        $cookiemock-&amp;gt;expects($this-&amp;gt;once())-&amp;gt;method(‘bakeIt’);
-
-        /* create the observed object and perform the required steps */
-        $cookieoven = new CookieOven();
-        $cookieoven-&amp;gt;finishCookie($cookiemock);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This first creates a mock and assigns the expectation that the &amp;ldquo;bakeIt&amp;rdquo;-function is called exactly once. [ beside the -&amp;gt;once()-call there are some alternatives: -&amp;gt;any(), -&amp;gt;never(), -&amp;gt;atLeastOnce(), -&amp;gt;exactly(int $count) and -&amp;gt;at(int $index) ]. Then it passes the mock to the oven and performs the method we want to check. To make this test green you need at least this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;CookieOven {
-    /**
-    * Takes a cookie and prepares it to be ready
-    * for a customer
-    *
-    * @param Cookie $cookie
-    */
-    public function finishCookie(Cookie $cookie) {
-        $cookie-&amp;gt;bakeIt();
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So as soon you have these lines you have a green test and that&amp;rsquo;s great because there is no need to have a real &amp;ldquo;cookie&amp;rdquo; class - someone else can take care of the cookies - oh wait &amp;hellip; I&amp;rsquo;d better do this myself :P&lt;/p&gt;
-</description>
+      <description>Let&amp;rsquo;s say you have some kind of process which creates cookies and which requires the cookies to bake before you deliver them to the customers. This process somehow touches two kinds of objects the cookie itself and a object which performs the process - the cookie oven. When you start to develop the oven how do you check whether the cookies are really baked or not? Since you can&amp;rsquo;t get rid of the dependency between the oven and the cookie, you have to simulate a real object and do the checks by hand - but wait there&amp;rsquo;s already a way to resolve it: PHPUnit ships with a very nice and comfortable function to create and check mock-objects and that&amp;rsquo;s exactly what we need in this situation where we somehow need to find out if our cookie really gets baked.</description>
     </item>
     
   </channel>

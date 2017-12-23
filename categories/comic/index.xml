@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Comic on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/categories/comic/index.xml</link>
+    <link>//blog.tolleiv.de/categories/comic/</link>
     <description>Recent content in Comic on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/categories/comic/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Jun 2008 22:28:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/categories/comic/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Today&#39;s Rofl</title>
@@ -15,8 +18,7 @@
       <pubDate>Sun, 15 Jun 2008 22:28:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/06/todays-rofl/</guid>
-      <description>&lt;p&gt;I just found this with the  Stumble-Button: &lt;a href=&#34;http://www.lessaid.net/fun/apt-get-wife.png&#34;&gt;http://www.lessaid.net/fun/apt-get-wife.png&lt;/a&gt; - so true :)&lt;/p&gt;
-</description>
+      <description>I just found this with the Stumble-Button: http://www.lessaid.net/fun/apt-get-wife.png - so true :)</description>
     </item>
     
   </channel>

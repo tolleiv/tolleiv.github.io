@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sprite on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/sprite/index.xml</link>
+    <link>//blog.tolleiv.de/tags/sprite/</link>
     <description>Recent content in Sprite on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/sprite/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Jul 2010 08:00:29 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/sprite/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>TYPO3 4.4 sprites in your extension...</title>
@@ -15,88 +18,8 @@
       <pubDate>Sun, 25 Jul 2010 08:00:29 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2010/07/typo3-4.4-sprites-in-your-extension.../</guid>
-      <description>
-
-&lt;p&gt;TYPO3 4.4 ships with a long list of improvements. One of them is the sprite API which was developed during T3UXW09. It extends the iconWorks API and enables to retrieve any backend-icon from a central sprite.&lt;/p&gt;
-
-&lt;p&gt;As extension maintainer there are several ways to use these new parts of the API you can either just use it to display core icons, you can include your own icons and retrieve it with the new API or you can include your own sprite and retrieve the separate icons.&lt;/p&gt;
-
-&lt;h4 id=&#34;use-sprite-icons&#34;&gt;Use sprite icons&lt;/h4&gt;
-
-&lt;p&gt;Using sprite icons is pretty easy, to get a checkmark icon you could use this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;t3lib_iconWorks::getSpriteIcon(&#39;status-dialog-ok&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The list of all available icons can be retrieved using the &amp;lsquo;&lt;strong&gt;&lt;a href=&#34;http://typo3.org/extensions/repository/view/spriteiconoverview/current/&#34;&gt;spriteiconoverview&lt;/a&gt;&lt;/strong&gt;&amp;rsquo; extension which I just recently pushed into the TER ;)&lt;/p&gt;
-
-&lt;h4 id=&#34;add-your-own-icons&#34;&gt;Add your own icons&lt;/h4&gt;
-
-&lt;p&gt;The API also provides the possibility to include your extension&amp;rsquo;s icons using either single icons or your own icon sprite.
-Using single icons can be done with the following code in your ext_tables.php or ext_localconf.php:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$icons = array(
-     &#39;myicon&#39; =&amp;gt; t3lib_extMgm::extRelPath(&#39;myextension&#39;) . &#39;myicon.gif&#39;
-);
-t3lib_SpriteManager::addSingleIcons($icons, &#39;myextension&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Using this icon is easy again:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;t3lib_iconWorks::getSpriteIcon(&#39;extensions-myextension-myicon&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If your extension comes with a larger amount of icons you might want to use your own sprite. This includes your sprite as a image file and a CSS file. The css file should look like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;.t3-icon-extensions-myextension {
-     background-image:url(../../typo3conf/ext/myextension/myextension_sprite.gif);
-}
-.t3-icon-extensions-myextension-icon1 { background-position: 0px 0px; }
-.t3-icon-extensions-myextension-icon2 { background-position: 0px -16px; }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The path to your sprite needs to be relative to the typo3temp/sprites/ folder, from where the (temporary) merged CSS file will be included.
-This sprite can be included using:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$icons = array(
-     &#39;extensions-myextension-icon1&#39;,
-     &#39;extensions-myextension-icon2&#39;
-);
-t3lib_SpriteManager::addIconSprite(
-     $icons,
-     t3lib_extMgm::siteRelPath(&#39;myextension&#39;) . &#39;myextension_sprite.css&#39;
-);              
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As you see it&amp;rsquo;s quite easy to include the new API, the API provides some further options for overlays and further modifications which I didn&amp;rsquo;t mention here. And as a final motivation this is a comparison between old and new API to get a &amp;ldquo;back&amp;rdquo; button:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// old API
-$icon = &#39;&amp;lt;img&#39; . t3lib_iconWorks::skinImg($this-&amp;gt;doc-&amp;gt;backPath,&#39;gfx/goback.gif&#39;,&#39;width=&amp;quot;14&amp;quot; height=&amp;quot;14&amp;quot;&#39;) . &#39;alt=&amp;quot;&amp;quot; /&amp;gt;&#39;;
-
-// new API
-$icon = t3lib_iconWorks::getSpriteIcon(&#39;actions-view-go-back&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;The sprite API is quite new and my knowledge about how to use it is also relatively fresh - so please let me know if you&amp;rsquo;ve any remarks or questions.&lt;/p&gt;
-
-&lt;h2 id=&#34;btw-special-kudos-for-his-involvement-during-the-implementation-of-this-nice-feature-and-many-many-thanks-for-helping-me-to-understand-it-to-steffen-ritter-http-www-rs-websystems-de&#34;&gt;Btw. special kudos for his involvement during the implementation of this nice feature and many many thanks for helping me to understand it, to &lt;a href=&#34;http://www.rs-websystems.de/&#34;&gt;Steffen Ritter&lt;/a&gt;  :)&lt;/h2&gt;
-
-&lt;p&gt;Further reading:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;If you&amp;rsquo;ve never heard of sprites you might want to read this article an &lt;a href=&#34;http://www.alistapart.com/articles/sprites&#34;&gt;alistapart.com&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://typo3.org/download/release-notes/typo3-44/&#34;&gt;TYPO3 4.4 release notes&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://news.typo3.org/news/article/t3dd10-its-all-about-sprites/&#34;&gt;news.typo3.org - T3DD10: It&amp;rsquo;s all about sprites&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://typo3.org/extensions/repository/view/spriteiconoverview/current/&#34;&gt;spriteiconoverview&lt;/a&gt; extension&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-</description>
+      <description>TYPO3 4.4 ships with a long list of improvements. One of them is the sprite API which was developed during T3UXW09. It extends the iconWorks API and enables to retrieve any backend-icon from a central sprite.
+As extension maintainer there are several ways to use these new parts of the API you can either just use it to display core icons, you can include your own icons and retrieve it with the new API or you can include your own sprite and retrieve the separate icons.</description>
     </item>
     
     <item>
@@ -105,10 +28,8 @@ $icon = t3lib_iconWorks::getSpriteIcon(&#39;actions-view-go-back&#39;);
       <pubDate>Wed, 29 Apr 2009 20:06:23 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2009/04/css-sprites-...-a-nice-way-to-save-bandwidth/</guid>
-      <description>&lt;p&gt;I saw some of these sprites long time ago on some spiegel.de subpage and from time to time I see smaller sprites within stuff I get from our HTML-team - but this article and it&amp;rsquo;s insights into realworld design, is really great &amp;hellip; continue on &lt;a href=&#34;http://www.smashingmagazine.com/2009/04/27/the-mystery-of-css-sprites-techniques-tools-and-tutorials/&#34;&gt; Smashing Mag - The Mystery Of CSS Sprites&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;And that&amp;rsquo;s where you should start with it - as always AListApart is the best source for Web-Designers &amp;hellip; &lt;a href=&#34;http://www.alistapart.com/articles/sprites&#34;&gt;AListApart about Sprites&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>I saw some of these sprites long time ago on some spiegel.de subpage and from time to time I see smaller sprites within stuff I get from our HTML-team - but this article and it&amp;rsquo;s insights into realworld design, is really great &amp;hellip; continue on Smashing Mag - The Mystery Of CSS Sprites
+And that&amp;rsquo;s where you should start with it - as always AListApart is the best source for Web-Designers &amp;hellip; AListApart about Sprites</description>
     </item>
     
   </channel>

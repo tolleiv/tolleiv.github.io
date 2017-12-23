@@ -2,12 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Specification on blog.tolleiv.de ...  </title>
-    <link>//blog.tolleiv.de/tags/specification/index.xml</link>
+    <link>//blog.tolleiv.de/tags/specification/</link>
     <description>Recent content in Specification on blog.tolleiv.de ...  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tolleiv&#34;&gt;tolleiv&lt;/a&gt; 2016 - &lt;a href=&#34;http://creativecommons.org/licenses/by-sa/3.0/&#34;&gt;CC BY-SA 3.0&lt;/a&gt; - Powered by Hugo</copyright>
-    <atom:link href="//blog.tolleiv.de/tags/specification/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Jun 2008 17:29:00 +0000</lastBuildDate>
+    
+	<atom:link href="//blog.tolleiv.de/tags/specification/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Query Object [PoEEA]</title>
@@ -15,87 +18,7 @@
       <pubDate>Fri, 20 Jun 2008 17:29:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/06/query-object-poeea/</guid>
-      <description>&lt;p&gt;Maybe you remember the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification Pattern&lt;/a&gt; I explained some weeks ago. It enabled a easy and intuitive  searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification.
-Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory. The idea of the Query Object pattern is that it enables a usage, comparable to the specification pattern, for objects which are persisted in a database. The benefit is that it creates a query to exclude objects which won&amp;rsquo;t satisfy your needs and therefore you wont mess up the memory anymore.
-Once you have a query-object in place you should not get in touch with SQL anymore because it can encapsulate SQL completely, at least if you also have some kind of data mapping (coming soon), which is a great benefit for everyone who is not so familiar with SQL. (But don&amp;rsquo;t forget, regarding performance, SQL-optimization is a very important thing).&lt;/p&gt;
-
-&lt;p&gt;So what we need for the Query Object in first place is a object, I&amp;rsquo;ll use the Cookie out of the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;specification pattern post&lt;/a&gt; again. Then we need criteria-objects which hold the information for a single criteria, (determined by &amp;ldquo;database-field&amp;rdquo;, &amp;ldquo;operator&amp;rdquo; and &amp;ldquo;value&amp;rdquo;) and we also need the Query Objects itself to wrap up the SQL-querying and the object creation somehow.&lt;/p&gt;
-
-&lt;p&gt;A very simple example could look like this:&lt;/p&gt;
-
-&lt;p&gt;interface Critera {
-public function getWhereClause();
-}&lt;/p&gt;
-
-&lt;p&gt;class CookieCriteria implements Critera {&lt;/p&gt;
-
-&lt;p&gt;private $operator,$field,$value;&lt;/p&gt;
-
-&lt;p&gt;protected function __construct($operator,$field,$value) {
-$this-&amp;gt;operator=$operator;
-$this-&amp;gt;field=$field;
-$this-&amp;gt;value=$value;
-}&lt;/p&gt;
-
-&lt;p&gt;public function getWhereClause() {
-return implode(&amp;rdquo; &amp;ldquo;,array($this-&amp;gt;field,$this-&amp;gt;operator,$this-&amp;gt;value));
-}&lt;/p&gt;
-
-&lt;p&gt;public static function matches($field,$value) {
-return new CookieCriteria(&amp;ldquo;LIKE&amp;rdquo;,$field,&amp;lsquo;&amp;ldquo;&amp;rsquo;.$value.&amp;lsquo;&amp;rdquo;&amp;rsquo;);
-}&lt;/p&gt;
-
-&lt;p&gt;public static function greaterThan($field,$value) {
-return new CookieCriteria(&amp;ldquo;&amp;gt;&amp;rdquo;,$field,$value);
-}
-}&lt;/p&gt;
-
-&lt;p&gt;class CookieFinder {
-protected $criterias;&lt;/p&gt;
-
-&lt;p&gt;public function addCriteria(Critera $criteria) {
-$this-&amp;gt;criterias[] = $criteria;
-}&lt;/p&gt;
-
-&lt;p&gt;public function generateSQL() {
-$sql = &amp;ldquo;SELECT * FROM cookies&amp;rdquo;;&lt;/p&gt;
-
-&lt;p&gt;if(sizeof($this-&amp;gt;criterias)) {
-$where=array();
-reset($this-&amp;gt;criterias);
-while(list(,$criteria)=each($this-&amp;gt;criterias)) {
-$where[] = $criteria-&amp;gt;getWhereClause();
-}
-$sql.= sizeof($where)?&amp;rdquo; WHERE &amp;ldquo;.implode(&amp;rdquo; AND &amp;ldquo;,$where):&amp;ldquo;&amp;rdquo;;
-}
-return $sql;
-}&lt;/p&gt;
-
-&lt;p&gt;public function find() {
-$collection = array();
-if(!$result = mysql_query($this-&amp;gt;generateSQL())) {
-throw new Exception(mysql_errno());
-}
-while($row = mysql_fetch_assoc($result)) {
-$collection[] = new Cookie($row[&amp;lsquo;name&amp;rsquo;],$row[&amp;lsquo;flavor&amp;rsquo;],$name[&amp;lsquo;size&amp;rsquo;]);
-}
-return $collection;
-}
-}&lt;/p&gt;
-
-&lt;p&gt;Possible client code could look like this:
-$finder = new CookieFinder();
-$finder-&amp;gt;addCriteria(CookieCriteria::matches(&amp;ldquo;name&amp;rdquo;,&amp;ldquo;Granny%&amp;rdquo;));
-$finder-&amp;gt;addCriteria(CookieCriteria::greaterThan(&amp;ldquo;size&amp;rdquo;,100));
-$cookies = $finder-&amp;gt;find();&lt;/p&gt;
-
-&lt;p&gt;We just pick up the Query Object, add one or more criteria and ask it to create the objects which fit them.&lt;/p&gt;
-
-&lt;p&gt;So this example is not as powerful as the one I used for the &lt;a href=&#34;http://www.cookiepattern.com/2008/05/specification-ddd.html&#34;&gt;Specification pattern&lt;/a&gt;, but it should be a easy task to create some kind of &amp;ldquo;nested criteria objects&amp;rdquo;.
-Query objects normally make use of data-mapping so that you can handle various classes, stored in different tables/databases, with a single and generic Query Object. This also enables to avoid SQL-Injection, since you&amp;rsquo;re able to validate the fields and values before you sent them to your database, also some kind of database abstraction would be possible.
-With the &amp;ldquo;Query Object by example&amp;rdquo;, which requires to build up a single object which is used as blueprint for the required objects, exists another flavor of this pattern which is very handy to use and more descriptive.
-But no matter which flavor you prefer, Query Objects bring some real benefits when you&amp;rsquo;ve to handle complex datasets - for smaller projects the effort might be to much so be careful where you use it.&lt;/p&gt;
-</description>
+      <description>Maybe you remember the Specification Pattern I explained some weeks ago. It enabled a easy and intuitive searching within large object-collections. A drawback of my example was that I stored the objects in the memory. This can be really ineffective if you want a single object out of hundreds, because you have to create all of them to see which one fits the specification. Normally you want to limit the number of objects and you also don&amp;rsquo;t store large datasets in memory.</description>
     </item>
     
     <item>
@@ -104,166 +27,7 @@ But no matter which flavor you prefer, Query Objects bring some real benefits wh
       <pubDate>Thu, 15 May 2008 14:00:00 +0000</pubDate>
       
       <guid>//blog.tolleiv.de/2008/05/specification-ddd/</guid>
-      <description>&lt;p&gt;Maybe sometimes the cookie tin is filled with all sorts of cookies and only some of them are what you&amp;rsquo;d like in this special moment. Often it&amp;rsquo;s very easy to specify which cookie you like, but sometimes your wishes are very complex, for example if you look for grannies special cookie with chocolate, coconut and vanilla crumbles. This could lead into a real crumby problem if you try to sort all the cookies and then select eat the right one.&lt;/p&gt;
-
-&lt;p&gt;In the world of OOP it&amp;rsquo;s often much harder to collect a few objects out of a large number of different objects, also combining different requirements isn&amp;rsquo;t easy and that&amp;rsquo;s where the specification pattern can help you out. It implements some basic operations to combine requirements (AND, OR, NOT) and the only thing a concrete specification for a concrete class has to do is to implement a method (isSatisfied()) which is able to determine whether a object meats a requirement or not.&lt;/p&gt;
-
-&lt;p&gt;I splitted the generic part of the script and the cookie-example. The first part just implements the methods which are needed for the combination and provides a abstract class which is extended by the specifications in the second part. As you see the specification is combined which normally encapsulates the retrieval of the objects ,for example from a database. &amp;hellip;.just have a look it&amp;rsquo;s really easy to select the right cookie &amp;hellip; yummy&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SC115dPibfI/AAAAAAAAABQ/ZZfCsWJAwDA/s1600-h/specification_sequenze.png&#34;&gt;&lt;img src=&#34;http://bp2.blogger.com/_l5fIZzJyYfc/SC115dPibfI/AAAAAAAAABQ/ZZfCsWJAwDA/s400/specification_sequenze.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;interface Specification {
-    public function isSatisfiedBy($obj);
-    public function _and(Specification $spec);
-    public function _or(Specification $spec);
-    public function _not();
-}
-
-abstract class AbstractSpecification implements Specification {
-    public function isSatisfiedBy($obj) { }
-    public function _and(Specification $spec) {
-        return new AndSpecification($this, $spec);
-    }
-    public function _or(Specification $spec) {
-        return new OrSpecification($this, $spec);
-    }
-    public function _not() {
-        return new NotSpecification($this);
-    }
-}
-
-class AndSpecification extends AbstractSpecification {
-    private $spec1, $spec2;
-    public function __construct(Specification $spec1, Specification $spec2) {
-        $this-&amp;gt;spec1 = $spec1;
-        $this-&amp;gt;spec2 = $spec2;
-    }
-    public function isSatisfiedBy($obj) {
-        return $this-&amp;gt;spec1-&amp;gt;isSatisfiedBy($obj) &amp;amp;&amp;amp; $this-&amp;gt;spec2-&amp;gt;isSatisfiedBy($obj);
-    }
-}
-
-class OrSpecification extends AbstractSpecification {
-    private $spec1, $spec2;
-    public function __construct(Specification $spec1, Specification $spec2) {
-        $this-&amp;gt;spec1 = $spec1;
-        $this-&amp;gt;spec2 = $spec2;
-    }
-    public function isSatisfiedBy($obj) {
-        return $this-&amp;gt;spec1-&amp;gt;isSatisfiedBy($obj) || $this-&amp;gt;spec2-&amp;gt;isSatisfiedBy($obj);
-    }
-}
-
-class NotSpecification extends AbstractSpecification {
-    private $spec;
-    public function __construct(Specification $spec) {
-        $this-&amp;gt;spec = $spec;
-    }
-    public function isSatisfiedBy($obj) {
-        return !$this-&amp;gt;spec-&amp;gt;isSatisfiedBy($obj);
-    }
-}
-
-
-
-
-
-
-/**
-* Cookie object just a container for the relevant data.
-*
-*/
-class Cookie {
-    protected $name,$flavor,$size;
-    public function __construct($name=”,$flavor=‘chocolate’,$size=100) {
-    $this-&amp;gt;name=$name;
-    $this-&amp;gt;flavor = $flavor;
-    $this-&amp;gt;size = abs($size); // avoid negative size
-    }
-    public function getName() { return $this-&amp;gt;name; }
-    public function getFlavor() { return $this-&amp;gt;flavor; }
-    public function getSize() { return $this-&amp;gt;size; }
-}
-/**
-* Cookie service delivers cookies, offers some ways to select specific types of cookies
-*
-*/
-class CookieService {
-    protected $cookies = array();
-    /**
-    * Add a cookie to the collection
-    * name is used as identifier, thats not the best choice
-    * but it’s ok for the example
-    *
-    * @param Cookie $cookie
-    */
-    public function add(Cookie $cookie) {
-        $this-&amp;gt;cookies[$cookie-&amp;gt;getName()]=$cookie;
-    }
-    /**
-    * Generic method to check which objects fit the spec
-    *
-    * @param Specification $spec
-    */
-    private function filter(Specification $spec) {
-        $result=array();
-        reset($this-&amp;gt;cookies);
-        foreach($this-&amp;gt;cookies as $name=&amp;gt;$cookie) {
-            if($spec-&amp;gt;isSatisfiedBy($cookie)) {
-                $result[]=$cookie;
-            }
-        }
-        return $result;
-    }
-
-    public function getLargeCookies() {
-        $spec = new SmallCookieSpecification();
-        $spec = $spec-&amp;gt;_not();
-        return $this-&amp;gt;filter($spec);
-    }
-    public function getSmallChocolateCookies() {
-        $spec = new SmallCookieSpecification();
-        $spec = $spec-&amp;gt;_and(new ChocolateCookieSpecification());
-        return $this-&amp;gt;filter($spec);
-    }
-    public function loadDummyData() {
-        $this-&amp;gt;add(new Cookie(‘Granny\’s classic’,‘chocolate’,60));
-        $this-&amp;gt;add(new Cookie(‘Modern Jumbo’,‘moca,chocolate’,180));
-        $this-&amp;gt;add(new Cookie(‘Kitchen Sink’,‘macadamia,cranberrie’,90));
-        $this-&amp;gt;add(new Cookie(‘Vanilla Cloud’,‘vanilla’,120));
-        $this-&amp;gt;add(new Cookie(‘Chocolate chip’,‘coconut,chocolate’,160));
-    }
-}
-
-class SmallCookieSpecification extends AbstractSpecification {
-    public function isSatisfiedBy($obj) {
-        return $obj-&amp;gt;getSize() &amp;lt; 100;
-    }
-}
-
-class ChocolateCookieSpecification extends AbstractSpecification {
-    public function isSatisfiedBy($obj) {
-        return stristr(strtolower($obj-&amp;gt;getFlavor()),‘chocolate’) !== FALSE;
-    }
-}
-
-/**
-* Client code
-*/
-$service = new CookieService();
-$service-&amp;gt;loadDummyData();
-echo ‘
-
-’;
-var_dump($service-&amp;gt;getLargeCookies());
-var_dump($service-&amp;gt;getSmallChocolateCookies());
-echo ‘
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;’;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://martinfowler.com/apsupp/spec.pdf&#34;&gt;more information by E.Evans and M.Fowler&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Maybe sometimes the cookie tin is filled with all sorts of cookies and only some of them are what you&amp;rsquo;d like in this special moment. Often it&amp;rsquo;s very easy to specify which cookie you like, but sometimes your wishes are very complex, for example if you look for grannies special cookie with chocolate, coconut and vanilla crumbles. This could lead into a real crumby problem if you try to sort all the cookies and then select eat the right one.</description>
     </item>
     
   </channel>
